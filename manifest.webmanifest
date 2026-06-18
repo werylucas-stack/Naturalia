@@ -1,0 +1,49 @@
+{
+  "name": "Naturalia — Apprends la nature",
+  "short_name": "Naturalia",
+  "description": "Application naturaliste pour identifier les espèces, apprendre le vocabulaire scientifique, tenir un carnet d'observations. Pour enfants de 7 à 14 ans.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f5efe0",
+  "theme_color": "#5e8054",
+  "lang": "fr-FR",
+  "categories": ["education", "kids", "books", "lifestyle"],
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Déterminer une espèce",
+      "short_name": "Déterminer",
+      "description": "Identifier un arbre, une plante ou un animal",
+      "url": "./#determ",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Mon journal de terrain",
+      "short_name": "Journal",
+      "description": "Carnet d'observations",
+      "url": "./#journal",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
