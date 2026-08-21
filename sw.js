@@ -1,26 +1,46 @@
-// Naturalia - Service Worker
+// Les Carnets du Naturaliste - Service Worker
 // Cache l'application pour fonctionnement hors-ligne
 
-const CACHE_NAME = 'naturalia-v26.0';
+const CACHE_NAME = 'carnets-naturaliste-v30.0';
+
+// Le noyau de l'app : sans ces fichiers rien ne s'affiche.
+// Ils sont prechargés à l'installation, un par un pour qu'un seul manquant
+// ne fasse pas échouer tout le lot (le défaut de cache.addAll).
 const ASSETS = [
   './',
   './index.html',
   './manifest.webmanifest',
   './icon-192.png',
   './icon-512.png',
-  // Google Fonts (CSS + woff2)
-  'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap'
+  './icon-512-maskable.png',
+  './apple-touch-icon.png',
+  // Polices auto-hebergees (plus aucun appel a Google Fonts)
+  // Cormorant Garamond est variable : ces 4 fichiers couvrent 300 a 700
+  './fonts/cormorant-garamond-400-normal-latin.woff2',
+  './fonts/cormorant-garamond-400-normal-latin-ext.woff2',
+  './fonts/cormorant-garamond-400-italic-latin.woff2',
+  './fonts/cormorant-garamond-400-italic-latin-ext.woff2',
+  './fonts/old-standard-tt-400-normal-latin.woff2',
+  './fonts/old-standard-tt-400-normal-latin-ext.woff2',
+  './fonts/old-standard-tt-400-italic-latin.woff2',
+  './fonts/old-standard-tt-400-italic-latin-ext.woff2',
+  './fonts/old-standard-tt-700-normal-latin.woff2',
+  './fonts/old-standard-tt-700-normal-latin-ext.woff2',
 ];
 
 // INSTALL : on précharge les assets essentiels
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(ASSETS).catch((err) => {
-        console.warn('[SW] Précache partiel:', err);
-        // On essaie quand même de cacher l'index seul
-        return cache.add('./').catch(() => {});
-      });
+      // Un par un, et jamais addAll : addAll est atomique, un seul fichier
+      // absent rejetait tout le lot et l'app se retrouvait sans cache.
+      return Promise.all(
+        ASSETS.map((url) =>
+          cache.add(url).catch((err) => {
+            console.warn('[SW] non mis en cache:', url, err);
+          })
+        )
+      );
     })
   );
   self.skipWaiting();

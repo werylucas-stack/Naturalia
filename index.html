@@ -150,14 +150,37 @@ document.getElementById('manifest-placeholder').href = manifestURL;
 
 // Service Worker désactivé (blob URL non supporté sur Android)
 </script>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* Polices auto-hebergees : aucune requete vers Google Fonts.
+   Cormorant Garamond est une police variable : un seul fichier par style,
+   declare sur la plage 300-700. Old Standard TT est statique. */
+@font-face{font-family:'Cormorant Garamond';font-style:normal;font-weight:300 700;font-display:swap;src:url('./fonts/cormorant-garamond-400-normal-latin.woff2') format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Cormorant Garamond';font-style:normal;font-weight:300 700;font-display:swap;src:url('./fonts/cormorant-garamond-400-normal-latin-ext.woff2') format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:'Cormorant Garamond';font-style:italic;font-weight:300 700;font-display:swap;src:url('./fonts/cormorant-garamond-400-italic-latin.woff2') format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Cormorant Garamond';font-style:italic;font-weight:300 700;font-display:swap;src:url('./fonts/cormorant-garamond-400-italic-latin-ext.woff2') format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:'Old Standard TT';font-style:normal;font-weight:400;font-display:swap;src:url('./fonts/old-standard-tt-400-normal-latin.woff2') format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Old Standard TT';font-style:normal;font-weight:400;font-display:swap;src:url('./fonts/old-standard-tt-400-normal-latin-ext.woff2') format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:'Old Standard TT';font-style:normal;font-weight:700;font-display:swap;src:url('./fonts/old-standard-tt-700-normal-latin.woff2') format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Old Standard TT';font-style:normal;font-weight:700;font-display:swap;src:url('./fonts/old-standard-tt-700-normal-latin-ext.woff2') format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:'Old Standard TT';font-style:italic;font-weight:400;font-display:swap;src:url('./fonts/old-standard-tt-400-italic-latin.woff2') format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Old Standard TT';font-style:italic;font-weight:400;font-display:swap;src:url('./fonts/old-standard-tt-400-italic-latin-ext.woff2') format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
+</style>
 <style>
 :root{
   --cream:#f4ede0;--cream-dark:#e8dfc8;--cream-deep:#ddd0b8;
   --ink:#2b2318;--ink-soft:#5a4a36;--sepia:#8b6b3d;
   --moss:#5c6b3a;--moss-dark:#3e4a27;--rust:#a0522d;
   --gold:#c8922a;
+  --font-title:'Cormorant Garamond',Georgia,serif;
+  --font-body:'Old Standard TT',Georgia,serif;
 }
+body.dark{
+  --cream:#1b211e;--cream-dark:#272e29;--cream-deep:#323a34;
+  --ink:#ece4d2;--ink-soft:#aaa28e;--sepia:#c2a87a;
+  --moss:#8fb47a;--moss-dark:#aecb98;--rust:#d68f5e;
+  --gold:#d8a843;
+}
+body{transition:background-color .25s ease, color .25s ease}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;overscroll-behavior:none}
 body{font-family:'Cormorant Garamond',serif;background:var(--cream);color:var(--ink);min-height:100vh;display:flex;justify-content:center}
@@ -273,6 +296,31 @@ body{font-family:'Cormorant Garamond',serif;background:var(--cream);color:var(--
 /* ── RÉSULTAT DÉTERM ── */
 .result-ring{width:160px;height:160px;border-radius:50%;border:1.5px solid rgba(139,107,61,.3);background:rgba(255,252,240,.5);display:flex;align-items:center;justify-content:center;margin:14px auto 18px}
 .result-ring svg{width:130px;height:130px}
+
+/* ── ILLUSTRATIONS (images) + PLEIN ÉCRAN ── */
+.illus{position:relative;margin:0;display:block;cursor:zoom-in;-webkit-tap-highlight-color:transparent}
+/* la vignette reprend exactement la boite du <svg> qu'elle remplace ;
+   figure etant un bloc, il faut le recentrer a la main */
+.sp-card .illus{width:64px;height:55px;margin:0 auto 8px}
+.coll-card .illus{width:80px;height:70px;margin:0 auto 8px}
+.fiche-header .illus{width:140px;height:130px;margin:0 auto 12px}
+.fiche-illus .illus{width:100%;height:100%}
+.result-ring .illus{margin:0 auto}
+.illus img{width:100%;height:100%;object-fit:contain;display:block;border-radius:4px}
+.illus-zoom{position:absolute;right:2px;bottom:2px;width:21px;height:21px;border-radius:5px;background:rgba(245,239,224,.9);border:1px solid rgba(139,107,61,.45);color:var(--sepia);display:flex;align-items:center;justify-content:center;pointer-events:none}
+.illus-zoom svg{width:12px;height:12px}
+/* sur les petites vignettes de grille, le picto ne doit pas manger le dessin */
+.sp-card .illus-zoom,.coll-card .illus-zoom,.cand-illus .illus-zoom{width:14px;height:14px;border-radius:4px;right:0;bottom:0}
+.sp-card .illus-zoom svg,.coll-card .illus-zoom svg,.cand-illus .illus-zoom svg{width:9px;height:9px}
+.result-ring .illus{width:130px;height:130px}
+.fiche-illus{margin:12px 0 4px;border:1px solid rgba(139,107,61,.22);border-radius:6px;background:rgba(255,252,240,.5);padding:8px;height:230px}
+.fiche-illus-leg{font-family:'Old Standard TT',serif;font-style:italic;font-size:12px;color:var(--sepia);text-align:center;margin:0 0 12px}
+.cand-illus{width:74px;height:74px;float:right;margin:0 0 6px 10px}
+.illus-overlay{position:fixed;inset:0;z-index:9999;background:rgba(30,24,16,.93);display:none;align-items:center;justify-content:center;flex-direction:column;padding:22px}
+.illus-overlay.open{display:flex}
+.illus-overlay img{max-width:100%;max-height:80vh;object-fit:contain;border-radius:6px;background:var(--cream)}
+.illus-legende{margin-top:14px;font-family:var(--font-title);font-style:italic;color:var(--cream);font-size:19px;text-align:center}
+.illus-close{position:absolute;top:14px;right:16px;width:38px;height:38px;border-radius:50%;background:rgba(245,239,224,.92);border:1px solid rgba(139,107,61,.5);color:var(--ink);font-size:22px;line-height:1;cursor:pointer}
 .result-name{font-weight:500;font-size:36px;font-style:italic;color:var(--moss-dark);text-align:center;line-height:1.1;margin-bottom:4px}
 .result-latin{font-family:'Old Standard TT',serif;font-style:italic;font-size:14px;color:var(--sepia);letter-spacing:.12em;text-align:center;margin-bottom:16px}
 .result-body{border-top:1px solid rgba(139,107,61,.2);padding-top:16px}
@@ -6170,7 +6218,34 @@ function renderGenericStory(storyId, retourFn){
     renderGenericStoryFin();
     return;
   }
+  if(idx===0 && progress.length===0 && story.intro){
+    renderGenericStoryIntro();
+    return;
+  }
   renderGenericStoryEtape();
+}
+
+function storyContainer(){
+  var c=document.getElementById('learn-content');
+  if(c && document.getElementById('screen-learn').classList.contains('active')) return c;
+  var cc=document.getElementById('coll-content');
+  if(cc && document.getElementById('screen-coll').classList.contains('active')) return cc;
+  return c||cc;
+}
+
+function renderGenericStoryIntro(){
+  var s=genericStoryState; var story=STORIES[s.storyId];
+  var retourCall=s.retourFn ? '(genericStoryState.retourFn)()' : 'history.back()';
+  var html='<div class="topbar">'
+    +'<button class="back-btn" aria-label="Retour" onclick="'+retourCall+'"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 18l-6-6 6-6"/></svg></button>'
+    +'<div class="topbar-title">'+story.emoji+' '+story.titre+'</div></div>'
+    +'<div style="padding:24px 20px;text-align:center;">'
+    +'<div style="font-size:4.5em;margin-bottom:10px;">'+story.emoji+'</div>'
+    +'<div style="font-family:var(--font-title);font-size:1.7em;color:var(--moss-dark);font-style:italic;margin-bottom:18px;">'+story.titre+'</div>'
+    +'<div style="background:var(--cream-dark);border-left:3px solid var(--moss);border-radius:8px;padding:16px;font-style:italic;font-size:1.02em;line-height:1.65;text-align:left;color:var(--ink);margin-bottom:24px;">'+story.intro+'</div>'
+    +'<button onclick="renderGenericStoryEtape()" class="btn btn-p" style="width:100%;">Commencer l\u2019aventure \u2192</button>'
+    +'</div>';
+  var container=storyContainer(); if(container) container.innerHTML=html;
 }
 
 function renderGenericStoryEtape(){
@@ -6282,7 +6357,12 @@ function genericNextEtape(){
 function renderGenericStoryFin(){
   var s=genericStoryState;
   var story=STORIES[s.storyId];
-  var fin=story.fin;
+  var fin=story.fin || { titre:'Aventure termin\u00e9e !', message:'Bravo, tu as suivi toute l\u2019histoire de \u00ab '+story.titre+' \u00bb.', badge:(story.emoji||'\uD83C\uDF3F')+' Petit naturaliste' };
+  var recap='';
+  for(var ri=0; ri<story.etapes.length; ri++){
+    var et=story.etapes[ri];
+    if(et && et.apprentissage){ recap+='<div style="text-align:left;background:var(--cream);border:1px solid var(--sepia);border-radius:8px;padding:10px 12px;margin-bottom:8px;font-size:0.85em;line-height:1.45;"><span style="color:var(--moss-dark);font-weight:600;">'+et.titre+'</span> \u2014 '+et.apprentissage+'</div>'; }
+  }
   var retourCall=s.retourFn ? '(genericStoryState.retourFn)()' : 'history.back()';
 
   var html='<div class="topbar">'
@@ -6299,6 +6379,7 @@ function renderGenericStoryFin(){
     +'<div style="font-size:1.6em;margin-bottom:6px;">'+fin.badge.split(' ')[0]+'</div>'
     +'<div style="font-family:var(--font-title);font-size:1.1em;color:var(--moss-dark);">'+fin.badge.substring(2)+'</div>'
     +'</div>'
+    +(recap?'<div style="margin:6px 0 22px;"><div class="eyebrow" style="margin-bottom:8px;">\u2014 Ce que tu as appris \u2014</div>'+recap+'</div>':'')
     +'<button onclick="resetGenericStory(&quot;'+s.storyId+'&quot;)" class="btn" style="margin-right:6px;">Recommencer</button>'
     +'<button onclick="'+retourCall+'" class="btn btn-p">Retour</button>'
     +'</div>';
@@ -11448,6 +11529,145 @@ const SPECIES_ORDER=[
   'Groseillier noir, cassis','Groseillier rouge',
 ];
 
+
+/* ====== Recherche & comparaison Naturodex ====== */
+var _ndexIdx=null, ndexCompareMode=false, ndexSel=[];
+function ndexBuild(){
+  if(_ndexIdx) return _ndexIdx;
+  var src=[
+    ['Plantes','\uD83C\uDF3F',PLANTES_DATA,PLANTES_ORDER],
+    ['Oiseaux','\uD83D\uDC26',OISEAUX_DATA,OISEAUX_ORDER],
+    ['Herp\u00e9to','\uD83E\uDD8E',HERPETO_DATA,HERPETO_ORDER],
+    ['Insectes','\uD83D\uDC1B',INSECTES_DATA,INSECTES_ORDER],
+    ['Champignons','\uD83C\uDF44',CHAMPIGNONS_DATA,CHAMPIGNONS_ORDER],
+    ['Mousses & lichens','\uD83C\uDF43',MOUSSES_DATA,MOUSSES_ORDER],
+    ['Animaux & traces','\uD83D\uDC3E',ANIMAUX_DATA,null],
+    ['Plantes des champs','\uD83C\uDF3E',CHAMPS_DATA,CHAMPS_ORDER],
+    ['Potager','\uD83E\uDD55',POTAGER_DATA,POTAGER_ORDER],
+    ['Roches & min\u00e9raux','\uD83E\uDEA8',ROCHES_DATA,ROCHES_ORDER],
+    ['Mammif\u00e8res','\uD83E\uDD8A',MAMM_DATA,MAMM_ORDER],
+    ['La mare & la rivi\u00e8re','\uD83D\uDCA7',MARE_DATA,MARE_ORDER],
+    ['Le ciel nocturne','\uD83C\uDF0C',CIEL_DATA,CIEL_ORDER]
+  ];
+  var idx=[];
+  for(var s=0;s<src.length;s++){
+    var regne=src[s][0],emo=src[s][1],data=src[s][2],order=src[s][3];
+    if(!data) continue;
+    var keys=order||Object.keys(data);
+    for(var i=0;i<keys.length;i++){
+      var cle=keys[i],e=data[cle];
+      if(!e||!e.nom) continue;
+      idx.push({cle:cle,nom:e.nom,regne:regne,emo:(e.emoji||emo),e:e});
+    }
+  }
+  // Arbres (structure différente : la clé est le nom)
+  try {
+    for(var t=0;t<SPECIES_ORDER.length;t++){
+      var tn=SPECIES_ORDER[t], te=SPECIES_DB[tn];
+      if(!te) continue;
+      idx.push({cle:tn, nom:tn, regne:'Arbres', emo:'\uD83C\uDF33',
+        e:{ nom:tn, latin:te.latin, famille:te.famille, description:te.desc, saviez:te.fun }});
+    }
+  } catch(e){}
+  _ndexIdx=idx; return idx;
+}
+function ndexNorm(s){ return (s||'').toString().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+function ndexFields(e){
+  var f=[]; function add(l,v){ if(v) f.push([l,v]); }
+  add('Nom savant', e.nom_savant||e.latin||e.sorte);
+  add('Famille', e.famille);
+  add('Description', e.description_courte||e.description);
+  add('Comment le reconna\u00eetre', e.reconnaitre);
+  add('Habitat / o\u00f9', e.habitat||e.ou);
+  add('Son r\u00f4le', e.role);
+  add('Nourriture', e.nourriture);
+  add('Duret\u00e9', e.durete);
+  add('Quand l\u2019observer', e.quand);
+  add('Le savais-tu', e.saviez||e.saviez_vous);
+  return f;
+}
+function ndexSearch(q){
+  var box=document.getElementById('ndex-results'); if(!box) return;
+  var nq=ndexNorm(q);
+  if(ndexCompareMode){ ndexRenderCompareSearch(nq); return; }
+  if(nq.length<1){ box.innerHTML=''; return; }
+  var idx=ndexBuild();
+  var res=idx.filter(function(it){ return ndexNorm(it.nom).indexOf(nq)>=0; }).slice(0,40);
+  if(!res.length){ box.innerHTML='<p style="text-align:center;color:var(--ink-soft);font-style:italic;font-size:0.9em;padding:14px;">Aucune esp\u00e8ce trouv\u00e9e.</p>'; return; }
+  box.innerHTML=res.map(function(it){ return ndexCard(it,'ndexOpen'); }).join('')+'<div style="height:6px;"></div>';
+}
+function ndexAttr(s){ return (s||'').toString().replace(/&/g,'&amp;').replace(/"/g,'&quot;'); }
+function ndexCard(it,handler){
+  return '<div onclick="'+handler+'(this.getAttribute(\'data-cle\'),this.getAttribute(\'data-regne\'))" data-cle="'+ndexAttr(it.cle)+'" data-regne="'+ndexAttr(it.regne)+'" style="background:var(--cream-dark);border:1px solid var(--sepia);border-radius:9px;padding:10px 12px;margin-bottom:8px;cursor:pointer;display:flex;align-items:center;gap:12px;">'
+    +'<span style="font-size:1.6em;line-height:1;">'+it.emo+'</span>'
+    +'<span style="flex:1;line-height:1.25;"><span style="font-family:var(--font-title);font-style:italic;font-size:1.08em;color:var(--moss-dark);">'+it.nom+'</span><br><span style="font-size:0.74em;color:var(--sepia);">'+it.regne+'</span></span>'
+    +'<span style="font-size:1.1em;color:var(--moss);">\u2192</span></div>';
+}
+function ndexFind(cle,regne){ var idx=ndexBuild(); for(var i=0;i<idx.length;i++){ if(idx[i].cle===cle && idx[i].regne.indexOf(regne.slice(0,5))>=0) return idx[i]; } for(var j=0;j<idx.length;j++){ if(idx[j].cle===cle) return idx[j]; } return null; }
+function ndexOpen(cle,regne){
+  var it=ndexFind(cle,regne); if(!it) return;
+  var f=ndexFields(it.e);
+  var html='<div class="topbar"><button class="back-btn" aria-label="Retour" onclick="renderCollScreen()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 18l-6-6 6-6"/></svg></button>'
+    +'<div class="topbar-title">'+it.nom+'</div></div>'
+    +'<div style="padding:16px;">'
+    +'<div style="text-align:center;margin-bottom:14px;"><div style="font-size:3.2em;line-height:1;">'+it.emo+'</div>'
+    +'<div style="font-family:var(--font-title);font-style:italic;font-size:1.5em;color:var(--moss-dark);margin-top:4px;">'+it.nom+'</div>'
+    +'<div style="display:inline-block;margin-top:6px;background:var(--moss);color:var(--cream);font-size:0.72em;padding:2px 10px;border-radius:10px;">'+it.regne+'</div></div>';
+  for(var i=0;i<f.length;i++){
+    html+='<div class="fiche-section"><h4>'+f[i][0]+'</h4><p style="line-height:1.6;">'+f[i][1]+'</p></div>';
+  }
+  html+='<button onclick="renderCollScreen()" class="btn" style="width:100%;margin-top:12px;">Retour au Naturodex</button></div>';
+  document.getElementById('coll-content').innerHTML=html;
+}
+function ndexToggleCompare(){
+  ndexCompareMode=!ndexCompareMode; ndexSel=[];
+  var btn=document.getElementById('ndex-cmp-btn');
+  if(btn){ btn.style.background=ndexCompareMode?'var(--moss)':'transparent'; btn.style.color=ndexCompareMode?'var(--cream)':'var(--moss-dark)'; }
+  var inp=document.getElementById('ndex-search');
+  ndexSearch(inp?inp.value:'');
+}
+function ndexRenderCompareSearch(nq){
+  var box=document.getElementById('ndex-results'); if(!box) return;
+  var sel='<div style="background:rgba(94,107,58,.12);border:1px dashed var(--moss);border-radius:9px;padding:8px 12px;margin-bottom:10px;font-size:0.85em;color:var(--moss-dark);text-align:center;">'
+    +(ndexSel.length===0?'\u2696\uFE0F Choisis 2 esp\u00e8ces \u00e0 comparer':'S\u00e9lection : '+ndexSel.map(function(x){return x.nom;}).join(' + ')+(ndexSel.length<2?' \u2026 (encore 1)':''))+'</div>';
+  var cards='';
+  if(nq.length>=1){
+    var idx=ndexBuild();
+    var res=idx.filter(function(it){ return ndexNorm(it.nom).indexOf(nq)>=0; }).slice(0,30);
+    cards=res.map(function(it){ return ndexCard(it,'ndexPick'); }).join('');
+    if(!res.length) cards='<p style="text-align:center;color:var(--ink-soft);font-style:italic;font-size:0.9em;padding:10px;">Aucune esp\u00e8ce trouv\u00e9e.</p>';
+  }
+  box.innerHTML=sel+cards;
+}
+function ndexPick(cle,regne){
+  var it=ndexFind(cle,regne); if(!it) return;
+  for(var i=0;i<ndexSel.length;i++){ if(ndexSel[i].cle===cle && ndexSel[i].regne===it.regne){ return; } }
+  ndexSel.push(it);
+  if(ndexSel.length>=2){ ndexRenderCompare(); return; }
+  var inp=document.getElementById('ndex-search'); ndexRenderCompareSearch(ndexNorm(inp?inp.value:''));
+}
+function ndexCompareCol(it){
+  var f=ndexFields(it.e);
+  var s='<div style="flex:1;min-width:0;background:var(--cream-dark);border:1px solid var(--moss);border-radius:10px;padding:12px;">'
+    +'<div style="text-align:center;margin-bottom:8px;"><div style="font-size:2.4em;line-height:1;">'+it.emo+'</div>'
+    +'<div style="font-family:var(--font-title);font-style:italic;font-size:1.1em;color:var(--moss-dark);line-height:1.2;">'+it.nom+'</div>'
+    +'<div style="font-size:0.68em;color:var(--sepia);">'+it.regne+'</div></div>';
+  for(var i=0;i<f.length;i++){
+    s+='<div style="margin-bottom:8px;"><div style="font-family:var(--font-body);font-size:0.64em;letter-spacing:.04em;text-transform:uppercase;color:var(--sepia);margin-bottom:2px;">'+f[i][0]+'</div><div style="font-size:0.82em;line-height:1.45;color:var(--ink);">'+f[i][1]+'</div></div>';
+  }
+  s+='</div>';
+  return s;
+}
+function ndexRenderCompare(){
+  var a=ndexSel[0],b=ndexSel[1];
+  var html='<div class="topbar"><button class="back-btn" aria-label="Retour" onclick="ndexSel=[];renderCollScreen();ndexCompareMode=true;ndexToggleCompare();ndexToggleCompare();"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 18l-6-6 6-6"/></svg></button>'
+    +'<div class="topbar-title">\u2696\uFE0F Comparaison</div></div>'
+    +'<div style="padding:14px;">'
+    +'<div style="display:flex;gap:10px;align-items:flex-start;">'+ndexCompareCol(a)+ndexCompareCol(b)+'</div>'
+    +'<button onclick="ndexSel=[];renderCollScreen();" class="btn" style="width:100%;margin-top:14px;">Nouvelle recherche</button></div>';
+  document.getElementById('coll-content').innerHTML=html;
+}
+
 function renderCollScreen(){
   var coll=loadCollection();
   var animaux=loadAnimauxCollection();
@@ -11496,6 +11716,10 @@ function renderCollScreen(){
     +'<div style="font-size:0.82em;color:var(--sepia);font-style:italic;">esp\u00e8ces identifi\u00e9es ('+pctGlobal+'%)</div>'
     +'<div style="background:rgba(139,107,61,.15);height:6px;border-radius:3px;overflow:hidden;max-width:280px;margin:10px auto 0;"><div style="background:linear-gradient(90deg, var(--moss), var(--gold));height:100%;width:'+pctGlobal+'%;transition:width .4s;"></div></div>'
     +'</div>'
+    // Recherche + comparaison
+    +'<input id="ndex-search" type="search" placeholder="\uD83D\uDD0D Rechercher une esp\u00e8ce\u2026" oninput="ndexSearch(this.value)" style="width:100%;padding:11px 14px;border:1px solid var(--sepia);border-radius:10px;background:var(--cream-dark);color:var(--ink);font-family:var(--font-body);font-size:0.95em;margin-bottom:8px;">'
+    +'<div style="text-align:center;margin-bottom:12px;"><button id="ndex-cmp-btn" onclick="ndexToggleCompare()" style="background:transparent;border:1px solid var(--moss);color:var(--moss-dark);border-radius:16px;padding:6px 14px;font-size:0.8em;font-family:var(--font-body);cursor:pointer;">\u2696\uFE0F Comparer 2 esp\u00e8ces</button></div>'
+    +'<div id="ndex-results"></div>'
     // Card Arbres
     +'<div onclick="renderCollArbres()" style="background:var(--cream-dark);border:1px solid var(--sepia);border-radius:10px;padding:16px;margin-bottom:12px;cursor:pointer;">'
     +'<div style="display:flex;align-items:center;gap:14px;">'
@@ -11608,7 +11832,7 @@ function renderCollArbres(){
     const onclick=unlocked?`data-name="${esc(name)}" onclick="openFicheFromColl(this.getAttribute('data-name'))"`:'' ;
     return `<div class="coll-card ${unlocked?'unlocked':'locked'}" ${onclick}>
       ${unlocked?'<div class="coll-check">✓</div>':'<div class="coll-lock">?</div>'}
-      <svg viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg">${svgContent}</svg>
+      ${unlocked?arbreVignette(name,'vignette','0 0 120 100','','planche'):`<svg viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg">${svgContent}</svg>`}
       <h3>${unlocked?name:'???'}</h3>
       <div class="coll-latin">${unlocked?(info.latin||''):'Indice : observe la feuille'}</div>
     </div>`;
@@ -12257,7 +12481,8 @@ function openFicheOiseau(cle){
     +'<h4>\uD83D\uDD0A Son chant</h4>'
     +'<div style="background:var(--cream-dark);border-radius:8px;padding:12px;font-size:0.92em;line-height:1.55;font-style:italic;">'+o.chant+'</div>'
     +'<button onclick="playChantOiseau(&quot;'+cle+'&quot;)" class="btn" style="width:100%;margin-top:8px;background:var(--moss);color:var(--cream);border:none;">\u25B6 \u00c9couter le chant (simul\u00e9)</button>'
-    +'<div style="font-size:0.75em;color:var(--sepia);font-style:italic;text-align:center;margin-top:4px;">Son g\u00e9n\u00e9r\u00e9 par synth\u00e8se \u2014 approximation simplifi\u00e9e</div>'
+    +'<button onclick="openXenoCantoOiseau(&quot;'+cle+'&quot;)" class="btn" style="width:100%;margin-top:6px;background:transparent;color:var(--moss-dark);border:1px solid var(--moss);">\uD83C\uDFA7 \u00c9couter un vrai chant enregistr\u00e9</button>'
+    +'<div style="font-size:0.75em;color:var(--sepia);font-style:italic;text-align:center;margin-top:4px;">Son simul\u00e9 hors-ligne \u00b7 vrais enregistrements sur xeno-canto (en ligne)</div>'
     +'</div>'
     +'<div class="fiche-section">'
     +'<h4>\uD83D\uDD0E Comment le reconna\u00eetre</h4>'
@@ -12330,6 +12555,12 @@ function playSweep(freqStart, freqEnd, duration, type, gain){
 }
 
 // Chant procédural par espèce (approximation simulée)
+function openXenoCantoOiseau(cle){
+  var o=OISEAUX_DATA[cle]; if(!o) return;
+  var q=(o.nom_savant||o.nom);
+  var url='https://xeno-canto.org/explore?query='+encodeURIComponent(q)+'%20type:song';
+  try{ window.open(url,'_blank','noopener'); }catch(e){ try{ location.href=url; }catch(_){} }
+}
 function playChantOiseau(cle){
   var ctx=getAudioCtx();
   if(!ctx) return;
@@ -13211,9 +13442,88 @@ function renderDefiDetail(id){
 /* ────────────────────────────────
    ÉCRAN HISTOIRES
 ──────────────────────────────── */
+/* ===== Histoires nouveaux règnes ===== */
+STORIES['loup'] = {
+  fin: { titre: 'Le loup est de retour', message: 'Tu as suivi un jeune loup d’Allemagne jusqu’en Belgique. Aujourd’hui protégé, il reprend doucement sa place dans nos forêts, où il joue un rôle précieux.', badge: '🐺 Ami des loups' },
+  titre: 'Le retour du loup',
+  emoji: '🐺',
+  intro: 'Je suis un jeune loup gris, né il y a deux ans dans une forêt d’Allemagne, au sein de la meute de mes parents. Aujourd’hui, l’appel du grand voyage me pousse à partir, seul, vers l’inconnu…',
+  etapes: [
+    { id:1, titre:'Le grand départ', decor:'🐺', narration:'Mes frères et sœurs restent avec nos parents. Moi, j’ai grandi : il est temps de quitter la meute pour fonder la mienne. Le museau au vent, je m’élance vers l’ouest.', question:'Pourquoi les jeunes loups quittent-ils leur meute ?', choix:[{ texte:'Parce qu’ils sont chassés par les autres', correct:false, feedback:'Non, ils partent de leur plein gré.' },{ texte:'Pour trouver leur propre territoire et fonder une meute', correct:true, feedback:'Exact ! C’est la dispersion : chacun cherche son territoire.' },{ texte:'Parce qu’ils détestent vivre en groupe', correct:false, feedback:'Au contraire, le loup est très social.' },{ texte:'Pour hiberner tout l’hiver', correct:false, feedback:'Le loup n’hiberne pas.' }], apprentissage:'Vers 1 à 2 ans, les jeunes loups se dispersent pour trouver un territoire libre et un partenaire.' },
+    { id:2, titre:'Le long voyage', decor:'🌲', narration:'Je marche, je trotte, je nage des rivières. Jour après jour, je traverse des forêts, je longe des champs, j’évite les routes et les villages.', question:'Quelle distance un loup peut-il parcourir en se dispersant ?', choix:[{ texte:'Quelques kilomètres', correct:false, feedback:'Bien plus loin !' },{ texte:'Une centaine de kilomètres', correct:false, feedback:'Encore plus loin !' },{ texte:'Plusieurs centaines, parfois plus de 1000 km', correct:true, feedback:'Bravo ! Certains loups parcourent plus de 1000 km.' },{ texte:'Il ne bouge presque jamais', correct:false, feedback:'Au contraire, c’est un grand marcheur.' }], apprentissage:'Un loup en dispersion peut traverser plusieurs pays et parcourir plus de 1000 km.' },
+    { id:3, titre:'Le retour en Belgique', decor:'🗺️', narration:'Un matin, je franchis une nouvelle frontière : me voici en Belgique. Ici, plus aucun loup ne vivait depuis très longtemps. Je suis un pionnier.', question:'Depuis combien de temps le loup avait-il disparu de Belgique ?', choix:[{ texte:'Quelques mois', correct:false, feedback:'Bien plus longtemps.' },{ texte:'Une dizaine d’années', correct:false, feedback:'Beaucoup plus !' },{ texte:'Plus de 100 ans', correct:true, feedback:'Exact ! Exterminé au 19e siècle, il est revenu tout seul vers 2018.' },{ texte:'Il n’avait jamais disparu', correct:false, feedback:'Si, il avait totalement disparu.' }], apprentissage:'Chassé, le loup avait disparu de Belgique depuis la fin du 19e siècle. Il est revenu naturellement vers 2018.' },
+    { id:4, titre:'La chasse', decor:'🦌', narration:'Mon ventre crie famine. Je repère une harde de chevreuils. Patient, je choisis le plus faible : c’est ainsi que je garde la forêt en bonne santé.', question:'De quoi le loup se nourrit-il surtout ?', choix:[{ texte:'D’herbe et de feuilles', correct:false, feedback:'Le loup est un carnivore.' },{ texte:'De grands herbivores : chevreuils, cerfs, sangliers', correct:true, feedback:'Exact ! Il régule leurs populations.' },{ texte:'De poissons uniquement', correct:false, feedback:'Ce n’est pas son menu principal.' },{ texte:'De fruits et de graines', correct:false, feedback:'Très rarement.' }], apprentissage:'En chassant surtout les herbivores affaiblis, le loup joue un rôle clé : il équilibre la forêt.' },
+    { id:5, titre:'Une nouvelle meute', decor:'🐾', narration:'Les saisons passent. Un jour, je croise une louve, elle aussi en voyage. Ensemble, nous fondons un territoire. Au printemps, des petits naissent dans notre tanière.', question:'Comment appelle-t-on le petit du loup ?', choix:[{ texte:'Le poulain', correct:false, feedback:'Non, ça c’est le cheval.' },{ texte:'Le louveteau', correct:true, feedback:'Bravo ! Toute la meute s’occupe de lui.' },{ texte:'Le faon', correct:false, feedback:'Ça, c’est le petit du cerf.' },{ texte:'Le marcassin', correct:false, feedback:'Ça, c’est le petit du sanglier.' }], apprentissage:'Une meute est une famille : un couple et ses louveteaux, élevés par tout le groupe.' }
+  ]
+};
+
+STORIES['tetard'] = {
+  fin: { titre: 'Bienvenue, petite grenouille !', message: 'D’un œuf à la grenouille, tu as traversé une métamorphose extraordinaire. La mare est un monde fragile : protégeons-la !', badge: '🐸 Gardien de la mare' },
+  titre: 'De têtard à grenouille',
+  emoji: '🐸',
+  intro: 'Je suis un minuscule têtard, tout juste sorti d’un œuf, au fond d’une mare tranquille. Devant moi : une incroyable transformation. Suis-moi !',
+  etapes: [
+    { id:1, titre:'Dans la gelée', decor:'🥚', narration:'Au début, je n’étais qu’un point noir dans une boule de gelée transparente, collée à une plante d’eau. Nous étions des centaines, serrés les uns contre les autres.', question:'Où la grenouille pond-elle ses œufs ?', choix:[{ texte:'Dans un nid, dans un arbre', correct:false, feedback:'Non, ça c’est l’oiseau.' },{ texte:'Dans l’eau, en amas gélatineux', correct:true, feedback:'Exact ! Ces amas s’appellent des pontes.' },{ texte:'Sous la terre', correct:false, feedback:'Non, il lui faut de l’eau.' },{ texte:'Dans une coquille dure', correct:false, feedback:'Les œufs de grenouille sont mous et gélatineux.' }], apprentissage:'La grenouille pond des centaines d’œufs dans l’eau, protégés par une gelée transparente.' },
+    { id:2, titre:'Le petit têtard', decor:'🐟', narration:'Me voilà libre ! Je nage grâce à ma longue queue. Je n’ai pas encore de pattes, et pour respirer sous l’eau, j’utilise de petites branchies, comme un poisson.', question:'Comment le têtard respire-t-il au début de sa vie ?', choix:[{ texte:'Avec des poumons', correct:false, feedback:'Pas encore !' },{ texte:'Avec des branchies, comme un poisson', correct:true, feedback:'Exact ! Il respire l’oxygène de l’eau.' },{ texte:'Il ne respire pas du tout', correct:false, feedback:'Si, il respire.' },{ texte:'Par sa queue', correct:false, feedback:'Non, par les branchies.' }], apprentissage:'Le jeune têtard vit dans l’eau et respire par des branchies, comme un poisson.' },
+    { id:3, titre:'La métamorphose', decor:'🐸', narration:'Les semaines passent. Un matin, je sens deux petites pattes pousser… à l’arrière ! Puis viennent les pattes avant. Ma queue, elle, commence doucement à rétrécir.', question:'Quelles pattes poussent en premier chez le têtard ?', choix:[{ texte:'Les pattes avant', correct:false, feedback:'Non, c’est l’inverse !' },{ texte:'Les pattes arrière', correct:true, feedback:'Exact ! Les pattes arrière d’abord, puis les avant.' },{ texte:'Toutes en même temps', correct:false, feedback:'Non, les arrière d’abord.' },{ texte:'Aucune ne pousse', correct:false, feedback:'Si, il lui pousse quatre pattes.' }], apprentissage:'Pendant la métamorphose, les pattes arrière apparaissent d’abord, puis les pattes avant ; la queue disparaît.' },
+    { id:4, titre:'Les dangers de la mare', decor:'🦗', narration:'La mare n’est pas un endroit tranquille ! Une larve de libellule, vraie chasseuse sous-marine, déplie son masque pour attraper mes voisins. Je file me cacher dans les herbes.', question:'Quel redoutable chasseur de la mare dévore les têtards ?', choix:[{ texte:'Le ver de terre', correct:false, feedback:'Il vit dans la terre, pas dans l’eau.' },{ texte:'La larve de libellule', correct:true, feedback:'Exact ! Une chasseuse redoutable, sous l’eau.' },{ texte:'L’escargot', correct:false, feedback:'L’escargot, lui, mange des plantes.' },{ texte:'L’abeille', correct:false, feedback:'L’abeille ne vit pas dans la mare.' }], apprentissage:'Dans la mare, têtards et larves servent de nourriture à de nombreux prédateurs, comme la larve de libellule.' },
+    { id:5, titre:'La sortie de l’eau', decor:'🌿', narration:'Ça y est : ma queue a disparu, mes poumons sont prêts. D’un bond, je sors de l’eau pour la première fois. Je suis devenu une grenouille !', question:'Que devient le têtard à la fin de sa métamorphose ?', choix:[{ texte:'Un poisson', correct:false, feedback:'Non !' },{ texte:'Une grenouille qui respire avec des poumons', correct:true, feedback:'Bravo ! Elle peut maintenant vivre hors de l’eau.' },{ texte:'Un triton', correct:false, feedback:'Le triton, c’est un autre animal.' },{ texte:'Une libellule', correct:false, feedback:'Non, ça c’est un insecte.' }], apprentissage:'À la fin, le têtard devient une grenouille à poumons, capable de vivre sur terre comme dans l’eau.' }
+  ]
+};
+
+STORIES['etoile_filante'] = {
+  fin: { titre: 'Un vœu dans la nuit', message: 'Tu as suivi un grain de poussière jusqu’à sa traînée de lumière. Lève les yeux les nuits d’été : le ciel est plein d’histoires.', badge: '⭐ Veilleur des étoiles' },
+  titre: 'Le voyage d’une étoile filante',
+  emoji: '☄️',
+  intro: 'Je suis un grain de poussière minuscule, plus petit qu’un grain de sable. Depuis des milliards d’années, je voyage dans le vide glacé de l’espace. Mais ce soir, tout va changer…',
+  etapes: [
+    { id:1, titre:'Dans le grand vide', decor:'✨', narration:'Autour de moi, le noir et le silence. Je file dans l’espace, abandonné par une vieille comète. Au loin, une belle planète bleue grossit : la Terre.', question:'Qu’est-ce qu’une « étoile filante » en réalité ?', choix:[{ texte:'Une vraie étoile qui tombe', correct:false, feedback:'Non, les étoiles sont d’énormes soleils très lointains.' },{ texte:'Un grain de poussière qui brûle dans l’atmosphère', correct:true, feedback:'Exact ! Ce n’est pas une étoile du tout.' },{ texte:'Un avion de nuit', correct:false, feedback:'Non, l’avion clignote lentement.' },{ texte:'Un petit nuage', correct:false, feedback:'Non, ça brille bien plus vite.' }], apprentissage:'Une étoile filante est un petit grain de poussière de l’espace (un météore) qui brûle en entrant dans l’air.' },
+    { id:2, titre:'La rencontre', decor:'🌍', narration:'La Terre m’attire. J’entre dans son atmosphère à une vitesse folle ! L’air, d’un coup, devient un mur invisible contre lequel je fonce.', question:'À quelle vitesse ces grains entrent-ils dans l’atmosphère ?', choix:[{ texte:'À la vitesse d’un vélo', correct:false, feedback:'Bien plus vite !' },{ texte:'À la vitesse d’une voiture', correct:false, feedback:'Encore beaucoup plus vite !' },{ texte:'À plusieurs dizaines de kilomètres par seconde', correct:true, feedback:'Exact ! Des dizaines de km… par seconde !' },{ texte:'Ils ne bougent presque pas', correct:false, feedback:'Ils foncent à toute allure.' }], apprentissage:'Les météores entrent dans l’atmosphère à des dizaines de km par seconde : d’où l’énorme frottement.' },
+    { id:3, titre:'La traînée de feu', decor:'☄️', narration:'Le frottement de l’air me chauffe à blanc. Je deviens incandescent et je trace une longue ligne lumineuse dans le ciel. En bas, un enfant me montre du doigt et fait un vœu.', question:'Pourquoi l’étoile filante brille-t-elle autant ?', choix:[{ texte:'Parce qu’elle est en feu depuis l’espace', correct:false, feedback:'Non, elle s’allume seulement dans l’air.' },{ texte:'Parce que le frottement de l’air la chauffe énormément', correct:true, feedback:'Exact ! L’air la chauffe jusqu’à la rendre incandescente.' },{ texte:'Parce qu’elle reflète le Soleil', correct:false, feedback:'Non, c’est la chaleur du frottement qui la fait briller.' },{ texte:'Parce qu’elle est électrique', correct:false, feedback:'Non, c’est bien le frottement.' }], apprentissage:'En freinant brutalement dans l’air, le grain chauffe tellement qu’il devient lumineux : voilà la traînée.' },
+    { id:4, titre:'La pluie d’étoiles', decor:'🌠', narration:'Je ne suis pas seul ce soir : des dizaines de mes semblables filent en même temps ! Quand la Terre traverse les poussières d’une comète, c’est une vraie pluie d’étoiles filantes.', question:'Comment s’appelle la célèbre pluie d’étoiles filantes du mois d’août ?', choix:[{ texte:'Les Perséides', correct:true, feedback:'Exact ! On les observe surtout vers le 12 août.' },{ texte:'Les Pléiades', correct:false, feedback:'Les Pléiades, c’est un amas d’étoiles, pas une pluie.' },{ texte:'Les Lunaires', correct:false, feedback:'Ça n’existe pas.' },{ texte:'Les Comètes du Nord', correct:false, feedback:'Ce n’est pas le bon nom.' }], apprentissage:'En août, la Terre traverse les poussières d’une comète : ce sont les Perséides, la plus connue des pluies d’étoiles.' },
+    { id:5, titre:'Le grand silence', decor:'🌌', narration:'Moi, petit grain, j’ai entièrement brûlé avant de toucher le sol. Mais parfois, un morceau plus gros résiste au voyage et atteint vraiment la Terre.', question:'Comment appelle-t-on un morceau qui atteint le sol sans avoir entièrement brûlé ?', choix:[{ texte:'Une planète', correct:false, feedback:'Bien trop petit pour ça !' },{ texte:'Une météorite', correct:true, feedback:'Exact ! Au sol, on parle de météorite.' },{ texte:'Une étoile', correct:false, feedback:'Non, une étoile est immense et très lointaine.' },{ texte:'Un satellite', correct:false, feedback:'Le satellite, lui, est fabriqué par l’homme.' }], apprentissage:'La plupart des grains brûlent entièrement ; les rares morceaux qui atteignent le sol sont des météorites.' }
+  ]
+};
+
+
+/* ===== Histoires : roches & champs ===== */
+STORIES['galet'] = {
+  titre: 'La longue vie d’un galet',
+  emoji: '🪨',
+  intro: 'Je suis un morceau de roche, accroché depuis des millions d’années au flanc d’une haute montagne. Le vent, la pluie et le gel travaillent sans relâche autour de moi. Mon grand voyage va commencer…',
+  fin: { titre: 'Le voyage sans fin de la pierre', message: 'De la montagne au sable, puis de nouveau à la roche : tu as suivi le grand cycle des roches, qui dure des millions d’années.', badge: '🪨 Explorateur des roches' },
+  etapes: [
+    { id:1, titre:'Sur la montagne', decor:'🏔️', narration:'Tout là-haut, l’eau s’infiltre dans mes fissures. La nuit elle gèle et gonfle, le jour elle fond. Petit à petit, elle me fragilise.', question:'Comment l’eau qui gèle casse-t-elle la roche ?', choix:[{ texte:'Elle la dissout comme du sucre', correct:false, feedback:'Pas vraiment : c’est surtout mécanique.' },{ texte:'En gelant, l’eau gonfle et fait éclater la roche', correct:true, feedback:'Exact ! Le gel fait éclater la pierre.' },{ texte:'Elle la brûle', correct:false, feedback:'Non, l’eau ne brûle pas.' },{ texte:'Elle ne fait rien du tout', correct:false, feedback:'Au contraire, avec le temps elle est très puissante.' }], apprentissage:'L’eau qui gèle gonfle et fait éclater la roche : c’est l’érosion par le gel, un grand sculpteur des montagnes.' },
+    { id:2, titre:'La chute', decor:'⛰️', narration:'Un matin, je me détache enfin ! Je dégringole la pente, je me cogne, je perds mes angles pointus. En bas, un torrent m’attend.', question:'Qu’est-ce que l’érosion ?', choix:[{ texte:'La fabrication de nouvelles montagnes', correct:false, feedback:'Non, c’est plutôt l’inverse.' },{ texte:'L’usure et le transport des roches par l’eau, le vent, la glace', correct:true, feedback:'Exact ! L’érosion use et déplace les roches.' },{ texte:'La fonte des métaux', correct:false, feedback:'Non, rien à voir.' },{ texte:'La croissance des plantes', correct:false, feedback:'Non.' }], apprentissage:'L’érosion, c’est l’usure et le transport des roches par l’eau, le vent et la glace, sur de très longues durées.' },
+    { id:3, titre:'Le voyage de la rivière', decor:'🌊', narration:'Le torrent me roule et me cogne contre mes voisins. Kilomètre après kilomètre, mes arêtes s’arrondissent. Je deviens lisse et rond : un galet.', question:'Pourquoi les galets de rivière sont-ils si lisses et arrondis ?', choix:[{ texte:'Quelqu’un les polit à la main', correct:false, feedback:'Non, c’est la nature.' },{ texte:'À force de rouler et de s’entrechoquer dans l’eau', correct:true, feedback:'Exact ! Le frottement les arrondit peu à peu.' },{ texte:'Ils naissent déjà ronds', correct:false, feedback:'Non, ils étaient anguleux au départ.' },{ texte:'Le soleil les fait fondre', correct:false, feedback:'Non.' }], apprentissage:'En roulant dans l’eau, les morceaux de roche s’entrechoquent et s’usent : ils deviennent des galets lisses et ronds.' },
+    { id:4, titre:'Du galet au sable', decor:'⏳', narration:'Les siècles passent. À force de me frotter, je me casse en morceaux de plus en plus petits. Mes plus fins grains finissent par devenir… du sable.', question:'De quoi est surtout fait le sable ?', choix:[{ texte:'De minuscules animaux', correct:false, feedback:'Pas principalement.' },{ texte:'De minuscules grains de roche usée, souvent du quartz', correct:true, feedback:'Exact ! Le sable, ce sont de tout petits grains de roche.' },{ texte:'De sucre', correct:false, feedback:'Non !' },{ texte:'De plastique', correct:false, feedback:'Hélas non… enfin, pas naturellement.' }], apprentissage:'Le sable est fait d’une multitude de minuscules grains de roche usée, souvent du quartz, très résistant.' },
+    { id:5, titre:'Une nouvelle roche', decor:'🪨', narration:'Au fond de la mer, mes grains s’accumulent, couche après couche. Pressés pendant des millions d’années, ils se collent et durcissent… pour redevenir de la roche !', question:'Comment des grains de sable peuvent-ils redevenir de la roche ?', choix:[{ texte:'Ils ne le peuvent pas', correct:false, feedback:'Si, avec énormément de temps !' },{ texte:'En s’accumulant et en étant pressés pendant des millions d’années', correct:true, feedback:'Exact ! Ainsi naît le grès, une roche sédimentaire.' },{ texte:'En les chauffant au four', correct:false, feedback:'Non, c’est la pression et le temps.' },{ texte:'En les mélangeant à de l’eau', correct:false, feedback:'Il faut bien plus que ça.' }], apprentissage:'Le sable accumulé et comprimé pendant des millions d’années forme une nouvelle roche : c’est le cycle des roches, sans fin.' }
+  ]
+};
+
+STORIES['coquelicot'] = {
+  titre: 'Le coquelicot des champs',
+  emoji: '🌺',
+  intro: 'Je suis une minuscule graine de coquelicot, enfouie dans la terre d’un champ depuis des années. J’attends, patiemment, le bon moment pour me réveiller…',
+  fin: { titre: 'Rouge comme un champ d’été', message: 'D’une graine endormie à une mer de fleurs rouges, tu as découvert la vie du coquelicot, fidèle compagnon des champs.', badge: '🌺 Ami des champs fleuris' },
+  etapes: [
+    { id:1, titre:'L’attente sous la terre', decor:'🌰', narration:'Cela fait des années que je dors sous terre, dans le noir. Je peux attendre très, très longtemps, jusqu’à ce que la lumière revienne.', question:'Combien de temps une graine de coquelicot peut-elle attendre dans le sol ?', choix:[{ texte:'Quelques jours seulement', correct:false, feedback:'Bien plus longtemps !' },{ texte:'Une seule saison', correct:false, feedback:'Encore plus !' },{ texte:'Plusieurs années, parfois des dizaines d’années', correct:true, feedback:'Exact ! Les graines peuvent dormir très longtemps.' },{ texte:'Elle ne peut pas attendre', correct:false, feedback:'Si, c’est sa grande force.' }], apprentissage:'Les graines de coquelicot peuvent rester endormies (en dormance) des années dans le sol, en attendant la lumière.' },
+    { id:2, titre:'Le réveil', decor:'🚜', narration:'Un jour, un tracteur retourne la terre. Soudain, la lumière me touche ! C’est le signal : je germe enfin et je pousse vers le soleil.', question:'Qu’est-ce qui réveille souvent les graines de coquelicot ?', choix:[{ texte:'La pleine lune', correct:false, feedback:'Non.' },{ texte:'Quand la terre est retournée et que la lumière les atteint', correct:true, feedback:'Exact ! Voilà pourquoi ils poussent dans les champs labourés.' },{ texte:'Le chant des oiseaux', correct:false, feedback:'Joli, mais non.' },{ texte:'Rien de spécial', correct:false, feedback:'Si : la lumière, après le labour.' }], apprentissage:'Le coquelicot germe quand la terre est remuée (labour, chantier) et que la lumière atteint ses graines : c’est une plante pionnière.' },
+    { id:3, titre:'La fleur rouge', decor:'🌺', narration:'Je grandis vite et j’ouvre une fleur d’un rouge éclatant, aux pétales fragiles comme du papier de soie. De loin, les insectes me repèrent.', question:'À quoi sert la couleur rouge vif du coquelicot ?', choix:[{ texte:'À faire joli, sans plus', correct:false, feedback:'Il y a une vraie raison !' },{ texte:'À attirer les insectes pollinisateurs', correct:true, feedback:'Exact ! La couleur est un signal pour les insectes.' },{ texte:'À faire peur aux animaux', correct:false, feedback:'Non.' },{ texte:'À se cacher', correct:false, feedback:'Au contraire, il se montre !' }], apprentissage:'Les couleurs vives des fleurs servent à attirer les insectes pollinisateurs, indispensables à leur reproduction.' },
+    { id:4, titre:'La pollinisation', decor:'🐝', narration:'Une abeille se pose sur moi pour butiner. En repartant, elle emporte un peu de mon pollen vers une autre fleur. Ainsi mes graines pourront se former.', question:'Que transporte l’abeille d’une fleur à l’autre ?', choix:[{ texte:'De l’eau', correct:false, feedback:'Non.' },{ texte:'Du pollen, qui permet aux graines de se former', correct:true, feedback:'Exact ! C’est la pollinisation.' },{ texte:'De la terre', correct:false, feedback:'Non.' },{ texte:'Rien du tout', correct:false, feedback:'Si : du pollen, précieux !' }], apprentissage:'En passant de fleur en fleur, les insectes transportent le pollen : c’est la pollinisation, qui permet aux plantes de faire des graines.' },
+    { id:5, titre:'Mille graines au vent', decor:'🌬️', narration:'Ma fleur fane et laisse une petite capsule pleine de graines. Quand le vent souffle, elle s’agite comme une salière et répand mes graines tout autour.', question:'Comment le coquelicot répand-il ses très nombreuses graines ?', choix:[{ texte:'Il les lance lui-même au loin', correct:false, feedback:'Pas exactement.' },{ texte:'La capsule s’agite au vent et saupoudre les graines, comme une salière', correct:true, feedback:'Exact ! Et il y en a des milliers.' },{ texte:'Il les enterre une à une', correct:false, feedback:'Non.' },{ texte:'Les fourmis font tout le travail', correct:false, feedback:'Elles aident parfois, mais ce n’est pas le principal.' }], apprentissage:'La capsule du coquelicot, percée de petits trous, répand des milliers de graines au vent ; certaines attendront des années avant de germer.' }
+  ]
+};
+
+
 function getAvailableStories(){
   // Liste statique avec mappings : règne, description, accroche
   return [
+    { id: 'galet', regne: 'roche', regne_emoji: '\uD83E\uDEA8', titre: 'La longue vie d\u2019un galet', emoji: '\uD83E\uDEA8', sub: 'Le cycle des roches : de la montagne au sable, et retour' },
+    { id: 'coquelicot', regne: 'champs', regne_emoji: '\uD83C\uDF3E', titre: 'Le coquelicot des champs', emoji: '\uD83C\uDF3A', sub: 'D\u2019une graine endormie \u00e0 une mer de fleurs rouges' },
+    { id: 'loup', regne: 'mammif\u00e8re', regne_emoji: '\uD83E\uDD8A', titre: 'Le retour du loup', emoji: '\uD83D\uDC3A', sub: 'Un jeune loup traverse l\u2019Europe jusqu\u2019en Belgique' },
+    { id: 'tetard', regne: 'mare', regne_emoji: '\uD83D\uDCA7', titre: 'De t\u00eatard \u00e0 grenouille', emoji: '\uD83D\uDC38', sub: 'La m\u00e9tamorphose dans la mare, \u00e9tape par \u00e9tape' },
+    { id: 'etoile_filante', regne: 'ciel', regne_emoji: '\uD83C\uDF0C', titre: 'Le voyage d\u2019une \u00e9toile filante', emoji: '\u2604\uFE0F', sub: 'Un grain de poussi\u00e8re qui finit en tra\u00een\u00e9e de lumi\u00e8re' },
     {
       id: 'gland',
       regne: 'arbre',
@@ -13455,10 +13765,19 @@ function renderHistoiresScreen(){
     +'<div style="padding:14px 16px;">'
     +'<div style="text-align:center;font-style:italic;color:var(--sepia);font-size:0.9em;margin-bottom:14px;line-height:1.5;">Suis le cycle de vie d\u2019un \u00eatre vivant et apprends en t\u2019amusant.</div>'
     // Section Histoires individuelles
-    +'<div style="font-family:var(--font-title);font-size:0.85em;color:var(--sepia);border-bottom:1px solid var(--sepia-light);padding-bottom:3px;margin-bottom:10px;letter-spacing:0.06em;text-transform:uppercase;">R\u00e9cits individuels</div>';
+    ;
 
-  for(var i=0;i<stories.length;i++){
-    var s=stories[i];
+  var REGNE_ORDER=['arbre','plante','champignon','mousse','insecte','oiseau','herpeto','mare','mammif\u00e8re','champs','roche','ciel','animal'];
+  var REGNE_LABEL={arbre:'\uD83C\uDF33 Arbres',plante:'\uD83C\uDF3F Plantes',champignon:'\uD83C\uDF44 Champignons',mousse:'\uD83C\uDF43 Mousses & lichens',insecte:'\uD83D\uDC1B Insectes',oiseau:'\uD83D\uDC26 Oiseaux',herpeto:'\uD83E\uDD8E Amphibiens & reptiles',mare:'\uD83D\uDCA7 La mare & la rivi\u00e8re','mammif\u00e8re':'\uD83E\uDD8A Mammif\u00e8res',champs:'\uD83C\uDF3E Champs',roche:'\uD83E\uDEA8 Roches',ciel:'\uD83C\uDF0C Le ciel nocturne',animal:'\u2B50 Personnages & mascottes'};
+  var byReg={};
+  for(var gi=0; gi<stories.length; gi++){ var gr=stories[gi].regne||'animal'; (byReg[gr]=byReg[gr]||[]).push(stories[gi]); }
+  var orderedRegnes=REGNE_ORDER.filter(function(r){return byReg[r];});
+  for(var rk in byReg){ if(orderedRegnes.indexOf(rk)<0) orderedRegnes.push(rk); }
+  for(var ri=0; ri<orderedRegnes.length; ri++){
+    var reg=orderedRegnes[ri]; var grp=byReg[reg];
+    html+='<div style="font-family:var(--font-title);font-size:0.9em;color:var(--moss-dark);margin:16px 0 8px;letter-spacing:0.03em;">'+(REGNE_LABEL[reg]||reg)+'</div>';
+    for(var i=0;i<grp.length;i++){
+    var s=grp[i];
     var st=STORIES[s.id];
     var prog=loadStoryProgress(s.id).length;
     var total=st?st.etapes.length:0;
@@ -13481,6 +13800,7 @@ function renderHistoiresScreen(){
       +'<div style="background:rgba(139,107,61,.15);height:5px;border-radius:3px;overflow:hidden;margin-top:8px;"><div style="background:'+(complet?'var(--gold)':'var(--moss)')+';height:100%;width:'+pct+'%;transition:width .3s;"></div></div>'
       +'<div style="font-size:0.72em;color:var(--sepia);text-align:right;margin-top:2px;">'+prog+'/'+total+' \u00e9tapes</div>'
       +'</div>';
+    }
   }
 
   // Section Saga
@@ -13558,6 +13878,14 @@ function renderParametresScreen(){
     +'</div>'
     +'<div style="padding:14px 16px;">'
 
+    // Apparence (mode sombre)
+    +'<div class="fiche-section">'
+    +'<h4>\uD83C\uDF19 Apparence</h4>'
+    +'<div style="background:var(--cream-dark);border-radius:8px;padding:14px;display:flex;align-items:center;justify-content:space-between;">'
+    +'<span style="font-size:0.95em;">Mode sombre</span>'
+    +'<button onclick="toggleDarkMode()" style="border:1px solid var(--sepia);background:'+(isDark()?'var(--moss)':'transparent')+';color:'+(isDark()?'var(--cream)':'var(--sepia)')+';border-radius:16px;padding:6px 16px;cursor:pointer;font-family:var(--font-body);font-size:0.85em;">'+(isDark()?'\uD83C\uDF19 Activ\u00e9':'\u2600\uFE0F D\u00e9sactiv\u00e9')+'</button>'
+    +'</div></div>'
+
     // À propos
     +'<div class="fiche-section">'
     +'<h4>\uD83C\uDF3F \u00c0 propos de Naturalia</h4>'
@@ -13613,7 +13941,7 @@ function renderParametresScreen(){
     +'<div style="background:var(--cream-dark);border-radius:8px;padding:14px;font-size:0.88em;line-height:1.7;font-family:monospace;">'
     +'<strong>Naturalia v29.0</strong><br>'
     +'Build : 2026-06-18<br>'
-    +'8 r\u00e8gnes \u00b7 152 esp\u00e8ces \u00b7 26 histoires \u00b7 89 questions \u00b7 35 termes'
+    +'8 r\u00e8gnes \u00b7 152 esp\u00e8ces \u00b7 31 histoires \u00b7 125 questions \u00b7 35 termes'
     +'</div></div>'
 
     // Bouton tutoriel
@@ -14007,8 +14335,26 @@ function dRestart(){
   renderDetermHome();
 }
 
+/* Noms traites en correspondance EXACTE, avant la chaine de includes() ci-dessous.
+   Sans cela : 'sapin' et 'aubepine' contiennent 'pin' et recevaient les aiguilles
+   longues de pin (la regle 'pin' passe avant les leurs) ; 'Epicéa commun' et 'If'
+   ne correspondaient a aucune regle -- la premiere teste 'épicéa' et 'epicea' mais
+   jamais 'epicéa', la seconde teste 'if ' avec une espace que normName() a retiree --
+   et retombaient sur la feuille plate par defaut. */
+const SVG_EXACTS={
+  'sapin':'aig_isolee',
+  'if':'aig_isolee',
+  'epicéa commun':'aig_isolee',
+  'épicéa commun':'aig_isolee',
+  'epicea commun':'aig_isolee',
+  'aubépine':'bord_lobe',
+  'aubepine':'bord_lobe',
+  'aubépine monogyne':'bord_lobe',
+  'aubepine monogyne':'bord_lobe'
+};
 function getSpeciesSVG(spName){
   const n=normName(spName);
+  if(SVG_EXACTS[n]) return SVG[SVG_EXACTS[n]];
   if(n.includes('chêne')||n.includes('chene')) return SVG.bord_lobe;
   if(n.includes('hêtre')||n.includes('hetre')) return SVG.bord_lisse;
   if(n.includes('bouleau')) return SVG.bord_dente;
@@ -14086,6 +14432,159 @@ function getSpeciesSVG(spName){
   if(n.includes('aubépine monogyne')||n.includes('aubepine monogyne')) return SVG.bord_lobe;
   return SVG.feuille_simple;
 }
+
+/* ────────────────────────────────────────────────────────────────
+   ILLUSTRATIONS D'ESPECES (images generees)
+   Fichiers attendus dans assets/arbres/ :
+     <slug>-planche.webp  feuille + fruit + bourgeon (vignettes)
+     <slug>-arbre.webp    l'arbre entier (fiche, description)
+   Un slug n'est servi que s'il est declare dans ARBRES_ILLUS :
+   tant qu'une image n'est pas generee, on retombe silencieusement
+   sur le pictogramme de la cle (aucune requete, aucun 404).
+──────────────────────────────────────────────────────────────── */
+const ARBRES_ILLUS_BASE='assets/arbres/';
+const ARBRES_ILLUS={
+/* ILLUS-AUTO-DEBUT — genere par preparer_illustrations.py, ne pas editer a la main */
+  'argousier': ['arbre','planche','vignette'],   /* Argousier */
+  'aubepine': ['arbre','planche','vignette'],   /* Aubépine */
+  'aubepine-monogyne': ['arbre','planche','vignette'],   /* Aubépine monogyne */
+  'aulne-blanc': ['arbre','planche','vignette'],   /* Aulne blanc */
+  'aulne-glutineux': ['arbre','planche','vignette'],   /* Aulne glutineux */
+  'bouleau-pubescent': ['arbre','planche','vignette'],   /* Bouleau pubescent */
+  'bouleau-verruqueux': ['arbre','planche','vignette'],   /* Bouleau verruqueux */
+  'bourdaine': ['arbre','planche','vignette'],   /* Bourdaine */
+  'buis': ['arbre','planche','vignette'],   /* Buis */
+  'cedre-de-l-atlas': ['arbre','planche','vignette'],   /* Cèdre de l'Atlas */
+  'cerisier-de-sainte-lucie': ['arbre','planche','vignette'],   /* Cerisier de Sainte-Lucie */
+  'charme': ['arbre','planche','vignette'],   /* Charme */
+  'chataignier': ['arbre','planche','vignette'],   /* Châtaignier */
+  'chene-pedoncule': ['arbre','planche','vignette'],   /* Chêne pédonculé */
+  'chene-rouge-d-amerique': ['arbre','planche','vignette'],   /* Chêne rouge d'Amérique */
+  'chene-sessile-rouvre': ['arbre','planche','vignette'],   /* Chêne sessile, rouvre */
+  'chevrefeuille': ['arbre','planche','vignette'],   /* Chèvrefeuille */
+  'clematite-des-haies': ['arbre','planche','vignette'],   /* Clématite des haies */
+  'cornouiller': ['arbre','planche','vignette'],   /* Cornouiller */
+  'cytise-faux-ebenier': ['arbre','planche','vignette'],   /* Cytise faux-ébénier */
+  'douglas': ['arbre','planche','vignette'],   /* Douglas */
+  'epicea-commun': ['arbre','planche','vignette'],   /* Epicéa commun */
+  'erable-champetre': ['arbre','planche','vignette'],   /* Erable champêtre */
+  'erable-de-montpellier': ['arbre','planche','vignette'],   /* Erable de Montpellier */
+  'erable-plane': ['arbre','planche','vignette'],   /* Erable plane */
+  'erable-sycomore': ['arbre','planche','vignette'],   /* Erable sycomore */
+  'forsythie': ['arbre','planche','vignette'],   /* Forsythie */
+  'frene-commun': ['arbre','planche','vignette'],   /* Frêne commun */
+  'fusain': ['arbre','planche','vignette'],   /* Fusain */
+  'genevrier-commun': ['arbre','planche','vignette'],   /* Genevrier commun */
+  'groseillier-noir-cassis': ['arbre','planche','vignette'],   /* Groseillier noir, cassis */
+  'groseillier-rouge': ['arbre','planche','vignette'],   /* Groseillier rouge */
+  'hetre': ['arbre','planche','vignette'],   /* Hêtre */
+  'houx': ['arbre','planche','vignette'],   /* Houx */
+  'if': ['arbre','planche','vignette'],   /* If */
+  'laurier-cerise': ['arbre','planche','vignette'],   /* Laurier-cerise */
+  'liane-chevrefeuille': ['arbre','planche','vignette'],   /* Liane chèvrefeuille */
+  'lierre': ['arbre','planche','vignette'],   /* Lierre */
+  'lilas': ['arbre','planche','vignette'],   /* Lilas */
+  'marronnier': ['arbre','planche','vignette'],   /* Marronnier */
+  'meleze-d-europe': ['arbre','planche','vignette'],   /* Melèze d'Europe */
+  'merisier': ['arbre','planche','vignette'],   /* Merisier */
+  'neflier': ['arbre','planche','vignette'],   /* Néflier */
+  'nerprun-purgatif': ['arbre','planche','vignette'],   /* Nerprun purgatif */
+  'noisetier': ['arbre','planche','vignette'],   /* Noisetier */
+  'noyer-royal': ['arbre','planche','vignette'],   /* Noyer royal */
+  'orme': ['arbre','planche','vignette'],   /* Orme */
+  'osier': ['arbre','planche','vignette'],   /* Osier */
+  'pecher': ['arbre','planche','vignette'],   /* Pêcher */
+  'peuplier': ['arbre','planche','vignette'],   /* Peuplier */
+  'peuplier-noir': ['arbre','planche','vignette'],   /* Peuplier noir */
+  'piment-royal': ['arbre','planche','vignette'],   /* Piment royal */
+  'pin-noir': ['arbre','planche','vignette'],   /* Pin Noir */
+  'pin-sylvestre': ['arbre','planche','vignette'],   /* Pin sylvestre */
+  'platane': ['arbre','planche','vignette'],   /* Platane */
+  'poirier': ['arbre','planche','vignette'],   /* Poirier */
+  'pommier': ['arbre','planche','vignette'],   /* Pommier */
+  'prunellier': ['arbre','planche','vignette'],   /* Prunellier */
+  'prunier-sauvage': ['arbre','planche','vignette'],   /* Prunier sauvage */
+  'robinier-faux-acacia': ['arbre','planche','vignette'],   /* Robinier faux-acacia */
+  'ronce': ['arbre','planche','vignette'],   /* Ronce */
+  'rosier-sauvage': ['arbre','planche','vignette'],   /* Rosier sauvage */
+  'sapin': ['arbre','planche','vignette'],   /* Sapin */
+  'saule': ['arbre','planche','vignette'],   /* Saule */
+  'sorbier-des-oiseleurs': ['arbre','planche','vignette'],   /* Sorbier des oiseleurs */
+  'sorbier-torminal': ['arbre','planche','vignette'],   /* Sorbier torminal */
+  'sureau-a-grappe': ['arbre','planche','vignette'],   /* Sureau à grappe */
+  'sureau-noir': ['arbre','planche','vignette'],   /* Sureau noir */
+  'symphorine': ['arbre','planche','vignette'],   /* Symphorine */
+  'tilleul': ['arbre','planche','vignette'],   /* Tilleul */
+  'troene-commun': ['arbre','planche','vignette'],   /* Troène commun */
+  'viorne-obier': ['arbre','planche','vignette'],   /* Viorne obier */
+/* ILLUS-AUTO-FIN */
+};
+
+function arbreSlug(name){
+  return normName(name)
+    .normalize('NFD').replace(new RegExp('[\\u0300-\\u036f]','g'),'')
+    .replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+}
+function hasArbreIllus(name,variante){
+  var v=ARBRES_ILLUS[arbreSlug(name)];
+  return !!v && v.indexOf(variante)>=0;
+}
+function arbreIllusSrc(name,variante){
+  return ARBRES_ILLUS_BASE+arbreSlug(name)+'-'+variante+'.webp';
+}
+
+var ICON_PLEIN_ECRAN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>';
+
+/* Vignette : image si elle existe, sinon pictogramme de la cle.
+   variante   : ce qui est affiche dans la case ('vignette', 'planche', 'arbre')
+   zoom       : ce qui s'ouvre en plein ecran au clic (defaut : la variante affichee)
+   La petite vignette montre la feuille seule ; le clic ouvre la planche entiere,
+   ou l'on voit aussi le fruit et le bourgeon. */
+function arbreVignette(name,variante,viewBox,cls,zoom){
+  var box=viewBox||'0 0 120 120';
+  if(!hasArbreIllus(name,variante)){
+    if(variante==='vignette' && hasArbreIllus(name,'planche')) variante='planche';
+    else return '<svg viewBox="'+box+'" xmlns="http://www.w3.org/2000/svg">'+getSpeciesSVG(name)+'</svg>';
+  }
+  var zv=(zoom && hasArbreIllus(name,zoom))?zoom:variante;
+  var src=arbreIllusSrc(name,variante);
+  var srcZoom=arbreIllusSrc(name,zv);
+  return '<figure class="illus '+(cls||'')+'" data-src="'+esc(srcZoom)+'" data-leg="'+esc(name)+'"'
+    +' onclick="event.stopPropagation();openIllus(this.getAttribute(&quot;data-src&quot;),this.getAttribute(&quot;data-leg&quot;))">'
+    /* pas de loading="lazy" : les ecrans sont rendus masques puis affiches,
+       et Chrome n'observe jamais les images differees creees dans un
+       conteneur masque -- elles resteraient indefiniment vides. */
+    +'<img src="'+esc(src)+'" alt="'+esc(name)+'" decoding="async">'
+    +'<span class="illus-zoom" aria-hidden="true">'+ICON_PLEIN_ECRAN+'</span>'
+    +'</figure>';
+}
+
+function openIllus(src,legende){
+  var o=document.getElementById('illus-overlay');
+  if(!o){
+    o=document.createElement('div');
+    o.id='illus-overlay';
+    o.className='illus-overlay';
+    o.addEventListener('click',closeIllus);
+    document.body.appendChild(o);
+  }
+  o.innerHTML='<button class="illus-close" aria-label="Fermer">&times;</button>'
+    +'<img src="'+esc(src)+'" alt="'+esc(legende||'')+'">'
+    +(legende?'<div class="illus-legende">'+esc(legende)+'</div>':'');
+  o.classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeIllus(){
+  var o=document.getElementById('illus-overlay');
+  if(o && o.classList.contains('open')){
+    o.classList.remove('open');
+    o.innerHTML='';
+    document.body.style.overflow='';
+    return true;
+  }
+  return false;
+}
+document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeIllus(); });
 
 /* ── RENDER DÉTERMINATION ── */
 /* ─── PLANTES DES CHAMPS (Déterminer) ─ 19 espèces ─── */
@@ -14497,18 +14996,18 @@ const POTAGER_SVG = {
   potiron: function(){ return `<svg viewBox="0 0 160 200" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="potiron-pt" cx="42%" cy="34%" r="72%"><stop offset="0%" stop-color="#f4a23e"></stop><stop offset="55%" stop-color="#e0852a"></stop><stop offset="100%" stop-color="#b35e18"></stop></radialGradient></defs><ellipse cx="80" cy="194" rx="30" ry="4" fill="#3a2c1c" opacity="0.12"></ellipse><g fill="url(#potiron-pt)" stroke="#9c4f14" stroke-width="0.8"><ellipse cx="80" cy="150" rx="44" ry="34"></ellipse></g><g stroke="#9c4f14" stroke-width="0.9" fill="none" opacity="0.7"><path d="M80 117 C 70 132 70 168 80 183"></path><path d="M62 120 C 50 134 50 166 62 180"></path><path d="M98 120 C 110 134 110 166 98 180"></path><path d="M46 130 C 40 142 40 158 46 170"></path><path d="M114 130 C 120 142 120 158 114 170"></path></g><ellipse cx="64" cy="136" rx="10" ry="6" fill="#ffffff" opacity="0.18"></ellipse><path d="M80 117 C 79 106 78 98 80 90" stroke="#6b5a36" stroke-width="4" fill="none" stroke-linecap="round"></path><path d="M80 90 C 86 88 90 90 92 94" stroke="#6b5a36" stroke-width="3" fill="none" stroke-linecap="round"></path></svg>`; },
   haricot: function(){ return `<svg viewBox="0 0 160 200" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"><ellipse cx="80" cy="194" rx="30" ry="4" fill="#3a2c1c" opacity="0.12"></ellipse><path d="M80 188 C 78 150 82 110 80 74" stroke="#5e7a38" stroke-width="2.4" fill="none" stroke-linecap="round"></path><path d="M80 150 C 60 148 52 130 44 140 C 50 156 66 160 80 156 Z" fill="#6e9a52" stroke="#3d5a37" stroke-width="0.7"></path><path d="M80 130 C 100 128 108 110 116 120 C 110 136 94 140 80 136 Z" fill="#5e8054" stroke="#3d5a37" stroke-width="0.7"></path><g fill="#7a9a4a" stroke="#46692a" stroke-width="0.7"><path d="M70 118 C 60 122 50 150 56 172 C 60 174 64 172 64 168 C 66 146 72 124 74 120 C 74 116 72 116 70 118 Z"></path><path d="M88 112 C 98 116 102 146 96 168 C 92 170 88 168 88 164 C 88 142 84 122 82 118 C 82 114 86 110 88 112 Z"></path><path d="M58 110 C 50 114 44 138 50 156 C 53 158 56 156 56 152 C 56 134 60 116 62 112 C 62 108 60 108 58 110 Z"></path></g><g fill="#cfe0a8" opacity="0.5"><circle cx="59" cy="140" r="0.9"></circle><circle cx="62" cy="155" r="0.9"></circle><circle cx="93" cy="138" r="0.9"></circle><circle cx="90" cy="152" r="0.9"></circle></g><g fill="#fbf6ea" stroke="#d8c9a0" stroke-width="0.5"><ellipse cx="92" cy="96" rx="5" ry="3.4" transform="rotate(20 92 96)"></ellipse><ellipse cx="98" cy="92" rx="3.4" ry="2.6"></ellipse><ellipse cx="86" cy="94" rx="3" ry="2.4"></ellipse></g></svg>`; },
   petit_pois: function(){ return `<svg viewBox="0 0 160 200" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="petit_pois-pp" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#a6c66a"></stop><stop offset="100%" stop-color="#6d9440"></stop></linearGradient></defs><ellipse cx="80" cy="194" rx="30" ry="4" fill="#3a2c1c" opacity="0.12"></ellipse><path d="M80 188 C 76 152 84 116 80 80" stroke="#6a8a40" stroke-width="2.2" fill="none" stroke-linecap="round"></path><path d="M80 148 C 58 146 50 128 60 124 C 70 122 84 132 86 146 C 86 154 82 152 80 148 Z" fill="url(#petit_pois-pp)" stroke="#496b27" stroke-width="0.8"></path><g fill="#5f8636" opacity="0.6"><circle cx="62" cy="135" r="3"></circle><circle cx="70" cy="140" r="3.2"></circle><circle cx="78" cy="144" r="3"></circle></g><path d="M80 124 C 100 122 108 104 98 100 C 88 98 76 108 74 122 C 74 130 78 128 80 124 Z" fill="url(#petit_pois-pp)" stroke="#496b27" stroke-width="0.8"></path><g fill="#5f8636" opacity="0.6"><circle cx="96" cy="111" r="3"></circle><circle cx="88" cy="116" r="3.2"></circle><circle cx="80" cy="120" r="3"></circle></g><path d="M80 96 C 90 92 96 96 92 102 C 88 106 82 104 84 98 C 86 94 90 96 89 99" fill="none" stroke="#6a8a40" stroke-width="1.3" stroke-linecap="round"></path><path d="M74 92 C 64 88 60 96 64 102 C 68 106 74 104 72 98 C 70 94 66 96 67 99" fill="none" stroke="#6a8a40" stroke-width="1.3" stroke-linecap="round"></path><g fill="#fbf6ea" stroke="#d8c9a0" stroke-width="0.5"><ellipse cx="80" cy="78" rx="6" ry="4" transform="rotate(-10 80 78)"></ellipse><ellipse cx="80" cy="73" rx="4.2" ry="3.2"></ellipse></g></svg>`; },
-  carotte: function(){ return SVG_pot_racine('#e0852a'); },
-  radis: function(){ return SVG_pot_racine('#d04a5a'); },
-  navet: function(){ return SVG_pot_racine('#cfc6e0'); },
-  betterave_rouge: function(){ return SVG_pot_racine('#9a2e5a'); },
-  oignon: function(){ return SVG_pot_racine('#d8a86a'); },
-  ail: function(){ return SVG_pot_racine('#ece4d6'); },
-  poireau: function(){ return SVG_pot_racine('#9aca6a'); },
-  laitue: function(){ return SVG_pot_feuille('#7aa84a'); },
-  epinard: function(){ return SVG_pot_feuille('#3d6a3a'); },
-  chou: function(){ return SVG_pot_feuille('#6e9a52'); },
-  brocoli: function(){ return SVG_pot_feuille('#4e7a4a'); },
-  celeri: function(){ return SVG_pot_feuille('#9ab86a'); },
+  carotte: function(){ return `<svg viewBox="0 0 160 200" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="pl1carotte-carotte-root" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#f0a04a"></stop><stop offset="0.5" stop-color="#e0852a"></stop><stop offset="1" stop-color="#c06a18"></stop></linearGradient><linearGradient id="pl1carotte-carotte-leaf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7a9a4a"></stop><stop offset="1" stop-color="#5e8054"></stop></linearGradient></defs><ellipse cx="80" cy="188" rx="34" ry="6" fill="#3d5a37" opacity="0.12"></ellipse><g fill="none" stroke="url(#pl1carotte-carotte-leaf)" stroke-width="1.4" stroke-linecap="round"><path d="M80,96 C78,72 70,52 58,34"></path><path d="M58,34 q-7,-4 -10,2 M58,40 q-8,-3 -11,3 M60,48 q-9,-2 -12,4"></path><path d="M80,96 C80,68 80,48 80,26"></path><path d="M80,26 q-6,-5 -10,-1 M80,34 q-7,-4 -11,0 M80,44 q-8,-3 -12,1 M80,26 q6,-5 10,-1 M80,34 q7,-4 11,0 M80,44 q8,-3 12,1"></path><path d="M80,96 C82,72 90,52 102,34"></path><path d="M102,34 q7,-4 10,2 M102,40 q8,-3 11,3 M100,48 q9,-2 12,4"></path><path d="M80,98 C74,80 64,66 52,58"></path><path d="M52,58 q-7,-1 -8,4"></path><path d="M80,98 C86,80 96,66 108,58"></path><path d="M108,58 q7,-1 8,4"></path></g><path d="M68,100 C66,138 74,168 80,182 C86,168 94,138 92,100 C88,96 72,96 68,100 Z" fill="url(#pl1carotte-carotte-root)" stroke="#9c5410" stroke-width="1"></path><g stroke="#b06214" stroke-width="0.7" opacity="0.5" fill="none"><path d="M70,114 Q80,118 90,114"></path><path d="M71,128 Q80,132 89,128"></path><path d="M73,144 Q80,148 87,144"></path><path d="M76,160 Q80,163 84,160"></path></g></svg>`; },
+  radis: function(){ return `<svg viewBox="0 0 160 200" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="pl1radis-radis-root" cx="0.4" cy="0.35" r="0.8"><stop offset="0" stop-color="#e87085"></stop><stop offset="0.7" stop-color="#d04a5a"></stop><stop offset="1" stop-color="#a8323f"></stop></radialGradient><linearGradient id="pl1radis-radis-leaf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7a9a4a"></stop><stop offset="1" stop-color="#5e8054"></stop></linearGradient></defs><ellipse cx="80" cy="190" rx="26" ry="5" fill="#3d5a37" opacity="0.12"></ellipse><g fill="url(#pl1radis-radis-leaf)" stroke="#4d6a44" stroke-width="0.8"><path d="M80,108 C70,96 58,76 46,58 C56,62 70,76 80,96 Z"></path><path d="M80,108 C82,90 84,66 86,44 C92,62 90,90 86,108 Z"></path><path d="M80,108 C90,96 104,78 116,62 C108,68 94,82 84,100 Z"></path><path d="M80,108 C72,98 60,90 50,86 C58,92 70,100 78,108 Z"></path></g><path d="M80,118 C62,118 54,134 56,148 C58,164 70,172 80,172 C90,172 102,164 104,148 C106,134 98,118 80,118 Z" fill="url(#pl1radis-radis-root)" stroke="#902b38" stroke-width="1"></path><path d="M70,168 C74,178 80,184 80,184 C80,184 86,178 90,168 C86,172 74,172 70,168 Z" fill="#f0e8d8" stroke="#cbbfa3" stroke-width="0.8"></path><ellipse cx="70" cy="138" rx="6" ry="9" fill="#fff" opacity="0.18"></ellipse></svg>`; },
+  navet: function(){ return `<svg viewBox="0 0 160 200" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="pl1navet-navet-root" cx="0.4" cy="0.35" r="0.85"><stop offset="0" stop-color="#fdfbf6"></stop><stop offset="0.7" stop-color="#ede6d6"></stop><stop offset="1" stop-color="#cdbf9f"></stop></radialGradient><linearGradient id="pl1navet-navet-shoulder" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9a7ec8"></stop><stop offset="1" stop-color="#c6b4e0"></stop></linearGradient><linearGradient id="pl1navet-navet-leaf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8aab5a"></stop><stop offset="1" stop-color="#6e9a52"></stop></linearGradient></defs><ellipse cx="80" cy="190" rx="28" ry="5" fill="#3d5a37" opacity="0.12"></ellipse><g fill="url(#pl1navet-navet-leaf)" stroke="#5e8054" stroke-width="0.8"><path d="M80,116 C68,98 54,80 42,66 C56,72 72,88 82,110 Z"></path><path d="M80,116 C80,94 80,70 80,50 C88,72 86,96 84,116 Z"></path><path d="M80,116 C92,98 106,82 118,68 C106,76 92,90 82,112 Z"></path></g><path d="M58,126 C58,124 102,124 102,126 C108,132 110,150 102,162 C94,174 80,178 80,178 C80,178 66,174 58,162 C50,150 52,132 58,126 Z" fill="url(#pl1navet-navet-root)" stroke="#b3a585" stroke-width="1"></path><path d="M58,126 C62,118 98,118 102,126 C95,132 65,132 58,126 Z" fill="url(#pl1navet-navet-shoulder)" stroke="#7e62ac" stroke-width="0.8"></path><path d="M78,178 C79,184 81,184 82,178 Z" fill="#cdbf9f" stroke="#b3a585" stroke-width="0.7"></path></svg>`; },
+  betterave_rouge: function(){ return `<svg viewBox="0 0 160 200" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="pl1betterave_rouge-bett-root" cx="0.4" cy="0.35" r="0.85"><stop offset="0" stop-color="#a83a55"></stop><stop offset="0.7" stop-color="#7e2440"></stop><stop offset="1" stop-color="#561530"></stop></radialGradient><linearGradient id="pl1betterave_rouge-bett-leaf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4a6a3e"></stop><stop offset="1" stop-color="#3d5a37"></stop></linearGradient></defs><ellipse cx="80" cy="190" rx="26" ry="5" fill="#3d5a37" opacity="0.12"></ellipse><g fill="url(#pl1betterave_rouge-bett-leaf)" stroke="#2e4528" stroke-width="0.8"><path d="M80,120 C66,98 52,74 44,52 C44,52 60,58 72,84 C80,100 82,112 80,120 Z"></path><path d="M80,120 C82,94 84,66 86,42 C86,42 96,62 92,92 C90,108 86,116 80,120 Z"></path><path d="M80,120 C94,100 110,80 120,60 C120,60 110,66 98,88 C88,104 84,114 80,120 Z"></path></g><g stroke="#d04a5a" stroke-width="1" fill="none" opacity="0.85"><path d="M80,120 C70,104 60,86 52,68"></path><path d="M80,120 L84,60"></path><path d="M80,120 C90,102 102,84 110,70"></path></g><path d="M60,128 C60,124 100,124 100,128 C106,138 102,158 88,170 C84,174 82,180 80,184 C78,180 76,174 72,170 C58,158 54,138 60,128 Z" fill="url(#pl1betterave_rouge-bett-root)" stroke="#4a1228" stroke-width="1"></path><path d="M70,150 Q80,156 90,150" stroke="#c8506a" stroke-width="0.7" fill="none" opacity="0.5"></path></svg>`; },
+  oignon: function(){ return `<svg viewBox="0 0 160 200" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="pl1oignon-oignon-bulb" cx="0.4" cy="0.4" r="0.8"><stop offset="0" stop-color="#f0d27a"></stop><stop offset="0.6" stop-color="#d6a83a"></stop><stop offset="1" stop-color="#a87520"></stop></radialGradient><linearGradient id="pl1oignon-oignon-leaf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8aab5a"></stop><stop offset="1" stop-color="#6e9a52"></stop></linearGradient></defs><ellipse cx="80" cy="190" rx="26" ry="5" fill="#3d5a37" opacity="0.12"></ellipse><g fill="none" stroke="url(#pl1oignon-oignon-leaf)" stroke-width="4" stroke-linecap="round"><path d="M74,120 C66,92 58,64 52,36"></path><path d="M80,120 C80,88 80,58 80,30"></path><path d="M86,120 C94,92 102,66 108,40"></path></g><path d="M60,128 C60,122 100,122 100,128 C108,140 106,164 90,176 C84,180 80,182 80,182 C80,182 76,180 70,176 C54,164 52,140 60,128 Z" fill="url(#pl1oignon-oignon-bulb)" stroke="#8a5e16" stroke-width="1"></path><g stroke="#9a6a1c" stroke-width="0.7" fill="none" opacity="0.55"><path d="M68,130 C62,148 64,166 78,178"></path><path d="M76,128 C72,148 73,168 80,180"></path><path d="M92,130 C98,148 96,166 82,178"></path><path d="M84,128 C88,148 87,168 80,180"></path></g><path d="M74,122 C74,118 86,118 86,122 C84,126 76,126 74,122 Z" fill="#cdbf9f" stroke="#a8956c" stroke-width="0.7"></path></svg>`; },
+  ail: function(){ return `<svg viewBox="0 0 160 200" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="pl1ail-ail-head" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fdfbf6"></stop><stop offset="1" stop-color="#ddd2bd"></stop></linearGradient><linearGradient id="pl1ail-ail-leaf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8aab5a"></stop><stop offset="1" stop-color="#6e9a52"></stop></linearGradient></defs><ellipse cx="80" cy="190" rx="26" ry="5" fill="#3d5a37" opacity="0.12"></ellipse><g fill="none" stroke="url(#pl1ail-ail-leaf)" stroke-width="3.5" stroke-linecap="round"><path d="M76,118 C64,92 56,62 54,34"></path><path d="M80,118 C80,86 82,56 84,30"></path><path d="M84,118 C96,94 104,66 108,42"></path></g><path d="M58,134 C58,124 102,124 102,134 C106,150 96,170 80,176 C64,170 54,150 58,134 Z" fill="url(#pl1ail-ail-head)" stroke="#bcae90" stroke-width="1"></path><g fill="none" stroke="#c3b69a" stroke-width="0.9"><path d="M80,128 C72,140 70,160 80,176"></path><path d="M80,128 C88,140 90,160 80,176"></path><path d="M68,132 C64,146 66,164 76,174"></path><path d="M92,132 C96,146 94,164 84,174"></path></g><path d="M72,126 C72,122 88,122 88,126 C86,130 74,130 72,126 Z" fill="#e6dcc6" stroke="#bcae90" stroke-width="0.7"></path></svg>`; },
+  poireau: function(){ return `<svg viewBox="0 0 160 200" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="pl1poireau-poireau-shaft" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#f4efe2"></stop><stop offset="0.5" stop-color="#eadfc8"></stop><stop offset="1" stop-color="#cabf9f"></stop></linearGradient><linearGradient id="pl1poireau-poireau-leaf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5e8054"></stop><stop offset="1" stop-color="#3d5a37"></stop></linearGradient></defs><ellipse cx="80" cy="188" rx="20" ry="5" fill="#3d5a37" opacity="0.12"></ellipse><g fill="url(#pl1poireau-poireau-leaf)" stroke="#2e4528" stroke-width="0.8"><path d="M80,96 C58,76 44,52 40,28 C52,40 70,66 82,92 Z"></path><path d="M80,96 C76,68 76,42 80,18 C86,44 86,72 84,96 Z"></path><path d="M80,96 C100,74 116,52 122,30 C112,46 94,70 82,94 Z"></path><path d="M80,98 C66,82 54,72 46,68 C58,78 70,90 78,98 Z"></path></g><path d="M70,96 C70,96 90,96 90,96 L88,176 C88,180 72,180 72,176 Z" fill="url(#pl1poireau-poireau-shaft)" stroke="#b3a585" stroke-width="1"></path><g stroke="#c9bd9e" stroke-width="0.7" opacity="0.6"><line x1="76" y1="100" x2="75" y2="176"></line><line x1="80" y1="100" x2="80" y2="176"></line><line x1="84" y1="100" x2="85" y2="176"></line></g><g stroke="#9aaf6a" stroke-width="0.8" opacity="0.7" fill="none"><path d="M72,176 Q80,182 88,176"></path></g></svg>`; },
+  laitue: function(){ return `<svg viewBox="0 0 160 200" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="pl1laitue-laitue-out" cx="0.5" cy="0.4" r="0.7"><stop offset="0" stop-color="#a8c878"></stop><stop offset="1" stop-color="#6e9a52"></stop></radialGradient><radialGradient id="pl1laitue-laitue-in" cx="0.5" cy="0.45" r="0.6"><stop offset="0" stop-color="#d4e0a0"></stop><stop offset="1" stop-color="#a8c878"></stop></radialGradient></defs><ellipse cx="80" cy="184" rx="40" ry="7" fill="#3d5a37" opacity="0.12"></ellipse><g fill="url(#pl1laitue-laitue-out)" stroke="#4d6a44" stroke-width="0.9"><path d="M80,160 C44,160 22,140 26,116 C30,98 44,96 52,110 C46,98 56,86 66,96 C62,82 76,76 80,92 C84,76 98,82 94,96 C104,86 114,98 108,110 C116,96 130,98 134,116 C138,140 116,160 80,160 Z"></path></g><g fill="url(#pl1laitue-laitue-in)" stroke="#5e8054" stroke-width="0.8"><path d="M80,150 C58,150 44,136 48,120 C52,108 62,108 68,118 C64,106 74,100 80,112 C86,100 96,106 92,118 C98,108 108,108 112,120 C116,136 102,150 80,150 Z"></path></g><path d="M80,142 C70,142 62,132 66,122 C72,114 80,118 80,128 C80,118 88,114 94,122 C98,132 90,142 80,142 Z" fill="#e2ecb4" stroke="#7a9a4a" stroke-width="0.7"></path><g stroke="#5e8054" stroke-width="0.6" opacity="0.5" fill="none"><path d="M80,158 C60,148 44,134 40,120"></path><path d="M80,158 C100,148 116,134 120,120"></path></g></svg>`; },
+  epinard: function(){ return `<svg viewBox="0 0 160 200" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="pl1epinard-epinard-leaf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4a6a3e"></stop><stop offset="1" stop-color="#3d5a37"></stop></linearGradient><linearGradient id="pl1epinard-epinard-leaf2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5e8054"></stop><stop offset="1" stop-color="#46663c"></stop></linearGradient></defs><ellipse cx="80" cy="184" rx="34" ry="6" fill="#3d5a37" opacity="0.12"></ellipse><g stroke="#2e4528" stroke-width="0.9"><path d="M80,150 C50,144 34,120 36,96 C44,108 56,110 60,100 C56,118 70,138 80,150 Z" fill="url(#pl1epinard-epinard-leaf2)"></path><path d="M80,150 C110,144 126,120 124,96 C116,108 104,110 100,100 C104,118 90,138 80,150 Z" fill="url(#pl1epinard-epinard-leaf2)"></path><path d="M80,152 C62,150 50,128 52,104 C56,80 72,72 80,72 C88,72 104,80 108,104 C110,128 98,150 80,152 Z" fill="url(#pl1epinard-epinard-leaf)"></path></g><g stroke="#6e9a52" stroke-width="0.8" opacity="0.7" fill="none"><path d="M80,150 L80,80"></path><path d="M80,120 C72,114 64,108 58,100 M80,120 C88,114 96,108 102,100 M80,135 C73,130 66,124 62,118 M80,135 C87,130 94,124 98,118"></path></g></svg>`; },
+  chou: function(){ return `<svg viewBox="0 0 160 200" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="pl1chou-chou-ball" cx="0.42" cy="0.4" r="0.7"><stop offset="0" stop-color="#a8c0a0"></stop><stop offset="0.7" stop-color="#7e9c84"></stop><stop offset="1" stop-color="#5a7864"></stop></radialGradient><linearGradient id="pl1chou-chou-wrap" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8aaa7e"></stop><stop offset="1" stop-color="#6a8a6e"></stop></linearGradient></defs><ellipse cx="80" cy="186" rx="38" ry="7" fill="#3d5a37" opacity="0.12"></ellipse><g fill="url(#pl1chou-chou-wrap)" stroke="#4d6a4a" stroke-width="0.9"><path d="M80,150 C40,158 18,140 22,118 C30,128 44,128 50,118 C46,138 64,150 80,150 Z"></path><path d="M80,150 C120,158 142,140 138,118 C130,128 116,128 110,118 C114,138 96,150 80,150 Z"></path></g><path d="M80,68 C112,68 132,92 130,120 C128,146 108,162 80,162 C52,162 32,146 30,120 C28,92 48,68 80,68 Z" fill="url(#pl1chou-chou-ball)" stroke="#4d6a4a" stroke-width="1"></path><g stroke="#5a7864" stroke-width="0.8" opacity="0.7" fill="none"><path d="M80,68 C62,90 56,124 70,160 M80,68 C98,90 104,124 90,160 M52,76 C44,104 50,136 66,158 M108,76 C116,104 110,136 94,158 M40,98 C40,124 54,148 72,160 M120,98 C120,124 106,148 88,160"></path></g><ellipse cx="68" cy="98" rx="10" ry="14" fill="#fff" opacity="0.14"></ellipse></svg>`; },
+  brocoli: function(){ return `<svg viewBox="0 0 160 200" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="pl1brocoli-broc-head" cx="0.5" cy="0.4" r="0.65"><stop offset="0" stop-color="#5e8054"></stop><stop offset="1" stop-color="#3d5a37"></stop></radialGradient><linearGradient id="pl1brocoli-broc-stalk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#aac888"></stop><stop offset="1" stop-color="#8aab5a"></stop></linearGradient></defs><ellipse cx="80" cy="188" rx="22" ry="5" fill="#3d5a37" opacity="0.12"></ellipse><path d="M74,108 C72,128 72,158 74,178 C78,182 82,182 86,178 C88,158 88,128 86,108 Z" fill="url(#pl1brocoli-broc-stalk)" stroke="#6e9a52" stroke-width="1"></path><path d="M74,120 C60,128 56,150 62,164 C64,150 68,138 76,130 Z" fill="url(#pl1brocoli-broc-stalk)" stroke="#6e9a52" stroke-width="0.9"></path><path d="M86,120 C100,128 104,150 98,164 C96,150 92,138 84,130 Z" fill="url(#pl1brocoli-broc-stalk)" stroke="#6e9a52" stroke-width="0.9"></path><g fill="url(#pl1brocoli-broc-head)" stroke="#2e4528" stroke-width="0.7"><ellipse cx="80" cy="68" rx="40" ry="30"></ellipse><ellipse cx="56" cy="78" rx="16" ry="14"></ellipse><ellipse cx="104" cy="78" rx="16" ry="14"></ellipse><ellipse cx="70" cy="50" rx="16" ry="14"></ellipse><ellipse cx="92" cy="50" rx="16" ry="14"></ellipse><ellipse cx="80" cy="40" rx="15" ry="13"></ellipse><ellipse cx="80" cy="80" rx="20" ry="16"></ellipse></g><g fill="#46663c" opacity="0.6"><circle cx="64" cy="62" r="1.6"></circle><circle cx="74" cy="56" r="1.6"></circle><circle cx="84" cy="56" r="1.6"></circle><circle cx="94" cy="62" r="1.6"></circle><circle cx="70" cy="70" r="1.6"></circle><circle cx="80" cy="66" r="1.6"></circle><circle cx="90" cy="70" r="1.6"></circle><circle cx="60" cy="74" r="1.6"></circle><circle cx="100" cy="74" r="1.6"></circle><circle cx="76" cy="78" r="1.6"></circle><circle cx="86" cy="78" r="1.6"></circle></g></svg>`; },
+  celeri: function(){ return `<svg viewBox="0 0 160 200" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="pl1celeri-celeri-stalk" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#c4d49a"></stop><stop offset="0.5" stop-color="#a8c878"></stop><stop offset="1" stop-color="#86a85c"></stop></linearGradient><linearGradient id="pl1celeri-celeri-leaf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6e9a52"></stop><stop offset="1" stop-color="#5e8054"></stop></linearGradient></defs><ellipse cx="80" cy="186" rx="24" ry="5" fill="#3d5a37" opacity="0.12"></ellipse><g fill="url(#pl1celeri-celeri-leaf)" stroke="#4d6a44" stroke-width="0.7"><path d="M60,72 C50,56 48,40 52,30 C58,42 62,56 64,70 Z"></path><path d="M80,66 C76,48 78,32 84,24 C86,40 84,56 84,66 Z"></path><path d="M100,72 C110,56 112,40 108,30 C102,42 98,56 96,70 Z"></path><path d="M70,70 C62,54 60,42 62,34 C68,46 72,58 74,70 Z"></path><path d="M90,70 C98,54 100,42 98,34 C92,46 88,58 86,70 Z"></path></g><g fill="url(#pl1celeri-celeri-stalk)" stroke="#7a9a4a" stroke-width="0.9"><path d="M62,72 C58,108 60,150 66,178 C70,180 72,180 74,178 C72,150 72,108 72,74 Z"></path><path d="M74,72 C72,108 73,152 76,180 C78,182 80,182 82,180 C81,152 80,108 80,72 Z"></path><path d="M84,72 C84,108 84,152 84,180 C86,182 88,182 90,180 C92,152 90,108 86,72 Z"></path><path d="M96,72 C100,108 100,150 94,178 C90,180 88,180 88,178 C88,150 88,108 90,74 Z"></path></g><g stroke="#86a85c" stroke-width="0.6" opacity="0.6"><line x1="68" y1="80" x2="70" y2="176"></line><line x1="78" y1="80" x2="78" y2="178"></line><line x1="88" y1="80" x2="86" y2="176"></line></g></svg>`; },
   persil: function(){ return SVG_pot_herbe('#4e8a3a'); },
   basilic: function(){ return SVG_pot_herbe('#4e8a4a'); },
   ciboulette: function(){ return SVG_pot_herbe('#5e9a5a'); },
@@ -14517,9 +15016,9 @@ const POTAGER_SVG = {
   courge: function(){ return `<svg viewBox="0 0 160 200" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="courge-ct" cx="42%" cy="36%" r="70%"><stop offset="0%" stop-color="#f6973a"></stop><stop offset="55%" stop-color="#e0742a"></stop><stop offset="100%" stop-color="#a84e16"></stop></radialGradient></defs><ellipse cx="80" cy="194" rx="30" ry="4" fill="#3a2c1c" opacity="0.12"></ellipse><g fill="url(#courge-ct)" stroke="#8f4212" stroke-width="0.8"><ellipse cx="80" cy="152" rx="48" ry="32"></ellipse></g><g stroke="#8f4212" stroke-width="1.1" fill="none" opacity="0.75"><path d="M80 121 C 68 138 68 166 80 183"></path><path d="M60 123 C 46 140 46 164 60 181"></path><path d="M100 123 C 114 140 114 164 100 181"></path><path d="M42 132 C 34 144 34 160 42 172"></path><path d="M118 132 C 126 144 126 160 118 172"></path><path d="M80 121 C 80 150 80 180 80 183"></path></g><ellipse cx="62" cy="138" rx="9" ry="5" fill="#ffffff" opacity="0.16"></ellipse><path d="M80 121 C 78 110 76 102 78 94" stroke="#7a6a3e" stroke-width="5" fill="none" stroke-linecap="round"></path><g stroke="#7a6a3e" stroke-width="2.4" fill="none" stroke-linecap="round"><path d="M78 94 C 74 90 70 90 66 92"></path><path d="M78 94 C 82 90 86 92 88 96"></path></g></svg>`; },
   melon: function(){ return `<svg viewBox="0 0 160 200" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="melon-ml" cx="40%" cy="32%" r="74%"><stop offset="0%" stop-color="#cdd089"></stop><stop offset="55%" stop-color="#a6ab5e"></stop><stop offset="100%" stop-color="#74783a"></stop></radialGradient></defs><ellipse cx="80" cy="194" rx="30" ry="4" fill="#3a2c1c" opacity="0.12"></ellipse><ellipse cx="80" cy="150" rx="40" ry="36" fill="url(#melon-ml)" stroke="#5e6230" stroke-width="0.9"></ellipse><g stroke="#5e6230" stroke-width="0.9" fill="none" opacity="0.6"><path d="M80 115 C 72 132 72 168 80 185"></path><path d="M60 122 C 52 138 52 162 60 178"></path><path d="M100 122 C 108 138 108 162 100 178"></path></g><g stroke="#eef0cf" stroke-width="0.55" fill="none" opacity="0.55"><path d="M48 138 C 70 132 92 132 112 140"></path><path d="M44 152 C 70 146 92 146 116 154"></path><path d="M48 166 C 70 162 92 162 112 168"></path><path d="M58 126 C 76 158 80 172 86 184"></path><path d="M70 120 C 80 150 82 170 78 184"></path><path d="M96 126 C 86 154 84 170 90 182"></path><path d="M52 144 C 66 150 60 164 70 176"></path><path d="M108 146 C 94 152 100 166 90 176"></path></g><ellipse cx="64" cy="134" rx="9" ry="6" fill="#ffffff" opacity="0.18"></ellipse><path d="M80 114 C 80 104 80 98 82 92" stroke="#6a7a3a" stroke-width="2.6" fill="none" stroke-linecap="round"></path></svg>`; },
   feve: function(){ return `<svg viewBox="0 0 160 200" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="feve-fv" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#9cbf5e"></stop><stop offset="100%" stop-color="#62893a"></stop></linearGradient></defs><ellipse cx="80" cy="194" rx="30" ry="4" fill="#3a2c1c" opacity="0.12"></ellipse><path d="M80 188 C 80 150 80 110 80 78" stroke="#52733a" stroke-width="2.8" fill="none" stroke-linecap="round"></path><path d="M70 178 C 56 168 56 132 64 116 C 68 110 72 112 72 120 C 70 140 72 162 76 176 C 76 182 73 182 70 178 Z" fill="url(#feve-fv)" stroke="#3f5b27" stroke-width="0.8"></path><path d="M90 174 C 102 162 102 128 94 114 C 90 108 86 110 86 118 C 88 138 86 158 84 172 C 84 178 87 178 90 174 Z" fill="url(#feve-fv)" stroke="#3f5b27" stroke-width="0.8"></path><g fill="#7a9a4a" stroke="#3f5b27" stroke-width="0.7"><path d="M80 132 C 64 130 56 116 50 124 C 56 138 70 140 80 138 Z"></path><path d="M80 116 C 96 114 104 100 110 108 C 104 122 90 124 80 122 Z"></path></g><g fill="#faf6ec" stroke="#cdbf98" stroke-width="0.5"><ellipse cx="80" cy="74" rx="7" ry="5"></ellipse><ellipse cx="80" cy="68" rx="5" ry="4"></ellipse></g><ellipse cx="80" cy="76" rx="2.4" ry="3.2" fill="#2a221a"></ellipse></svg>`; },
-  panais: function(){ return SVG_pot_racine('#efe6cf'); },
-  echalote: function(){ return SVG_pot_racine('#c89a6a'); },
-  blette: function(){ return SVG_pot_feuille('#6e9a52'); },
+  panais: function(){ return `<svg viewBox="0 0 160 200" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="pl1panais-panais-root" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#f6efde"></stop><stop offset="0.5" stop-color="#e8dcc0"></stop><stop offset="1" stop-color="#c9b994"></stop></linearGradient><linearGradient id="pl1panais-panais-leaf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7a9a4a"></stop><stop offset="1" stop-color="#5e8054"></stop></linearGradient></defs><ellipse cx="80" cy="188" rx="28" ry="6" fill="#3d5a37" opacity="0.12"></ellipse><g fill="url(#pl1panais-panais-leaf)" stroke="#4d6a44" stroke-width="0.8"><path d="M80,92 C62,80 46,58 40,36 C40,36 56,46 68,68 C76,82 80,88 80,92 Z M52,52 q-6,-2 -8,3 M60,64 q-7,-1 -8,4"></path><path d="M80,92 C82,68 84,44 86,24 C86,24 94,46 90,72 C88,84 84,90 80,92 Z"></path><path d="M80,92 C98,80 114,60 120,38 C120,38 106,48 94,70 C86,84 82,90 80,92 Z M108,54 q6,-2 8,3 M100,66 q7,-1 8,4"></path></g><path d="M66,98 C64,134 72,166 80,184 C88,166 96,134 94,98 C88,94 72,94 66,98 Z" fill="url(#pl1panais-panais-root)" stroke="#b3a585" stroke-width="1"></path><g stroke="#c9bd9e" stroke-width="0.7" opacity="0.55" fill="none"><path d="M68,116 Q80,120 92,116"></path><path d="M70,134 Q80,138 90,134"></path><path d="M73,154 Q80,157 87,154"></path></g></svg>`; },
+  echalote: function(){ return `<svg viewBox="0 0 160 200" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="pl1echalote-echalote-bulb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e0a866"></stop><stop offset="0.6" stop-color="#c08038"></stop><stop offset="1" stop-color="#8f5a1e"></stop></linearGradient><linearGradient id="pl1echalote-echalote-leaf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8aab5a"></stop><stop offset="1" stop-color="#6e9a52"></stop></linearGradient></defs><ellipse cx="80" cy="190" rx="26" ry="5" fill="#3d5a37" opacity="0.12"></ellipse><g fill="none" stroke="url(#pl1echalote-echalote-leaf)" stroke-width="3" stroke-linecap="round"><path d="M72,128 C62,104 54,78 50,52"></path><path d="M82,126 C82,98 84,70 86,46"></path><path d="M90,128 C100,106 108,82 112,60"></path></g><path d="M66,132 C60,124 62,114 70,116 C66,130 68,164 78,178 C70,176 60,160 60,148 C60,140 62,134 66,132 Z" fill="url(#pl1echalote-echalote-bulb)" stroke="#7a4a16" stroke-width="1"></path><path d="M94,132 C100,124 98,114 90,116 C94,130 92,164 82,178 C90,176 100,160 100,148 C100,140 98,134 94,132 Z" fill="url(#pl1echalote-echalote-bulb)" stroke="#7a4a16" stroke-width="1"></path><path d="M78,118 C76,150 78,170 80,180 C82,170 84,150 82,118 C80,116 80,116 78,118 Z" fill="#caa066" stroke="#7a4a16" stroke-width="0.8" opacity="0.9"></path><g stroke="#8f5a1e" stroke-width="0.6" opacity="0.5" fill="none"><path d="M70,140 C70,158 74,172 80,178"></path><path d="M90,140 C90,158 86,172 80,178"></path></g></svg>`; },
+  blette: function(){ return `<svg viewBox="0 0 160 200" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="pl1blette-blette-leaf" cx="0.5" cy="0.3" r="0.8"><stop offset="0" stop-color="#4a6a3e"></stop><stop offset="1" stop-color="#3d5a37"></stop></radialGradient><linearGradient id="pl1blette-blette-leaf2" cx="0.5" cy="0.3" r="0.8"><stop offset="0" stop-color="#5e8054"></stop><stop offset="1" stop-color="#46663c"></stop></linearGradient></defs><ellipse cx="80" cy="186" rx="26" ry="5" fill="#3d5a37" opacity="0.12"></ellipse><path d="M64,176 C58,140 54,96 56,60 C50,90 48,140 56,178 Z" fill="#f0e8d8" stroke="#cbbfa3" stroke-width="0.9"></path><path d="M96,176 C102,140 106,96 104,60 C110,90 112,140 104,178 Z" fill="#d04a5a" stroke="#a8323f" stroke-width="0.9"></path><path d="M80,178 L78,72 C82,72 82,72 82,72 L82,178 Z" fill="#f0e8d8" stroke="#cbbfa3" stroke-width="0.9"></path><g stroke="#2e4528" stroke-width="0.9"><path d="M56,60 C30,56 18,34 24,16 C40,22 52,40 60,62 C58,64 56,62 56,60 Z" fill="url(#pl1blette-blette-leaf2)"></path><path d="M104,60 C130,56 142,34 136,16 C120,22 108,40 100,62 C102,64 104,62 104,60 Z" fill="url(#pl1blette-blette-leaf2)"></path><path d="M80,72 C56,68 42,42 48,18 C60,22 76,40 80,62 C84,40 100,22 112,18 C118,42 104,68 80,72 Z" fill="url(#pl1blette-blette-leaf)"></path></g><g stroke="#6e9a52" stroke-width="0.7" opacity="0.6" fill="none"><path d="M80,72 C72,58 62,42 54,32 M80,72 C88,58 98,42 106,32 M80,72 L80,36"></path></g></svg>`; },
   mache: function(){ return SVG_pot_feuille('#5e8a4a'); },
   roquette: function(){ return SVG_pot_feuille('#7aa84a'); },
   chou_fleur: function(){ return SVG_pot_feuille('#ece4d2'); },
@@ -15251,22 +15750,22 @@ function openFicheMare(cle){
 
 /* ====== MODULE LE CIEL NOCTURNE (16) ====== */
 const CIEL_DATA = {
-  lune: { nom: 'La Lune', surnom: 'Notre satellite', groupe: 'lune', description: 'Le gros astre qui éclaire nos nuits, compagnon de la Terre.', reconnaitre: 'Un grand disque clair ; on y voit des taches sombres (les ’mers’) et des cratères.', quand: 'Presque toutes les nuits, et parfois même en plein jour.', saviez: 'Elle nous montre toujours la même face : on ne voit jamais son dos depuis la Terre.' },
-  phases_lune: { nom: 'Les phases de la Lune', surnom: 'Nouvelle, croissant, pleine…', groupe: 'lune', description: 'La Lune semble changer de forme au fil du mois.', reconnaitre: 'Nouvelle Lune (invisible) → croissant → quartier → pleine Lune → puis elle décroît.', quand: 'Le cycle complet dure environ 29 jours.', saviez: 'Ce n’est pas la Lune qui change : c’est l’angle du Soleil qui éclaire un morceau différent.' },
-  grande_ourse: { nom: 'La Grande Ourse', surnom: 'La grande casserole', groupe: 'constellation', description: 'Sept étoiles brillantes en forme de casserole, faciles à trouver.', reconnaitre: 'Quatre étoiles forment la cuve, trois autres le manche.', quand: 'Toute l’année dans le ciel du nord (elle ne se couche jamais chez nous).', saviez: 'En prolongeant le bord de la casserole, on trouve l’Étoile polaire, qui montre le nord.' },
-  petite_ourse: { nom: 'La Petite Ourse', surnom: 'L’Étoile polaire', groupe: 'constellation', description: 'Une petite casserole dont la dernière étoile est l’Étoile polaire.', reconnaitre: 'Plus petite et plus pâle que la Grande Ourse ; la Polaire est au bout du manche.', quand: 'Toute l’année, vers le nord.', saviez: 'L’Étoile polaire indique toujours le nord : elle a guidé les marins pendant des siècles.' },
-  cassiopee: { nom: 'Cassiopée', surnom: 'Le grand W', groupe: 'constellation', description: 'Cinq étoiles dessinant un grand W (ou M) dans le ciel.', reconnaitre: 'Un zigzag de 5 étoiles, de l’autre côté de la Polaire par rapport à la Grande Ourse.', quand: 'Toute l’année, vers le nord.', saviez: 'Quand la Grande Ourse est basse, Cassiopée est haute : elles tournent autour de la Polaire.' },
-  orion: { nom: 'Orion', surnom: 'Le chasseur', groupe: 'constellation', description: 'Une des plus belles constellations de l’hiver, avec sa célèbre ceinture.', reconnaitre: 'Trois étoiles alignées (la ceinture) entre deux étoiles brillantes : Bételgeuse (rouge) et Rigel (bleue).', quand: 'Les soirs d’hiver, vers le sud.', saviez: 'Sous la ceinture, une petite tache floue est la nébuleuse d’Orion, une pouponnière d’étoiles.' },
-  cygne: { nom: 'Le Cygne', surnom: 'La croix du Nord', groupe: 'constellation', description: 'Une grande croix d’étoiles qui semble voler dans la Voie lactée.', reconnaitre: 'Cinq étoiles en croix ; la plus brillante est Deneb, la queue du cygne.', quand: 'Les soirs d’été, très haut dans le ciel.', saviez: 'Le Cygne plonge dans la Voie lactée, qu’on voit bien l’été loin des villes.' },
-  pleiades: { nom: 'Les Pléiades', surnom: 'Les sept sœurs', groupe: 'constellation', description: 'Un petit groupe serré d’étoiles, comme une mini-casserole brumeuse.', reconnaitre: 'Une tache floue où l’œil distingue 6 ou 7 petites étoiles très rapprochées.', quand: 'Les soirs d’automne et d’hiver.', saviez: 'C’est un amas de centaines d’étoiles jeunes, nées ensemble du même nuage.' },
-  venus: { nom: 'Vénus', surnom: 'L’étoile du Berger', groupe: 'planete', description: 'La planète la plus brillante, qu’on prend souvent pour une étoile.', reconnaitre: 'Un point très brillant, blanc, bas sur l’horizon après le coucher ou avant le lever du Soleil.', quand: 'Au crépuscule ou à l’aube (jamais en pleine nuit).', saviez: 'On l’appelle ’étoile du Berger’, mais ce n’est pas une étoile : c’est une planète voisine.' },
-  mars: { nom: 'Mars', surnom: 'La planète rouge', groupe: 'planete', description: 'Une planète à la lueur orangée, couleur de rouille.', reconnaitre: 'Un point qui ne scintille pas, de couleur rouge-orangé.', quand: 'Certaines périodes de l’année, selon sa position.', saviez: 'Sa couleur rouille vient de la poussière de fer qui couvre tout son sol.' },
-  jupiter: { nom: 'Jupiter', surnom: 'La géante', groupe: 'planete', description: 'La plus grosse planète du système solaire, très brillante.', reconnaitre: 'Un point jaune très brillant et stable, visible une bonne partie de la nuit.', quand: 'Plusieurs mois par an, selon sa position.', saviez: 'Avec de simples jumelles, on voit ses 4 plus grosses lunes alignées à côté d’elle.' },
-  saturne: { nom: 'Saturne', surnom: 'La planète aux anneaux', groupe: 'planete', description: 'La planète célèbre pour son magnifique anneau.', reconnaitre: 'Un point jaune pâle, plus discret que Jupiter ; les anneaux apparaissent au télescope.', quand: 'Plusieurs mois par an, selon sa position.', saviez: 'Ses anneaux sont faits de milliards de morceaux de glace et de roche.' },
-  etoile_filante: { nom: 'Les étoiles filantes', surnom: 'Les météores', groupe: 'phenomene', description: 'De brèves traînées de lumière qui filent dans le ciel.', reconnaitre: 'Un trait lumineux qui apparaît et disparaît en une seconde.', quand: 'Surtout lors des pluies d’étoiles filantes (ex. les Perséides, en août).', saviez: 'Ce n’est pas une étoile : c’est un grain de poussière qui brûle en entrant dans l’atmosphère.' },
-  voie_lactee: { nom: 'La Voie lactée', surnom: 'Notre galaxie', groupe: 'phenomene', description: 'Une grande traînée laiteuse d’étoiles en travers du ciel.', reconnaitre: 'Une bande pâle et brumeuse, visible loin des lumières de la ville.', quand: 'Les nuits d’été sans Lune, dans un endroit très sombre.', saviez: 'C’est notre galaxie vue de l’intérieur : des centaines de milliards d’étoiles, dont le Soleil.' },
-  iss: { nom: 'La Station spatiale (ISS)', surnom: 'Un point qui file', groupe: 'phenomene', description: 'Un vaisseau habité qui tourne autour de la Terre.', reconnaitre: 'Un point brillant qui traverse le ciel en ligne droite, sans clignoter, en quelques minutes.', quand: 'Au crépuscule ou à l’aube (des applis annoncent son passage).', saviez: 'Des astronautes y vivent ; elle fait le tour de la Terre en seulement 90 minutes.' },
-  satellites: { nom: 'Satellites & avions', surnom: 'Les lumières qui bougent', groupe: 'phenomene', description: 'Des points lumineux qui se déplacent dans le ciel nocturne.', reconnaitre: 'Un satellite = point régulier sans clignoter ; un avion = lumières qui clignotent (rouge/vert).', quand: 'Toute l’année, surtout en début de nuit.', saviez: 'Des milliers de satellites tournent autour de la Terre : météo, GPS, télévision…' },
+  lune: { nom: 'La Lune', surnom: 'Notre satellite', groupe: 'lune', description: 'Le gros astre qui éclaire nos nuits, compagnon de la Terre.', reconnaitre: 'Un grand disque clair ; on y voit des taches sombres (les ’mers’) et des cratères.', quand: 'Presque toutes les nuits, et parfois même en plein jour.', saviez: 'Elle nous montre toujours la même face : on ne voit jamais son dos depuis la Terre.', plus: 'La Lune s’éloigne de la Terre d’environ 4 cm par an. Ses « mers » sombres sont d’anciennes coulées de lave durcie. Et comme il n’y a pas de vent là-haut, les traces de pas des astronautes d’Apollo y resteront intactes des millions d’années.' },
+  phases_lune: { nom: 'Les phases de la Lune', surnom: 'Nouvelle, croissant, pleine…', groupe: 'lune', description: 'La Lune semble changer de forme au fil du mois.', reconnaitre: 'Nouvelle Lune (invisible) → croissant → quartier → pleine Lune → puis elle décroît.', quand: 'Le cycle complet dure environ 29 jours.', saviez: 'Ce n’est pas la Lune qui change : c’est l’angle du Soleil qui éclaire un morceau différent.', plus: 'Quand on voit un fin croissant, on devine parfois faiblement le reste du disque : c’est la « lumière cendrée », la lumière du Soleil renvoyée par la Terre sur la Lune. Astuce : un croissant en « p » → Lune croissante (premier quartier) ; en « d » → Lune décroissante (dernier quartier).' },
+  grande_ourse: { nom: 'La Grande Ourse', surnom: 'La grande casserole', groupe: 'constellation', description: 'Sept étoiles brillantes dessinent une grande casserole : c’est l’astérisme du « Grand Chariot ». Mais la vraie constellation, la Grande Ourse, est bien plus vaste — la casserole n’en forme que l’arrière-train et la queue !', reconnaitre: 'La casserole : 4 étoiles pour la cuve, 3 pour le manche. Tout autour, des étoiles plus faibles dessinent la tête et les pattes de l’ourse.', quand: 'Toute l’année dans le ciel du nord (elle ne se couche jamais chez nous).', saviez: 'Les 7 étoiles de la casserole portent des noms : Dubhe, Merak, Phecda, Megrez, Alioth, Mizar et Alkaid.', plus: 'Ce qu’on appelle « la Grande Ourse » au quotidien n’est que sa partie la plus brillante : un astérisme, c’est-à-dire un dessin d’étoiles facile à repérer. La constellation complète compte une vingtaine d’étoiles formant un grand ours. Regarde bien Mizar (2e étoile du manche) : juste à côté brille Alcor, sa minuscule compagne — un test de bonne vue depuis l’Antiquité ! Et en prolongeant 5 fois l’écart entre Merak et Dubhe, on tombe pile sur l’Étoile polaire.' },
+  petite_ourse: { nom: 'La Petite Ourse', surnom: 'L’Étoile polaire', groupe: 'constellation', description: 'Une petite casserole, plus pâle et plus discrète que la Grande Ourse. Tout au bout de son manche brille l’Étoile polaire.', reconnaitre: 'Cherche d’abord la Grande Ourse, puis remonte vers l’Étoile polaire : elle termine le manche de la petite casserole.', quand: 'Toute l’année, vers le nord.', saviez: 'L’Étoile polaire (Polaris) est presque pile au-dessus du pôle Nord : elle semble immobile pendant que tout le ciel tourne autour d’elle.', plus: 'La Petite Ourse n’a pas toujours eu la Polaire pour étoile du pôle : à cause d’un lent balancement de la Terre (la précession), l’étoile du pôle change sur des milliers d’années — dans 12 000 ans, ce sera Véga ! Voir ses 7 étoiles est aussi un bon test : si tu les distingues toutes, ton ciel est très peu pollué par les lumières des villes.' },
+  cassiopee: { nom: 'Cassiopée', surnom: 'Le grand W', groupe: 'constellation', description: 'Cinq étoiles brillantes en forme de W (ou de M, selon la saison), bien visibles toute l’année.', reconnaitre: 'Cherche un grand W d’étoiles, de l’autre côté de l’Étoile polaire par rapport à la Grande Ourse.', quand: 'Toute l’année, vers le nord.', saviez: 'Cassiopée tourne autour de l’Étoile polaire : quand la Grande Ourse est basse, Cassiopée est haute, et inversement.', plus: 'Cassiopée est une reine de la mythologie grecque, punie à tourner sans fin autour du pôle. Son W traverse la Voie lactée : avec des jumelles, on y découvre de superbes amas d’étoiles. Comme la Grande Ourse, c’est une constellation « circumpolaire » — chez nous, elle ne se couche jamais sous l’horizon.' },
+  orion: { nom: 'Orion', surnom: 'Le chasseur', groupe: 'constellation', description: 'Une des plus belles constellations de l’hiver : deux étoiles brillantes pour les épaules, deux pour les pieds, et au milieu trois étoiles alignées — la célèbre Ceinture d’Orion.', reconnaitre: 'Repère les 3 étoiles alignées de la Ceinture. En haut à gauche, Bételgeuse (rougeâtre) ; en bas à droite, Rigel (bleutée). Sous la ceinture pend une petite épée.', quand: 'Les soirs d’hiver, vers le sud.', saviez: 'Bételgeuse est une géante rouge si énorme qu’à la place du Soleil, elle engloutirait la Terre et Mars.', plus: 'Les trois étoiles de la Ceinture s’appellent Alnitak, Alnilam et Mintaka. Juste en dessous, la petite « épée » abrite la nébuleuse d’Orion : un immense nuage de gaz où naissent en ce moment de nouvelles étoiles — visible aux jumelles comme une tache floue. En prolongeant la ceinture vers le bas à gauche, on trouve Sirius, l’étoile la plus brillante de tout le ciel.' },
+  cygne: { nom: 'Le Cygne', surnom: 'La croix du Nord', groupe: 'constellation', description: 'Une grande croix d’étoiles qui semble voler le long de la Voie lactée : la « Croix du Nord ».', reconnaitre: 'Cinq étoiles en croix : la plus brillante, Deneb, marque la queue ; à l’autre bout, Albireo marque la tête.', quand: 'Les soirs d’été, très haut dans le ciel.', saviez: 'Avec Véga et Altaïr, l’étoile Deneb forme le grand « Triangle d’été », très visible de juin à septembre.', plus: 'Albireo, la tête du cygne, est une superbe étoile double : dans une petite lunette, on voit deux étoiles côte à côte, l’une dorée et l’autre bleue. Deneb, elle, est une supergéante qui brille comme 100 000 Soleils — mais si lointaine qu’elle nous paraît ordinaire. Le Cygne plonge dans la Voie lactée, la région la plus riche en étoiles de notre ciel d’été.' },
+  pleiades: { nom: 'Les Pléiades', surnom: 'Les sept sœurs', groupe: 'constellation', description: 'Un petit groupe serré d’étoiles bleutées, comme une mini-casserole brumeuse. Ce n’est pas une constellation, mais un amas d’étoiles.', reconnaitre: 'Une tache floue où l’œil distingue 6 ou 7 petites étoiles très rapprochées, près de la constellation du Taureau.', quand: 'Les soirs d’automne et d’hiver.', saviez: 'On les surnomme « les Sept Sœurs ». À l’œil nu on en compte souvent 6 ; aux jumelles, des dizaines apparaissent !', plus: 'Les Pléiades sont un amas ouvert : des centaines d’étoiles jeunes (environ 100 millions d’années — des bébés, à l’échelle des étoiles !) nées ensemble du même nuage de gaz. Aux jumelles, on devine parfois un voile bleuté autour d’elles. De nombreuses cultures les ont utilisées comme calendrier : leur lever dans le ciel annonçait les semailles ou les moissons.' },
+  venus: { nom: 'Vénus', surnom: 'L’étoile du Berger', groupe: 'planete', description: 'La planète la plus brillante, qu’on prend souvent pour une étoile.', reconnaitre: 'Un point très brillant, blanc, bas sur l’horizon après le coucher ou avant le lever du Soleil.', quand: 'Au crépuscule ou à l’aube (jamais en pleine nuit).', saviez: 'On l’appelle ’étoile du Berger’, mais ce n’est pas une étoile : c’est une planète voisine.', plus: 'Vénus est la planète la plus chaude (plus de 460 °C !), à cause d’un effet de serre démesuré. Au télescope, elle montre des phases comme la Lune (croissant, quartier…) : c’est en les observant que Galilée a compris que les planètes tournent autour du Soleil.' },
+  mars: { nom: 'Mars', surnom: 'La planète rouge', groupe: 'planete', description: 'Une planète à la lueur orangée, couleur de rouille.', reconnaitre: 'Un point qui ne scintille pas, de couleur rouge-orangé.', quand: 'Certaines périodes de l’année, selon sa position.', saviez: 'Sa couleur rouille vient de la poussière de fer qui couvre tout son sol.', plus: 'Mars possède le plus grand volcan du système solaire, Olympus Mons, presque trois fois plus haut que l’Everest. Des robots (rovers) s’y promènent en ce moment même, à la recherche de traces d’une ancienne vie.' },
+  jupiter: { nom: 'Jupiter', surnom: 'La géante', groupe: 'planete', description: 'La plus grosse planète du système solaire, très brillante.', reconnaitre: 'Un point jaune très brillant et stable, visible une bonne partie de la nuit.', quand: 'Plusieurs mois par an, selon sa position.', saviez: 'Avec de simples jumelles, on voit ses 4 plus grosses lunes alignées à côté d’elle.', plus: 'Jupiter est si grosse que toutes les autres planètes tiendraient à l’intérieur. Sa « Grande Tache rouge » est une tempête plus large que la Terre, qui dure depuis des siècles. Ses 4 grosses lunes, repérables aux jumelles, ont été découvertes par Galilée en 1610.' },
+  saturne: { nom: 'Saturne', surnom: 'La planète aux anneaux', groupe: 'planete', description: 'La planète célèbre pour son magnifique anneau.', reconnaitre: 'Un point jaune pâle, plus discret que Jupiter ; les anneaux apparaissent au télescope.', quand: 'Plusieurs mois par an, selon sa position.', saviez: 'Ses anneaux sont faits de milliards de morceaux de glace et de roche.', plus: 'Les anneaux de Saturne sont immenses mais incroyablement fins : quelques dizaines de mètres d’épaisseur seulement ! Et Saturne est si peu dense qu’elle flotterait dans une (gigantesque) baignoire d’eau.' },
+  etoile_filante: { nom: 'Les étoiles filantes', surnom: 'Les météores', groupe: 'phenomene', description: 'De brèves traînées de lumière qui filent dans le ciel.', reconnaitre: 'Un trait lumineux qui apparaît et disparaît en une seconde.', quand: 'Surtout lors des pluies d’étoiles filantes (ex. les Perséides, en août).', saviez: 'Ce n’est pas une étoile : c’est un grain de poussière qui brûle en entrant dans l’atmosphère.', plus: 'Plusieurs fois par an, la Terre traverse les poussières laissées par une comète : c’est une « pluie » d’étoiles filantes (les Perséides en août, les Géminides en décembre). Lors d’une nuit très sombre, on peut en compter des dizaines par heure.' },
+  voie_lactee: { nom: 'La Voie lactée', surnom: 'Notre galaxie', groupe: 'phenomene', description: 'Une grande traînée laiteuse d’étoiles en travers du ciel.', reconnaitre: 'Une bande pâle et brumeuse, visible loin des lumières de la ville.', quand: 'Les nuits d’été sans Lune, dans un endroit très sombre.', saviez: 'C’est notre galaxie vue de l’intérieur : des centaines de milliards d’étoiles, dont le Soleil.', plus: 'Notre galaxie contient plus de 100 milliards d’étoiles ; le Soleil n’est que l’une d’elles, perdue dans un bras en spirale. La bande laiteuse que l’on voit, c’est notre propre galaxie vue par la tranche, de l’intérieur.' },
+  iss: { nom: 'La Station spatiale (ISS)', surnom: 'Un point qui file', groupe: 'phenomene', description: 'Un vaisseau habité qui tourne autour de la Terre.', reconnaitre: 'Un point brillant qui traverse le ciel en ligne droite, sans clignoter, en quelques minutes.', quand: 'Au crépuscule ou à l’aube (des applis annoncent son passage).', saviez: 'Des astronautes y vivent ; elle fait le tour de la Terre en seulement 90 minutes.', plus: 'La Station spatiale file à environ 28 000 km/h : un tour de la Terre toutes les 90 minutes ! On la voit comme un point très brillant qui traverse le ciel en quelques minutes, sans clignoter. Des applis gratuites annoncent l’heure exacte de son passage.' },
+  satellites: { nom: 'Satellites & avions', surnom: 'Les lumières qui bougent', groupe: 'phenomene', description: 'Des points lumineux qui se déplacent dans le ciel nocturne.', reconnaitre: 'Un satellite = point régulier sans clignoter ; un avion = lumières qui clignotent (rouge/vert).', quand: 'Toute l’année, surtout en début de nuit.', saviez: 'Des milliers de satellites tournent autour de la Terre : météo, GPS, télévision…', plus: 'Des milliers de satellites tournent autour de la Terre. Quand on en voit plusieurs en file indienne, ce sont souvent des satellites de communication récents. Pour les distinguer d’un avion : le satellite ne clignote pas et ne fait aucun bruit.' },
 };
 
 const CIEL_ORDER = ['lune', 'phases_lune', 'grande_ourse', 'petite_ourse', 'cassiopee', 'orion', 'cygne', 'pleiades', 'venus', 'mars', 'jupiter', 'saturne', 'etoile_filante', 'voie_lactee', 'iss', 'satellites'];
@@ -15274,12 +15773,12 @@ const CIEL_ORDER = ['lune', 'phases_lune', 'grande_ourse', 'petite_ourse', 'cass
 const CIEL_SVG = {
   lune: function(){ return SVG_moonFull(); },
   phases_lune: function(){ return SVG_moonPhases(); },
-  grande_ourse: function(){ return SVG_constel([[38,90],[60,84],[64,106],[42,112],[82,78],[104,74],[124,82]],[[0,1],[1,2],[2,3],[3,0],[1,4],[4,5],[5,6]]); },
-  petite_ourse: function(){ return SVG_constel([[58,152],[76,148],[80,128],[62,132],[92,120],[104,102],[114,82]],[[0,1],[1,2],[2,3],[3,0],[2,4],[4,5],[5,6]]); },
-  cassiopee: function(){ return SVG_constel([[36,120],[58,90],[80,112],[102,88],[124,116]],[[0,1],[1,2],[2,3],[3,4]]); },
-  orion: function(){ return SVG_constel([[52,56],[110,60],[74,104],[82,107],[90,110],[58,152],[112,150]],[[0,2],[1,4],[2,3],[3,4],[2,5],[4,6]]); },
-  cygne: function(){ return SVG_constel([[80,48],[80,104],[80,160],[48,104],[112,104]],[[0,1],[1,2],[3,1],[1,4]]); },
-  pleiades: function(){ return SVG_constel([[70,92],[80,86],[88,94],[93,84],[74,101],[85,103]],[]); },
+  grande_ourse: function(){ return SVG_constel([[60,58,1],[58,82,1],[82,88,1],[84,64,1],[104,60,1],[122,58,1],[140,60,1],[44,68,0],[30,78,0],[22,92,0],[56,118,0],[68,132,0],[100,112,0],[112,128,0]],[[0,3,0],[3,2,0],[2,1,0],[1,0,0],[3,4,0],[4,5,0],[5,6,0],[0,7,1],[7,8,1],[8,9,1],[1,10,1],[10,11,1],[2,12,1],[12,13,1]]); },
+  petite_ourse: function(){ return SVG_constel([[58,150,1],[78,148,1],[80,128,1],[60,132,1],[92,118,1],[104,98,1],[114,78,2]],[[0,1,0],[1,2,0],[2,3,0],[3,0,0],[2,4,0],[4,5,0],[5,6,0]]); },
+  cassiopee: function(){ return SVG_constel([[34,116,1],[58,88,1],[80,108,1],[102,84,1],[124,112,1]],[[0,1,0],[1,2,0],[2,3,0],[3,4,0]]); },
+  orion: function(){ return SVG_constel([[54,58,2],[104,62,1],[80,42,0],[70,104,1],[80,108,1],[92,112,1],[60,156,1],[114,150,2],[78,122,0],[79,132,0],[80,142,0]],[[0,3,0],[1,5,0],[3,4,0],[4,5,0],[3,6,0],[5,7,0],[0,2,0],[1,2,0],[4,8,1],[8,9,1],[9,10,1]]); },
+  cygne: function(){ return SVG_constel([[80,46,2],[80,100,1],[80,160,1],[44,96,1],[116,96,1]],[[0,1,0],[1,2,0],[3,1,0],[1,4,0]]); },
+  pleiades: function(){ return SVG_constel([[82,100,2],[74,90,1],[66,100,1],[76,110,1],[62,88,1],[92,106,1],[96,100,1],[78,82,0],[88,90,0]],[]); },
   venus: function(){ return SVG_brightstar(); },
   mars: function(){ return SVG_planet('#c8502a'); },
   jupiter: function(){ return SVG_planet('#d8b878'); },
@@ -15294,7 +15793,7 @@ function _sky(){ return '<rect x="8" y="16" width="144" height="168" rx="12" fil
 function _svg(inner){ return '<svg viewBox="0 0 160 200" xmlns="http://www.w3.org/2000/svg">'+_sky()+inner+'</svg>'; }
 function SVG_moonFull(){ return _svg('<circle cx="80" cy="100" r="42" fill="#e8e2cc"/><g fill="#cfc7ab"><circle cx="66" cy="84" r="8"/><circle cx="96" cy="92" r="6"/><circle cx="84" cy="116" r="9"/><circle cx="62" cy="112" r="5"/><circle cx="100" cy="116" r="4"/></g>'); }
 function SVG_moonPhases(){ return _svg('<circle cx="38" cy="100" r="13" fill="none" stroke="#5a6478" stroke-width="1.5"/><circle cx="72" cy="100" r="13" fill="#e8e2cc"/><circle cx="66" cy="100" r="13" fill="#26303f"/><path d="M106 87 a13 13 0 0 1 0 26 Z" fill="#e8e2cc"/><circle cx="106" cy="100" r="13" fill="none" stroke="#5a6478" stroke-width="1"/><circle cx="134" cy="100" r="13" fill="#e8e2cc"/>'); }
-function SVG_constel(pts, lines){ var s='<g stroke="#aebccd" stroke-width="1.4" opacity="0.75">'; for(var i=0;i<lines.length;i++){ var a=pts[lines[i][0]],b=pts[lines[i][1]]; s+='<line x1="'+a[0]+'" y1="'+a[1]+'" x2="'+b[0]+'" y2="'+b[1]+'"/>'; } s+='</g><g fill="#f4e8c8">'; for(var j=0;j<pts.length;j++){ s+='<circle cx="'+pts[j][0]+'" cy="'+pts[j][1]+'" r="3.4"/>'; } s+='</g>'; return _svg(s); }
+function SVG_constel(stars, lines){ var s='<g stroke-linecap="round">'; for(var i=0;i<lines.length;i++){ var a=stars[lines[i][0]],b=stars[lines[i][1]],fa=lines[i][2]; s+='<line x1="'+a[0]+'" y1="'+a[1]+'" x2="'+b[0]+'" y2="'+b[1]+'" stroke="'+(fa?'#6f7f95':'#c2cee0')+'" stroke-width="'+(fa?1:1.5)+'"'+(fa?' stroke-dasharray="2 3" opacity="0.65"':' opacity="0.85"')+'/>'; } s+='</g>'; for(var j=0;j<stars.length;j++){ var st=stars[j],br=st[2]; if(br){ s+='<circle cx="'+st[0]+'" cy="'+st[1]+'" r="6.5" fill="#f4e8c8" opacity="0.20"/>'; s+='<circle cx="'+st[0]+'" cy="'+st[1]+'" r="'+(br===2?4.3:3.3)+'" fill="#f6ecd0"/>'; } else { s+='<circle cx="'+st[0]+'" cy="'+st[1]+'" r="1.7" fill="#9fb0c6"/>'; } } return _svg(s); }
 function SVG_planet(c){ return _svg('<circle cx="80" cy="100" r="34" fill="'+c+'"/><ellipse cx="68" cy="88" rx="12" ry="8" fill="rgba(255,255,255,.12)"/>'); }
 function SVG_ringplanet(c){ return _svg('<ellipse cx="80" cy="100" rx="58" ry="15" fill="none" stroke="#c8b486" stroke-width="5"/><circle cx="80" cy="100" r="30" fill="'+c+'"/><path d="M23 100 a57 15 0 0 0 114 0" fill="none" stroke="#c8b486" stroke-width="5"/>'); }
 function SVG_brightstar(){ return _svg('<circle cx="80" cy="100" r="30" fill="#f4ecc8" opacity="0.22"/><circle cx="80" cy="100" r="14" fill="#f8f0d8"/><g stroke="#f8f0d8" stroke-width="3" stroke-linecap="round"><path d="M80 66 l0 -16M80 134 l0 16M46 100 l-16 0M114 100 l16 0M58 78 l-10 -10M102 122 l10 10M102 78 l10 -10M58 122 l-10 10"/></g>'); }
@@ -15421,6 +15920,7 @@ function openFicheCiel(cle){
     +'<div style="font-family:var(--font-title);font-style:italic;font-size:1.02em;color:var(--moss-dark);line-height:1.4;">'+p.reconnaitre+'</div></div>'
     +'<div class="fiche-section"><h4>\uD83D\uDCD6 Description</h4><p style="line-height:1.6;">'+autoGloss(p.description)+'</p></div>'
     +'<div class="fiche-section"><h4>\uD83C\uDF03 Quand l\u2019observer</h4><p style="line-height:1.6;">'+p.quand+'</p></div>'
+    +(p.plus?'<div class="fiche-section"><h4>\uD83D\uDD2D Pour aller plus loin</h4><p style="line-height:1.6;">'+autoGloss(p.plus)+'</p></div>':'')
     +'<div style="background:rgba(200,146,42,.10);border-left:3px solid var(--gold);padding:12px 14px;border-radius:6px;margin:14px 0;">'
     +'<div class="eyebrow" style="margin-bottom:4px;">\u2014 Le savais-tu ? \u2014</div>'
     +'<div style="font-family:var(--font-title);font-style:italic;font-size:1.02em;color:var(--ink);line-height:1.45;">'+p.saviez+'</div></div>'
@@ -16308,7 +16808,7 @@ function renderDetermResult(spName){
     </div>
     <div style="text-align:center">
       <div class="eyebrow">— Nous avons trouvé —</div>
-      <div class="result-ring"><svg viewBox="0 0 120 120">${getSpeciesSVG(spName)}</svg></div>
+      <div class="result-ring">${arbreVignette(spName,'vignette','0 0 120 120','','planche')}</div>
       <div class="result-name">${displayName}</div>
       <div class="result-latin">${info.latin||''}</div>
     </div>
@@ -16338,6 +16838,7 @@ function renderDetermMulti(candidates){
     const clueLines=otherKey?(info.clues[otherKey]||[]):[];
     const collected=coll.includes(normName(spName));
     return `<div class="cand-card">
+      ${hasArbreIllus(spName,'vignette')?arbreVignette(spName,'vignette','0 0 120 120','cand-illus','planche'):''}
       <h3>${displayName}</h3>
       <div class="cand-latin">${info.latin||''}</div>
       ${clueLines.length>0
@@ -18582,7 +19083,7 @@ function renderLearnList(){
         const info=findSpeciesDB(name)||{};
         const col=coll.includes(normName(name));
         return `<div class="sp-card ${col?'collected':''}" data-name="${esc(name)}" onclick="openFiche(this.getAttribute('data-name'))">
-          <svg viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg">${getSpeciesSVG(name)}</svg>
+          ${arbreVignette(name,'vignette','0 0 120 100','','planche')}
           <h3>${name}</h3>
           <div class="sp-latin">${info.latin||''}</div>
           ${col?'<div class="collected-mark">✓ collecté</div>':''}
@@ -18613,7 +19114,7 @@ function openFiche(name){
       <div class="badge badge-green">${type}</div>
     </div>
     <div class="fiche-header">
-      <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">${getSpeciesSVG(name)}</svg>
+      ${arbreVignette(name,'vignette','0 0 120 120','','planche')}
       <div class="fiche-name">${displayName}</div>
       <div class="fiche-latin">${info.latin||''}</div>
       <div class="fiche-tags">
@@ -18626,10 +19127,13 @@ function openFiche(name){
     </button>
     <div class="fiche-section">
       <h4>Description</h4>
+      ${hasArbreIllus(name,'arbre')?`<div class="fiche-illus">${arbreVignette(name,'arbre','0 0 120 120')}</div>`:''}
       <p>${info.desc||'Fiche à compléter.'}</p>
     </div>
     <div class="fiche-section">
       <h4>Comment le reconnaître ?</h4>
+      ${hasArbreIllus(name,'planche')?`<div class="fiche-illus">${arbreVignette(name,'planche','0 0 120 120')}</div>
+      <div class="fiche-illus-leg">La feuille, le fruit et le bourgeon — appuie pour agrandir</div>`:''}
       <div class="recognise-items">${recItems}</div>
     </div>
     ${info.fun?`<div class="fiche-section"><h4>Le savais-tu ?</h4><p class="fun">${info.fun}</p></div>`:''}
@@ -19095,7 +19599,22 @@ function startQuiz(n){
   quizActive=true;
   var bank=buildQuizBank(currentQuizTheme||'arbres');
   var shuffled=bank.slice().sort(function(){return Math.random()-.5;}).slice(0,n);
+  shuffled=shuffled.map(function(q){
+    if(q.type!=='qcm') return q;
+    var pairs=q.opts.map(function(o,i){return {o:o, ok:(i===q.ans)};});
+    pairs.sort(function(){return Math.random()-.5;});
+    var newAns=0; for(var k=0;k<pairs.length;k++){ if(pairs[k].ok) newAns=k; }
+    return {type:'qcm', q:q.q, opts:pairs.map(function(p){return p.o;}), ans:newAns, exp:q.exp};
+  });
   quizState={questions:shuffled,idx:0,score:0,answers:[]};
+  renderQuizQuestion();
+}
+function replayMissedQuiz(){
+  var missed=(quizState.answers||[]).filter(function(a){return !a.correct;}).map(function(a){return a.q;});
+  if(!missed.length) return;
+  quizActive=true;
+  missed=missed.slice().sort(function(){return Math.random()-.5;});
+  quizState={questions:missed,idx:0,score:0,answers:[]};
   renderQuizQuestion();
 }
 
@@ -19167,17 +19686,21 @@ function renderQuizScore(){
   const {score,questions,answers}=quizState;
   const total=questions.length;
   const pct=Math.round((score/total)*100);
+  const missedCount=answers.filter(a=>!a.correct).length;
   let msg,sub;
-  if(pct>=90){ msg='Excellent !'; sub='Tu es un vrai naturaliste !'; }
-  else if(pct>=70){ msg='Très bien !'; sub='Tu connais bien les arbres.'; }
+  if(pct>=90){ msg='Excellent !'; sub='Tu es un vrai petit naturaliste !'; }
+  else if(pct>=70){ msg='Très bien !'; sub='Tu connais bien la nature.'; }
   else if(pct>=50){ msg='Pas mal !'; sub='Encore un peu de pratique…'; }
-  else { msg='Continue !'; sub='Va observer les arbres et reviens !'; }
+  else { msg='Continue !'; sub='Va explorer dehors et reviens vite !'; }
 
-  const details=answers.map(({q,correct})=>`
-    <div class="score-detail-item">
-      <span style="flex:1">${q.q.substring(0,50)}…</span>
+  const details=answers.map(({q,correct})=>{
+    const corr = q.type==='qcm' ? q.opts[q.ans] : (q.ans?'Vrai':'Faux');
+    return `
+    <div class="score-detail-item" style="flex-wrap:wrap;align-items:flex-start;">
+      <span style="flex:1;min-width:0;">${q.q}</span>
       <span class="mark ${correct?'mark-ok':'mark-ko'}">${correct?'✓':'✗'}</span>
-    </div>`).join('');
+      ${correct?'':`<div style="flex-basis:100%;font-size:0.82em;color:var(--moss-dark);margin-top:2px;">→ Bonne réponse : <em>${corr}</em></div>`}
+    </div>`;}).join('');
 
   document.getElementById('quiz-content').innerHTML=`
     <div class="topbar">
@@ -19195,6 +19718,7 @@ function renderQuizScore(){
       <div class="score-msg">${msg}</div>
       <div class="score-sub">${sub}</div>
       <div class="score-details">${details}</div>
+      ${missedCount?`<button class="btn btn-s" onclick="replayMissedQuiz()" style="width:100%;margin-bottom:10px;">↻ Rejouer les ${missedCount} question${missedCount>1?'s':''} ratée${missedCount>1?'s':''}</button>`:''}
       <div style="display:flex;gap:10px">
         <button class="btn btn-s" onclick="startQuiz(quizState.questions.length)" style="flex:1">Recommencer</button>
         <button class="btn btn-p" onclick="showScreen('learn')" style="flex:2">Aller apprendre →</button>
@@ -19360,6 +19884,12 @@ function showInstallHelp(kind){
   ov.addEventListener('click', function(ev){ if(ev.target===ov) ov.remove(); });
   document.body.appendChild(ov);
 }
+
+// Mode sombre
+function isDark(){ try{ return localStorage.getItem('naturalia_dark')==='1'; }catch(e){ return false; } }
+function applyDarkMode(){ if(document.body) document.body.classList.toggle('dark', isDark()); }
+function toggleDarkMode(){ var d=!isDark(); try{ localStorage.setItem('naturalia_dark', d?'1':'0'); }catch(e){} applyDarkMode(); try{ renderParametresScreen(); }catch(e){} }
+applyDarkMode();
 
 // Détecter si l'app est lancée en mode standalone (installée)
 if(window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true){
