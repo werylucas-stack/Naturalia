@@ -13996,7 +13996,7 @@ function renderParametresScreen(){
     +'<div class="fiche-section">'
     +'<h4>\u2139\uFE0F Version</h4>'
     +'<div style="background:var(--cream-dark);border-radius:8px;padding:14px;font-size:0.88em;line-height:1.7;font-family:monospace;">'
-    +'<strong>Naturalia v33.2</strong><br>'
+    +'<strong>Naturalia v33.3</strong><br>'
     +'Build : 2026-08-22<br>'
     /* Compte reellement les regnes et les especes plutot que d'annoncer des
        chiffres ecrits en dur, qui dataient de la v28 et n'ont jamais suivi. */
@@ -19992,6 +19992,15 @@ function aquaImg(dossier,cle,style){
   return '<img src="'+aquaSrc(dossier,cle)+'" alt="" decoding="async" style="'
     +(style||'width:100%;height:100%;object-fit:contain;display:block')+'">';
 }
+/* Style pour les images qui remplacent un emoji : en em, l'image prend la
+   taille du bloc qui l'accueille, quel qu'il soit. */
+var AQUA_STYLE_EM='width:1em;height:1em;object-fit:contain;display:inline-block;vertical-align:-0.12em';
+/* Style pour les images qui remplacent un SVG dans un bloc sans dimensions
+   propres. Un SVG porte sa taille avec lui, pas une image : sans dimensions
+   explicites, le bloc parent se replie a zero tant que l'image n'est pas
+   chargee. Les aquarelles etant carrees, une taille fixe bornee par le bloc
+   marche partout : 88 px dans un bloc libre, la taille du bloc sinon. */
+var AQUA_STYLE_FIT='width:88px;height:88px;max-width:100%;max-height:100%;object-fit:contain;display:block;margin:0 auto';
 /* Cle d'aquarelle pour un arbre : meme slug que partout, mais avec des
    soulignes, comme les nommait la v29. */
 function aquaCleArbre(nom){ return arbreSlug(nom).replace(/-/g,'_'); }
@@ -20033,8 +20042,12 @@ function aquaSubstituer(table,dossier){
   if(typeof TRACES_EMPREINTES!=='undefined' && TRACES_EMPREINTES.length){
     for(var j=0;j<TRACES_EMPREINTES.length;j++){
       var e=TRACES_EMPREINTES[j];
-      if(!aquaDispo('traces_illus',e.cle)) continue;
-      e.svg=aquaImg('traces_illus',e.cle); total++;
+      if(aquaDispo('traces_illus',e.cle)){ e.svg=aquaImg('traces_illus',e.cle,AQUA_STYLE_FIT); total++; }
+      /* .emoji sert de portrait de l'animal (carte de collection, fiche,
+         journal). Une image dimensionnee en em suit la taille de police du
+         bloc qui l'accueille : 2.5em ici, 4em la, 1em dans la topbar.
+         Le chat et le chien n'ont pas d'aquarelle : ils gardent l'emoji. */
+      if(aquaDispo('obs_animal_illus',e.cle)){ e.emoji=aquaImg('obs_animal_illus',e.cle,AQUA_STYLE_EM); total++; }
     }
   }
   console.log('[Naturalia] '+total+' aquarelles appliquees');
@@ -20061,6 +20074,68 @@ document.addEventListener('DOMContentLoaded',aquaPoserTuiles);
   if(typeof showScreen!=='function') return;
   var _showScreen=showScreen;
   showScreen=function(){ var r=_showScreen.apply(this,arguments); try{ aquaPoserTuiles(); }catch(e){} return r; };
+})();
+
+/* Menu « Determiner » : quatorze cartes ecrites en dur dans un gabarit, avec
+   un pictogramme SVG chacune. On les reconnait a leur onclick plutot que
+   d'aller reecrire le gabarit. */
+var AQUA_DETERM=[['renderDetermArbresHome','arbre'],['renderTracesTerrainStartFromDeterm','traces'],
+  ['renderDetermPlantesStart','plante'],['renderDetermOiseauxStart','oiseau'],
+  ['renderEntomologieGalerie','insecte'],['renderDetermChampignonsStart','champignon'],
+  ['renderMoussesGalerie','mousse'],['renderDetermHerpetoStart','herpeto'],
+  ['renderChampsGalerie','champs'],['renderPotagerGalerie','potager'],
+  ['renderRochesGalerie','roches'],['renderMammiferesGalerie','animal'],
+  ['renderMareGalerie','mare'],['renderCielGalerie','ciel']];
+function aquaPoserDeterm(){
+  var cartes=document.querySelectorAll('#determ-content .home-card');
+  for(var i=0;i<cartes.length;i++){
+    var oc=cartes[i].getAttribute('onclick')||'';
+    for(var k=0;k<AQUA_DETERM.length;k++){
+      if(oc.indexOf(AQUA_DETERM[k][0])<0) continue;
+      var rond=cartes[i].querySelector('.home-card-icon');
+      var html=aquaImg('cat_icons',AQUA_DETERM[k][1],'width:34px;height:34px;object-fit:contain;display:block');
+      if(rond&&html) rond.innerHTML=html;
+      break;
+    }
+  }
+}
+
+/* Histoires : la liste, les quatre tuiles de la saga et les ecrans d'intro
+   et de fin. Toutes ces cartes portent l'identifiant de l'histoire dans leur
+   onclick ; l'emoji occupe le premier bloc, dimensionne en em. On ne touche
+   pas a STORIES[id].emoji : la valeur sert aussi a fabriquer le libelle du
+   badge de fin, qu'un decoupage de chaine irait casser. */
+function aquaPoserHistoires(racine){
+  var zone=racine||document;
+  var cartes=zone.querySelectorAll('[onclick*="renderGenericStory("]');
+  for(var i=0;i<cartes.length;i++){
+    var m=(cartes[i].getAttribute('onclick')||'').match(/renderGenericStory\('([a-z0-9_]+)'/);
+    if(!m||!aquaDispo('story_illus',m[1])) continue;
+    var bloc=cartes[i].querySelector('div[style*="font-size:2em"],div[style*="font-size:1.4em"]');
+    if(bloc&&!bloc.querySelector('img')) bloc.innerHTML=aquaImg('story_illus',m[1],AQUA_STYLE_EM);
+  }
+}
+function aquaPoserStory(){
+  var id=(typeof genericStoryState!=='undefined'&&genericStoryState)?genericStoryState.storyId:null;
+  if(!id||!aquaDispo('story_illus',id)) return;
+  var zone=(typeof storyContainer==='function')?storyContainer():null;
+  if(!zone) return;
+  /* 4.5em a l'intro, 5em a la fin : les deux grands portraits de l'histoire. */
+  var bloc=zone.querySelector('div[style*="font-size:4.5em"],div[style*="font-size:5em"]');
+  if(bloc&&!bloc.querySelector('img')) bloc.innerHTML=aquaImg('story_illus',id,AQUA_STYLE_EM);
+}
+(function(){
+  var apres=[['renderDetermHome',aquaPoserDeterm],
+    ['renderHistoiresScreen',function(){ aquaPoserHistoires(); }],
+    ['renderGenericStoryIntro',aquaPoserStory],
+    ['renderGenericStoryFin',aquaPoserStory]];
+  for(var i=0;i<apres.length;i++){
+    (function(nom,poser){
+      var f=window[nom];
+      if(typeof f!=='function') return;
+      window[nom]=function(){ var r=f.apply(this,arguments); try{ poser(); }catch(e){} return r; };
+    })(apres[i][0],apres[i][1]);
+  }
 })();
 /* AQUA-AUTO-FIN */
 
