@@ -10,7 +10,7 @@
 ║  FICHIER     : index.html + sw.js + manifest.webmanifest        ║
 ║  TAILLE      : ~1,7 Mo (index.html) + 363 aquarelles WebP       ║
 ╠══════════════════════════════════════════════════════════════════╣
-║  DERNIÈRE VERSION : v33.5 — 2026-08-22                          ║
+║  DERNIÈRE VERSION : v34.0 — 2026-08-22                          ║
 ║  DÉPLOIEMENT : toujours incrémenter CACHE_NAME dans sw.js ET    ║
 ║  pousser sw.js — c'est le seul signal de mise à jour du         ║
 ║  navigateur. Ne jamais réécrire index.html avec PowerShell 5.1  ║
@@ -100,7 +100,7 @@
 ║          place dans toute l'app (assets/aqua + surcouche AQUA-AUTO)    ║
 ║  v33.1 — Surcouche appliquée avant le rendu de l'accueil               ║
 ║  v33.2 — Empreintes en aquarelle (TRACES_EMPREINTES)                   ║
-║  v33.5 — Menu Déterminer, histoires et portraits d'animaux             ║
+║  v34.0 — Menu Déterminer, histoires et portraits d'animaux             ║
 ╠══════════════════════════════════════════════════════════════════╣
 ║  PROCHAINES ÉTAPES SUGGÉRÉES                                     ║
 ║  • Badges encore en emoji (~40)                                 ║
@@ -307,6 +307,11 @@ body{font-family:'Cormorant Garamond',serif;background:var(--cream);color:var(--
 .coll-card .illus{width:80px;height:70px;margin:0 auto 8px}
 .fiche-header .illus{width:140px;height:130px;margin:0 auto 12px}
 .fiche-illus .illus{width:100%;height:100%}
+/* La modale du glossaire est creee a la volee, sans classe de contexte : sans
+   cette regle le .illus se replie a zero et le schema ne s'affiche pas. */
+/* flex:0 0 auto : le bloc qui l'entoure est un conteneur flex, sans quoi la
+   largeur fixe se fait ecraser a zero. */
+#gloss-overlay .illus{width:180px;height:180px;margin:0 auto;flex:0 0 auto}
 .result-ring .illus{margin:0 auto}
 .illus img{width:100%;height:100%;object-fit:contain;display:block;border-radius:4px}
 .illus-zoom{position:absolute;right:2px;bottom:2px;width:21px;height:21px;border-radius:5px;background:rgba(245,239,224,.9);border:1px solid rgba(139,107,61,.45);color:var(--sepia);display:flex;align-items:center;justify-content:center;pointer-events:none}
@@ -3274,10 +3279,33 @@ var GLOSSAIRE_VERS_CRITERE={
 };
 /* Renvoie l'illustration d'un terme : gravure si on en a une, sinon le
    schema SVG d'origine, sinon rien. Toujours agrandissable au clic. */
+/* Schemas propres au glossaire (assets/glossaire/<cle>.webp). Ce sont les
+   notions d'ecologie et de comportement, qui n'ont pas d'equivalent parmi les
+   pictogrammes de la cle : elles se racontent par une petite scene. */
+const GLOSSAIRE_ILLUS={
+/* GLOSSAIRE-AUTO-DEBUT — genere par generer_glossaire.py */
+  'bioindicateur': 1,
+  'caduc': 1,
+  'decomposeur': 1,
+  'dispersion': 1,
+  'herbivore': 1,
+  'mimetisme': 1,
+  'mycorhize': 1,
+  'photosynthese': 1,
+  'pionniere': 1,
+  'pollinisation': 1,
+  'predateur': 1,
+  'spore': 1,
+  'symbiose': 1,
+/* GLOSSAIRE-AUTO-FIN */
+};
+
 function glossaireIllus(termeKey){
   var brut='';
   var pic=GLOSSAIRE_VERS_CRITERE[termeKey];
-  if(pic && CRITERES_ILLUS[pic]){
+  if(GLOSSAIRE_ILLUS[termeKey]){
+    brut='<img src="assets/glossaire/'+termeKey+'.webp" alt="" decoding="async">';
+  } else if(pic && CRITERES_ILLUS[pic]){
     brut='<img src="assets/criteres/'+pic+'.webp" alt="" decoding="async">';
   } else {
     var fn=GLOSSAIRE_SVG[termeKey];
@@ -13987,7 +14015,7 @@ function renderParametresScreen(){
     +'<div class="fiche-section">'
     +'<h4>\u2139\uFE0F Version</h4>'
     +'<div style="background:var(--cream-dark);border-radius:8px;padding:14px;font-size:0.88em;line-height:1.7;font-family:monospace;">'
-    +'<strong>Les Carnets du Naturaliste v33.5</strong><br>'
+    +'<strong>Les Carnets du Naturaliste v34.0</strong><br>'
     +'Build : 2026-08-22<br>'
     /* Compte reellement les regnes et les especes plutot que d'annoncer des
        chiffres ecrits en dur, qui dataient de la v28 et n'ont jamais suivi. */
@@ -14086,7 +14114,7 @@ function getAllBadges(){
     {id:'brock', nom:'Ami des animaux nocturnes', source:'Histoire de Brock le blaireau'},
     {id:'piko', nom:'Protecteur des h\u00e9rissons', source:'Histoire de Piko'},
     {id:'brutus', nom:'Compagnon des fouilleurs', source:'Histoire de Brutus le sanglier'},
-    {id:'elise', nom:'Sentinelle des cerf\u00e9s', source:'Histoire d\u2019\u00c9lise le chevreuil'},
+    {id:'elise', nom:'Sentinelle des cervid\u00e9s', source:'Histoire d\u2019\u00c9lise le chevreuil'},
     {id:'chene_monde', nom:'Confident du Vieux Ch\u00eane', source:'Histoire de Vieux Ch\u00eane'},
     {id:'lierre', nom:'Ami du lierre', source:'Histoire du lierre'},
     {id:'ortie', nom:'D\u00e9fenseur de l\u2019ortie', source:'Histoire de l\u2019ortie'},
@@ -14137,8 +14165,64 @@ function getAllBadges(){
     })(DEFIS[d]);
   }
 
+  /* Chaque badge a sa gravure (assets/badges/<id>.webp). On remplace l'emoji
+     ici plutot que dans les trois endroits qui construisent la liste ; un
+     badge sans gravure garde sa coupe. Taille en em, pour suivre le bloc qui
+     l'accueille. */
+  for(var bi=0;bi<list.length;bi++){
+    if(!BADGES_ILLUS[list[bi].id]) continue;
+    list[bi].emoji='<img src="assets/badges/'+list[bi].id+'.webp" alt="" decoding="async"'
+      +' style="width:1em;height:1em;object-fit:contain;display:inline-block;vertical-align:-0.12em">';
+  }
+
   return list;
 }
+
+/* Gravures des badges. */
+const BADGES_ILLUS={
+/* BADGES-AUTO-DEBUT — genere par generer_badges.py */
+  'b_abeille': 1,
+  'b_boletus': 1,
+  'b_brock': 1,
+  'b_brutus': 1,
+  'b_chene_monde': 1,
+  'b_chenille': 1,
+  'b_coccinelle': 1,
+  'b_defi_a1': 1,
+  'b_defi_a2': 1,
+  'b_defi_a3': 1,
+  'b_defi_e1': 1,
+  'b_defi_e2': 1,
+  'b_defi_e3': 1,
+  'b_defi_h1': 1,
+  'b_defi_h2': 1,
+  'b_defi_h3': 1,
+  'b_defi_h4': 1,
+  'b_defi_p1': 1,
+  'b_defi_p2': 1,
+  'b_defi_p3': 1,
+  'b_defi_p4': 1,
+  'b_elise': 1,
+  'b_fougere': 1,
+  'b_gland': 1,
+  'b_grenouille': 1,
+  'b_hirondelle': 1,
+  'b_lichen': 1,
+  'b_lierre': 1,
+  'b_ortie': 1,
+  'b_piko': 1,
+  'b_pioupiou': 1,
+  'b_pissenlit': 1,
+  'b_renard': 1,
+  'b_ronce': 1,
+  'b_roussette': 1,
+  'b_saga_automne': 1,
+  'b_saga_ete': 1,
+  'b_saga_hiver': 1,
+  'b_saga_printemps': 1,
+  'b_sphaigne': 1,
+/* BADGES-AUTO-FIN */
+};
 
 function renderBadgesScreen(){
   var all=getAllBadges();
@@ -14170,7 +14254,9 @@ function renderBadgesScreen(){
     var b=histoires[h];
     var obt=b.check();
     html+='<div style="background:'+(obt?'rgba(94,128,84,.12)':'var(--cream-dark)')+';border:1px solid '+(obt?'var(--moss)':'var(--sepia)')+';border-radius:8px;padding:12px;text-align:center;'+(obt?'':'opacity:0.55;')+'">'
-      +'<div style="font-size:2.2em;margin-bottom:4px;'+(obt?'':'filter:grayscale(0.7);')+'">'+b.emoji+'</div>'
+      /* Les gravures etant deja monochromes, un desaturage ne distinguerait
+         plus le badge obtenu du badge a decrocher : on joue sur l'opacite. */
+      +'<div style="font-size:2.2em;margin-bottom:4px;'+(obt?'':'opacity:.3;')+'">'+b.emoji+'</div>'
       +'<div style="font-family:var(--font-title);font-size:0.88em;color:var(--moss-dark);font-style:italic;line-height:1.2;margin-bottom:4px;">'+b.nom+'</div>'
       +'<div style="font-size:0.7em;color:var(--sepia);">'+b.source+'</div>'
       +'</div>';
@@ -14193,7 +14279,7 @@ function renderBadgesScreen(){
       var bd=groupe[di];
       var bobt=bd.check();
       html+='<div style="background:'+(bobt?'rgba(200,146,42,.15)':'var(--cream-dark)')+';border:1px solid '+(bobt?'var(--gold)':'var(--sepia)')+';border-radius:8px;padding:12px;text-align:center;'+(bobt?'':'opacity:0.55;')+'">'
-        +'<div style="font-size:2.2em;margin-bottom:4px;'+(bobt?'':'filter:grayscale(0.7);')+'">'+bd.emoji+'</div>'
+        +'<div style="font-size:2.2em;margin-bottom:4px;'+(bobt?'':'opacity:.3;')+'">'+bd.emoji+'</div>'
         +'<div style="font-family:var(--font-title);font-size:0.88em;color:var(--moss-dark);font-style:italic;line-height:1.2;margin-bottom:4px;">'+bd.nom+'</div>'
         +'<div style="font-size:0.7em;color:var(--sepia);">'+bd.source+'</div>'
         +'</div>';
