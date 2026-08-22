@@ -10,7 +10,7 @@
 ║  FICHIER     : index.html + sw.js + manifest.webmanifest        ║
 ║  TAILLE      : ~1,7 Mo (index.html) + 363 aquarelles WebP       ║
 ╠══════════════════════════════════════════════════════════════════╣
-║  DERNIÈRE VERSION : v33.4 — 2026-08-22                          ║
+║  DERNIÈRE VERSION : v33.5 — 2026-08-22                          ║
 ║  DÉPLOIEMENT : toujours incrémenter CACHE_NAME dans sw.js ET    ║
 ║  pousser sw.js — c'est le seul signal de mise à jour du         ║
 ║  navigateur. Ne jamais réécrire index.html avec PowerShell 5.1  ║
@@ -28,10 +28,10 @@
 ╠══════════════════════════════════════════════════════════════════╣
 ║  STYLE                                                           ║
 ║  • Palette : crème #f4ede0, sépia #8b6b3d, mousse #3e4a27      ║
-║  • Polices : Cormorant Garamond + Old Standard TT (Google Fonts)║
+║  • Polices : Cormorant Garamond + Old Standard TT (embarquées)  ║
 ║  • 363 aquarelles en WebP dans assets/aqua/, posées par la      ║
 ║    surcouche AQUA-AUTO ; gravures et SVG inline en repli        ║
-║  • 0 dépendance externe hors Google Fonts                       ║
+║  • 0 dépendance externe : polices et images embarquées          ║
 ╠══════════════════════════════════════════════════════════════════╣
 ║  HISTORIQUE DES MODIFICATIONS                                    ║
 ║  v1.0 — Maquette HTML (bord feuille, multi-sélection)           ║
@@ -100,7 +100,7 @@
 ║          place dans toute l'app (assets/aqua + surcouche AQUA-AUTO)    ║
 ║  v33.1 — Surcouche appliquée avant le rendu de l'accueil               ║
 ║  v33.2 — Empreintes en aquarelle (TRACES_EMPREINTES)                   ║
-║  v33.4 — Menu Déterminer, histoires et portraits d'animaux             ║
+║  v33.5 — Menu Déterminer, histoires et portraits d'animaux             ║
 ╠══════════════════════════════════════════════════════════════════╣
 ║  PROCHAINES ÉTAPES SUGGÉRÉES                                     ║
 ║  • Badges encore en emoji (~40)                                 ║
@@ -113,7 +113,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>Naturalia — Apprends la nature</title>
+<title>Les Carnets du Naturaliste — Apprends la nature</title>
 <meta name="description" content="Application naturaliste pour identifier les espèces (arbres, plantes, insectes, animaux, oiseaux, champignons). Pour enfants 7-14 ans.">
 <meta name="theme-color" content="#5e8054">
 <meta name="background-color" content="#f5efe0">
@@ -124,50 +124,23 @@
 <!-- Apple iOS PWA -->
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Naturalia">
+<meta name="apple-mobile-web-app-title" content="Carnets">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 
 <!-- Android Chrome -->
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="application-name" content="Naturalia">
+<meta name="application-name" content="Carnets">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
 
 <!-- Open Graph (partage social) -->
-<meta property="og:title" content="Naturalia — Apprends la nature">
+<meta property="og:title" content="Les Carnets du Naturaliste — Apprends la nature">
 <meta property="og:description" content="Application naturaliste pour enfants 7-14 ans. Identifier, apprendre, observer la nature.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="icon-512.png">
-<meta name="apple-mobile-web-app-title" content="Naturalia">
+<meta name="apple-mobile-web-app-title" content="Carnets">
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxOTIgMTkyIj48cmVjdCB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgcng9IjQ4IiBmaWxsPSIjZjRlZGUwIi8+PHBhdGggZD0iTTk2IDE4IEM2NiAyOCw1MiA2MCw5NiAxNTggQzE0MCA2MCwxMjYgMjgsOTYgMThaIiBmaWxsPSIjZThkZmM4IiBzdHJva2U9IiMzZTRhMjciIHN0cm9rZS13aWR0aD0iMyIvPjxwYXRoIGQ9Ik05NiAxOEw5NiAxNTgiIHN0cm9rZT0iIzVjNmIzYSIgc3Ryb2tlLXdpZHRoPSIyIiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTk2IDQ4IFE3MCA2MCw1MCA3OCIgc3Ryb2tlPSIjNWM2YjNhIiBzdHJva2Utd2lkdGg9IjEuNSIgZmlsbD0ibm9uZSIvPjxwYXRoIGQ9Ik05NiA0OCBRMTI2IDYwLDE0MiA3OCIgc3Ryb2tlPSIjNWM2YjNhIiBzdHJva2Utd2lkdGg9IjEuNSIgZmlsbD0ibm9uZSIvPjwvc3ZnPg==">
-<link rel="manifest" id="manifest-placeholder">
-<script>
-// ── Manifest dynamique (reste mono-fichier) ──
-const MANIFEST = {
-  name: "Naturalia",
-  short_name: "Naturalia",
-  description: "Détermination d'arbres pour enfants",
-  start_url: "./",
-  display: "standalone",
-  background_color: "#f4ede0",
-  theme_color: "#f4ede0",
-  orientation: "portrait",
-  icons: [
-    {
-      src: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxOTIgMTkyIj48cmVjdCB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgcng9IjQ4IiBmaWxsPSIjZjRlZGUwIi8+PHBhdGggZD0iTTk2IDE4IEM2NiAyOCw1MiA2MCw5NiAxNTggQzE0MCA2MCwxMjYgMjgsOTYgMThaIiBmaWxsPSIjZThkZmM4IiBzdHJva2U9IiMzZTRhMjciIHN0cm9rZS13aWR0aD0iMyIvPjxwYXRoIGQ9Ik05NiAxOEw5NiAxNTgiIHN0cm9rZT0iIzVjNmIzYSIgc3Ryb2tlLXdpZHRoPSIyIiBmaWxsPSJub25lIi8+PC9zdmc+",
-      sizes: "192x192",
-      type: "image/svg+xml",
-      purpose: "any maskable"
-    }
-  ]
-};
-const blob = new Blob([JSON.stringify(MANIFEST)], {type:'application/json'});
-const manifestURL = URL.createObjectURL(blob);
-document.getElementById('manifest-placeholder').href = manifestURL;
-
-// Service Worker désactivé (blob URL non supporté sur Android)
-</script>
 <style>
 /* Polices auto-hebergees : aucune requete vers Google Fonts.
    Cormorant Garamond est une police variable : un seul fichier par style,
@@ -13963,9 +13936,9 @@ function renderParametresScreen(){
 
     // À propos
     +'<div class="fiche-section">'
-    +'<h4>\uD83C\uDF3F \u00c0 propos de Naturalia</h4>'
+    +'<h4>\uD83C\uDF3F \u00c0 propos des Carnets</h4>'
     +'<div style="background:var(--cream-dark);border-radius:8px;padding:14px;font-size:0.92em;line-height:1.6;">'
-    +'Naturalia est une application naturaliste \u00e9ducative pour enfants de 7 \u00e0 14 ans. '
+    +'Les Carnets du Naturaliste sont une application naturaliste \u00e9ducative pour enfants de 7 \u00e0 14 ans. '
     +'Elle aide \u00e0 identifier les esp\u00e8ces de la nature de Belgique, France, Pays-Bas et Allemagne, '
     +'apprendre le vocabulaire scientifique, et tenir un carnet d\u2019observations.'
     +'<br><br>'
@@ -13993,10 +13966,10 @@ function renderParametresScreen(){
     +'<div class="fiche-section">'
     +'<h4>\uD83D\uDC8C Cr\u00e9dits & sources</h4>'
     +'<div style="background:var(--cream-dark);border-radius:8px;padding:14px;font-size:0.88em;line-height:1.6;">'
-    +'<div style="margin-bottom:8px;"><strong style="font-family:var(--font-title);font-style:italic;">Conception</strong><br>Les Carnets du naturaliste, 2026</div>'
+    +'<div style="margin-bottom:8px;"><strong style="font-family:var(--font-title);font-style:italic;">Conception</strong><br>Les Carnets du Naturaliste, 2026</div>'
     +'<div style="margin-bottom:8px;"><strong style="font-family:var(--font-title);font-style:italic;">Base de connaissances</strong><br>\u00c9crite pour l\u2019application par Claude (Anthropic) : fiches d\u2019esp\u00e8ces, cl\u00e9s de d\u00e9termination, histoires et quiz.</div>'
     +'<div style="margin-bottom:8px;"><strong style="font-family:var(--font-title);font-style:italic;">Illustrations</strong><br>Aquarelles et gravures r\u00e9alis\u00e9es pour l\u2019application, relues une \u00e0 une.</div>'
-    +'<div><strong style="font-family:var(--font-title);font-style:italic;">Polices</strong><br>Cormorant Garamond + Old Standard TT (Google Fonts).</div>'
+    +'<div><strong style="font-family:var(--font-title);font-style:italic;">Polices</strong><br>Cormorant Garamond + Old Standard TT, embarqu\u00e9es avec l\u2019application.</div>'
     +'</div></div>'
 
     // Données
@@ -14014,7 +13987,7 @@ function renderParametresScreen(){
     +'<div class="fiche-section">'
     +'<h4>\u2139\uFE0F Version</h4>'
     +'<div style="background:var(--cream-dark);border-radius:8px;padding:14px;font-size:0.88em;line-height:1.7;font-family:monospace;">'
-    +'<strong>Naturalia v33.4</strong><br>'
+    +'<strong>Les Carnets du Naturaliste v33.5</strong><br>'
     +'Build : 2026-08-22<br>'
     /* Compte reellement les regnes et les especes plutot que d'annoncer des
        chiffres ecrits en dur, qui dataient de la v28 et n'ont jamais suivi. */
@@ -14059,7 +14032,7 @@ function exportAllData(){
     var url=URL.createObjectURL(blob);
     var a=document.createElement('a');
     a.href=url;
-    a.download='naturalia-export-'+new Date().toISOString().slice(0,10)+'.json';
+    a.download='carnets-naturaliste-export-'+new Date().toISOString().slice(0,10)+'.json';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -14075,7 +14048,7 @@ function exportAllData(){
 }
 
 function confirmResetData(){
-  if(!confirm('\u26A0 Cette action effacera TOUTES tes donn\u00e9es Naturalia (collection, journal, d\u00e9fis, histoires). Cette action est irr\u00e9versible. Continuer ?')) return;
+  if(!confirm('\u26A0 Cette action effacera TOUTES tes donn\u00e9es (collection, journal, d\u00e9fis, histoires). Cette action est irr\u00e9versible. Continuer ?')) return;
   if(!confirm('Es-tu vraiment s\u00fbr\u00b7e ? Tout sera perdu.')) return;
   // Supprimer toutes les clés naturalia_*
   var toDelete=[];
@@ -14244,7 +14217,7 @@ var onboardingState = { idx:0 };
 var ONBOARDING_STEPS = [
   {
     emoji: '\uD83C\uDF3F',
-    titre: 'Bienvenue dans Naturalia',
+    titre: 'Bienvenue dans les Carnets',
     eyebrow: '— pour les curieux de nature —',
     texte: 'Une application naturaliste pour apprendre \u00e0 reconna\u00eetre les esp\u00e8ces autour de toi. <em>Arbres, plantes, insectes, animaux et oiseaux</em>.'
   },
@@ -17952,7 +17925,7 @@ function openFicheFamilleChampi(cle){
   html+='</ul></div>';
   // Exemples dans l'app
   if(f.exemples_app.length>0){
-    html+='<div class="fiche-section"><h4>\uD83C\uDFAF Dans Naturalia</h4>'
+    html+='<div class="fiche-section"><h4>\uD83C\uDFAF Dans les Carnets</h4>'
       +'<div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">';
     for(var je=0;je<f.exemples_app.length;je++){
       var espId=f.exemples_app[je];
@@ -18366,7 +18339,7 @@ function openFicheOrdreInsecte(cle){
 
   // Exemples présents dans l'app
   if(o.exemples_app.length>0){
-    html+='<div class="fiche-section"><h4>\uD83C\uDFAF Dans Naturalia</h4>'
+    html+='<div class="fiche-section"><h4>\uD83C\uDFAF Dans les Carnets</h4>'
       +'<div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">';
     for(var je=0;je<o.exemples_app.length;je++){
       var espId=o.exemples_app[je];
@@ -20251,7 +20224,7 @@ function showInstallBanner(){
   banner.style.cssText = 'position:fixed;bottom:14px;left:14px;right:14px;background:var(--cream);border:2px solid var(--moss);border-radius:10px;padding:14px;z-index:9999;box-shadow:0 8px 24px rgba(62,47,31,.25);display:flex;align-items:center;gap:12px;font-family:var(--font-body);';
   banner.innerHTML = '<div style="font-size:1.8em;">\uD83C\uDF3F</div>'
     +'<div style="flex:1;">'
-    +'<div style="font-family:var(--font-title);font-style:italic;font-size:1em;color:var(--moss-dark);">Installer Naturalia</div>'
+    +'<div style="font-family:var(--font-title);font-style:italic;font-size:1em;color:var(--moss-dark);">Installer les Carnets</div>'
     +'<div style="font-size:0.78em;color:var(--sepia);">Ajoute l\u2019app \u00e0 ton \u00e9cran d\u2019accueil pour un acc\u00e8s rapide.</div>'
     +'</div>'
     +'<button id="install-btn" style="background:var(--moss-dark);color:var(--cream);border:none;padding:8px 14px;border-radius:6px;font-family:var(--font-body);font-size:0.85em;cursor:pointer;">Installer</button>'
@@ -20263,7 +20236,7 @@ function showInstallBanner(){
     deferredInstallPrompt.prompt();
     deferredInstallPrompt.userChoice.then(function(choice){
       if(choice.outcome === 'accepted'){
-        showToast('\uD83C\uDF3F Naturalia install\u00e9 !');
+        showToast('\uD83C\uDF3F Carnets install\u00e9s !');
       }
       deferredInstallPrompt = null;
       banner.remove();
@@ -20289,7 +20262,7 @@ function promptInstall(){
   if(deferredInstallPrompt){
     deferredInstallPrompt.prompt();
     deferredInstallPrompt.userChoice.then(function(c){
-      if(c.outcome==='accepted'){ try{ showToast('\uD83C\uDF3F Naturalia install\u00e9 !'); }catch(e){} }
+      if(c.outcome==='accepted'){ try{ showToast('\uD83C\uDF3F Carnets install\u00e9s !'); }catch(e){} }
       deferredInstallPrompt=null;
     });
     return;
@@ -20308,7 +20281,7 @@ function showInstallHelp(kind){
   ov.style.cssText='position:fixed;inset:0;background:rgba(62,47,31,.45);z-index:10000;display:flex;align-items:center;justify-content:center;padding:24px;';
   ov.innerHTML='<div style="background:var(--cream);border:2px solid var(--moss);border-radius:14px;max-width:340px;padding:20px;font-family:var(--font-body);box-shadow:0 12px 32px rgba(62,47,31,.3);">'
     +'<div style="font-size:2em;text-align:center;margin-bottom:8px;">\uD83D\uDCF1</div>'
-    +'<div style="font-family:var(--font-title);font-style:italic;font-size:1.2em;color:var(--moss-dark);text-align:center;margin-bottom:12px;">Installer Naturalia</div>'
+    +'<div style="font-family:var(--font-title);font-style:italic;font-size:1.2em;color:var(--moss-dark);text-align:center;margin-bottom:12px;">Installer les Carnets</div>'
     +'<div style="font-size:0.92em;color:var(--ink);line-height:1.7;">'+corps+'</div>'
     +'<button onclick="var e=document.getElementById(\'install-help\');if(e)e.remove();" style="margin-top:16px;width:100%;background:var(--moss-dark);color:var(--cream);border:none;padding:11px;border-radius:8px;font-family:var(--font-body);font-size:0.9em;cursor:pointer;">J\u2019ai compris</button>'
     +'</div>';
