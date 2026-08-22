@@ -2,30 +2,36 @@
 <html lang="fr">
 <!--
 ╔══════════════════════════════════════════════════════════════════╗
-║  NATURALIA — MÉTADONNÉES DE VERSION                             ║
+║  LES CARNETS DU NATURALISTE — MÉTADONNÉES DE VERSION            ║
 ║  Lire ce bloc en début de conversation pour connaître l'état    ║
 ╠══════════════════════════════════════════════════════════════════╣
-║  URL LIVE    : https://werylucas-stack.github.io/Naturalia/     ║
-║  FICHIER     : index.html (GitHub) / naturalia_app.html (local) ║
-║  TAILLE      : ~252 Ko — 1 seul fichier HTML offline            ║
+║  URL LIVE    : https://app.lescarnetsdunaturaliste.eu/          ║
+║  DÉPÔT       : werylucas-stack/Naturalia (GitHub Pages)         ║
+║  FICHIER     : index.html + sw.js + manifest.webmanifest        ║
+║  TAILLE      : ~1,7 Mo (index.html) + 363 aquarelles WebP       ║
 ╠══════════════════════════════════════════════════════════════════╣
-║  DERNIÈRE VERSION : v28.0 — 2026-06-18                          ║
+║  DERNIÈRE VERSION : v33.4 — 2026-08-22                          ║
+║  DÉPLOIEMENT : toujours incrémenter CACHE_NAME dans sw.js ET    ║
+║  pousser sw.js — c'est le seul signal de mise à jour du         ║
+║  navigateur. Ne jamais réécrire index.html avec PowerShell 5.1  ║
+║  (relu en Windows-1252, réécrit en UTF-8 = accents doublés).    ║
 ╠══════════════════════════════════════════════════════════════════╣
 ║  CONTENU ACTUEL                                                  ║
-║  • 72 espèces dans SPECIES_DB + SPECIES_ORDER                   ║
-║  • 28 termes dans GLOSSAIRE (termes cliquables dans fiches)     ║
-║  • 5 écrans : Accueil / Déterminer / Apprendre / Quiz / Coll.  ║
-║  • PWA : manifest dynamique (blob), SW désactivé (incompatible) ║
+║  • 14 règnes · 284 espèces · 27 histoires + saga · 35 termes    ║
+║  • 72 arbres dans SPECIES_DB + SPECIES_ORDER                    ║
+║  • 6 écrans : Accueil / Déterminer / Apprendre / Quiz / Coll.   ║
+║    + Journal de terrain, défis, badges, paramètres              ║
+║  • PWA installable, service worker actif, marche hors-ligne     ║
 ║  • Collection Pokédex : locked/unlocked, barre progression      ║
-║  • Auto-ajout collection à l'identification, toggle pour retirer║
-║  • Quiz : 15 questions QCM+vrai/faux, modes 5 ou 10 questions  ║
 ║  • Moteur frontier multi-sélection tolérante                    ║
 ║  • 166 critères mappés dans C2C                                 ║
 ╠══════════════════════════════════════════════════════════════════╣
 ║  STYLE                                                           ║
 ║  • Palette : crème #f4ede0, sépia #8b6b3d, mousse #3e4a27      ║
 ║  • Polices : Cormorant Garamond + Old Standard TT (Google Fonts)║
-║  • Schémas SVG inline, tout embarqué, 0 dépendance externe      ║
+║  • 363 aquarelles en WebP dans assets/aqua/, posées par la      ║
+║    surcouche AQUA-AUTO ; gravures et SVG inline en repli        ║
+║  • 0 dépendance externe hors Google Fonts                       ║
 ╠══════════════════════════════════════════════════════════════════╣
 ║  HISTORIQUE DES MODIFICATIONS                                    ║
 ║  v1.0 — Maquette HTML (bord feuille, multi-sélection)           ║
@@ -83,11 +89,23 @@
 ║          Progression par module dans hub Apprendre (14/72 etc.)        ║
 ║          Fix : "À observer" n'ajoute plus à la collection directement  ║
 ║          Fix : Bouton "Ajouter/Retirer" fonctionne dans les deux sens  ║
+║  v28.0 — Règnes Champs, Potager, Roches, Mare, Ciel, Mammifères        ║
+║  v29.0 — Aquarelles des espèces (jamais poussées sur GitHub :          ║
+║          elles ne vivaient que dans la copie Hostinger)                ║
+║  v30-31 — Domaine app.lescarnetsdunaturaliste.eu, page privacy,        ║
+║          service worker qui se met à jour tout seul                    ║
+║  v32.0 — Gravures : 72 arbres, 40 pictos de critères, 55 espèces       ║
+║          des nouveaux règnes, icône Piko                               ║
+║  v33.0 — Les 363 aquarelles de la v29 retrouvées et remises en         ║
+║          place dans toute l'app (assets/aqua + surcouche AQUA-AUTO)    ║
+║  v33.1 — Surcouche appliquée avant le rendu de l'accueil               ║
+║  v33.2 — Empreintes en aquarelle (TRACES_EMPREINTES)                   ║
+║  v33.4 — Menu Déterminer, histoires et portraits d'animaux             ║
 ╠══════════════════════════════════════════════════════════════════╣
 ║  PROCHAINES ÉTAPES SUGGÉRÉES                                     ║
-║  • SVG pokédex locked = vrai SVG grisé (indice silhouette)      ║
-║  • Améliorer SVG des espèces (plus fidèles botaniquement)       ║
-║  • Enrichir quiz (questions sur les 72 espèces)                 ║
+║  • Badges encore en emoji (~40)                                 ║
+║  • 13 schémas d'écologie manquants dans le glossaire            ║
+║  • Publication Play Store (assetlinks, captures, formulaires)   ║
 ║  • Tests terrain avec enfants                                    ║
 ╚══════════════════════════════════════════════════════════════════╝
 -->
@@ -13975,10 +13993,10 @@ function renderParametresScreen(){
     +'<div class="fiche-section">'
     +'<h4>\uD83D\uDC8C Cr\u00e9dits & sources</h4>'
     +'<div style="background:var(--cream-dark);border-radius:8px;padding:14px;font-size:0.88em;line-height:1.6;">'
-    +'<div style="margin-bottom:8px;"><strong style="font-family:var(--font-title);font-style:italic;">Conception</strong><br>Lucas \u2014 Naturalia, 2026</div>'
-    +'<div style="margin-bottom:8px;"><strong style="font-family:var(--font-title);font-style:italic;">Donn\u00e9es</strong><br>D\u2019apr\u00e8s les syllabus CNB-GN (Cercle Naturaliste de Belgique) et observations de terrain.</div>'
-    +'<div style="margin-bottom:8px;"><strong style="font-family:var(--font-title);font-style:italic;">Polices</strong><br>Cormorant Garamond + Old Standard TT (Google Fonts).</div>'
-    +'<div><strong style="font-family:var(--font-title);font-style:italic;">SVG des esp\u00e8ces</strong><br>Dessin\u00e9s sp\u00e9cifiquement pour Naturalia, style botanique sobre 19e si\u00e8cle.</div>'
+    +'<div style="margin-bottom:8px;"><strong style="font-family:var(--font-title);font-style:italic;">Conception</strong><br>Les Carnets du naturaliste, 2026</div>'
+    +'<div style="margin-bottom:8px;"><strong style="font-family:var(--font-title);font-style:italic;">Base de connaissances</strong><br>\u00c9crite pour l\u2019application par Claude (Anthropic) : fiches d\u2019esp\u00e8ces, cl\u00e9s de d\u00e9termination, histoires et quiz.</div>'
+    +'<div style="margin-bottom:8px;"><strong style="font-family:var(--font-title);font-style:italic;">Illustrations</strong><br>Aquarelles et gravures r\u00e9alis\u00e9es pour l\u2019application, relues une \u00e0 une.</div>'
+    +'<div><strong style="font-family:var(--font-title);font-style:italic;">Polices</strong><br>Cormorant Garamond + Old Standard TT (Google Fonts).</div>'
     +'</div></div>'
 
     // Données
@@ -13996,7 +14014,7 @@ function renderParametresScreen(){
     +'<div class="fiche-section">'
     +'<h4>\u2139\uFE0F Version</h4>'
     +'<div style="background:var(--cream-dark);border-radius:8px;padding:14px;font-size:0.88em;line-height:1.7;font-family:monospace;">'
-    +'<strong>Naturalia v33.3</strong><br>'
+    +'<strong>Naturalia v33.4</strong><br>'
     +'Build : 2026-08-22<br>'
     /* Compte reellement les regnes et les especes plutot que d'annoncer des
        chiffres ecrits en dur, qui dataient de la v28 et n'ont jamais suivi. */
