@@ -13996,7 +13996,7 @@ function renderParametresScreen(){
     +'<div class="fiche-section">'
     +'<h4>\u2139\uFE0F Version</h4>'
     +'<div style="background:var(--cream-dark);border-radius:8px;padding:14px;font-size:0.88em;line-height:1.7;font-family:monospace;">'
-    +'<strong>Naturalia v33.0</strong><br>'
+    +'<strong>Naturalia v33.1</strong><br>'
     +'Build : 2026-08-22<br>'
     /* Compte reellement les regnes et les especes plutot que d'annoncer des
        chiffres ecrits en dur, qui dataient de la v28 et n'ont jamais suivi. */
@@ -19954,20 +19954,6 @@ function toggleOpt(el){
 /* ────────────────────────────────
    INIT
 ──────────────────────────────── */
-updateHomeCollection();
-updateSaisonSuggestions();
-updateHomeJournalCount();
-updateHomeDefisCount();
-updateHomeHistoiresCount();
-updateSuggestionContextuelle();
-// Lancer l'onboarding au premier démarrage uniquement
-if(shouldShowOnboarding()) startOnboarding();
-
-/* ────────────────────────────────
-   PWA — Service Worker + Installation
-──────────────────────────────── */
-
-// Enregistrement du Service Worker (cache offline)
 /* AQUA-AUTO-DEBUT — genere par poser_aquarelles.js
    363 aquarelles recuperees de la v29 : elles vivaient en base64 dans la
    copie Hostinger et n'avaient jamais ete poussees sur GitHub. Servies ici
@@ -20067,6 +20053,21 @@ document.addEventListener('DOMContentLoaded',aquaPoserTuiles);
   showScreen=function(){ var r=_showScreen.apply(this,arguments); try{ aquaPoserTuiles(); }catch(e){} return r; };
 })();
 /* AQUA-AUTO-FIN */
+
+updateHomeCollection();
+updateSaisonSuggestions();
+updateHomeJournalCount();
+updateHomeDefisCount();
+updateHomeHistoiresCount();
+updateSuggestionContextuelle();
+// Lancer l'onboarding au premier démarrage uniquement
+if(shouldShowOnboarding()) startOnboarding();
+
+/* ────────────────────────────────
+   PWA — Service Worker + Installation
+──────────────────────────────── */
+
+// Enregistrement du Service Worker (cache offline)
 
 if ('serviceWorker' in navigator) {
   var majEnCours = false;
