@@ -1,7 +1,7 @@
 // Les Carnets du Naturaliste - Service Worker
 // Cache l'application pour fonctionnement hors-ligne
 
-const CACHE_NAME = 'carnets-naturaliste-v30.0';
+const CACHE_NAME = 'carnets-naturaliste-v31.1';
 
 // Le noyau de l'app : sans ces fichiers rien ne s'affiche.
 // Ils sont prechargés à l'installation, un par un pour qu'un seul manquant
@@ -58,38 +58,64 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
-// FETCH : Stratégie "Network first, fallback cache"
-// → l'utilisateur a toujours la dernière version si réseau,
-//   et l'app marche entièrement offline sinon.
-self.addEventListener('fetch', (event) => {
-  // Ignorer les requêtes non-GET (POST, etc.)
-  if (event.request.method !== 'GET') return;
+// FETCH : deux stratégies selon la nature du fichier.
+//
+//   Le code de l'app (page, index.html) → RÉSEAU D'ABORD, en contournant
+//   explicitement le cache HTTP du navigateur avec cache:'no-store'.
+//   C'est le point clé : GitHub Pages répond max-age=600, et sans no-store
+//   le service worker récupérait un index.html vieux de dix minutes puis le
+//   rangeait dans son propre cache — l'app restait figée sur une version
+//   périmée alors même que le réseau marchait.
+//
+//   Les illustrations, polices et icônes → CACHE D'ABORD, avec revalidation
+//   en arrière-plan. Affichage instantané et hors-ligne, tout en récupérant
+//   les nouvelles versions pour la fois suivante.
+function estCodeDeLApp(request) {
+  if (request.mode === 'navigate') return true;
+  const url = new URL(request.url);
+  return /\.(html|webmanifest)$/.test(url.pathname) || url.pathname.endsWith('/');
+}
 
-  // Ignorer chrome-extension://, etc.
+self.addEventListener('fetch', (event) => {
+  if (event.request.method !== 'GET') return;
   if (!event.request.url.startsWith('http')) return;
 
-  event.respondWith(
-    fetch(event.request)
-      .then((response) => {
-        // Mettre en cache une copie pour usage offline futur
-        if (response && response.status === 200) {
-          const cloned = response.clone();
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, cloned).catch(() => {});
-          });
-        }
-        return response;
-      })
-      .catch(() => {
-        // Pas de réseau → on tape dans le cache
-        return caches.match(event.request).then((cached) => {
-          if (cached) return cached;
-          // Si rien : on retourne au moins l'index.html (SPA-style)
-          if (event.request.mode === 'navigate') {
-            return caches.match('./index.html');
+  if (estCodeDeLApp(event.request)) {
+    event.respondWith(
+      fetch(event.request, { cache: 'no-store' })
+        .then((response) => {
+          if (response && response.status === 200) {
+            const cloned = response.clone();
+            caches.open(CACHE_NAME).then((cache) => {
+              cache.put(event.request, cloned).catch(() => {});
+            });
           }
-        });
-      })
+          return response;
+        })
+        .catch(() =>
+          caches.match(event.request).then(
+            (cached) => cached || caches.match('./index.html')
+          )
+        )
+    );
+    return;
+  }
+
+  event.respondWith(
+    caches.match(event.request).then((cached) => {
+      const reseau = fetch(event.request)
+        .then((response) => {
+          if (response && response.status === 200) {
+            const cloned = response.clone();
+            caches.open(CACHE_NAME).then((cache) => {
+              cache.put(event.request, cloned).catch(() => {});
+            });
+          }
+          return response;
+        })
+        .catch(() => cached);
+      return cached || reseau;
+    })
   );
 });
 

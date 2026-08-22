@@ -13976,7 +13976,7 @@ function renderParametresScreen(){
     +'<div class="fiche-section">'
     +'<h4>\u2139\uFE0F Version</h4>'
     +'<div style="background:var(--cream-dark);border-radius:8px;padding:14px;font-size:0.88em;line-height:1.7;font-family:monospace;">'
-    +'<strong>Naturalia v29.0</strong><br>'
+    +'<strong>Naturalia v31.1</strong><br>'
     +'Build : 2026-06-18<br>'
     +'8 r\u00e8gnes \u00b7 152 esp\u00e8ces \u00b7 31 histoires \u00b7 125 questions \u00b7 35 termes'
     +'</div></div>'
@@ -19915,18 +19915,50 @@ if(shouldShowOnboarding()) startOnboarding();
 
 // Enregistrement du Service Worker (cache offline)
 if ('serviceWorker' in navigator) {
+  var majEnCours = false;
+
+  /* Le nouveau service worker appelle skipWaiting() : des qu'il prend le
+     controle, on recharge une seule fois. Avant, l'app se contentait de
+     dire « recharge pour mettre a jour » sans jamais le faire. */
+  navigator.serviceWorker.addEventListener('controllerchange', function(){
+    if(majEnCours) return;
+    majEnCours = true;
+    try{ sessionStorage.setItem('naturalia_maj_faite','1'); }catch(e){}
+    location.reload();
+  });
+
   window.addEventListener('load', function(){
+    /* Message apres un rechargement automatique, pour expliquer l'ecran
+       qui se recharge tout seul. */
+    try{
+      if(sessionStorage.getItem('naturalia_maj_faite')){
+        sessionStorage.removeItem('naturalia_maj_faite');
+        setTimeout(function(){ showToast('✨ Application mise à jour'); }, 900);
+      }
+    }catch(e){}
+
     navigator.serviceWorker.register('sw.js')
       .then(function(reg){
         console.log('[Naturalia] Service Worker enregistré', reg.scope);
+
+        /* Une PWA reste ouverte des jours : sans ces verifications, elle ne
+           voyait jamais qu'une version plus recente existait. */
+        function chercherMaj(){ try{ reg.update(); }catch(e){} }
+        document.addEventListener('visibilitychange', function(){
+          if(document.visibilityState === 'visible') chercherMaj();
+        });
+        setInterval(chercherMaj, 30*60*1000);
+
         // Détecter une mise à jour disponible
         reg.addEventListener('updatefound', function(){
           var newSW = reg.installing;
           if(!newSW) return;
           newSW.addEventListener('statechange', function(){
             if(newSW.state === 'installed' && navigator.serviceWorker.controller){
-              // Une nouvelle version est en attente
-              showToast('\u2728 Nouvelle version disponible. Recharge pour mettre \u00e0 jour.');
+              /* Le nouveau SW appelle skipWaiting() : il va prendre le
+                 controle tout seul, et controllerchange rechargera la page.
+                 Rien a demander a l'utilisateur. */
+              console.log('[Naturalia] nouvelle version install\u00e9e, activation en cours');
             }
           });
         });
