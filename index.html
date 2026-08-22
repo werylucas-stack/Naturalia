@@ -3451,8 +3451,21 @@ function updateHomeCollection(){
   var totalChampignons=CHAMPIGNONS_ORDER.length;
   var totalHerpeto=HERPETO_ORDER.length;
   var totalMousses=MOUSSES_ORDER.length;
-  var grandTotal=arbres+animaux+plantes+insectes+oiseaux+champignons+herpeto+mousses;
-  var grandMax=totalArbres+totalAnimaux+totalPlantes+totalInsectes+totalOiseaux+totalChampignons+totalHerpeto+totalMousses;
+  /* Les six regnes ajoutes apres coup (champs, potager, roches, mammiferes,
+     mare, ciel) manquaient a ce total : l'accueil annoncait 152 especes alors
+     que l'app en compte 274, et l'ecran Collection, lui, les comptait bien. */
+  var champs=loadChampsProgress().length;
+  var potager=loadPotagerProgress().length;
+  var roches=loadRochesProgress().length;
+  var mammiferes=loadMammProgress().length;
+  var mare=loadMareProgress().length;
+  var ciel=loadCielProgress().length;
+
+  var grandTotal=arbres+animaux+plantes+insectes+oiseaux+champignons+herpeto+mousses
+    +champs+potager+roches+mammiferes+mare+ciel;
+  var grandMax=totalArbres+totalAnimaux+totalPlantes+totalInsectes+totalOiseaux+totalChampignons+totalHerpeto+totalMousses
+    +CHAMPS_ORDER.length+POTAGER_ORDER.length+ROCHES_ORDER.length
+    +MAMM_ORDER.length+MARE_ORDER.length+CIEL_ORDER.length;
 
   var pb=document.getElementById('home-progbar'); if(pb&&grandMax) pb.style.width=Math.round(grandTotal/grandMax*100)+'%';
   var preview=document.getElementById('home-coll-preview');
@@ -11724,8 +11737,15 @@ function renderCollScreen(){
   var totalHerpeto=HERPETO_ORDER.length;
   var totalMousses=MOUSSES_ORDER.length;
 
-  var foundGlobal = coll.length + animaux.length + plantes.length + insectes.length + oiseaux.length + champignons.length + herpeto.length + mousses.length;
-  var totalGlobal = totalArbres + totalAnimaux + totalPlantes + totalInsectes + totalOiseaux + totalChampignons + totalHerpeto + totalMousses;
+  /* Meme oubli que sur l'accueil : les six regnes ajoutes apres coup
+     n'entraient pas dans le total global. Les deux ecrans comptent
+     desormais les 14 regnes, et affichent donc le meme chiffre. */
+  var foundGlobal = coll.length + animaux.length + plantes.length + insectes.length + oiseaux.length + champignons.length + herpeto.length + mousses.length
+    + loadChampsProgress().length + loadPotagerProgress().length + loadRochesProgress().length
+    + loadMammProgress().length + loadMareProgress().length + loadCielProgress().length;
+  var totalGlobal = totalArbres + totalAnimaux + totalPlantes + totalInsectes + totalOiseaux + totalChampignons + totalHerpeto + totalMousses
+    + CHAMPS_ORDER.length + POTAGER_ORDER.length + ROCHES_ORDER.length
+    + MAMM_ORDER.length + MARE_ORDER.length + CIEL_ORDER.length;
   var pctGlobal = Math.round(foundGlobal / totalGlobal * 100);
 
   // Titre du niveau global selon progression
@@ -13972,13 +13992,15 @@ function renderParametresScreen(){
     +'<button onclick="confirmResetData()" class="btn" style="width:100%;color:var(--rust);border-color:var(--rust);">\uD83D\uDDD1\uFE0F Effacer toutes mes donn\u00e9es</button>'
     +'</div>'
 
-    // Version
+    // Version (chiffres calcules, voir statsApp)
     +'<div class="fiche-section">'
     +'<h4>\u2139\uFE0F Version</h4>'
     +'<div style="background:var(--cream-dark);border-radius:8px;padding:14px;font-size:0.88em;line-height:1.7;font-family:monospace;">'
-    +'<strong>Naturalia v32.0</strong><br>'
-    +'Build : 2026-06-18<br>'
-    +'8 r\u00e8gnes \u00b7 152 esp\u00e8ces \u00b7 31 histoires \u00b7 125 questions \u00b7 35 termes'
+    +'<strong>Naturalia v32.1</strong><br>'
+    +'Build : 2026-08-22<br>'
+    /* Compte reellement les regnes et les especes plutot que d'annoncer des
+       chiffres ecrits en dur, qui dataient de la v28 et n'ont jamais suivi. */
+    +statsApp()
     +'</div></div>'
 
     // Bouton tutoriel
@@ -14615,6 +14637,18 @@ const REGNES_ILLUS={
   'roches': {'amethyste':1,'ardoise':1,'calcaire':1,'craie':1,'galene':1,'granite':1,'gres':1,'marbre':1,'pyrite':1,'quartz':1,'schiste':1,'silex':1},
 /* REGNES-AUTO-FIN */
 };
+/* Chiffres de l'ecran Version, comptes sur les donnees reelles. */
+function statsApp(){
+  var groupes=[SPECIES_ORDER,TRACES_EMPREINTES,PLANTES_ORDER,INSECTES_ORDER,OISEAUX_ORDER,
+    CHAMPIGNONS_ORDER,HERPETO_ORDER,MOUSSES_ORDER,CHAMPS_ORDER,POTAGER_ORDER,
+    ROCHES_ORDER,MAMM_ORDER,MARE_ORDER,CIEL_ORDER];
+  var especes=0;
+  for(var i=0;i<groupes.length;i++){ especes+=groupes[i].length; }
+  return groupes.length+' règnes · '+especes+' espèces · '
+    +Object.keys(STORIES).length+' histoires · '
+    +Object.keys(GLOSSAIRE_TERMES).length+' termes';
+}
+
 function especeVignette(dossier,cle,svgFn){
   var m=REGNES_ILLUS[dossier];
   if(m && m[cle]){
