@@ -13996,7 +13996,7 @@ function renderParametresScreen(){
     +'<div class="fiche-section">'
     +'<h4>\u2139\uFE0F Version</h4>'
     +'<div style="background:var(--cream-dark);border-radius:8px;padding:14px;font-size:0.88em;line-height:1.7;font-family:monospace;">'
-    +'<strong>Naturalia v32.1</strong><br>'
+    +'<strong>Naturalia v33.0</strong><br>'
     +'Build : 2026-08-22<br>'
     /* Compte reellement les regnes et les especes plutot que d'annoncer des
        chiffres ecrits en dur, qui dataient de la v28 et n'ont jamais suivi. */
@@ -14649,7 +14649,14 @@ function statsApp(){
     +Object.keys(GLOSSAIRE_TERMES).length+' termes';
 }
 
+/* Ces trois regnes ont ete illustres deux fois : en gravure (2026) puis, en
+   remontant l'archive v29, en aquarelle. L'aquarelle passe devant. */
+var AQUA_REGNE={mammiferes:'mamm_illus',mare:'mare_illus',roches:'roches_illus'};
 function especeVignette(dossier,cle,svgFn){
+  var coll=AQUA_REGNE[dossier];
+  if(coll && typeof aquaDispo==='function' && aquaDispo(coll,cle)){
+    return '<img class="espece-illus" src="'+aquaSrc(coll,cle)+'" alt="" decoding="async">';
+  }
   var m=REGNES_ILLUS[dossier];
   if(m && m[cle]){
     return '<img class="espece-illus" src="assets/'+dossier+'/'+cle+'.webp" alt="" decoding="async">';
@@ -14727,6 +14734,16 @@ var ICON_PLEIN_ECRAN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
    ou l'on voit aussi le fruit et le bourgeon. */
 function arbreVignette(name,variante,viewBox,cls,zoom){
   var box=viewBox||'0 0 120 120';
+  /* Les aquarelles recuperees de la v29 passent avant tout le reste : elles
+     n'ont qu'une vue par espece, donc la meme sert de vignette et d'agrandi. */
+  if(typeof aquaDispo==='function' && aquaDispo('arbres_illus',aquaCleArbre(name))){
+    var srcAq=aquaSrc('arbres_illus',aquaCleArbre(name));
+    return '<figure class="illus '+(cls||'')+'" data-src="'+esc(srcAq)+'" data-leg="'+esc(name)+'"'
+      +' onclick="event.stopPropagation();openIllus(this.getAttribute(&quot;data-src&quot;),this.getAttribute(&quot;data-leg&quot;))">'
+      +'<img src="'+esc(srcAq)+'" alt="'+esc(name)+'" decoding="async">'
+      +'<span class="illus-zoom" aria-hidden="true">'+ICON_PLEIN_ECRAN+'</span>'
+      +'</figure>';
+  }
   if(!hasArbreIllus(name,variante)){
     if(variante==='vignette' && hasArbreIllus(name,'planche')) variante='planche';
     else return '<svg viewBox="'+box+'" xmlns="http://www.w3.org/2000/svg">'+getSpeciesSVG(name)+'</svg>';
@@ -19305,12 +19322,12 @@ function openFiche(name){
     </button>
     <div class="fiche-section">
       <h4>Description</h4>
-      ${hasArbreIllus(name,'arbre')?`<div class="fiche-illus">${arbreVignette(name,'arbre','0 0 120 120')}</div>`:''}
+      ${(!aquaDispo('arbres_illus',aquaCleArbre(name)) && hasArbreIllus(name,'arbre'))?`<div class="fiche-illus">${arbreVignette(name,'arbre','0 0 120 120')}</div>`:''}
       <p>${info.desc||'Fiche à compléter.'}</p>
     </div>
     <div class="fiche-section">
       <h4>Comment le reconnaître ?</h4>
-      ${hasArbreIllus(name,'planche')?`<div class="fiche-illus">${arbreVignette(name,'planche','0 0 120 120')}</div>
+      ${(!aquaDispo('arbres_illus',aquaCleArbre(name)) && hasArbreIllus(name,'planche'))?`<div class="fiche-illus">${arbreVignette(name,'planche','0 0 120 120')}</div>
       <div class="fiche-illus-leg">La feuille, le fruit et le bourgeon — appuie pour agrandir</div>`:''}
       <div class="recognise-items">${recItems}</div>
     </div>
@@ -19951,6 +19968,106 @@ if(shouldShowOnboarding()) startOnboarding();
 ──────────────────────────────── */
 
 // Enregistrement du Service Worker (cache offline)
+/* AQUA-AUTO-DEBUT — genere par poser_aquarelles.js
+   363 aquarelles recuperees de la v29 : elles vivaient en base64 dans la
+   copie Hostinger et n'avaient jamais ete poussees sur GitHub. Servies ici
+   en fichiers, elles remplacent les dessins SVG et les emoji la ou elles
+   existent. Principe repris de la v29 : on substitue les valeurs des tables
+   existantes plutot que de toucher aux ecrans, donc le repli reste intact. */
+/* Toutes les aquarelles sont dans un seul dossier, le nom portant la
+   collection en prefixe : un dossier se televerse en huit fois sur GitHub,
+   dix-neuf en auraient demande une vingtaine. */
+const AQUA_BASE='assets/aqua/';
+const AQUA={
+  'animaux_illus':{'blaireau':1,'canard':1,'chat':1,'chevreuil':1,'chien':1,'ecureuil':1,'heron':1,'lievre':1,'renard':1,'sanglier':1},
+  'arbres_illus':{'argousier':1,'aubepine':1,'aubepine_monogyne':1,'aulne_blanc':1,'aulne_glutineux':1,'bouleau_pubescent':1,'bouleau_verruqueux':1,'bourdaine':1,'buis':1,'cedre_de_l_atlas':1,'cerisier_de_sainte_lucie':1,'charme':1,'chataignier':1,'chene_pedoncule':1,'chene_rouge_d_amerique':1,'chene_sessile_rouvre':1,'chevrefeuille':1,'clematite_des_haies':1,'cornouiller':1,'cytise_faux_ebenier':1,'douglas':1,'epicea_commun':1,'erable_champetre':1,'erable_de_montpellier':1,'erable_plane':1,'erable_sycomore':1,'forsythie':1,'frene_commun':1,'fusain':1,'genevrier_commun':1,'groseillier_noir_cassis':1,'groseillier_rouge':1,'hetre':1,'houx':1,'if':1,'laurier_cerise':1,'liane_chevrefeuille':1,'lierre':1,'lilas':1,'marronnier':1,'meleze_d_europe':1,'merisier':1,'neflier':1,'nerprun_purgatif':1,'noisetier':1,'noyer_royal':1,'orme':1,'osier':1,'pecher':1,'peuplier':1,'peuplier_noir':1,'piment_royal':1,'pin_noir':1,'pin_sylvestre':1,'platane':1,'poirier':1,'pommier':1,'prunellier':1,'prunier_sauvage':1,'robinier_faux_acacia':1,'ronce':1,'rosier_sauvage':1,'sapin':1,'saule':1,'sorbier_des_oiseleurs':1,'sorbier_torminal':1,'sureau_a_grappe':1,'sureau_noir':1,'symphorine':1,'tilleul':1,'troene_commun':1,'viorne_obier':1},
+  'cat_icons':{'animal':1,'arbre':1,'champignon':1,'champs':1,'ciel':1,'herpeto':1,'insecte':1,'mare':1,'mousse':1,'oiseau':1,'plante':1,'potager':1,'roches':1,'traces':1},
+  'champignons_illus':{'agaric_champetre':1,'amanite_phalloide':1,'amanite_tue_mouches':1,'bolet_satan':1,'cepe':1,'girolle':1,'lepiote_elevee':1,'morille':1,'pleurote_huitre':1,'russule_charbonniere':1,'trompette_de_la_mort':1,'vesse_de_loup':1},
+  'champs_illus':{'avoine':1,'betterave':1,'bleuet':1,'chicoree':1,'chrysantheme_moissons':1,'colza':1,'coquelicot':1,'epeautre':1,'feverole':1,'froment':1,'lin':1,'luzerne':1,'mais':1,'matricaire':1,'moutarde':1,'orge':1,'pomme_de_terre':1,'seigle':1,'trefle_violet':1},
+  'ciel_illus':{'cassiopee':1,'cygne':1,'etoile_filante':1,'grande_ourse':1,'iss':1,'jupiter':1,'lune':1,'mars':1,'orion':1,'petite_ourse':1,'phases_lune':1,'pleiades':1,'satellites':1,'saturne':1,'venus':1,'voie_lactee':1},
+  'herpeto_illus':{'couleuvre_collier':1,'crapaud_commun':1,'grenouille_rousse':1,'grenouille_verte':1,'lezard_mur':1,'lezard_vert':1,'orvet':1,'salamandre_tachetee':1,'triton_palme':1,'vipere_aspic':1},
+  'home_icons':{'apprendre':1,'identifier':1,'naturodex':1,'quiz':1},
+  'insectes_illus':{'abeille':1,'bourdon':1,'cetoine':1,'citron':1,'coccinelle':1,'fourmi':1,'hanneton':1,'libellule':1,'mante':1,'paon_du_jour':1,'punaise_verte':1,'sauterelle':1},
+  'mamm_illus':{'belette':1,'blaireau':1,'castor':1,'cerf':1,'chat_forestier':1,'chauve_souris':1,'chevreuil':1,'daim':1,'ecureuil':1,'fouine':1,'herisson':1,'lapin':1,'lievre':1,'loir':1,'loup':1,'loutre':1,'martre':1,'mulot':1,'musaraigne':1,'muscardin':1,'rat_musque':1,'renard':1,'sanglier':1,'taupe':1},
+  'mare_illus':{'dytique':1,'elodee':1,'epinoche':1,'gammare':1,'gerris':1,'grenouille_verte':1,'iris_marais':1,'larve_libellule':1,'lentille':1,'limnee':1,'massette':1,'myriophylle':1,'nenuphar':1,'notonecte':1,'phrygane':1,'renoncule_eau':1,'roseau':1,'tetard':1,'triton':1},
+  'mousses_illus':{'cladonie':1,'evernia':1,'fontinale':1,'graphis':1,'hypne':1,'mnium':1,'parmelie':1,'polytric':1,'sphaigne':1,'tortula':1,'usnee':1,'xanthorie':1},
+  'obs_animal_illus':{'blaireau':1,'canard':1,'chevreuil':1,'ecureuil':1,'heron':1,'lievre':1,'renard':1,'sanglier':1},
+  'ois_illus':{'buse':1,'chouette_hulotte':1,'corneille':1,'hirondelle':1,'merle':1,'mesange_bleue':1,'moineau':1,'mouette':1,'pic_epeiche':1,'pie':1,'pinson':1,'rouge_gorge':1},
+  'plantes_illus':{'achillee':1,'bardane':1,'bourrache':1,'bouton_or':1,'coquelicot':1,'lierre_terrestre':1,'marguerite':1,'ortie':1,'paquerette':1,'pissenlit':1,'plantain_lanceole':1,'trefle_blanc':1},
+  'potager_illus':{'ail':1,'aubergine':1,'basilic':1,'betterave_rouge':1,'blette':1,'bourrache':1,'brocoli':1,'capucine':1,'carotte':1,'celeri':1,'chou':1,'chou_fleur':1,'ciboulette':1,'concombre':1,'cosmos':1,'courge':1,'courgette':1,'echalote':1,'epinard':1,'feve':1,'fraise':1,'haricot':1,'laitue':1,'lavande':1,'mache':1,'mais_doux':1,'melon':1,'navet':1,'oeillet_inde':1,'oignon':1,'panais':1,'persil':1,'petit_pois':1,'phacelie':1,'poireau':1,'poivron':1,'potiron':1,'radis':1,'roquette':1,'souci':1,'tomate':1,'tournesol':1},
+  'roches_illus':{'amethyste':1,'ardoise':1,'calcaire':1,'craie':1,'galene':1,'granite':1,'gres':1,'marbre':1,'pyrite':1,'quartz':1,'schiste':1,'silex':1},
+  'story_illus':{'abeille':1,'boletus':1,'bouleau':1,'brock':1,'brutus':1,'chauvesouris':1,'chene_monde':1,'chenille':1,'chouette':1,'coccinelle':1,'coquelicot':1,'elise':1,'escargot':1,'etoile_filante':1,'fougere':1,'fourmi':1,'galet':1,'geai':1,'gland':1,'grenouille':1,'hetre':1,'hirondelle':1,'lichen':1,'lierre':1,'loup':1,'lucane':1,'lune':1,'ortie':1,'pic':1,'piko':1,'pioupiou':1,'pissenlit':1,'renard':1,'ronce':1,'roussette':1,'saga_automne':1,'saga_ete':1,'saga_hiver':1,'saga_printemps':1,'saule':1,'sphaigne':1,'tetard':1,'verdeterre':1},
+  'traces_illus':{'blaireau':1,'canard':1,'chat':1,'chevreuil':1,'chien':1,'ecureuil':1,'heron':1,'lievre':1,'renard':1,'sanglier':1}
+};
+function aquaDispo(dossier,cle){ var m=AQUA[dossier]; return !!(m && m[cle]); }
+function aquaSrc(dossier,cle){ return AQUA_BASE+dossier+'__'+cle+'.webp'; }
+function aquaImg(dossier,cle,style){
+  if(!aquaDispo(dossier,cle)) return '';
+  return '<img src="'+aquaSrc(dossier,cle)+'" alt="" decoding="async" style="'
+    +(style||'width:100%;height:100%;object-fit:contain;display:block')+'">';
+}
+/* Cle d'aquarelle pour un arbre : meme slug que partout, mais avec des
+   soulignes, comme les nommait la v29. */
+function aquaCleArbre(nom){ return arbreSlug(nom).replace(/-/g,'_'); }
+
+/* Substitue les valeurs d'une table SVG. Certaines tables contiennent des
+   chaines, d'autres des fonctions : on conserve le type d'origine, sinon
+   les ecrans qui appellent MAP[cle]() planteraient. */
+function aquaSubstituer(table,dossier){
+  if(typeof table!=='object'||!table) return 0;
+  var n=0;
+  Object.keys(table).forEach(function(cle){
+    if(!aquaDispo(dossier,cle)) return;
+    var html=aquaImg(dossier,cle);
+    var etaitFonction = (typeof table[cle]==='function');
+    table[cle] = etaitFonction ? function(){ return html; } : html;
+    n++;
+  });
+  return n;
+}
+
+(function appliquerAquarelles(){
+  var paires=[[typeof PLANTES_SVG!=='undefined'&&PLANTES_SVG,'plantes_illus'],
+    [typeof INSECTES_SVG!=='undefined'&&INSECTES_SVG,'insectes_illus'],
+    [typeof OISEAUX_SVG!=='undefined'&&OISEAUX_SVG,'ois_illus'],
+    [typeof CHAMPIGNONS_SVG!=='undefined'&&CHAMPIGNONS_SVG,'champignons_illus'],
+    [typeof HERPETO_SVG!=='undefined'&&HERPETO_SVG,'herpeto_illus'],
+    [typeof MOUSSES_SVG!=='undefined'&&MOUSSES_SVG,'mousses_illus'],
+    [typeof CHAMPS_SVG!=='undefined'&&CHAMPS_SVG,'champs_illus'],
+    [typeof POTAGER_SVG!=='undefined'&&POTAGER_SVG,'potager_illus'],
+    [typeof CIEL_SVG!=='undefined'&&CIEL_SVG,'ciel_illus'],
+    [typeof MAMM_SVG!=='undefined'&&MAMM_SVG,'mamm_illus'],
+    [typeof MARE_SVG!=='undefined'&&MARE_SVG,'mare_illus'],
+    [typeof ROCHES_SVG!=='undefined'&&ROCHES_SVG,'roches_illus']];
+  var total=0;
+  for(var i=0;i<paires.length;i++){ if(paires[i][0]) total+=aquaSubstituer(paires[i][0],paires[i][1]); }
+  console.log('[Naturalia] '+total+' aquarelles appliquees');
+})();
+
+/* Les quatre tuiles de l'accueil : le HTML contient un emoji, on le
+   remplace apres rendu. */
+var AQUA_TUILES={determ:'identifier',learn:'apprendre',quiz:'quiz',coll:'naturodex'};
+function aquaPoserTuiles(){
+  var tuiles=document.querySelectorAll('.home-tile');
+  for(var i=0;i<tuiles.length;i++){
+    var oc=tuiles[i].getAttribute('onclick')||'';
+    var cle=null;
+    for(var k in AQUA_TUILES){ if(oc.indexOf("'"+k+"'")>=0||oc.indexOf('"'+k+'"')>=0) cle=AQUA_TUILES[k]; }
+    if(!cle) continue;
+    var ti=tuiles[i].querySelector('.ti');
+    var html=aquaImg('home_icons',cle,'width:58px;height:58px;object-fit:contain;display:block;margin:0 auto');
+    if(ti&&html) ti.innerHTML=html;
+  }
+}
+document.addEventListener('DOMContentLoaded',aquaPoserTuiles);
+/* L'accueil est re-rendu a chaque retour : on repose les icones. */
+(function(){
+  if(typeof showScreen!=='function') return;
+  var _showScreen=showScreen;
+  showScreen=function(){ var r=_showScreen.apply(this,arguments); try{ aquaPoserTuiles(); }catch(e){} return r; };
+})();
+/* AQUA-AUTO-FIN */
+
 if ('serviceWorker' in navigator) {
   var majEnCours = false;
 
