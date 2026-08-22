@@ -285,6 +285,14 @@ body{font-family:'Cormorant Garamond',serif;background:var(--cream);color:var(--
 .opt.sel .ck{background:var(--moss-dark);color:var(--cream);border-color:var(--moss-dark)}
 .opt svg{width:100%;max-width:110px;height:85px;margin-bottom:8px}
 /* l'image de critere reprend exactement la boite du <svg> qu'elle remplace */
+/* l'illustration d'espece remplit la boite que le rendu lui donne */
+.espece-illus{width:100%;height:100%;object-fit:contain;display:block}
+/* zoom generique : marche pour un SVG en ligne comme pour une image */
+.illus-zoomable{width:100%;height:100%}
+.illus-src{display:block;width:100%;height:100%}
+.illus-src>svg,.illus-src>img{width:100%;height:100%;object-fit:contain;display:block}
+.illus-grand{width:min(86vw,520px);height:min(68vh,520px);display:flex;align-items:center;justify-content:center;background:var(--cream);border-radius:6px;padding:10px}
+.illus-grand svg,.illus-grand img{width:100%;height:100%;object-fit:contain}
 .opt .critere-illus{width:100%;max-width:110px;height:85px;object-fit:contain;margin-bottom:8px}
 .rec-item .critere-illus{width:32px;height:32px;object-fit:contain;flex-shrink:0;margin-top:2px}
 .opt-label{font-family:'Old Standard TT',serif;font-size:15px;font-style:italic;text-align:center;line-height:1.2}
@@ -3262,6 +3270,33 @@ const GLOSSAIRE_SVG = {
   'bourgeon': SVG_schema_bourgeon
 };
 
+/* Plusieurs termes du glossaire decrivent exactement le meme caractere que
+   les pictogrammes de la cle de determination : on reutilise la gravure
+   plutot que de la redessiner. Les termes absents de cette table gardent
+   leur ancien schema SVG en attendant leur propre gravure. */
+var GLOSSAIRE_VERS_CRITERE={
+  alterne:'disp_alt', opposee:'disp_opp',
+  simple:'feuille_simple', composee:'feuille_composee', pennee:'feuille_composee',
+  palmee:'nerv_palmee', nervure:'nerv_pennee',
+  limbe:'feuille_plate', petiole:'pet_long',
+  lobe:'bord_lobe', dente:'bord_dente', caduc:'caduc'
+};
+/* Renvoie l'illustration d'un terme : gravure si on en a une, sinon le
+   schema SVG d'origine, sinon rien. Toujours agrandissable au clic. */
+function glossaireIllus(termeKey){
+  var brut='';
+  var pic=GLOSSAIRE_VERS_CRITERE[termeKey];
+  if(pic && CRITERES_ILLUS[pic]){
+    brut='<img src="assets/criteres/'+pic+'.webp" alt="" decoding="async">';
+  } else {
+    var fn=GLOSSAIRE_SVG[termeKey];
+    brut=fn?fn():'';
+  }
+  if(!brut) return '';
+  var t=GLOSSAIRE_TERMES[termeKey];
+  return zoomable(brut, t?t.titre:'');
+}
+
 // Ouvre la modale d'un terme
 function openGlossaireModal(termeKey){
   var t = GLOSSAIRE_TERMES[termeKey];
@@ -3274,8 +3309,7 @@ function openGlossaireModal(termeKey){
   overlay.id = 'gloss-overlay';
   overlay.style.cssText = 'position:fixed;inset:0;background:rgba(62,47,31,.55);z-index:10000;display:flex;align-items:center;justify-content:center;padding:18px;animation:toastSlideUp 0.25s ease-out;';
 
-  var svgFn = GLOSSAIRE_SVG[termeKey];
-  var svgHtml = svgFn ? svgFn() : '';
+  var svgHtml = glossaireIllus(termeKey);
 
   overlay.innerHTML = '<div style="background:var(--cream);border:2px solid var(--moss);border-radius:12px;max-width:480px;width:100%;max-height:90vh;overflow-y:auto;padding:20px;box-shadow:0 12px 40px rgba(62,47,31,.4);">'
     +'<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;gap:12px;">'
@@ -10203,7 +10237,7 @@ function openFicheMousse(cle){
     +'<div class="topbar-title">'+m.nom+'</div>'
     +'</div>'
     +'<div style="padding:14px 16px;">'
-    +'<div style="width:130px;height:130px;margin:6px auto 4px;">'+MOUSSES_SVG[cle]+'</div>'
+    +'<div style="width:130px;height:130px;margin:6px auto 4px;">'+zoomable(MOUSSES_SVG[cle],'')+'</div>'
     +'<div style="text-align:center;margin-bottom:14px;">'
     +'<div style="font-family:var(--font-title);font-size:1.6em;color:var(--moss-dark);font-style:italic;">'+m.nom+'</div>'
     +'<div style="font-size:0.9em;color:var(--sepia);font-style:italic;">'+m.nom_savant+'</div>'
@@ -12106,7 +12140,7 @@ function openFichePlante(cle){
     +'<div style="padding:14px 16px;">'
     // Header
     +'<div style="text-align:center;margin-bottom:14px;">'
-    +'<div style="width:120px;height:120px;margin:0 auto;">'+PLANTES_SVG[cle]+'</div>'
+    +'<div style="width:120px;height:120px;margin:0 auto;">'+zoomable(PLANTES_SVG[cle],'')+'</div>'
     +'<div style="font-family:var(--font-title);font-size:1.6em;color:var(--moss-dark);">'+p.nom+'</div>'
     +'<div style="font-style:italic;color:var(--sepia);font-size:0.95em;">'+p.nom_savant+'</div>'
     +'<div style="font-size:0.85em;color:var(--sepia);margin-top:4px;">Famille : '+p.famille+'</div>'
@@ -12246,7 +12280,7 @@ function openFicheInsecte(cle){
     +'</div>'
     +'<div style="padding:14px 16px;">'
     +'<div style="text-align:center;margin-bottom:14px;">'
-    +'<div style="width:120px;height:120px;margin:0 auto;">'+INSECTES_SVG[cle]+'</div>'
+    +'<div style="width:120px;height:120px;margin:0 auto;">'+zoomable(INSECTES_SVG[cle],'')+'</div>'
     +'<div style="font-family:var(--font-title);font-size:1.6em;color:var(--moss-dark);">'+ins.nom+'</div>'
     +'<div style="font-style:italic;color:var(--sepia);font-size:0.95em;">'+ins.nom_savant+'</div>'
     +'<div style="font-size:0.85em;color:var(--sepia);margin-top:4px;">'+ins.ordre+' \u00b7 '+ins.famille+'</div>'
@@ -12457,7 +12491,7 @@ function openFicheOiseau(cle){
     +'</div>'
     +'<div style="padding:14px 16px;">'
     +'<div style="text-align:center;margin-bottom:14px;">'
-    +'<div style="width:120px;height:120px;margin:0 auto;">'+OISEAUX_SVG[cle]+'</div>'
+    +'<div style="width:120px;height:120px;margin:0 auto;">'+zoomable(OISEAUX_SVG[cle],'')+'</div>'
     +'<div style="font-family:var(--font-title);font-size:1.6em;color:var(--moss-dark);">'+o.nom+'</div>'
     +'<div style="font-style:italic;color:var(--sepia);font-size:0.95em;">'+o.nom_savant+'</div>'
     +'<div style="font-size:0.85em;color:var(--sepia);margin-top:4px;">'+o.ordre+' \u00b7 '+o.famille+'</div>'
@@ -14571,6 +14605,52 @@ const CRITERES_ILLUS={
   'velu': 1,
 /* CRITERES-AUTO-FIN */
 };
+/* Illustrations d'especes des regnes dont les dessins etaient des gabarits
+   generiques (mammiferes, mare, roches). Meme principe que partout ailleurs :
+   image si elle existe, sinon le SVG d'origine. */
+const REGNES_ILLUS={
+/* REGNES-AUTO-DEBUT — genere par generer_regnes.py */
+/* REGNES-AUTO-FIN */
+};
+function especeVignette(dossier,cle,svgFn){
+  var m=REGNES_ILLUS[dossier];
+  if(m && m[cle]){
+    return '<img class="espece-illus" src="assets/'+dossier+'/'+cle+'.webp" alt="" decoding="async">';
+  }
+  return svgFn();
+}
+
+/* Rend n'importe quelle illustration cliquable pour l'agrandir, qu'elle soit
+   une image ou un SVG en ligne. C'est ce qui permet au zoom de marcher dans
+   tous les regnes et pas seulement chez les arbres. */
+function zoomable(html,legende){
+  if(!html) return '';
+  return '<figure class="illus illus-zoomable" data-leg="'+esc(legende||'')+'"'
+    +' onclick="event.stopPropagation();openIllusHTML(this.querySelector(&quot;.illus-src&quot;).innerHTML,this.getAttribute(&quot;data-leg&quot;))">'
+    +'<span class="illus-src">'+html+'</span>'
+    +'<span class="illus-zoom" aria-hidden="true">'+ICON_PLEIN_ECRAN+'</span>'
+    +'</figure>';
+}
+function ouvrirCalqueIllus(){
+  var o=document.getElementById('illus-overlay');
+  if(!o){
+    o=document.createElement('div');
+    o.id='illus-overlay';
+    o.className='illus-overlay';
+    o.addEventListener('click',closeIllus);
+    document.body.appendChild(o);
+  }
+  return o;
+}
+function openIllusHTML(html,legende){
+  var o=ouvrirCalqueIllus();
+  o.innerHTML='<button class="illus-close" aria-label="Fermer">&times;</button>'
+    +'<div class="illus-grand">'+html+'</div>'
+    +(legende?'<div class="illus-legende">'+esc(legende)+'</div>':'');
+  o.classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
 var SVG_CLE=null;
 function critereCle(valeurSVG){
   if(!SVG_CLE){
@@ -14628,14 +14708,7 @@ function arbreVignette(name,variante,viewBox,cls,zoom){
 }
 
 function openIllus(src,legende){
-  var o=document.getElementById('illus-overlay');
-  if(!o){
-    o=document.createElement('div');
-    o.id='illus-overlay';
-    o.className='illus-overlay';
-    o.addEventListener('click',closeIllus);
-    document.body.appendChild(o);
-  }
+  var o=ouvrirCalqueIllus();
   o.innerHTML='<button class="illus-close" aria-label="Fermer">&times;</button>'
     +'<img src="'+esc(src)+'" alt="'+esc(legende||'')+'">'
     +(legende?'<div class="illus-legende">'+esc(legende)+'</div>':'');
@@ -14988,7 +15061,7 @@ function openFicheChamp(cle){
     +'<button class="back-btn" aria-label="Retour" onclick="renderChampsGalerie()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 18l-6-6 6-6"/></svg></button>'
     +'<div class="topbar-title">'+p.nom+'</div></div>'
     +'<div style="padding:14px 16px;">'
-    +'<div style="width:128px;height:128px;margin:6px auto 4px;">'+CHAMPS_SVG[cle]()+'</div>'
+    +'<div style="width:128px;height:128px;margin:6px auto 4px;">'+zoomable(CHAMPS_SVG[cle](),'')+'</div>'
     +'<div style="text-align:center;margin-bottom:14px;">'
     +'<div style="font-family:var(--font-title);font-size:1.6em;color:var(--moss-dark);font-style:italic;">'+p.nom+'</div>'
     +'<div style="font-size:0.9em;color:var(--sepia);font-style:italic;">'+p.nom_savant+'</div>'
@@ -15240,7 +15313,7 @@ function openFichePotager(cle){
     +'<button class="back-btn" aria-label="Retour" onclick="renderPotagerGalerie(potagerOrigin)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 18l-6-6 6-6"/></svg></button>'
     +'<div class="topbar-title">'+p.nom+'</div></div>'
     +'<div style="padding:14px 16px;">'
-    +'<div style="width:128px;height:128px;margin:6px auto 4px;">'+POTAGER_SVG[cle]()+'</div>'
+    +'<div style="width:128px;height:128px;margin:6px auto 4px;">'+zoomable(POTAGER_SVG[cle](),'')+'</div>'
     +'<div style="text-align:center;margin-bottom:14px;">'
     +'<div style="font-family:var(--font-title);font-size:1.6em;color:var(--moss-dark);font-style:italic;">'+p.nom+'</div>'
     +'<div style="font-size:0.9em;color:var(--sepia);font-style:italic;">'+p.nom_savant+'</div>'
@@ -15332,7 +15405,7 @@ function renderRochesGalerie(origin){
     for(var i=0;i<keys.length;i++){
       var cle=keys[i],p=ROCHES_DATA[cle],col=coll.indexOf(cle)>=0;
       html+='<div data-cle="'+cle+'" onclick="openFicheRoche(this.getAttribute(\'data-cle\'))" style="background:var(--cream-dark);border:1px solid '+(col?'var(--moss)':'var(--sepia)')+';border-radius:8px;padding:10px;cursor:pointer;text-align:center;">'
-        +'<div style="width:72px;height:72px;margin:0 auto;">'+ROCHES_SVG[cle]()+'</div>'
+        +'<div style="width:72px;height:72px;margin:0 auto;">'+especeVignette('roches',cle,ROCHES_SVG[cle])+'</div>'
         +'<div style="font-family:var(--font-title);font-size:0.88em;color:var(--moss-dark);font-style:italic;line-height:1.2;margin-top:6px;">'+(col?'\u2713 ':'')+p.nom+'</div></div>';
     }
     html+='</div>';
@@ -15398,7 +15471,7 @@ function rochesKeyResult(keys){
   for(var i=0;i<keys.length;i++){
     var cle=keys[i],p=ROCHES_DATA[cle];
     html+='<div data-cle="'+cle+'" onclick="openFicheRoche(this.getAttribute(\'data-cle\'))" style="background:var(--cream-dark);border:1px solid var(--moss);border-radius:8px;padding:10px;cursor:pointer;text-align:center;">'
-      +'<div style="width:80px;height:80px;margin:0 auto;">'+ROCHES_SVG[cle]()+'</div>'
+      +'<div style="width:80px;height:80px;margin:0 auto;">'+especeVignette('roches',cle,ROCHES_SVG[cle])+'</div>'
       +'<div style="font-family:var(--font-title);font-size:0.92em;color:var(--moss-dark);font-style:italic;margin-top:6px;">'+p.nom+'</div></div>';
   }
   html+='</div>'
@@ -15415,7 +15488,7 @@ function openFicheRoche(cle){
     +'<button class="back-btn" aria-label="Retour" onclick="renderRochesGalerie(rochesOrigin)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 18l-6-6 6-6"/></svg></button>'
     +'<div class="topbar-title">'+p.nom+'</div></div>'
     +'<div style="padding:14px 16px;">'
-    +'<div style="width:128px;height:128px;margin:6px auto 4px;">'+ROCHES_SVG[cle]()+'</div>'
+    +'<div style="width:128px;height:128px;margin:6px auto 4px;">'+zoomable(especeVignette('roches',cle,ROCHES_SVG[cle]),'')+'</div>'
     +'<div style="text-align:center;margin-bottom:14px;">'
     +'<div style="font-family:var(--font-title);font-size:1.6em;color:var(--moss-dark);font-style:italic;">'+p.nom+'</div>'
     +'<div style="font-size:0.9em;color:var(--sepia);font-style:italic;">'+p.sorte+'</div>'
@@ -15537,7 +15610,7 @@ function renderMammiferesGalerie(origin){
     for(var i=0;i<keys.length;i++){
       var cle=keys[i],p=MAMM_DATA[cle],col2=coll.indexOf(cle)>=0;
       html+='<div data-cle="'+cle+'" onclick="openFicheMammifere(this.getAttribute(\'data-cle\'))" style="background:var(--cream-dark);border:1px solid '+(col2?'var(--moss)':'var(--sepia)')+';border-radius:8px;padding:10px;cursor:pointer;text-align:center;">'
-        +'<div style="width:72px;height:72px;margin:0 auto;">'+MAMM_SVG[cle]()+'</div>'
+        +'<div style="width:72px;height:72px;margin:0 auto;">'+especeVignette('mammiferes',cle,MAMM_SVG[cle])+'</div>'
         +'<div style="font-family:var(--font-title);font-size:0.86em;color:var(--moss-dark);font-style:italic;line-height:1.2;margin-top:6px;">'+(col2?'\u2713 ':'')+p.nom+'</div></div>';
     }
     html+='</div>';
@@ -15588,7 +15661,7 @@ function mammKeyResult(keys){
   for(var i=0;i<keys.length;i++){
     var cle=keys[i],p=MAMM_DATA[cle];
     html+='<div data-cle="'+cle+'" onclick="openFicheMammifere(this.getAttribute(\'data-cle\'))" style="background:var(--cream-dark);border:1px solid var(--moss);border-radius:8px;padding:10px;cursor:pointer;text-align:center;">'
-      +'<div style="width:80px;height:80px;margin:0 auto;">'+MAMM_SVG[cle]()+'</div>'
+      +'<div style="width:80px;height:80px;margin:0 auto;">'+especeVignette('mammiferes',cle,MAMM_SVG[cle])+'</div>'
       +'<div style="font-family:var(--font-title);font-size:0.9em;color:var(--moss-dark);font-style:italic;margin-top:6px;">'+p.nom+'</div></div>';
   }
   html+='</div>'
@@ -15604,7 +15677,7 @@ function openFicheMammifere(cle){
   var html='<div class="topbar">'+mammBack('renderMammiferesGalerie(mammOrigin)')
     +'<div class="topbar-title">'+p.nom+'</div></div>'
     +'<div style="padding:14px 16px;">'
-    +'<div style="width:140px;height:140px;margin:6px auto 4px;">'+MAMM_SVG[cle]()+'</div>'
+    +'<div style="width:140px;height:140px;margin:6px auto 4px;">'+zoomable(especeVignette('mammiferes',cle,MAMM_SVG[cle]),'')+'</div>'
     +'<div style="text-align:center;margin-bottom:14px;">'
     +'<div style="font-family:var(--font-title);font-size:1.6em;color:var(--moss-dark);font-style:italic;">'+p.nom+'</div>'
     +'<div style="font-size:0.9em;color:var(--sepia);font-style:italic;">'+p.latin+'</div>'
@@ -15730,7 +15803,7 @@ function renderMareGalerie(origin){
     for(var i=0;i<keys.length;i++){
       var cle=keys[i],p=MARE_DATA[cle],col2=coll.indexOf(cle)>=0;
       html+='<div data-cle="'+cle+'" onclick="openFicheMare(this.getAttribute(\'data-cle\'))" style="background:var(--cream-dark);border:1px solid '+(col2?'var(--moss)':'var(--sepia)')+';border-radius:8px;padding:10px;cursor:pointer;text-align:center;">'
-        +'<div style="width:72px;height:72px;margin:0 auto;">'+MARE_SVG[cle]()+'</div>'
+        +'<div style="width:72px;height:72px;margin:0 auto;">'+especeVignette('mare',cle,MARE_SVG[cle])+'</div>'
         +'<div style="font-family:var(--font-title);font-size:0.84em;color:var(--moss-dark);font-style:italic;line-height:1.2;margin-top:6px;">'+(col2?'\u2713 ':'')+p.nom+'</div></div>';
     }
     html+='</div>';
@@ -15780,7 +15853,7 @@ function mareKeyResult(keys){
   for(var i=0;i<keys.length;i++){
     var cle=keys[i],p=MARE_DATA[cle];
     html+='<div data-cle="'+cle+'" onclick="openFicheMare(this.getAttribute(\'data-cle\'))" style="background:var(--cream-dark);border:1px solid var(--moss);border-radius:8px;padding:10px;cursor:pointer;text-align:center;">'
-      +'<div style="width:80px;height:80px;margin:0 auto;">'+MARE_SVG[cle]()+'</div>'
+      +'<div style="width:80px;height:80px;margin:0 auto;">'+especeVignette('mare',cle,MARE_SVG[cle])+'</div>'
       +'<div style="font-family:var(--font-title);font-size:0.88em;color:var(--moss-dark);font-style:italic;margin-top:6px;">'+p.nom+'</div></div>';
   }
   html+='</div>'
@@ -15796,7 +15869,7 @@ function openFicheMare(cle){
   var html='<div class="topbar">'+mareBack('renderMareGalerie(mareOrigin)')
     +'<div class="topbar-title">'+p.nom+'</div></div>'
     +'<div style="padding:14px 16px;">'
-    +'<div style="width:140px;height:140px;margin:6px auto 4px;">'+MARE_SVG[cle]()+'</div>'
+    +'<div style="width:140px;height:140px;margin:6px auto 4px;">'+zoomable(especeVignette('mare',cle,MARE_SVG[cle]),'')+'</div>'
     +'<div style="text-align:center;margin-bottom:14px;">'
     +'<div style="font-family:var(--font-title);font-size:1.55em;color:var(--moss-dark);font-style:italic;">'+p.nom+'</div>'
     +'<div style="font-size:0.9em;color:var(--sepia);font-style:italic;">'+p.latin+'</div>'
@@ -15978,7 +16051,7 @@ function openFicheCiel(cle){
   var html='<div class="topbar">'+cielBack('renderCielGalerie(cielOrigin)')
     +'<div class="topbar-title">'+p.nom+'</div></div>'
     +'<div style="padding:14px 16px;">'
-    +'<div style="width:150px;height:150px;margin:6px auto 4px;">'+CIEL_SVG[cle]()+'</div>'
+    +'<div style="width:150px;height:150px;margin:6px auto 4px;">'+zoomable(CIEL_SVG[cle](),'')+'</div>'
     +'<div style="text-align:center;margin-bottom:14px;">'
     +'<div style="font-family:var(--font-title);font-size:1.55em;color:var(--moss-dark);font-style:italic;">'+p.nom+'</div>'
     +'<div style="font-size:0.9em;color:var(--sepia);font-style:italic;">'+p.surnom+'</div>'
@@ -17564,7 +17637,7 @@ function nextJeuPlantesFamille(){
     +'<div style="padding:14px 16px;">'
     +'<div style="text-align:center;font-size:0.9em;color:var(--sepia);margin-bottom:10px;">Score : <strong>'+jeuPlantesFamilleState.score+'</strong></div>'
     +'<div style="text-align:center;font-family:var(--font-title);font-size:1em;color:var(--moss-dark);margin-bottom:6px;">\u00c0 quelle famille appartient...</div>'
-    +'<div style="text-align:center;margin:10px 0;"><div style="width:120px;height:120px;margin:0 auto;">'+PLANTES_SVG[cle]+'</div></div>'
+    +'<div style="text-align:center;margin:10px 0;"><div style="width:120px;height:120px;margin:0 auto;">'+zoomable(PLANTES_SVG[cle],'')+'</div></div>'
     +'<div style="text-align:center;font-family:var(--font-title);font-size:1.4em;color:var(--rust);font-style:italic;margin-bottom:14px;">'+p.nom+'</div>'
     +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">';
 
@@ -17905,7 +17978,7 @@ function openFicheChampignon(cle){
     +'<div class="topbar-title">\uD83C\uDF44 '+c.nom+'</div>'
     +'</div>'
     +'<div style="padding:14px 16px;">'
-    +'<div style="text-align:center;width:140px;height:140px;margin:0 auto 10px;">'+CHAMPIGNONS_SVG[cle]+'</div>'
+    +'<div style="text-align:center;width:140px;height:140px;margin:0 auto 10px;">'+zoomable(CHAMPIGNONS_SVG[cle],'')+'</div>'
     +'<div style="text-align:center;margin-bottom:14px;">'
     +'<div style="font-family:var(--font-title);font-size:1.5em;color:var(--moss-dark);font-style:italic;">'+c.nom+'</div>'
     +'<div style="font-size:0.9em;color:var(--sepia);font-style:italic;">'+c.nom_savant+'</div>'
@@ -18065,7 +18138,7 @@ function openFicheHerpeto(cle){
     +'<div class="topbar-title">'+h.emoji+' '+h.nom+'</div>'
     +'</div>'
     +'<div style="padding:14px 16px;">'
-    +'<div style="text-align:center;width:140px;height:140px;margin:0 auto 10px;">'+HERPETO_SVG[cle]+'</div>'
+    +'<div style="text-align:center;width:140px;height:140px;margin:0 auto 10px;">'+zoomable(HERPETO_SVG[cle],'')+'</div>'
     +'<div style="text-align:center;margin-bottom:14px;">'
     +'<div style="font-family:var(--font-title);font-size:1.5em;color:var(--moss-dark);font-style:italic;">'+h.nom+'</div>'
     +'<div style="font-size:0.9em;color:var(--sepia);font-style:italic;">'+h.nom_savant+'</div>'
