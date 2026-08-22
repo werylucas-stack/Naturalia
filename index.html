@@ -284,6 +284,9 @@ body{font-family:'Cormorant Garamond',serif;background:var(--cream);color:var(--
 .opt .ck{position:absolute;top:7px;right:7px;width:20px;height:20px;border-radius:50%;border:1.5px solid var(--sepia);background:var(--cream);display:flex;align-items:center;justify-content:center;font-size:11px;color:transparent;transition:.15s}
 .opt.sel .ck{background:var(--moss-dark);color:var(--cream);border-color:var(--moss-dark)}
 .opt svg{width:100%;max-width:110px;height:85px;margin-bottom:8px}
+/* l'image de critere reprend exactement la boite du <svg> qu'elle remplace */
+.opt .critere-illus{width:100%;max-width:110px;height:85px;object-fit:contain;margin-bottom:8px}
+.rec-item .critere-illus{width:32px;height:32px;object-fit:contain;flex-shrink:0;margin-top:2px}
 .opt-label{font-family:'Old Standard TT',serif;font-size:15px;font-style:italic;text-align:center;line-height:1.2}
 .opt-sub{font-size:11px;color:var(--sepia);margin-top:2px;text-align:center}
 .skip-btn{width:100%;border:1px dashed var(--sepia);border-radius:6px;padding:13px;font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic;color:var(--ink-soft);background:transparent;cursor:pointer;margin-bottom:18px}
@@ -14520,6 +14523,71 @@ const ARBRES_ILLUS={
 /* ILLUS-AUTO-FIN */
 };
 
+/* Pictogrammes de la cle de determination (assets/criteres/<cle>.webp).
+   Les valeurs de la table SVG sont des chaines uniques : on retrouve la cle
+   par correspondance inverse, ce qui evite de toucher aux 40 declarations
+   d'options. Sans image, on garde le pictogramme SVG d'origine. */
+const CRITERES_ILLUS={
+/* CRITERES-AUTO-DEBUT — genere par generer_criteres.py */
+  'aig_courte': 1,
+  'aig_isolee': 1,
+  'aig_longue': 1,
+  'aig_touffe': 1,
+  'base_asym': 1,
+  'base_coin': 1,
+  'base_ronde': 1,
+  'base_sym': 1,
+  'bord_dd': 1,
+  'bord_dente': 1,
+  'bord_epineux': 1,
+  'bord_lisse': 1,
+  'bord_lobe': 1,
+  'caduc': 1,
+  'disp_alt': 1,
+  'disp_opp': 1,
+  'ecailles': 1,
+  'epines_non': 1,
+  'epines_oui': 1,
+  'feuille_composee': 1,
+  'feuille_plate': 1,
+  'feuille_simple': 1,
+  'forme_longue': 1,
+  'forme_ovale': 1,
+  'forme_ronde': 1,
+  'glabre': 1,
+  'lobe_pointu': 1,
+  'lobe_rond': 1,
+  'nerv_palmee': 1,
+  'nerv_pennee': 1,
+  'odeur_n': 1,
+  'odeur_o': 1,
+  'persistant': 1,
+  'pet_court': 1,
+  'pet_long': 1,
+  'ram_lisse': 1,
+  'ram_verruq': 1,
+  'som_pointu': 1,
+  'som_rond': 1,
+  'velu': 1,
+/* CRITERES-AUTO-FIN */
+};
+var SVG_CLE=null;
+function critereCle(valeurSVG){
+  if(!SVG_CLE){
+    SVG_CLE={};
+    for(var k in SVG){ if(!(SVG[k] in SVG_CLE)) SVG_CLE[SVG[k]]=k; }
+  }
+  return SVG_CLE[valeurSVG]||null;
+}
+/* Rend un pictogramme de critere : image si elle existe, sinon le SVG d'origine. */
+function critereVignette(valeurSVG){
+  var cle=critereCle(valeurSVG);
+  if(cle && CRITERES_ILLUS[cle]){
+    return '<img class="critere-illus" src="assets/criteres/'+cle+'.webp" alt="" decoding="async">';
+  }
+  return '<svg viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg">'+valeurSVG+'</svg>';
+}
+
 function arbreSlug(name){
   return normName(name)
     .normalize('NFD').replace(new RegExp('[\\u0300-\\u036f]','g'),'')
@@ -16762,7 +16830,7 @@ function renderDetermQuestion(){
       ${opts.map(o=>`
         <div class="opt" data-v="${esc(o.v)}" onclick="toggleOpt(this)">
           <div class="ck">✓</div>
-          <svg viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg">${o.svg}</svg>
+          ${critereVignette(o.svg)}
           <div class="opt-label">${o.label}</div>
           ${o.sub?`<div class="opt-sub">${o.sub}</div>`:''}
         </div>`).join('')}
@@ -19255,7 +19323,7 @@ function getRecItems(name){
   if(!list.length) return `<div style="font-style:italic;color:var(--sepia)">Indices visuels à venir.</div>`;
   return list.map(i=>`
     <div class="rec-item">
-      <svg viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg">${i.svg}</svg>
+      ${critereVignette(i.svg)}
       <p>${i.txt}</p>
     </div>`).join('');
 }
