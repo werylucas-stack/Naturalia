@@ -10,7 +10,7 @@
 ║  FICHIER     : index.html + sw.js + manifest.webmanifest        ║
 ║  TAILLE      : ~1,7 Mo (index.html) + 363 aquarelles WebP       ║
 ╠══════════════════════════════════════════════════════════════════╣
-║  DERNIÈRE VERSION : v34.1 — 2026-08-22                          ║
+║  DERNIÈRE VERSION : v34.2 — 2026-08-22                          ║
 ║  DÉPLOIEMENT : toujours incrémenter CACHE_NAME dans sw.js ET    ║
 ║  pousser sw.js — c'est le seul signal de mise à jour du         ║
 ║  navigateur. Ne jamais réécrire index.html avec PowerShell 5.1  ║
@@ -100,7 +100,7 @@
 ║          place dans toute l'app (assets/aqua + surcouche AQUA-AUTO)    ║
 ║  v33.1 — Surcouche appliquée avant le rendu de l'accueil               ║
 ║  v33.2 — Empreintes en aquarelle (TRACES_EMPREINTES)                   ║
-║  v34.1 — Menu Déterminer, histoires et portraits d'animaux             ║
+║  v34.2 — Menu Déterminer, histoires et portraits d'animaux             ║
 ╠══════════════════════════════════════════════════════════════════╣
 ║  PROCHAINES ÉTAPES SUGGÉRÉES                                     ║
 ║  • Badges encore en emoji (~40)                                 ║
@@ -139,8 +139,10 @@
 <meta property="og:description" content="Application naturaliste pour enfants 7-14 ans. Identifier, apprendre, observer la nature.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="icon-512.png">
-<meta name="apple-mobile-web-app-title" content="Carnets">
-<link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxOTIgMTkyIj48cmVjdCB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgcng9IjQ4IiBmaWxsPSIjZjRlZGUwIi8+PHBhdGggZD0iTTk2IDE4IEM2NiAyOCw1MiA2MCw5NiAxNTggQzE0MCA2MCwxMjYgMjgsOTYgMThaIiBmaWxsPSIjZThkZmM4IiBzdHJva2U9IiMzZTRhMjciIHN0cm9rZS13aWR0aD0iMyIvPjxwYXRoIGQ9Ik05NiAxOEw5NiAxNTgiIHN0cm9rZT0iIzVjNmIzYSIgc3Ryb2tlLXdpZHRoPSIyIiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTk2IDQ4IFE3MCA2MCw1MCA3OCIgc3Ryb2tlPSIjNWM2YjNhIiBzdHJva2Utd2lkdGg9IjEuNSIgZmlsbD0ibm9uZSIvPjxwYXRoIGQ9Ik05NiA0OCBRMTI2IDYwLDE0MiA3OCIgc3Ryb2tlPSIjNWM2YjNhIiBzdHJva2Utd2lkdGg9IjEuNSIgZmlsbD0ibm9uZSIvPjwvc3ZnPg==">
+<!-- Ici trainaient un second apple-mobile-web-app-title et un second
+     apple-touch-icon en data-URI (une feuille dessinee a la main), restes de
+     l'epoque du manifeste en blob. Etant declares en dernier, ils ecrasaient
+     les vrais : iOS affichait la feuille au lieu de l'icone de l'app. -->
 <style>
 /* Polices auto-hebergees : aucune requete vers Google Fonts.
    Cormorant Garamond est une police variable : un seul fichier par style,
@@ -14015,7 +14017,7 @@ function renderParametresScreen(){
     +'<div class="fiche-section">'
     +'<h4>\u2139\uFE0F Version</h4>'
     +'<div style="background:var(--cream-dark);border-radius:8px;padding:14px;font-size:0.88em;line-height:1.7;font-family:monospace;">'
-    +'<strong>Les Carnets du Naturaliste v34.1</strong><br>'
+    +'<strong>Les Carnets du Naturaliste v34.2</strong><br>'
     +'Build : 2026-08-22<br>'
     /* Compte reellement les regnes et les especes plutot que d'annoncer des
        chiffres ecrits en dur, qui dataient de la v28 et n'ont jamais suivi. */
