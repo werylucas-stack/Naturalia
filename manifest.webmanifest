@@ -1,7 +1,8 @@
 {
-  "name": "Naturalia — Apprends la nature",
-  "short_name": "Naturalia",
-  "description": "Application naturaliste pour identifier les espèces, apprendre le vocabulaire scientifique, tenir un carnet d'observations. Pour enfants de 7 à 14 ans.",
+  "id": "/",
+  "name": "Les Carnets du Naturaliste",
+  "short_name": "Carnets",
+  "description": "Identifier les espèces, apprendre le vocabulaire scientifique, tenir un carnet d'observations. Application naturaliste pour les enfants de 7 à 14 ans. Sans publicité, sans compte, entièrement hors-ligne.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
@@ -9,6 +10,7 @@
   "background_color": "#f5efe0",
   "theme_color": "#5e8054",
   "lang": "fr-FR",
+  "dir": "ltr",
   "categories": ["education", "kids", "books", "lifestyle"],
   "icons": [
     {
