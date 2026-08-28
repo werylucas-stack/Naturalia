@@ -1,7 +1,7 @@
 {
   "id": "/",
   "name": "Les Carnets du Naturaliste",
-  "short_name": "Carnets",
+  "short_name": "Naturaliste",
   "description": "Identifier les espèces, apprendre le vocabulaire scientifique, tenir un carnet d'observations. Application naturaliste pour les enfants de 7 à 14 ans. Sans publicité, sans compte, entièrement hors-ligne.",
   "start_url": "./",
   "scope": "./",

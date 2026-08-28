@@ -1,7 +1,7 @@
 // Les Carnets du Naturaliste - Service Worker
 // Cache l'application pour fonctionnement hors-ligne
 
-const CACHE_NAME = 'carnets-naturaliste-v34.2';
+const CACHE_NAME = 'carnets-naturaliste-v34.4';
 
 // Le noyau de l'app : sans ces fichiers rien ne s'affiche.
 // Ils sont prechargés à l'installation, un par un pour qu'un seul manquant

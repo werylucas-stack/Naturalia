@@ -10,7 +10,7 @@
 ║  FICHIER     : index.html + sw.js + manifest.webmanifest        ║
 ║  TAILLE      : ~1,7 Mo (index.html) + 363 aquarelles WebP       ║
 ╠══════════════════════════════════════════════════════════════════╣
-║  DERNIÈRE VERSION : v34.2 — 2026-08-22                          ║
+║  DERNIÈRE VERSION : v34.4 — 2026-08-28                          ║
 ║  DÉPLOIEMENT : toujours incrémenter CACHE_NAME dans sw.js ET    ║
 ║  pousser sw.js — c'est le seul signal de mise à jour du         ║
 ║  navigateur. Ne jamais réécrire index.html avec PowerShell 5.1  ║
@@ -101,6 +101,10 @@
 ║  v33.1 — Surcouche appliquée avant le rendu de l'accueil               ║
 ║  v33.2 — Empreintes en aquarelle (TRACES_EMPREINTES)                   ║
 ║  v34.2 — Menu Déterminer, histoires et portraits d'animaux             ║
+║  v34.3 — Icône de l'app : Piko le naturaliste (aquarelle)              ║
+║  v34.4 — Clé des arbres en un clic, explications avec les vraies       ║
+║          gravures, fin de clé réparée (HTML coupé), naturodex avec     ║
+║          noms + silhouettes + filtres, fleuron à la place des étoiles  ║
 ╠══════════════════════════════════════════════════════════════════╣
 ║  PROCHAINES ÉTAPES SUGGÉRÉES                                     ║
 ║  • Badges encore en emoji (~40)                                 ║
@@ -346,7 +350,9 @@ body{font-family:'Cormorant Garamond',serif;background:var(--cream);color:var(--
 /* ── MULTI-CANDIDATS ── */
 .multi-header{text-align:center;margin-bottom:18px}
 .multi-header p{font-size:16px;font-style:italic;color:var(--ink-soft);margin-top:6px}
-.cand-card{border:1.5px solid rgba(139,107,61,.3);border-radius:6px;padding:14px 16px;margin-bottom:10px}
+/* display:flow-root : la vignette est en float:right ; sans ca la carte ne la
+   contient pas et les cartes suivantes se chevauchent en fin de determination */
+.cand-card{border:1.5px solid rgba(139,107,61,.3);border-radius:6px;padding:14px 16px;margin-bottom:10px;display:flow-root;background:rgba(255,252,240,.45)}
 .cand-card h3{font-weight:500;font-size:20px;font-style:italic;color:var(--moss-dark)}
 .cand-card .cand-latin{font-family:'Old Standard TT',serif;font-style:italic;font-size:12px;color:var(--sepia);letter-spacing:.1em;margin-bottom:6px}
 .cand-card .cand-clue{font-size:14px;color:var(--ink-soft);font-style:italic;line-height:1.45}
@@ -399,6 +405,12 @@ body{font-family:'Cormorant Garamond',serif;background:var(--cream);color:var(--
 .modal p{font-size:16px;line-height:1.55;margin-bottom:10px}
 .modal-close{position:absolute;top:12px;right:12px;width:34px;height:34px;border-radius:50%;background:transparent;border:1px solid var(--sepia);cursor:pointer;font-size:18px;color:var(--ink)}
 .modal-tip{font-size:14px;font-style:italic;color:var(--sepia);margin-top:10px;padding-top:10px;border-top:1px solid rgba(139,107,61,.2)}
+/* l'explication montre les memes vignettes que les cartes de l'etape :
+   sinon l'enfant tombe sur un dessin qu'il ne retrouve pas a l'ecran */
+.modal-opts{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:2px 0 14px}
+.modal-opt{flex:0 1 132px;margin:0;text-align:center}
+.modal-opt img,.modal-opt svg{width:100%;height:92px;object-fit:contain;display:block}
+.modal-opt figcaption{font-family:'Old Standard TT',serif;font-style:italic;font-size:13px;color:var(--sepia);margin-top:4px}
 
 /* ── TOAST ── */
 .toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--moss-dark);color:var(--cream);padding:10px 18px;border-radius:20px;font-size:14px;font-family:'Cormorant Garamond',serif;box-shadow:0 4px 12px rgba(0,0,0,.18);opacity:0;pointer-events:none;transition:opacity .25s ease,transform .25s ease;z-index:999;max-width:85%;text-align:center}
@@ -444,12 +456,23 @@ body{font-family:'Cormorant Garamond',serif;background:var(--cream);color:var(--
 .coll-card.unlocked{border-color:var(--moss-dark);background:rgba(62,74,39,.06)}
 .coll-card.locked{border-color:rgba(139,107,61,.15);background:rgba(244,237,224,.3)}
 .coll-card svg{width:80px;height:70px;margin-bottom:8px}
-.coll-card.locked svg{opacity:.22;filter:sepia(1) brightness(.9)}
+/* une carte pas encore trouvee doit rester lisible : c'est elle qui donne
+   envie d'aller chercher l'espece sur le terrain */
+.coll-card.locked svg{opacity:.5;filter:sepia(.55)}
 .coll-card h3{font-weight:500;font-size:15px;font-style:italic;line-height:1.2;margin-bottom:2px}
-.coll-card.locked h3{color:rgba(43,35,24,.3)}
+.coll-card.locked h3{color:rgba(43,35,24,.62)}
 .coll-card.unlocked h3{color:var(--moss-dark)}
 .coll-card .coll-latin{font-family:'Old Standard TT',serif;font-style:italic;font-size:10px;letter-spacing:.06em}
-.coll-card.locked .coll-latin{color:rgba(43,35,24,.2)}
+.coll-card.locked .coll-latin{color:rgba(139,107,61,.75);font-style:italic}
+/* Espece pas encore trouvee : sa vraie planche, mais en ombre. On distingue la
+   forme — donc ce qu'il faut chercher — sans lire le detail, et le clic de zoom
+   reste reserve aux especes deja rencontrees. */
+.coll-silhouette{filter:grayscale(1) contrast(1.05) opacity(.55);pointer-events:none}
+.coll-silhouette .illus-zoom{display:none}
+/* filtre Tout / Trouves / A decouvrir du naturodex */
+.coll-filtres{display:flex;gap:8px;justify-content:center;margin:12px 0 4px;flex-wrap:wrap}
+.coll-filtre{padding:6px 14px;border:1px solid rgba(139,107,61,.45);border-radius:16px;background:transparent;color:var(--ink-soft);font-family:'Old Standard TT',serif;font-style:italic;font-size:13px;cursor:pointer}
+.coll-filtre.on{background:var(--moss-dark);border-color:var(--moss-dark);color:var(--cream)}
 .coll-card.unlocked .coll-latin{color:var(--sepia)}
 .coll-card .coll-lock{position:absolute;top:8px;right:8px;font-size:13px;opacity:.3}
 .coll-card.unlocked .coll-lock{display:none}
@@ -846,7 +869,7 @@ const KEY_TREE = {
                           }
                         }
                       },
-                      "species": "Lianes _ Chèvrefeuille"
+                      "species": "Liane chèvrefeuille"
                     },
                     "Limbe denté": {
                       "character": "Limbe denté",
@@ -885,7 +908,7 @@ const KEY_TREE = {
                                 "Rapport folaire - de 3": {
                                   "character": "Rapport folaire - de 3",
                                   "children": {},
-                                  "species": "Nerpun purgatif"
+                                  "species": "Nerprun purgatif"
                                 }
                               }
                             }
@@ -993,7 +1016,7 @@ const KEY_TREE = {
                                     "Pétiole long d'au moins 5mm": {
                                       "character": "Pétiole long d'au moins 5mm",
                                       "children": {},
-                                      "species": "Laurier - cerise"
+                                      "species": "Laurier-cerise"
                                     }
                                   }
                                 }
@@ -1122,7 +1145,7 @@ const KEY_TREE = {
                                                 "Jeunes rameaux pourvus de poils terminés par une glande": {
                                                   "character": "Jeunes rameaux pourvus de poils terminés par une glande",
                                                   "children": {},
-                                                  "species": "Noisetier ou coudrier"
+                                                  "species": "Noisetier"
                                                 },
                                                 "Jeunes rameaux dépourvus de poils glanduleux": {
                                                   "character": "Jeunes rameaux dépourvus de poils glanduleux",
@@ -1198,7 +1221,7 @@ const KEY_TREE = {
                                                         "Pétiole comprimé latéralement.": {
                                                           "character": "Pétiole comprimé latéralement.",
                                                           "children": {},
-                                                          "species": "Peuplier noir et peuplier d'Italie."
+                                                          "species": "Peuplier noir"
                                                         },
                                                         "Pétiole peu aplati.": {
                                                           "character": "Pétiole peu aplati.",
@@ -1380,7 +1403,7 @@ const KEY_TREE = {
                                                     "Feuilles alternes.": {
                                                       "character": "Feuilles alternes.",
                                                       "children": {},
-                                                      "species": "Pommier 51"
+                                                      "species": "Pommier"
                                                     }
                                                   }
                                                 }
@@ -1473,7 +1496,7 @@ const KEY_TREE = {
                                 "Lobes munis de dents peu nombreuses et espacées": {
                                   "character": "Lobes munis de dents peu nombreuses et espacées",
                                   "children": {},
-                                  "species": "Chênes américains"
+                                  "species": "Chêne rouge d'Amérique"
                                 }
                               }
                             }
@@ -1557,7 +1580,7 @@ const KEY_TREE = {
                       }
                     }
                   },
-                  "species": "Liane-Clématite des haies"
+                  "species": "Clématite des haies"
                 }
               },
               "species": "Marronnier"
@@ -1584,7 +1607,7 @@ const KEY_TREE = {
                         "Stipules lo,guement soudées à la base du pétiole": {
                           "character": "Stipules lo,guement soudées à la base du pétiole",
                           "children": {},
-                          "species": "Rose"
+                          "species": "Rosier sauvage"
                         }
                       }
                     }
@@ -2599,7 +2622,7 @@ function showProgressToast(msg, regneOuScreen){
   var toast = document.createElement('div');
   toast.id = 'progress-toast';
   toast.style.cssText = 'position:fixed;bottom:18px;left:14px;right:14px;background:var(--moss-dark);color:var(--cream);border-radius:10px;padding:12px 14px;z-index:9999;box-shadow:0 8px 24px rgba(62,47,31,.3);display:flex;align-items:center;gap:10px;font-family:var(--font-body);font-size:0.9em;animation:toastSlideUp 0.3s ease-out;max-width:520px;margin:0 auto;';
-  toast.innerHTML = '<div style="font-size:1.4em;flex-shrink:0;">\u2728</div>'
+  toast.innerHTML = '<div style="flex-shrink:0;display:flex;align-items:center;">'+(typeof ORNEMENT_FEUILLE!=='undefined'?ORNEMENT_FEUILLE:'')+'</div>'
     +'<div style="flex:1;line-height:1.3;">'+msg+'</div>'
     +'<button id="progress-toast-btn" style="background:var(--gold);color:var(--ink);border:none;padding:6px 12px;border-radius:6px;font-family:var(--font-body);font-size:0.82em;font-weight:bold;cursor:pointer;letter-spacing:0.04em;flex-shrink:0;">Voir \u2192</button>';
   document.body.appendChild(toast);
@@ -10247,7 +10270,7 @@ function renderCollMousses(){
       var cle=list[i]; var m=MOUSSES_DATA[cle]; var col=coll.indexOf(cle)>=0;
       h+='<div data-cle="'+cle+'" onclick="openFicheMousse(this.getAttribute(\'data-cle\'))" style="background:'+(col?'rgba(94,128,84,.10)':'var(--cream-dark)')+';border:1px solid '+(col?'var(--moss)':'var(--sepia)')+';border-radius:8px;padding:10px;cursor:pointer;text-align:center;'+(col?'':'opacity:0.65;')+'">'
         +'<div style="width:78px;height:78px;margin:0 auto;'+(col?'':'filter:grayscale(0.7);')+'">'+MOUSSES_SVG[cle]+'</div>'
-        +'<div style="font-family:var(--font-title);font-size:0.9em;color:var(--moss-dark);font-style:italic;line-height:1.2;margin-top:6px;">'+(col?m.nom:'???')+'</div>'
+        +'<div style="font-family:var(--font-title);font-size:0.9em;color:'+(col?'var(--moss-dark)':'var(--sepia)')+';font-style:italic;line-height:1.2;margin-top:6px;">'+m.nom+'</div>'
         +'</div>';
     }
     h+='</div>'; return h;
@@ -11898,21 +11921,31 @@ function renderCollScreen(){
 }
 
 /* ── Collection ARBRES ── */
+/* tous | trouves | adecouvrir — un carnet sert autant a voir ce qui manque
+   qu'a admirer ce qu'on a deja trouve */
+var collArbresFiltre='tous';
+function setCollArbresFiltre(f){ collArbresFiltre=f; renderCollArbres(); }
+
 function renderCollArbres(){
   const coll=loadCollection();
   const total=SPECIES_ORDER.length;
   const found=coll.length;
   const pct=Math.round((found/total)*100);
-  const cards=SPECIES_ORDER.map(name=>{
+  const liste=SPECIES_ORDER.filter(name=>{
+    const u=coll.includes(normName(name));
+    if(collArbresFiltre==='trouves') return u;
+    if(collArbresFiltre==='adecouvrir') return !u;
+    return true;
+  });
+  const cards=liste.map(name=>{
     const info=findSpeciesDB(name)||{};
     const unlocked=coll.includes(normName(name));
-    const svgContent=getSpeciesSVG(name);
     const onclick=unlocked?`data-name="${esc(name)}" onclick="openFicheFromColl(this.getAttribute('data-name'))"`:'' ;
     return `<div class="coll-card ${unlocked?'unlocked':'locked'}" ${onclick}>
       ${unlocked?'<div class="coll-check">✓</div>':'<div class="coll-lock">?</div>'}
-      ${unlocked?arbreVignette(name,'vignette','0 0 120 100','','planche'):`<svg viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg">${svgContent}</svg>`}
-      <h3>${unlocked?name:'???'}</h3>
-      <div class="coll-latin">${unlocked?(info.latin||''):'Indice : observe la feuille'}</div>
+      ${arbreVignette(name,'vignette','0 0 120 100',unlocked?'':'coll-silhouette','planche')}
+      <h3>${name}</h3>
+      <div class="coll-latin">${unlocked?(info.latin||''):'à trouver'}</div>
     </div>`;
   }).join('');
 
@@ -11928,8 +11961,14 @@ function renderCollArbres(){
       <div class="eyebrow">— Naturaliste en herbe —</div>
       <div class="coll-progress-bar"><div class="coll-progress-fill" style="width:${pct}%"></div></div>
       <div class="coll-progress-label">${found} arbre${found>1?'s':''} identifié${found>1?'s':''} sur ${total} — ${pct}%</div>
+      <div class="coll-filtres">
+        <button class="coll-filtre ${collArbresFiltre==='tous'?'on':''}" onclick="setCollArbresFiltre('tous')">Tous (${total})</button>
+        <button class="coll-filtre ${collArbresFiltre==='trouves'?'on':''}" onclick="setCollArbresFiltre('trouves')">Trouvés (${found})</button>
+        <button class="coll-filtre ${collArbresFiltre==='adecouvrir'?'on':''}" onclick="setCollArbresFiltre('adecouvrir')">À découvrir (${total-found})</button>
+      </div>
     </div>
-    <div class="coll-grid">${cards}</div>`;
+    <div class="coll-grid">${cards}</div>
+    ${liste.length?'':'<p style="text-align:center;font-style:italic;color:var(--sepia);margin-top:24px">Rien dans cette liste pour l’instant.</p>'}`;
 }
 
 /* ── Collection ANIMAUX ── */
@@ -11989,7 +12028,7 @@ function renderCollAnimaux(){
       +'<div style="display:flex;justify-content:center;align-items:center;height:100px;">'
       +(unlocked?'<div style="font-size:2.5em;">'+a.emoji+'</div>':'<div style="font-size:2em;opacity:0.4;">\uD83D\uDC3E</div>')
       +'</div>'
-      +'<h3>'+(unlocked?a.nom:'???')+'</h3>'
+      +'<h3>'+a.nom+'</h3>'
       +'<div class="coll-latin">'+(unlocked?a.nom_savant:'Identifie son empreinte')+'</div>'
       +'</div>';
   }
@@ -12159,7 +12198,7 @@ function renderCollPlantes(){
       +'<div style="display:flex;justify-content:center;align-items:center;height:100px;">'
       +(unlocked?'<div style="width:90px;height:90px;">'+PLANTES_SVG[cle]+'</div>':'<div style="font-size:2em;opacity:0.4;">\uD83C\uDF3F</div>')
       +'</div>'
-      +'<h3>'+(unlocked?p.nom:'???')+'</h3>'
+      +'<h3>'+p.nom+'</h3>'
       +'<div class="coll-latin">'+(unlocked?p.nom_savant:'Plante mystère')+'</div>'
       +'</div>';
   }
@@ -12300,7 +12339,7 @@ function renderCollInsectes(){
       +'<div style="display:flex;justify-content:center;align-items:center;height:100px;">'
       +(unlocked?'<div style="width:90px;height:90px;">'+INSECTES_SVG[cle]+'</div>':'<div style="font-size:2em;opacity:0.4;">\uD83D\uDC1B</div>')
       +'</div>'
-      +'<h3>'+(unlocked?ins.nom:'???')+'</h3>'
+      +'<h3>'+ins.nom+'</h3>'
       +'<div class="coll-latin">'+(unlocked?ins.nom_savant:'Insecte mystère')+'</div>'
       +'</div>';
   }
@@ -12511,7 +12550,7 @@ function renderCollOiseaux(){
       +'<div style="display:flex;justify-content:center;align-items:center;height:100px;">'
       +(unlocked?'<div style="width:90px;height:90px;">'+OISEAUX_SVG[cle]+'</div>':'<div style="font-size:2em;opacity:0.4;">\uD83D\uDC26</div>')
       +'</div>'
-      +'<h3>'+(unlocked?o.nom:'???')+'</h3>'
+      +'<h3>'+o.nom+'</h3>'
       +'<div class="coll-latin">'+(unlocked?o.nom_savant:'Oiseau mystère')+'</div>'
       +'</div>';
   }
@@ -14017,7 +14056,7 @@ function renderParametresScreen(){
     +'<div class="fiche-section">'
     +'<h4>\u2139\uFE0F Version</h4>'
     +'<div style="background:var(--cream-dark);border-radius:8px;padding:14px;font-size:0.88em;line-height:1.7;font-family:monospace;">'
-    +'<strong>Les Carnets du Naturaliste v34.2</strong><br>'
+    +'<strong>Les Carnets du Naturaliste v34.4</strong><br>'
     +'Build : 2026-08-22<br>'
     /* Compte reellement les regnes et les especes plutot que d'annoncer des
        chiffres ecrits en dur, qui dataient de la v28 et n'ont jamais suivi. */
@@ -14805,6 +14844,22 @@ function arbreIllusSrc(name,variante){
 }
 
 var ICON_PLEIN_ECRAN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>';
+
+/* Fleuron de fin de determination : remplace l'emoji etoile, qui jurait avec
+   la gravure du reste de l'app. Meme trait sepia que les pictos de la cle. */
+var ORNEMENT_RESULTAT='<div style="text-align:center;margin:14px 0 10px;">'
+  +'<svg viewBox="0 0 160 46" width="150" height="43" fill="none" stroke="#8b6b3d" stroke-width="1.3" stroke-linecap="round" aria-hidden="true">'
+  +'<path d="M6 23h38M154 23h-38"/>'
+  +'<circle cx="48" cy="23" r="2" fill="#8b6b3d" stroke="none"/>'
+  +'<circle cx="112" cy="23" r="2" fill="#8b6b3d" stroke="none"/>'
+  +'<path d="M80 6c-9 5-13 11-13 17s4 12 13 17c9-5 13-11 13-17S89 11 80 6z"/>'
+  +'<path d="M80 6v34"/>'
+  +'<path d="M80 16c-3 2-5 3-7 3M80 16c3 2 5 3 7 3M80 25c-3 2-5 3-7 3M80 25c3 2 5 3 7 3"/>'
+  +'<path d="M56 23c4-4 7-6 11-6M104 23c-4-4-7-6-11-6"/>'
+  +'</svg></div>';
+
+/* Petite feuille gravee pour les bandeaux (toasts, en-tetes) */
+var ORNEMENT_FEUILLE='<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true" style="flex-shrink:0"><path d="M5 19c0-8 5-13 14-14 1 9-4 14-12 14H5z"/><path d="M5 19c3-4 6-6 11-8"/></svg>';
 
 /* Vignette : image si elle existe, sinon pictogramme de la cle.
    variante   : ce qui est affiche dans la case ('vignette', 'planche', 'arbre')
@@ -16369,7 +16424,7 @@ function renderDetermArbresHome(){
     <div style="text-align:center;padding:30px 0 20px">
       <div class="eyebrow">— En forêt —</div>
       <h2 style="font-weight:500;font-size:28px;font-style:italic;color:var(--ink);margin-bottom:8px">Quel arbre est devant toi ?</h2>
-      <p style="font-size:16px;font-style:italic;color:var(--ink-soft);max-width:280px;margin:0 auto 28px;line-height:1.6">Réponds aux questions pour identifier l'espèce. Tu peux cocher plusieurs réponses.</p>
+      <p style="font-size:16px;font-style:italic;color:var(--ink-soft);max-width:280px;margin:0 auto 28px;line-height:1.6">Réponds aux questions pour identifier l'espèce. Touche la réponse qui correspond, et tu passes à la suivante.</p>
       <button onclick="renderDetermQuestion()" style="padding:16px 40px;background:var(--ink);color:var(--cream);border:none;border-radius:6px;font-family:'Old Standard TT',serif;font-size:16px;letter-spacing:.06em;cursor:pointer">Commencer →</button>
     </div>`;
 }
@@ -16484,7 +16539,7 @@ function renderTracesTerrainResultatInDeterm(){
     +'<div class="topbar-title">\uD83C\uDFC6 Résultat</div>'
     +'</div>'
     +'<div style="padding:14px 16px;">'
-    +'<div style="text-align:center;font-size:3em;margin:10px 0;">\u2728</div>'
+    +ORNEMENT_RESULTAT
     +'<div style="text-align:center;font-family:var(--font-title);font-size:1.2em;color:var(--moss-dark);margin-bottom:18px;">L\u2019animal probable est...</div>';
 
   for(var i=0;i<resultats.length;i++){
@@ -16594,7 +16649,7 @@ function renderDetermPlantesResultat(){
     +'<div class="topbar-title">\uD83C\uDFC6 R\u00e9sultat</div>'
     +'</div>'
     +'<div style="padding:14px 16px;">'
-    +'<div style="text-align:center;font-size:3em;margin:10px 0;">\u2728</div>'
+    +ORNEMENT_RESULTAT
     +'<div style="text-align:center;font-family:var(--font-title);font-size:1.2em;color:var(--moss-dark);margin-bottom:18px;">La plante probable est...</div>';
 
   for(var i=0;i<resultats.length;i++){
@@ -16700,7 +16755,7 @@ function renderDetermOiseauxResultat(){
     +'<div class="topbar-title">\uD83C\uDFC6 R\u00e9sultat</div>'
     +'</div>'
     +'<div style="padding:14px 16px;">'
-    +'<div style="text-align:center;font-size:3em;margin:10px 0;">\u2728</div>'
+    +ORNEMENT_RESULTAT
     +'<div style="text-align:center;font-family:var(--font-title);font-size:1.2em;color:var(--moss-dark);margin-bottom:18px;">L\u2019oiseau probable est...</div>';
 
   for(var i=0;i<resultats.length;i++){
@@ -16842,7 +16897,7 @@ function renderDetermChampignonsResultat(){
   if(resultats.length===0){
     html+='<div style="text-align:center;padding:24px;background:var(--cream-dark);border-radius:8px;font-style:italic;color:var(--sepia);">Identification impossible avec ces crit\u00e8res. Demande \u00e0 un adulte expert !</div>';
   } else {
-    html+='<div style="text-align:center;font-size:3em;margin:10px 0;">\u2728</div>'
+    html+=ORNEMENT_RESULTAT
       +'<div style="text-align:center;font-family:var(--font-title);font-size:1.2em;color:var(--moss-dark);margin-bottom:18px;">Le champignon pourrait \u00eatre...</div>';
 
     for(var i=0;i<resultats.length;i++){
@@ -16961,7 +17016,7 @@ function renderDetermHerpetoResultat(){
     +'<div class="topbar-title">\uD83C\uDFC6 R\u00e9sultat</div>'
     +'</div>'
     +'<div style="padding:14px 16px;">'
-    +'<div style="text-align:center;font-size:3em;margin:10px 0;">\u2728</div>'
+    +ORNEMENT_RESULTAT
     +'<div style="text-align:center;font-family:var(--font-title);font-size:1.2em;color:var(--moss-dark);margin-bottom:18px;">L\u2019animal probable est...</div>';
 
   for(var i=0;i<resultats.length;i++){
@@ -17031,10 +17086,10 @@ function renderDetermQuestion(){
         qu'est-ce que ça veut dire ?
       </div>
     </div>
-    <div class="hint">tu peux cocher plusieurs réponses</div>
+    <div class="hint">touche la réponse pour continuer</div>
     <div class="opts" id="opts-grid">
       ${opts.map(o=>`
-        <div class="opt" data-v="${esc(o.v)}" onclick="toggleOpt(this)">
+        <div class="opt" data-v="${esc(o.v)}" onclick="pickOptAndAdvance(this)">
           <div class="ck">✓</div>
           ${critereVignette(o.svg)}
           <div class="opt-label">${o.label}</div>
@@ -17043,15 +17098,20 @@ function renderDetermQuestion(){
     </div>
     <button class="skip-btn" onclick="dSkipAll(getBestQuestion());renderDetermQuestion()">Je ne sais pas — passer</button>
     <div class="fixed-actions">
-      <button class="btn btn-s" onclick="dRestart()">Recommencer</button>
-      <button class="btn btn-p" id="btn-next" onclick="confirmDetermQ(getBestQuestion())" disabled>Continuer →</button>
+      <button class="btn btn-s" style="flex:1" onclick="dRestart()">Recommencer</button>
     </div>`;
 }
 
 function confirmDetermQ(q){
   const selected=[...document.querySelectorAll('.opt.sel')].map(o=>o.dataset.v);
   const ok=dAdvance(selected,q);
-  if(!ok){ alert('Aucun résultat. Essaie une autre réponse.'); return; }
+  if(!ok){
+    /* la carte reste cochee sinon : on la relache pour pouvoir en essayer une autre */
+    document.querySelectorAll('.opt.sel').forEach(o=>o.classList.remove('sel'));
+    if(typeof showToast==='function') showToast('Aucun arbre ne correspond — essaie l’autre réponse');
+    else alert('Aucun résultat. Essaie une autre réponse.');
+    return;
+  }
   renderDetermQuestion();
 }
 
@@ -17103,9 +17163,22 @@ function renderDetermResult(spName){
     </div>`;
 }
 
+/* Les descriptions contiennent des <span class="term"> cliquables. Les couper
+   a la longueur laissait une balise ouverte : le navigateur imbriquait alors
+   toutes les cartes suivantes dedans, d'ou l'empilement en fin de cle.
+   On retire donc le balisage avant de tronquer, et on coupe sur un mot. */
+function resumeTexte(html,max){
+  var t=String(html||'').replace(/<[^>]*>/g,'').replace(/\s+/g,' ').trim();
+  if(!t) return '';
+  if(t.length<=max) return t;
+  return t.slice(0,max).replace(/\s+\S*$/,'')+'…';
+}
+
 function renderDetermMulti(candidates){
   const coll=loadCollection();
-  const cards=candidates.slice(0,6).map(spName=>{
+  const MAX_CANDS=10;
+  const restants=Math.max(0,candidates.length-MAX_CANDS);
+  const cards=candidates.slice(0,MAX_CANDS).map(spName=>{
     const info=findSpeciesDB(spName)||{};
     const displayName=info.key||capitalize(spName);
     const otherKey=Object.keys(info.clues||{})[0];
@@ -17117,7 +17190,7 @@ function renderDetermMulti(candidates){
       <div class="cand-latin">${info.latin||''}</div>
       ${clueLines.length>0
         ?clueLines.map(l=>`<div class="cand-clue">${l.replace(/^([^:]+):/,'<strong>$1</strong> :')}</div>`).join('')
-        :`<div class="cand-clue">${info.desc?(info.desc.substring(0,100)+'…'):''}</div>`}
+        :`<div class="cand-clue">${resumeTexte(info.desc,110)}</div>`}
       <button class="cand-pick-btn ${collected?'picked':''}" id="cand-btn-${esc(normName(spName)).replace(/[^a-z]/g,'')}" data-name="${esc(spName)}" onclick="pickCandidate(this.getAttribute('data-name'))">
         ${collected?"✓ Dans ma collection":"C'est celui-là ! — ajouter"}
       </button>
@@ -17136,7 +17209,9 @@ function renderDetermMulti(candidates){
       <h1 class="question-title">Ton arbre est l'un de ces <em>${candidates.length}</em></h1>
       <p>Lis les différences pour trancher</p>
     </div>
-    <div>${cards}</div>
+    <div style="padding-bottom:150px">${cards}
+      ${restants?`<div class="cand-clue" style="text-align:center;margin-top:10px">…et ${restants} autre${restants>1?'s':''} — reviens en arrière pour affiner.</div>`:''}
+    </div>
     <div class="fixed-actions">
       <button class="btn btn-s" onclick="dGoBack();renderDetermQuestion()">Affiner</button>
       <button class="btn btn-p" onclick="dRestart()">Recommencer</button>
@@ -18183,7 +18258,7 @@ function renderCollChampignons(){
 
     html+='<div data-cle="'+cle+'" onclick="openFicheChampignon(this.getAttribute(\'data-cle\'))" style="background:'+(collecte?'rgba(94,128,84,.10)':'var(--cream-dark)')+';border:1px solid '+(collecte?'var(--moss)':'var(--sepia)')+';border-radius:8px;padding:10px;cursor:pointer;text-align:center;'+(collecte?'':'opacity:0.65;')+'">'
       +'<div style="width:80px;height:80px;margin:0 auto;'+(collecte?'':'filter:grayscale(0.7);')+'">'+CHAMPIGNONS_SVG[cle]+'</div>'
-      +'<div style="font-family:var(--font-title);font-size:0.92em;color:var(--moss-dark);font-style:italic;line-height:1.2;margin-top:6px;">'+(collecte?c.nom:'???')+'</div>'
+      +'<div style="font-family:var(--font-title);font-size:0.92em;color:'+(collecte?'var(--moss-dark)':'var(--sepia)')+';font-style:italic;line-height:1.2;margin-top:6px;">'+c.nom+'</div>'
       +(collecte?'<div style="font-size:0.7em;color:'+dangerCol+';margin-top:3px;font-weight:bold;">'+(c.comestibilite==='mortel'?'\u2620':(c.comestibilite==='toxique'?'\u26A0':'\u2713'))+'</div>':'')
       +'</div>';
   }
@@ -18328,7 +18403,7 @@ function renderCollHerpeto(){
     var collecte=coll.indexOf(cle)>=0;
     html+='<div data-cle="'+cle+'" onclick="openFicheHerpeto(this.getAttribute(\'data-cle\'))" style="background:'+(collecte?'rgba(94,128,84,.10)':'var(--cream-dark)')+';border:1px solid '+(collecte?'var(--moss)':'var(--sepia)')+';border-radius:8px;padding:10px;cursor:pointer;text-align:center;'+(collecte?'':'opacity:0.65;')+'">'
       +'<div style="width:80px;height:80px;margin:0 auto;'+(collecte?'':'filter:grayscale(0.7);')+'">'+HERPETO_SVG[cle]+'</div>'
-      +'<div style="font-family:var(--font-title);font-size:0.92em;color:var(--moss-dark);font-style:italic;line-height:1.2;margin-top:6px;">'+(collecte?h.nom:'???')+'</div>'
+      +'<div style="font-family:var(--font-title);font-size:0.92em;color:'+(collecte?'var(--moss-dark)':'var(--sepia)')+';font-style:italic;line-height:1.2;margin-top:6px;">'+h.nom+'</div>'
       +'</div>';
   }
 
@@ -19289,7 +19364,7 @@ function renderTracesTerrainResultat(){
     +'<div class="topbar-title">\uD83C\uDFC6 R\u00e9sultat</div>'
     +'</div>'
     +'<div style="padding:14px 16px;">'
-    +'<div style="text-align:center;font-size:3em;margin:10px 0;">\u2728</div>'
+    +ORNEMENT_RESULTAT
     +'<div style="text-align:center;font-family:var(--font-title);font-size:1.2em;color:var(--moss-dark);margin-bottom:18px;">L\u2019animal probable est...</div>';
 
   for(var i=0;i<resultats.length;i++){
@@ -20009,7 +20084,18 @@ function openConceptModal(concept){
   document.getElementById('modal-title').textContent=c.titre;
   document.getElementById('modal-body').textContent=c.explication;
   const svgEl=document.getElementById('modal-svg');
-  svgEl.innerHTML=c.svg_modal||'';
+  /* On reprend les vignettes des cartes de l'etape plutot que svg_modal :
+     ce dernier garde les vieux schemas verts, que l'enfant ne retrouve nulle
+     part a l'ecran. Repli sur svg_modal si le concept n'a pas d'options. */
+  const modalOpts=(c.opts||[]).filter(o=>o&&o.svg);
+  if(modalOpts.length){
+    svgEl.innerHTML='<div class="modal-opts">'+modalOpts.map(o=>
+      '<figure class="modal-opt">'+critereVignette(o.svg)
+      +'<figcaption>'+o.label+(o.sub?' <span style="opacity:.7">('+o.sub+')</span>':'')+'</figcaption></figure>'
+    ).join('')+'</div>';
+  } else {
+    svgEl.innerHTML=c.svg_modal||'';
+  }
   const tips={
     bord:'💡 Passe doucement le doigt sur le bord pour sentir.',
     pil:'💡 Retourne la feuille et touche le dessous.',
@@ -20028,6 +20114,22 @@ function toggleOpt(el){
   el.classList.toggle('sel');
   const btn=document.getElementById('btn-next');
   if(btn) btn.disabled=document.querySelectorAll('.opt.sel').length===0;
+}
+
+/* Un clic sur une carte vaut reponse : on coche, on laisse voir la coche un
+   instant, puis on enchaine. Le verrou evite qu'un double tap saute une etape. */
+let optLock=false;
+function pickOptAndAdvance(el){
+  if(optLock) return;
+  optLock=true;
+  const grid=el.closest('#opts-grid')||el.parentElement;
+  grid.querySelectorAll('.opt').forEach(o=>o.classList.remove('sel'));
+  el.classList.add('sel');
+  const q=getBestQuestion();
+  setTimeout(function(){
+    optLock=false;
+    confirmDetermQ(q);
+  },200);
 }
 
 /* ────────────────────────────────
@@ -20312,7 +20414,7 @@ function showInstallBanner(){
   banner.style.cssText = 'position:fixed;bottom:14px;left:14px;right:14px;background:var(--cream);border:2px solid var(--moss);border-radius:10px;padding:14px;z-index:9999;box-shadow:0 8px 24px rgba(62,47,31,.25);display:flex;align-items:center;gap:12px;font-family:var(--font-body);';
   banner.innerHTML = '<div style="font-size:1.8em;">\uD83C\uDF3F</div>'
     +'<div style="flex:1;">'
-    +'<div style="font-family:var(--font-title);font-style:italic;font-size:1em;color:var(--moss-dark);">Installer les Carnets</div>'
+    +'<div style="font-family:var(--font-title);font-style:italic;font-size:1em;color:var(--moss-dark);">Installer Les Carnets du Naturaliste</div>'
     +'<div style="font-size:0.78em;color:var(--sepia);">Ajoute l\u2019app \u00e0 ton \u00e9cran d\u2019accueil pour un acc\u00e8s rapide.</div>'
     +'</div>'
     +'<button id="install-btn" style="background:var(--moss-dark);color:var(--cream);border:none;padding:8px 14px;border-radius:6px;font-family:var(--font-body);font-size:0.85em;cursor:pointer;">Installer</button>'
@@ -20369,7 +20471,7 @@ function showInstallHelp(kind){
   ov.style.cssText='position:fixed;inset:0;background:rgba(62,47,31,.45);z-index:10000;display:flex;align-items:center;justify-content:center;padding:24px;';
   ov.innerHTML='<div style="background:var(--cream);border:2px solid var(--moss);border-radius:14px;max-width:340px;padding:20px;font-family:var(--font-body);box-shadow:0 12px 32px rgba(62,47,31,.3);">'
     +'<div style="font-size:2em;text-align:center;margin-bottom:8px;">\uD83D\uDCF1</div>'
-    +'<div style="font-family:var(--font-title);font-style:italic;font-size:1.2em;color:var(--moss-dark);text-align:center;margin-bottom:12px;">Installer les Carnets</div>'
+    +'<div style="font-family:var(--font-title);font-style:italic;font-size:1.2em;color:var(--moss-dark);text-align:center;margin-bottom:12px;">Installer Les Carnets du Naturaliste</div>'
     +'<div style="font-size:0.92em;color:var(--ink);line-height:1.7;">'+corps+'</div>'
     +'<button onclick="var e=document.getElementById(\'install-help\');if(e)e.remove();" style="margin-top:16px;width:100%;background:var(--moss-dark);color:var(--cream);border:none;padding:11px;border-radius:8px;font-family:var(--font-body);font-size:0.9em;cursor:pointer;">J\u2019ai compris</button>'
     +'</div>';
