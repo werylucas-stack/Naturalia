@@ -1,0 +1,11 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "eu.lescarnetsdunaturaliste.app",
+    "sha256_cert_fingerprints": [
+      "76:75:DB:7C:51:65:C3:E9:25:96:B0:38:77:C4:07:92:D3:58:6B:07:BB:59:F7:21:25:C8:C8:48:2C:D8:7C:39",
+      "8A:B9:49:C7:B4:68:0A:73:20:D3:64:D2:8B:30:B9:D0:33:AA:59:29:7F:DB:C8:12:AF:F7:01:7C:9E:17:47:FC"
+    ]
+  }
+}]
