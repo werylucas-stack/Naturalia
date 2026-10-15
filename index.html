@@ -661,7 +661,12 @@ const AQUA={
   'potager_illus':{'ail':1,'aubergine':1,'basilic':1,'betterave_rouge':1,'blette':1,'bourrache':1,'brocoli':1,'capucine':1,'carotte':1,'celeri':1,'chou':1,'chou_fleur':1,'ciboulette':1,'concombre':1,'cosmos':1,'courge':1,'courgette':1,'echalote':1,'epinard':1,'feve':1,'fraise':1,'haricot':1,'laitue':1,'lavande':1,'mache':1,'mais_doux':1,'melon':1,'navet':1,'oeillet_inde':1,'oignon':1,'panais':1,'persil':1,'petit_pois':1,'phacelie':1,'poireau':1,'poivron':1,'potiron':1,'radis':1,'roquette':1,'souci':1,'tomate':1,'tournesol':1},
   'roches_illus':{'amethyste':1,'ardoise':1,'calcaire':1,'craie':1,'galene':1,'granite':1,'gres':1,'marbre':1,'pyrite':1,'quartz':1,'schiste':1,'silex':1},
   'story_illus':{'abeille':1,'boletus':1,'bouleau':1,'brock':1,'brutus':1,'chauvesouris':1,'chene_monde':1,'chenille':1,'chouette':1,'coccinelle':1,'coquelicot':1,'elise':1,'escargot':1,'etoile_filante':1,'fougere':1,'fourmi':1,'galet':1,'geai':1,'gland':1,'grenouille':1,'hetre':1,'hirondelle':1,'lichen':1,'lierre':1,'loup':1,'lucane':1,'lune':1,'ortie':1,'pic':1,'piko':1,'pioupiou':1,'pissenlit':1,'renard':1,'ronce':1,'roussette':1,'saga_automne':1,'saga_ete':1,'saga_hiver':1,'saga_printemps':1,'saule':1,'sphaigne':1,'tetard':1,'verdeterre':1},
-  'traces_illus':{'blaireau':1,'canard':1,'chat':1,'chevreuil':1,'chien':1,'ecureuil':1,'heron':1,'lievre':1,'renard':1,'sanglier':1}
+  'traces_illus':{'blaireau':1,'canard':1,'chat':1,'chevreuil':1,'chien':1,'ecureuil':1,'heron':1,'lievre':1,'renard':1,'sanglier':1},
+  'arachno_illus':{'argiope_frelon':1,'dolomede_des_marais':1,'epeire_diademe':1,'lycose':1,'opilion':1,'pholque_phalangide':1,'pisaure_admirable':1,'pseudoscorpion':1,'saltique':1,'tegenaire_domestique':1,'thomise':1,'tique_du_mouton':1},
+  'carcino_illus':{'aselle':1,'cloporte_boule':1,'cloporte_commun':1,'cloporte_rugueux':1,'crabe_chinois':1,'daphnie':1,'ecrevisse_americaine':1,'ecrevisse_louisiane':1,'ecrevisse_pattes_rouges':1,'gammare':1},
+  'ichtyo_illus':{'ablette':1,'anguille':1,'brochet':1,'carpe_commune':1,'chabot':1,'epinoche':1,'gardon':1,'perche':1,'rotengle':1,'tanche':1,'truite_fario':1,'vairon':1},
+  'malaco_illus':{'anodonte':1,'clausilie':1,'escargot_de_bourgogne':1,'escargot_des_haies':1,'escargot_des_jardins':1,'grande_loche_rouge':1,'limace_grise_des_jardins':1,'limace_leopard':1,'limnee_des_etangs':1,'moule_zebree':1,'petit_gris':1,'planorbe':1},
+  'sols_illus':{'collembole':1,'enchytree':1,'hanneton_larve':1,'humus':1,'iule':1,'lithobie':1,'mycelium':1,'nematode':1,'oribate':1,'taupe':1,'ver_compost':1,'ver_de_terre':1}
 };
 function aquaDispo(dossier,cle){ var m=AQUA[dossier]; return !!(m && m[cle]); }
 function aquaSrc(dossier,cle){ return AQUA_BASE+dossier+'__'+cle+'.webp'; }
@@ -11627,17 +11632,21 @@ function getSpeciesSVG(spName){
 const ARBRES_ILLUS_BASE='assets/arbres/';
 const ARBRES_ILLUS={
 /* ILLUS-AUTO-DEBUT — genere par preparer_illustrations.py, ne pas editer a la main */
+  'alisier': ['arbre','planche','vignette'],   /* Alisier */
   'argousier': ['arbre','planche','vignette'],   /* Argousier */
   'aubepine': ['arbre','planche','vignette'],   /* Aubépine */
   'aubepine-monogyne': ['arbre','planche','vignette'],   /* Aubépine monogyne */
   'aulne-blanc': ['arbre','planche','vignette'],   /* Aulne blanc */
   'aulne-glutineux': ['arbre','planche','vignette'],   /* Aulne glutineux */
+  'bois-gentil': ['arbre','planche','vignette'],   /* Bois-gentil */
   'bouleau-pubescent': ['arbre','planche','vignette'],   /* Bouleau pubescent */
   'bouleau-verruqueux': ['arbre','planche','vignette'],   /* Bouleau verruqueux */
   'bourdaine': ['arbre','planche','vignette'],   /* Bourdaine */
+  'buddlea': ['arbre','planche','vignette'],   /* Buddléa */
   'buis': ['arbre','planche','vignette'],   /* Buis */
   'cedre-de-l-atlas': ['arbre','planche','vignette'],   /* Cèdre de l'Atlas */
   'cerisier-de-sainte-lucie': ['arbre','planche','vignette'],   /* Cerisier de Sainte-Lucie */
+  'chamaecyparis': ['arbre','planche','vignette'],   /* Chamaecyparis */
   'charme': ['arbre','planche','vignette'],   /* Charme */
   'chataignier': ['arbre','planche','vignette'],   /* Châtaignier */
   'chene-pedoncule': ['arbre','planche','vignette'],   /* Chêne pédonculé */
@@ -11657,12 +11666,14 @@ const ARBRES_ILLUS={
   'frene-commun': ['arbre','planche','vignette'],   /* Frêne commun */
   'fusain': ['arbre','planche','vignette'],   /* Fusain */
   'genevrier-commun': ['arbre','planche','vignette'],   /* Genévrier commun */
+  'groseillier-epineux': ['arbre','planche','vignette'],   /* Groseillier épineux */
   'groseillier-noir-cassis': ['arbre','planche','vignette'],   /* Groseillier noir, cassis */
   'groseillier-rouge': ['arbre','planche','vignette'],   /* Groseillier rouge */
   'hetre': ['arbre','planche','vignette'],   /* Hêtre */
   'houx': ['arbre','planche','vignette'],   /* Houx */
   'if': ['arbre','planche','vignette'],   /* If */
   'laurier-cerise': ['arbre','planche','vignette'],   /* Laurier-cerise */
+  'laurier-des-bois': ['arbre','planche','vignette'],   /* Laurier des bois */
   'liane-chevrefeuille': ['arbre','planche','vignette'],   /* Liane chèvrefeuille */
   'lierre': ['arbre','planche','vignette'],   /* Lierre */
   'lilas': ['arbre','planche','vignette'],   /* Lilas */
@@ -11686,18 +11697,24 @@ const ARBRES_ILLUS={
   'pommier': ['arbre','planche','vignette'],   /* Pommier */
   'prunellier': ['arbre','planche','vignette'],   /* Prunellier */
   'prunier-sauvage': ['arbre','planche','vignette'],   /* Prunier sauvage */
+  'prunus': ['arbre','planche','vignette'],   /* Prunus */
   'robinier-faux-acacia': ['arbre','planche','vignette'],   /* Robinier faux-acacia */
   'ronce': ['arbre','planche','vignette'],   /* Ronce */
   'rosier-sauvage': ['arbre','planche','vignette'],   /* Rosier sauvage */
   'sapin': ['arbre','planche','vignette'],   /* Sapin */
   'saule': ['arbre','planche','vignette'],   /* Saule */
+  'saule-rampant': ['arbre','planche','vignette'],   /* Saule rampant */
   'sorbier-des-oiseleurs': ['arbre','planche','vignette'],   /* Sorbier des oiseleurs */
   'sorbier-torminal': ['arbre','planche','vignette'],   /* Sorbier torminal */
   'sureau-a-grappe': ['arbre','planche','vignette'],   /* Sureau à grappe */
   'sureau-noir': ['arbre','planche','vignette'],   /* Sureau noir */
   'symphorine': ['arbre','planche','vignette'],   /* Symphorine */
+  'thuya': ['arbre','planche','vignette'],   /* Thuya */
   'tilleul': ['arbre','planche','vignette'],   /* Tilleul */
   'troene-commun': ['arbre','planche','vignette'],   /* Troène commun */
+  'troene-des-haies': ['arbre','planche','vignette'],   /* Troène des haies */
+  'tsuga': ['arbre','planche','vignette'],   /* Tsuga */
+  'viorne-mancienne': ['arbre','planche','vignette'],   /* Viorne mancienne */
   'viorne-obier': ['arbre','planche','vignette'],   /* Viorne obier */
 /* ILLUS-AUTO-FIN */
 };
