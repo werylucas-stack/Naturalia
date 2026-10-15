@@ -8,9 +8,9 @@
 ║  URL LIVE    : https://app.lescarnetsdunaturaliste.eu/          ║
 ║  DÉPÔT       : werylucas-stack/Naturalia (GitHub Pages)         ║
 ║  FICHIER     : index.html + sw.js + manifest.webmanifest        ║
-║  TAILLE      : ~1,7 Mo (index.html) + 363 aquarelles WebP       ║
+║  TAILLE      : ~1,5 Mo (index.html) + 645 aquarelles WebP       ║
 ╠══════════════════════════════════════════════════════════════════╣
-║  DERNIÈRE VERSION : v34.4 — 2026-08-28                          ║
+║  DERNIÈRE VERSION : v35.0 — 2026-10-15                          ║
 ║  DÉPLOIEMENT : toujours incrémenter CACHE_NAME dans sw.js ET    ║
 ║  pousser sw.js — c'est le seul signal de mise à jour du         ║
 ║  navigateur. Ne jamais réécrire index.html avec PowerShell 5.1  ║
@@ -105,6 +105,10 @@
 ║  v34.4 — Clé des arbres en un clic, explications avec les vraies       ║
 ║          gravures, fin de clé réparée (HTML coupé), naturodex avec     ║
 ║          noms + silhouettes + filtres, fleuron à la place des étoiles  ║
+║  v35.0 — Lancement : code épuré (moteur unique FICHES, 17 règnes),    ║
+║          12 arbres + 12 histoires + 5 modules nouveaux, toutes les     ║
+║          images en aquarelle sépia (décors, défis, pictos, familles),  ║
+║          glossaire 53 schémas, 84 arbres gravés, mode sombre images    ║
 ╠══════════════════════════════════════════════════════════════════╣
 ║  PROCHAINES ÉTAPES SUGGÉRÉES                                     ║
 ║  • Badges encore en emoji (~40)                                 ║
@@ -11100,7 +11104,7 @@ function renderParametresScreen(){
     +'<div class="fiche-section">'
     +'<h4>\u2139\uFE0F Version</h4>'
     +'<div style="background:var(--cream-dark);border-radius:8px;padding:14px;font-size:0.88em;line-height:1.7;font-family:monospace;">'
-    +'<strong>Les Carnets du Naturaliste v34.4</strong><br>'
+    +'<strong>Les Carnets du Naturaliste v35.0</strong><br>'
     +'Build : 2026-08-22<br>'
     /* Compte reellement les regnes et les especes plutot que d'annoncer des
        chiffres ecrits en dur, qui dataient de la v28 et n'ont jamais suivi. */
@@ -11283,10 +11287,13 @@ const BADGES_ILLUS={
 /* BADGES-AUTO-DEBUT — genere par generer_badges.py */
   'b_abeille': 1,
   'b_boletus': 1,
+  'b_bouleau': 1,
   'b_brock': 1,
   'b_brutus': 1,
+  'b_chauvesouris': 1,
   'b_chene_monde': 1,
   'b_chenille': 1,
+  'b_chouette': 1,
   'b_coccinelle': 1,
   'b_defi_a1': 1,
   'b_defi_a2': 1,
@@ -11303,13 +11310,20 @@ const BADGES_ILLUS={
   'b_defi_p3': 1,
   'b_defi_p4': 1,
   'b_elise': 1,
+  'b_escargot': 1,
   'b_fougere': 1,
+  'b_fourmi': 1,
+  'b_geai': 1,
   'b_gland': 1,
   'b_grenouille': 1,
+  'b_hetre': 1,
   'b_hirondelle': 1,
   'b_lichen': 1,
   'b_lierre': 1,
+  'b_lucane': 1,
+  'b_lune': 1,
   'b_ortie': 1,
+  'b_pic': 1,
   'b_piko': 1,
   'b_pioupiou': 1,
   'b_pissenlit': 1,
@@ -11320,7 +11334,9 @@ const BADGES_ILLUS={
   'b_saga_ete': 1,
   'b_saga_hiver': 1,
   'b_saga_printemps': 1,
+  'b_saule': 1,
   'b_sphaigne': 1,
+  'b_verdeterre': 1,
 /* BADGES-AUTO-FIN */
 };
 
