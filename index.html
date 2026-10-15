@@ -178,6 +178,8 @@ body.dark{
   --gold:#d8a843;
 }
 body{transition:background-color .25s ease, color .25s ease}
+/* Mode sombre : les aquarelles et gravures ont un fond papier creme ; on les presente comme de petites vignettes de papier (coins arrondis, un peu assourdies) plutot que de les inverser. */
+body.dark img[src^="assets/"]{filter:brightness(.86) saturate(.9);border-radius:10px}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;overscroll-behavior:none}
 body{font-family:'Cormorant Garamond',serif;background:var(--cream);color:var(--ink);min-height:100vh;display:flex;justify-content:center}
@@ -673,7 +675,7 @@ const AQUA={
   'indices_illus':{'crotte_chevreuil':1,'crotte_lapin':1,'crotte_renard':1,'pelote_chouette':1,'pic_arbre':1,'plumes':1,'pomme_pin_rongee':1,'taupiniere':1,'terrier_lapin':1,'terrier_renard':1},
   'ordres_illus':{'coleopteres':1,'dipteres':1,'hemipteres':1,'hymenopteres':1,'lepidopteres':1,'mantopteres':1,'odonates':1,'orthopteres':1},
   'ui_illus':{'ampoule':1,'apprendre':1,'arbre':1,'bienvenue':1,'cadenas':1,'calendrier':1,'carnet':1,'cerveau':1,'champignon':1,'cible':1,'cle':1,'coche':1,'coeur':1,'corbeille':1,'diplome':1,'diplome_or':1,'etoile':1,'explorer':1,'feuille':1,'fleur':1,'fusee':1,'galaxie':1,'goutte':1,'grenouille':1,'identifier':1,'insecte':1,'lettre':1,'lezard':1,'lieu':1,'livre':1,'loupe':1,'lune':1,'mousse':1,'observations':1,'oeil':1,'oiseau':1,'palette':1,'partage':1,'patte':1,'plume':1,'question':1,'roche':1,'sablier':1,'sauvegarde':1,'serpent':1,'sons':1,'stats':1,'trophee':1},
-  'decor_illus':{'abeille':1,'amanite':1,'boussole':1,'cepe':1,'cerf':1,'chataigne':1,'chene':1,'chenille':1,'ecureuil':1,'empreintes':1,'epicea':1,'feuille_vent':1,'feuilles_mortes':1,'fleur_cerisier':1,'flocon':1,'goutte_rosee':1,'graines_lumineuses':1,'lune_branches':1,'lune_noire':1,'menthe':1,'mesange':1,'oeuf_oiseau':1,'pousse':1,'sablier':1,'soleil':1,'sommet_neige':1,'vent':1}
+  'decor_illus':{'abeille':1,'agneau_bondissant':1,'amanite':1,'ambre':1,'ammonite':1,'ancre':1,'aube':1,'besace':1,'blaireau':1,'boussole':1,'brouillard':1,'buche':1,'cabane':1,'capsule_eclatee':1,'carte_ancienne':1,'cepe':1,'cerf':1,'chataigne':1,'chaumiere':1,'chauve_souris':1,'chene':1,'chenille':1,'chien':1,'chou':1,'ciel_etoile':1,'cle_ancienne':1,'clocher':1,'coccinelle':1,'cochon':1,'colonne_lierre':1,'comete':1,'coquelicot':1,'cor_de_chasse':1,'couleuvre':1,'couronne_chene':1,'crosse_fougere':1,'cycle_feuille':1,'cygnes':1,'dune':1,'eclaircie':1,'ecureuil':1,'empreintes':1,'epi_ble':1,'epicea':1,'escargot':1,'etoile_filante':1,'feuille_vent':1,'feuilles_mortes':1,'fil_lin':1,'fleur_cerisier':1,'flocon':1,'foudre':1,'fourmi':1,'fraise_bois':1,'galet_blanc':1,'geai':1,'globe':1,'goutte_rosee':1,'graines_lumineuses':1,'grenouille':1,'grillon':1,'herisson':1,'ilot':1,'lait':1,'lapin':1,'lierre_grimpant':1,'loup':1,'loupe':1,'lucane':1,'lune_branches':1,'lune_croissante':1,'lune_noire':1,'maison_briques':1,'marguerite':1,'marmite':1,'menthe':1,'merle':1,'mesange':1,'mesanges_couple':1,'microscope':1,'miel':1,'moustique':1,'myrtilles':1,'nenuphar':1,'nid_vide':1,'noix_cerveau':1,'nuage':1,'oeuf_oiseau':1,'outils_jardin':1,'panier':1,'paon_du_jour':1,'pic':1,'pioche':1,'pleine_lune':1,'pluie':1,'pomme':1,'pousse':1,'poussin':1,'poussin_eclosion':1,'roche_ardennes':1,'rocher':1,'rose_tremiere':1,'sablier':1,'sanglier':1,'soleil':1,'sommet_neige':1,'souci':1,'souris':1,'sphinx_ocelle':1,'sureau':1,'terrier':1,'toile':1,'tournesol':1,'tracteur':1,'truffe':1,'truite':1,'vague':1,'vent':1,'violon':1,'yeux_hibou':1}
 };
 function aquaDispo(dossier,cle){ var m=AQUA[dossier]; return !!(m && m[cle]); }
 function aquaSrc(dossier,cle){ return AQUA_BASE+dossier+'__'+cle+'.webp'; }
@@ -3275,19 +3277,59 @@ var GLOSSAIRE_VERS_CRITERE={
    pictogrammes de la cle : elles se racontent par une petite scene. */
 const GLOSSAIRE_ILLUS={
 /* GLOSSAIRE-AUTO-DEBUT — genere par generer_glossaire.py */
+  'alterne': 1,
+  'antenne': 1,
+  'aposematique': 1,
+  'arrondi': 1,
   'bioindicateur': 1,
+  'bourgeon': 1,
   'caduc': 1,
+  'chaton': 1,
+  'composee': 1,
+  'composee_palmee': 1,
+  'composee_pennee': 1,
+  'corde': 1,
+  'cupule': 1,
   'decomposeur': 1,
+  'dente': 1,
   'dispersion': 1,
+  'ecorce': 1,
+  'elliptique': 1,
+  'elytre': 1,
+  'entier': 1,
+  'foliole': 1,
+  'glabre': 1,
   'herbivore': 1,
+  'hibernation': 1,
+  'lanceole': 1,
+  'limbe': 1,
+  'lobe': 1,
+  'metamorphose': 1,
   'mimetisme': 1,
+  'mue': 1,
+  'mycelium': 1,
   'mycorhize': 1,
+  'nervure': 1,
+  'opposee': 1,
+  'palmee': 1,
+  'pennee': 1,
+  'persistante': 1,
+  'petiole': 1,
   'photosynthese': 1,
   'pionniere': 1,
   'pollinisation': 1,
   'predateur': 1,
+  'pubescent': 1,
+  'rameau': 1,
+  'rostre': 1,
+  'samare': 1,
+  'sessile': 1,
+  'simple': 1,
   'spore': 1,
+  'stipule': 1,
   'symbiose': 1,
+  'velu': 1,
+  'volve': 1,
 /* GLOSSAIRE-AUTO-FIN */
 };
 
@@ -15872,18 +15914,18 @@ function aquaSlugFamille(n){ return String(n||'').toLowerCase().normalize('NFD')
 })();
 /* Pictos génériques : un emoji en tête d'un titre d'écran, d'un sous-titre ou seul dans un grand bloc
    est remplacé par son aquarelle (ui_illus) après chaque rendu. */
-var AQUA_UI_EMOJI={'\uD83D\uDD11':'cle','\uD83C\uDFC6':'trophee','\uD83D\uDD0D':'loupe','\uD83D\uDD0E':'loupe','\uD83D\uDCD3':'carnet','\uD83C\uDFAF':'cible','\uD83D\uDCD6':'livre','\uD83D\uDCDA':'livre','\uD83C\uDF19':'lune','\uD83D\uDCCA':'stats','\uD83E\uDEB6':'plume','\uD83C\uDFA8':'palette','\uD83D\uDCA1':'ampoule','\uD83D\uDC40':'oeil','\uD83D\uDCC5':'calendrier','\uD83D\uDCCD':'lieu','\uD83D\uDC8C':'lettre','\uD83D\uDCBE':'sauvegarde','\uD83D\uDCE4':'partage','\uD83D\uDDD1':'corbeille','\u2726':'etoile','\u2B50':'etoile','\uD83C\uDF93':'diplome','\uD83D\uDD12':'cadenas','\u2754':'question','\u2753':'question','\uD83D\uDC0D':'serpent','\uD83D\uDC38':'grenouille','\uD83C\uDF44':'champignon','\uD83C\uDF3F':'feuille','\uD83C\uDF43':'mousse','\uD83D\uDC3E':'patte','\uD83D\uDC1B':'insecte','\uD83D\uDC26':'oiseau','\uD83C\uDF33':'arbre','\uD83C\uDF38':'fleur','\uD83C\uDF3C':'fleur','\uD83E\uDD8E':'lezard','\uD83E\uDEA8':'roche','\uD83D\uDCA7':'goutte','\uD83C\uDF0C':'galaxie','\u23F3':'sablier','\uD83D\uDD0A':'sons','\uD83D\uDC9E':'coeur','\u2764\uFE0F':'coeur','\uD83D\uDE80':'fusee','\uD83E\uDDE0':'cerveau','\uD83E\uDD47':'diplome_or','\uD83D\uDCDD':'carnet'};
+var AQUA_UI_EMOJI={'\uD83D\uDD11':'cle','\uD83C\uDFC6':'trophee','\uD83D\uDD0D':'loupe','\uD83D\uDD0E':'loupe','\uD83D\uDCD3':'carnet','\uD83C\uDFAF':'cible','\uD83D\uDCD6':'livre','\uD83D\uDCDA':'livre','\uD83C\uDF19':'lune','\uD83D\uDCCA':'stats','\uD83E\uDEB6':'plume','\uD83C\uDFA8':'palette','\uD83D\uDCA1':'ampoule','\uD83D\uDC40':'oeil','\uD83D\uDCC5':'calendrier','\uD83D\uDCCD':'lieu','\uD83D\uDC8C':'lettre','\uD83D\uDCBE':'sauvegarde','\uD83D\uDCE4':'partage','\uD83D\uDDD1':'corbeille','\u2726':'etoile','\u2B50':'etoile','\uD83C\uDF93':'diplome','\uD83D\uDD12':'cadenas','\u2754':'question','\u2753':'question','\uD83D\uDC0D':'serpent','\uD83D\uDC38':'grenouille','\uD83C\uDF44':'champignon','\uD83C\uDF3F':'feuille','\uD83C\uDF43':'mousse','\uD83D\uDC3E':'patte','\uD83D\uDC1B':'insecte','\uD83D\uDC26':'oiseau','\uD83C\uDF33':'arbre','\uD83C\uDF38':'fleur','\uD83C\uDF3C':'fleur','\uD83E\uDD8E':'lezard','\uD83E\uDEA8':'roche','\uD83D\uDCA7':'goutte','\uD83C\uDF0C':'galaxie','\u23F3':'sablier','\uD83D\uDD0A':'sons','\uD83D\uDC9E':'coeur','\u2764\uFE0F':'coeur','\uD83D\uDE80':'fusee','\uD83E\uDDE0':'cerveau','\uD83E\uDD47':'diplome_or','\uD83D\uDCDD':'carnet','🍂':'decor_illus:feuilles_mortes','❄️':'decor_illus:flocon','☀️':'decor_illus:soleil','💩':'indices_illus:crotte_renard','🦉':'indices_illus:pelote_chouette','🕳️':'indices_illus:terrier_renard','🪵':'indices_illus:pic_arbre'};
 var AQUA_UI_RE=/^(\u2726|\u2B50|\u2754|\u2753|\u23F3|\u2764\uFE0F|[\uD83C-\uD83E][\uDC00-\uDFFF])\uFE0F?\s*/;
 function aquaPoserUI(racine){
   if(!racine||!racine.querySelectorAll) return;
-  var els=racine.querySelectorAll('.topbar-title,h1,h2,h3,h4,div[style*="font-size:3em"],div[style*="font-size:2.5em"],div[style*="font-size:4em"],div[style*="font-size:5em"],div[style*="font-size:3.5em"]');
+  var els=racine.querySelectorAll('.topbar-title,h1,h2,h3,h4,div[style*="font-size:3em"],div[style*="font-size:2.5em"],div[style*="font-size:4em"],div[style*="font-size:5em"],div[style*="font-size:3.5em"],div[style*="font-family:var(--font-title)"]');
   for(var i=0;i<els.length;i++){
     var el=els[i]; if(el.querySelector('img')) continue;
     var t=el.firstChild; if(!t||t.nodeType!==3) continue;
     var m=t.nodeValue.match(AQUA_UI_RE); if(!m) continue;
-    var cle=AQUA_UI_EMOJI[m[1]]; if(!cle||!aquaDispo('ui_illus',cle)) continue;
+    var cle=AQUA_UI_EMOJI[m[1]]||AQUA_UI_EMOJI[m[1]+'️']; if(!cle) continue; var coll='ui_illus'; if(cle.indexOf(':')>0){ coll=cle.split(':')[0]; cle=cle.split(':')[1]; } if(!aquaDispo(coll,cle)) continue;
     var seul=t.nodeValue.trim()===m[0].trim()&&el.children.length===0;
-    var img=document.createElement('span'); img.innerHTML=aquaImg('ui_illus',cle,seul?'width:1em;height:1em;object-fit:contain;display:inline-block':'width:1.15em;height:1.15em;object-fit:contain;display:inline-block;vertical-align:-0.2em;margin-right:0.25em');
+    var img=document.createElement('span'); img.innerHTML=aquaImg(coll,cle,seul?'width:1em;height:1em;object-fit:contain;display:inline-block':'width:1.15em;height:1.15em;object-fit:contain;display:inline-block;vertical-align:-0.2em;margin-right:0.25em');
     t.nodeValue=t.nodeValue.slice(m[0].length);
     el.insertBefore(img.firstChild,t);
   }
