@@ -2721,205 +2721,62 @@ function showProgressToast(msg, regneOuScreen){
 ═══════════════════════════════════════════════════════ */
 
 const GLOSSAIRE_TERMES = {
-  /* ─ B3 : +13 termes (écologie & relations) ─ */
-  'photosynthese': {
-    titre: 'Photosynth\u00e8se',
-    definition: 'La <strong>photosynth\u00e8se</strong> est la fa\u00e7on dont les plantes fabriquent leur nourriture (du sucre) en utilisant la lumi\u00e8re du soleil, l\u2019eau et le gaz carbonique de l\u2019air. En \u00e9change, elles rel\u00e2chent l\u2019oxyg\u00e8ne que nous respirons.',
-    exemple: 'Gr\u00e2ce \u00e0 la photosynth\u00e8se dans ses feuilles, un grand arbre produit chaque jour beaucoup d\u2019oxyg\u00e8ne.'
-  },
-  'symbiose': {
-    titre: 'Symbiose',
-    definition: 'Une <strong>symbiose</strong> est une association entre deux \u00eatres vivants diff\u00e9rents qui s\u2019entraident : chacun apporte quelque chose \u00e0 l\u2019autre.',
-    exemple: 'La mycorhize, entre un arbre et un champignon, est une symbiose : l\u2019un donne de l\u2019eau, l\u2019autre du sucre.'
-  },
-  'mycorhize': {
-    titre: 'Mycorhize',
-    definition: 'La <strong>mycorhize</strong> est l\u2019alliance entre les racines d\u2019une plante et un champignon. Le champignon apporte de l\u2019eau et des min\u00e9raux ; la plante lui donne du sucre.',
-    exemple: 'Presque tous les arbres de la for\u00eat vivent en mycorhize avec des champignons cach\u00e9s sous le sol.'
-  },
-  'pollinisation': {
-    titre: 'Pollinisation',
-    definition: 'La <strong>pollinisation</strong> est le transport du pollen d\u2019une fleur \u00e0 une autre. C\u2019est ce qui permet aux plantes de produire des graines et des fruits. Les insectes, le vent ou les oiseaux s\u2019en chargent.',
-    exemple: 'Les abeilles assurent la pollinisation en passant de fleur en fleur.'
-  },
-  'predateur': {
-    titre: 'Pr\u00e9dateur',
-    definition: 'Un <strong>pr\u00e9dateur</strong> est un animal qui chasse et mange d\u2019autres animaux, qu\u2019on appelle ses proies.',
-    exemple: 'Le renard est un pr\u00e9dateur des mulots ; la libellule, un pr\u00e9dateur des moustiques.'
-  },
-  'herbivore': {
-    titre: 'Herbivore',
-    definition: 'Un <strong>herbivore</strong> est un animal qui se nourrit de plantes : herbe, feuilles, fruits ou \u00e9corce.',
-    exemple: 'Le chevreuil et le lapin sont des herbivores ; ils broutent feuilles et jeunes pousses.'
-  },
-  'mimetisme': {
-    titre: 'Mim\u00e9tisme',
-    definition: 'Le <strong>mim\u00e9tisme</strong>, c\u2019est ressembler \u00e0 autre chose (une feuille, une brindille, un animal dangereux) pour se cacher ou tromper ses ennemis.',
-    exemple: 'Le phasme imite une brindille : c\u2019est un mim\u00e9tisme presque parfait.'
-  },
-  'dispersion': {
-    titre: 'Dispersion des graines',
-    definition: 'La <strong>dispersion</strong> est le transport des graines loin de la plante m\u00e8re, pour qu\u2019elles poussent ailleurs. Le vent, l\u2019eau ou les animaux s\u2019en chargent.',
-    exemple: 'L\u2019\u00e9cureuil disperse les glands en les enterrant ; l\u2019oiseau disperse les graines de ronce dans ses fientes.'
-  },
-  'pionniere': {
-    titre: 'Esp\u00e8ce pionni\u00e8re',
-    definition: 'Une esp\u00e8ce <strong>pionni\u00e8re</strong> est la premi\u00e8re \u00e0 s\u2019installer sur un terrain nu. Elle pr\u00e9pare le sol pour les esp\u00e8ces qui viendront ensuite.',
-    exemple: 'La ronce et le bouleau sont des pionniers : ils colonisent vite les friches et les lisi\u00e8res.'
-  },
-  'bioindicateur': {
-    titre: 'Bio-indicateur',
-    definition: 'Un <strong>bio-indicateur</strong> est un \u00eatre vivant dont la pr\u00e9sence renseigne sur l\u2019\u00e9tat d\u2019un milieu : sol riche, eau propre, air pur...',
-    exemple: 'Beaucoup d\u2019orties indiquent un sol riche en azote ; certains lichens signalent un air pur.'
-  },
-  'decomposeur': {
-    titre: 'D\u00e9composeur',
-    definition: 'Un <strong>d\u00e9composeur</strong> est un \u00eatre vivant (champignon, ver, bact\u00e9rie) qui recycle la mati\u00e8re morte \u2014 feuilles, bois, cadavres \u2014 en la transformant en terre fertile.',
-    exemple: 'Les champignons sont les grands d\u00e9composeurs de la for\u00eat : sans eux, les feuilles mortes s\u2019entasseraient sans fin.'
-  },
-  'caduc': {
-    titre: 'Caduc et persistant',
-    definition: 'Un arbre <strong>caduc</strong> perd toutes ses feuilles en hiver ; un arbre <strong>persistant</strong> les garde toute l\u2019ann\u00e9e.',
-    exemple: 'Le ch\u00eane et le bouleau sont caducs ; le sapin et le houx sont persistants.'
-  },
-  'spore': {
-    titre: 'Spore',
-    definition: 'Une <strong>spore</strong> est un minuscule grain qui permet \u00e0 certains \u00eatres vivants (champignons, foug\u00e8res, mousses) de se reproduire sans faire ni graine ni fleur.',
-    exemple: 'Une foug\u00e8re lib\u00e8re des millions de spores par le dessous de ses feuilles.'
-  },
-  'alterne': {
-    titre: 'Feuilles alternes',
-    definition: 'Des feuilles sont <strong>alternes</strong> quand elles sont dispos\u00e9es une par une le long de la tige, jamais en face l\u2019une de l\u2019autre. Chaque feuille pousse un peu plus haut que la pr\u00e9c\u00e9dente.',
-    exemple: 'Le ch\u00eane, le h\u00eatre, le bouleau ont des feuilles alternes.',
-    schema: 'SVG_schema_alterne'
-  },
-  'opposee': {
-    titre: 'Feuilles oppos\u00e9es',
-    definition: 'Des feuilles sont <strong>oppos\u00e9es</strong> quand elles poussent deux par deux, face \u00e0 face, au m\u00eame niveau sur la tige.',
-    exemple: 'L\u2019\u00e9rable et le marronnier ont des feuilles oppos\u00e9es.',
-    schema: 'SVG_schema_opposee'
-  },
-  'pennee': {
-    titre: 'Feuille penn\u00e9e',
-    definition: 'Une feuille <strong>penn\u00e9e</strong> est compos\u00e9e de plusieurs petites feuilles (folioles) align\u00e9es de chaque c\u00f4t\u00e9 d\u2019un axe central, comme une plume d\u2019oiseau.',
-    exemple: 'Le fr\u00eane, le sorbier des oiseleurs, l\u2019acacia ont des feuilles penn\u00e9es.',
-    schema: 'SVG_schema_pennee'
-  },
-  'palmee': {
-    titre: 'Feuille palm\u00e9e',
-    definition: 'Une feuille <strong>palm\u00e9e</strong> a plusieurs lobes ou folioles qui partent tous d\u2019un m\u00eame point central, comme les doigts d\u2019une main.',
-    exemple: 'Les feuilles d\u2019\u00e9rable et de marronnier sont palm\u00e9es.',
-    schema: 'SVG_schema_palmee'
-  },
-  'simple': {
-    titre: 'Feuille simple',
-    definition: 'Une feuille est <strong>simple</strong> quand son limbe (la partie verte) est d\u2019un seul tenant, sans \u00eatre divis\u00e9 en folioles s\u00e9par\u00e9es.',
-    exemple: 'Le ch\u00eane, le h\u00eatre, le ch\u00e2taignier ont des feuilles simples.',
-    schema: 'SVG_schema_simple'
-  },
-  'composee': {
-    titre: 'Feuille compos\u00e9e',
-    definition: 'Une feuille <strong>compos\u00e9e</strong> est form\u00e9e de plusieurs petites parties s\u00e9par\u00e9es appel\u00e9es <em>folioles</em>, fix\u00e9es sur un m\u00eame p\u00e9tiole.',
-    exemple: 'Le fr\u00eane et le marronnier ont des feuilles compos\u00e9es.',
-    schema: 'SVG_schema_composee'
-  },
-  'limbe': {
-    titre: 'Limbe',
-    definition: 'Le <strong>limbe</strong> est la partie plate et verte d\u2019une feuille, celle qui capte la lumi\u00e8re pour la photosynth\u00e8se.',
-    exemple: 'Le limbe est large chez le h\u00eatre, fin et allong\u00e9 chez le saule.',
-    schema: 'SVG_schema_limbe'
-  },
-  'petiole': {
-    titre: 'P\u00e9tiole',
-    definition: 'Le <strong>p\u00e9tiole</strong> est la petite tige qui relie le limbe de la feuille \u00e0 la branche. C\u2019est comme le manche d\u2019une feuille.',
-    exemple: 'Le p\u00e9tiole est tr\u00e8s long chez le tremble (ce qui fait trembler ses feuilles au vent !).',
-    schema: 'SVG_schema_petiole'
-  },
-  'nervure': {
-    titre: 'Nervures',
-    definition: 'Les <strong>nervures</strong> sont les "veines" d\u2019une feuille, par o\u00f9 circulent l\u2019eau et la s\u00e8ve. Elles forment un dessin caract\u00e9ristique selon l\u2019esp\u00e8ce.',
-    exemple: 'Les nervures du h\u00eatre sont parall\u00e8les, celles du ch\u00eane forment un r\u00e9seau.',
-    schema: 'SVG_schema_nervure'
-  },
-  'lobe': {
-    titre: 'Lobes',
-    definition: 'Les <strong>lobes</strong> sont les parties arrondies qui d\u00e9passent sur le bord d\u2019une feuille. Ils donnent \u00e0 la feuille une forme d\u00e9coup\u00e9e.',
-    exemple: 'Les feuilles de ch\u00eane ont des lobes arrondis bien visibles.',
-    schema: 'SVG_schema_lobe'
-  },
-  'dente': {
-    titre: 'Bord dent\u00e9',
-    definition: 'Un bord est <strong>dent\u00e9</strong> quand il a des petites pointes r\u00e9guli\u00e8res, comme une scie ou les dents d\u2019un peigne.',
-    exemple: 'Les feuilles de noisetier et de ch\u00e2taignier ont un bord dent\u00e9.',
-    schema: 'SVG_schema_dente'
-  },
-  'elytre': {
-    titre: '\u00c9lytres',
-    definition: 'Les <strong>\u00e9lytres</strong> sont les ailes durcies des col\u00e9opt\u00e8res (coccinelles, scarab\u00e9es...). Elles prot\u00e8gent les vraies ailes (transparentes) cach\u00e9es dessous.',
-    exemple: 'Les points noirs de la coccinelle sont sur ses \u00e9lytres.',
-    schema: 'SVG_schema_elytre'
-  },
-  'antenne': {
-    titre: 'Antennes',
-    definition: 'Les <strong>antennes</strong> sont les deux "fils" sur la t\u00eate des insectes. Ce sont leurs organes sensoriels : elles sentent, touchent, et parfois m\u00eame go\u00fbtent !',
-    exemple: 'Les antennes des papillons sont en massue ou en plume selon l\u2019esp\u00e8ce.',
-    schema: 'SVG_schema_antenne'
-  },
-  'mycelium': {
-    titre: 'Myc\u00e9lium',
-    definition: 'Le <strong>myc\u00e9lium</strong> est la vraie partie d\u2019un champignon : un r\u00e9seau de filaments cach\u00e9 sous terre ou dans le bois. Le "champignon" qu\u2019on voit n\u2019est que son fruit !',
-    exemple: 'Le myc\u00e9lium peut s\u2019\u00e9tendre sur plusieurs hectares sous la for\u00eat.',
-    schema: 'SVG_schema_mycelium'
-  },
-  'volve': {
-    titre: 'Volve',
-    definition: 'La <strong>volve</strong> est un sac \u00e0 la base du pied de certains champignons. C\u2019est un indice cl\u00e9 \u26A0 : la volve blanche signale souvent l\u2019amanite mortelle.',
-    exemple: 'L\u2019amanite phallo\u00efde (mortelle) a une volve blanche tr\u00e8s nette.',
-    schema: 'SVG_schema_volve'
-  },
-  'rostre': {
-    titre: 'Rostre',
-    definition: 'Le <strong>rostre</strong> est un "bec" perforant que certains insectes (punaises, cigales) utilisent pour piquer et aspirer la s\u00e8ve des plantes ou le sang.',
-    exemple: 'Le moustique femelle utilise son rostre pour piquer.',
-    schema: 'SVG_schema_rostre'
-  },
-  'metamorphose': {
-    titre: 'M\u00e9tamorphose',
-    definition: 'La <strong>m\u00e9tamorphose</strong> est la transformation compl\u00e8te d\u2019un insecte : \u0153uf \u2192 larve (chenille, têtard) \u2192 nymphe (chrysalide) \u2192 adulte.',
-    exemple: 'La m\u00e9tamorphose d\u2019une chenille en papillon prend 1 \u00e0 4 semaines.',
-    schema: 'SVG_schema_metamorphose'
-  },
-  'mue': {
-    titre: 'Mue',
-    definition: 'La <strong>mue</strong>, c\u2019est quand un animal change de peau ou de poil. Les serpents perdent leur peau enti\u00e8re, les oiseaux renouvellent leurs plumes.',
-    exemple: 'Les serpents muent plusieurs fois par an pour grandir.',
-    schema: 'SVG_schema_mue'
-  },
-  'hibernation': {
-    titre: 'Hibernation',
-    definition: 'L\u2019<strong>hibernation</strong> est un grand sommeil hivernal. L\u2019animal ralentit \u00e9norm\u00e9ment son cœur et sa respiration pour \u00e9conomiser de l\u2019\u00e9nergie pendant le froid.',
-    exemple: 'Le h\u00e9risson hiberne avec une temp\u00e9rature corporelle de 5\u00b0C !',
-    schema: 'SVG_schema_hibernation'
-  },
-  'aposematique': {
-    titre: 'Signal apos\u00e9matique',
-    definition: 'Un <strong>signal apos\u00e9matique</strong> est une couleur vive (rouge, jaune, noir) qui sert d\u2019avertissement : "attention, je suis dangereux ou mauvais au go\u00fbt !"',
-    exemple: 'La salamandre tachet\u00e9e (noire et jaune) et la coccinelle (rouge \u00e0 points) en sont des exemples.',
-    schema: 'SVG_schema_aposematique'
-  },
-  'ecorce': {
-    titre: '\u00c9corce',
-    definition: 'L\u2019<strong>\u00e9corce</strong> est la peau ext\u00e9rieure d\u2019un arbre. Elle prot\u00e8ge le tronc des blessures, du froid et des parasites. Sa texture aide \u00e0 reconna\u00eetre l\u2019esp\u00e8ce.',
-    exemple: 'L\u2019\u00e9corce du bouleau est blanche, celle du ch\u00eane crevass\u00e9e.',
-    schema: 'SVG_schema_ecorce'
-  },
-  'bourgeon': {
-    titre: 'Bourgeon',
-    definition: 'Un <strong>bourgeon</strong> est une petite "boule" sur une branche qui contient les futures feuilles ou fleurs. Il prot\u00e8ge la jeune pousse pendant l\u2019hiver.',
-    exemple: 'Les bourgeons du marronnier sont gros et collants.',
-    schema: 'SVG_schema_bourgeon'
-  }
+  "photosynthese": {"titre":"Photosynthèse","definition":"La <strong>photosynthèse</strong> est la façon dont les plantes fabriquent leur nourriture (du sucre) en utilisant la lumière du soleil, l’eau et le gaz carbonique de l’air. En échange, elles relâchent l’oxygène que nous respirons.","exemple":"Grâce à la photosynthèse dans ses feuilles, un grand arbre produit chaque jour beaucoup d’oxygène."},
+  "symbiose": {"titre":"Symbiose","definition":"Une <strong>symbiose</strong> est une association entre deux êtres vivants différents qui s’entraident : chacun apporte quelque chose à l’autre.","exemple":"La mycorhize, entre un arbre et un champignon, est une symbiose : l’un donne de l’eau, l’autre du sucre."},
+  "mycorhize": {"titre":"Mycorhize","definition":"La <strong>mycorhize</strong> est l’alliance entre les racines d’une plante et un champignon. Le champignon apporte de l’eau et des minéraux ; la plante lui donne du sucre.","exemple":"Presque tous les arbres de la forêt vivent en mycorhize avec des champignons cachés sous le sol."},
+  "pollinisation": {"titre":"Pollinisation","definition":"La <strong>pollinisation</strong> est le transport du pollen d’une fleur à une autre. C’est ce qui permet aux plantes de produire des graines et des fruits. Les insectes, le vent ou les oiseaux s’en chargent.","exemple":"Les abeilles assurent la pollinisation en passant de fleur en fleur."},
+  "predateur": {"titre":"Prédateur","definition":"Un <strong>prédateur</strong> est un animal qui chasse et mange d’autres animaux, qu’on appelle ses proies.","exemple":"Le renard est un prédateur des mulots ; la libellule, un prédateur des moustiques."},
+  "herbivore": {"titre":"Herbivore","definition":"Un <strong>herbivore</strong> est un animal qui se nourrit de plantes : herbe, feuilles, fruits ou écorce.","exemple":"Le chevreuil et le lapin sont des herbivores ; ils broutent feuilles et jeunes pousses."},
+  "mimetisme": {"titre":"Mimétisme","definition":"Le <strong>mimétisme</strong>, c’est ressembler à autre chose (une feuille, une brindille, un animal dangereux) pour se cacher ou tromper ses ennemis.","exemple":"Le phasme imite une brindille : c’est un mimétisme presque parfait."},
+  "dispersion": {"titre":"Dispersion des graines","definition":"La <strong>dispersion</strong> est le transport des graines loin de la plante mère, pour qu’elles poussent ailleurs. Le vent, l’eau ou les animaux s’en chargent.","exemple":"L’écureuil disperse les glands en les enterrant ; l’oiseau disperse les graines de ronce dans ses fientes."},
+  "pionniere": {"titre":"Espèce pionnière","definition":"Une espèce <strong>pionnière</strong> est la première à s’installer sur un terrain nu. Elle prépare le sol pour les espèces qui viendront ensuite.","exemple":"La ronce et le bouleau sont des pionniers : ils colonisent vite les friches et les lisières."},
+  "bioindicateur": {"titre":"Bio-indicateur","definition":"Un <strong>bio-indicateur</strong> est un être vivant dont la présence renseigne sur l’état d’un milieu : sol riche, eau propre, air pur...","exemple":"Beaucoup d’orties indiquent un sol riche en azote ; certains lichens signalent un air pur."},
+  "decomposeur": {"titre":"Décomposeur","definition":"Un <strong>décomposeur</strong> est un être vivant (champignon, ver, bactérie) qui recycle la matière morte — feuilles, bois, cadavres — en la transformant en terre fertile.","exemple":"Les champignons sont les grands décomposeurs de la forêt : sans eux, les feuilles mortes s’entasseraient sans fin."},
+  "caduc": {"titre":"Caduc et persistant","definition":"Un arbre <strong>caduc</strong> perd toutes ses feuilles en hiver ; un arbre <strong>persistant</strong> les garde toute l’année.<br><br>Un arbre caduque perd toutes ses feuilles à l'automne. En hiver, il se retrouve nu. C'est une adaptation au froid et à la sécheresse hivernale. La plupart de nos arbres indigènes sont caducs : chêne, hêtre, charme, bouleau...","exemple":"Le chêne et le bouleau sont caducs ; le sapin et le houx sont persistants.","simple":"La feuille tombe à l'automne.","tip":"💡 En automne, les feuilles caduques changent de couleur (jaune, orange, rouge) avant de tomber — c'est un spectacle !","exemples":[{"nom":"Hêtre","svg":"caduc","txt":"Caduque, feuilles tombent en automne"},{"nom":"Chêne pédonculé","svg":"bord_lobe","txt":"Caduque — parfois semi-persistant"}]},
+  "spore": {"titre":"Spore","definition":"Une <strong>spore</strong> est un minuscule grain qui permet à certains êtres vivants (champignons, fougères, mousses) de se reproduire sans faire ni graine ni fleur.","exemple":"Une fougère libère des millions de spores par le dessous de ses feuilles."},
+  "alterne": {"titre":"Feuilles alternes","definition":"Des feuilles sont <strong>alternes</strong> quand elles sont disposées une par une le long de la tige, jamais en face l’une de l’autre. Chaque feuille pousse un peu plus haut que la précédente.<br><br>Les feuilles alternes ne sont jamais face à face. Elles sont décalées — une à gauche, une à droite, une à gauche... C'est la disposition la plus courante chez les arbres.","exemple":"Le chêne, le hêtre, le bouleau ont des feuilles alternes.","schema":"SVG_schema_alterne","simple":"Les feuilles sont placées une après l'autre en zigzag sur la branche.","tip":"💡 Regarde une branche du bas vers le haut : si les feuilles alternent de côté, elles sont alternes.","exemples":[{"nom":"Hêtre","svg":"disp_alt","txt":"Feuilles alternes"},{"nom":"Châtaignier","svg":"disp_alt","txt":"Feuilles alternes"}]},
+  "opposee": {"titre":"Feuilles opposées","definition":"Des feuilles sont <strong>opposées</strong> quand elles poussent deux par deux, face à face, au même niveau sur la tige.<br><br>Les feuilles opposées poussent deux par deux, directement en face l'une de l'autre sur la branche. C'est moins courant que les feuilles alternes. Le frêne, l'érable et le marronnier ont des feuilles opposées.","exemple":"L’érable et le marronnier ont des feuilles opposées.","schema":"SVG_schema_opposee","simple":"Les feuilles sont placées par paires, face à face.","tip":"💡 Si tu vois deux feuilles exactement face à face au même niveau, elles sont opposées.","exemples":[{"nom":"Frêne commun","svg":"disp_opp","txt":"Folioles opposées"},{"nom":"Érable sycomore","svg":"disp_opp","txt":"Feuilles opposées"}]},
+  "pennee": {"titre":"Feuille pennée","definition":"Une feuille <strong>pennée</strong> est composée de plusieurs petites feuilles (folioles) alignées de chaque côté d’un axe central, comme une plume d’oiseau.<br><br>Dans une feuille à nervation pennée, toutes les nervures secondaires partent d'une seule grande nervure centrale (le 'rachis'). C'est comme les barbes d'une plume d'oiseau. La plupart des feuillus ont une nervation pennée.","exemple":"Le frêne, le sorbier des oiseleurs, l’acacia ont des feuilles pennées.","schema":"SVG_schema_pennee","simple":"Une nervure centrale avec des nervures secondaires de chaque côté — comme une plume.","tip":"💡 Tiens la feuille à contre-jour : tu verras la nervure centrale et ses 'bras' de chaque côté.","exemples":[{"nom":"Hêtre","svg":"nerv_pennee","txt":"Nervation pennée classique"},{"nom":"Châtaignier","svg":"nerv_pennee","txt":"Nervures très marquées"}]},
+  "palmee": {"titre":"Feuille palmée","definition":"Une feuille <strong>palmée</strong> a plusieurs lobes ou folioles qui partent tous d’un même point central, comme les doigts d’une main.<br><br>Une nervation palmée ressemble à une main ouverte : plusieurs grandes nervures rayonnent depuis le point d'attache du pétiole. Les feuilles d'érable, de platane et de marronnier sont palmées. Une feuille composée palmée a ses folioles disposées comme les doigts d'une main.","exemple":"Les feuilles d’érable et de marronnier sont palmées.","schema":"SVG_schema_palmee","simple":"Plusieurs nervures principales partent toutes du même point — comme les doigts d'une main.","tip":"💡 Trouve le point où la queue (pétiole) rejoint la feuille : si plusieurs nervures partent de là, c'est palmé.","exemples":[{"nom":"Érable sycomore","svg":"nerv_palmee","txt":"5 nervures palmées"},{"nom":"Marronnier","svg":"feuille_composee","txt":"Feuille composée palmée"}]},
+  "simple": {"titre":"Feuille simple","definition":"Une feuille est <strong>simple</strong> quand son limbe (la partie verte) est d’un seul tenant, sans être divisé en folioles séparées.","exemple":"Le chêne, le hêtre, le châtaignier ont des feuilles simples.","schema":"SVG_schema_simple"},
+  "composee": {"titre":"Feuille composée","definition":"Une feuille <strong>composée</strong> est formée de plusieurs petites parties séparées appelées <em>folioles</em>, fixées sur un même pétiole.","exemple":"Le frêne et le marronnier ont des feuilles composées.","schema":"SVG_schema_composee"},
+  "limbe": {"titre":"Limbe","definition":"Le <strong>limbe</strong> est la partie plate et verte d’une feuille, celle qui capte la lumière pour la photosynthèse.","exemple":"Le limbe est large chez le hêtre, fin et allongé chez le saule.","schema":"SVG_schema_limbe"},
+  "petiole": {"titre":"Pétiole","definition":"Le <strong>pétiole</strong> est la petite tige qui relie le limbe de la feuille à la branche. C’est comme le manche d’une feuille.<br><br>Le pétiole est la tige mince entre la branche et le limbe (la partie plate de la feuille). Il peut être long ou court, velu ou glabre, rond ou aplati. Certaines feuilles n'en ont pas (feuilles sessiles).","exemple":"Le pétiole est très long chez le tremble (ce qui fait trembler ses feuilles au vent !).","schema":"SVG_schema_petiole","simple":"La 'queue' qui relie la feuille à la branche.","tip":"💡 Le pétiole du chêne pédonculé est très court, celui du peuplier est aplati — c'est pour ça que ses feuilles tremblent dans le vent !","exemples":[{"nom":"Chêne pédonculé","svg":"pet_court","txt":"Pétiole très court"},{"nom":"Hêtre","svg":"pet_long","txt":"Pétiole moyen"}]},
+  "nervure": {"titre":"Nervures","definition":"Les <strong>nervures</strong> sont les \"veines\" d’une feuille, par où circulent l’eau et la sève. Elles forment un dessin caractéristique selon l’espèce.<br><br>Les nervures sont les canaux qui transportent l'eau et les nutriments dans la feuille. Elles forment un réseau visible. La nervure principale (midrib) va de la base au sommet. Les nervures secondaires partent de la principale. Leur disposition — pennée ou palmée — est un critère clé d'identification.","exemple":"Les nervures du hêtre sont parallèles, celles du chêne forment un réseau.","schema":"SVG_schema_nervure","simple":"Les 'veines' visibles sur une feuille.","tip":"💡 Tiens ta feuille à contre-jour devant le soleil : tu verras tout le réseau de nervures en transparence.","exemples":[{"nom":"Hêtre","svg":"nerv_pennee","txt":"Nervation pennée très régulière"},{"nom":"Érable sycomore","svg":"nerv_palmee","txt":"Nervation palmée à 5 branches"}]},
+  "lobe": {"titre":"Lobes","definition":"Les <strong>lobes</strong> sont les parties arrondies qui dépassent sur le bord d’une feuille. Ils donnent à la feuille une forme découpée.<br><br>Une feuille lobée est découpée en 'lobes', comme les doigts d'une main. Les lobes peuvent être arrondis (chêne) ou pointus (érable sycomore, chêne rouge). Ce n'est pas une coupure totale — les lobes restent reliés entre eux.","exemple":"Les feuilles de chêne ont des lobes arrondis bien visibles.","schema":"SVG_schema_lobe","simple":"Le bord de la feuille forme de grandes vagues arrondies ou pointues.","tip":"💡 Passe le doigt sur le bord : tu sentiras les grandes vagues successives.","exemples":[{"nom":"Chêne pédonculé","svg":"bord_lobe","txt":"Lobes arrondis, profonds"},{"nom":"Érable sycomore","svg":"nerv_palmee","txt":"5 lobes palmés, dentés"}]},
+  "dente": {"titre":"Bord denté","definition":"Un bord est <strong>denté</strong> quand il a des petites pointes régulières, comme une scie ou les dents d’un peigne.<br><br>Un bord denté ressemble à la lame d'une scie : des petites pointes régulières tout autour. Certaines feuilles sont 'simplement dentées' (dents simples) ou 'doublement dentées' (chaque dent a elle-même de petites dents).","exemple":"Les feuilles de noisetier et de châtaignier ont un bord denté.","schema":"SVG_schema_dente","simple":"Le bord de la feuille a de petites dents régulières, comme une scie.","tip":"💡 Passe doucement ton doigt sur le bord — tu sentiras les petites dents une à une.","exemples":[{"nom":"Bouleau verruqueux","svg":"bord_dente","txt":"Doublement denté"},{"nom":"Charme","svg":"bord_dd","txt":"Doublement denté, nervures saillantes"}]},
+  "elytre": {"titre":"Élytres","definition":"Les <strong>élytres</strong> sont les ailes durcies des coléoptères (coccinelles, scarabées...). Elles protègent les vraies ailes (transparentes) cachées dessous.","exemple":"Les points noirs de la coccinelle sont sur ses élytres.","schema":"SVG_schema_elytre"},
+  "antenne": {"titre":"Antennes","definition":"Les <strong>antennes</strong> sont les deux \"fils\" sur la tête des insectes. Ce sont leurs organes sensoriels : elles sentent, touchent, et parfois même goûtent !","exemple":"Les antennes des papillons sont en massue ou en plume selon l’espèce.","schema":"SVG_schema_antenne"},
+  "mycelium": {"titre":"Mycélium","definition":"Le <strong>mycélium</strong> est la vraie partie d’un champignon : un réseau de filaments caché sous terre ou dans le bois. Le \"champignon\" qu’on voit n’est que son fruit !","exemple":"Le mycélium peut s’étendre sur plusieurs hectares sous la forêt.","schema":"SVG_schema_mycelium"},
+  "volve": {"titre":"Volve","definition":"La <strong>volve</strong> est un sac à la base du pied de certains champignons. C’est un indice clé ⚠ : la volve blanche signale souvent l’amanite mortelle.","exemple":"L’amanite phalloïde (mortelle) a une volve blanche très nette.","schema":"SVG_schema_volve"},
+  "rostre": {"titre":"Rostre","definition":"Le <strong>rostre</strong> est un \"bec\" perforant que certains insectes (punaises, cigales) utilisent pour piquer et aspirer la sève des plantes ou le sang.","exemple":"Le moustique femelle utilise son rostre pour piquer.","schema":"SVG_schema_rostre"},
+  "metamorphose": {"titre":"Métamorphose","definition":"La <strong>métamorphose</strong> est la transformation complète d’un insecte : œuf → larve (chenille, têtard) → nymphe (chrysalide) → adulte.","exemple":"La métamorphose d’une chenille en papillon prend 1 à 4 semaines.","schema":"SVG_schema_metamorphose"},
+  "mue": {"titre":"Mue","definition":"La <strong>mue</strong>, c’est quand un animal change de peau ou de poil. Les serpents perdent leur peau entière, les oiseaux renouvellent leurs plumes.","exemple":"Les serpents muent plusieurs fois par an pour grandir.","schema":"SVG_schema_mue"},
+  "hibernation": {"titre":"Hibernation","definition":"L’<strong>hibernation</strong> est un grand sommeil hivernal. L’animal ralentit énormément son cœur et sa respiration pour économiser de l’énergie pendant le froid.","exemple":"Le hérisson hiberne avec une température corporelle de 5°C !","schema":"SVG_schema_hibernation"},
+  "aposematique": {"titre":"Signal aposématique","definition":"Un <strong>signal aposématique</strong> est une couleur vive (rouge, jaune, noir) qui sert d’avertissement : \"attention, je suis dangereux ou mauvais au goût !\"","exemple":"La salamandre tachetée (noire et jaune) et la coccinelle (rouge à points) en sont des exemples.","schema":"SVG_schema_aposematique"},
+  "ecorce": {"titre":"Écorce","definition":"L’<strong>écorce</strong> est la peau extérieure d’un arbre. Elle protège le tronc des blessures, du froid et des parasites. Sa texture aide à reconnaître l’espèce.","exemple":"L’écorce du bouleau est blanche, celle du chêne crevassée.","schema":"SVG_schema_ecorce"},
+  "bourgeon": {"titre":"Bourgeon","definition":"Un <strong>bourgeon</strong> est une petite \"boule\" sur une branche qui contient les futures feuilles ou fleurs. Il protège la jeune pousse pendant l’hiver.<br><br>Le bourgeon est une structure compacte protégée par des écailles. Il contient les futures feuilles ou fleurs en miniature. La forme, la couleur et la disposition des bourgeons sont des critères très utiles pour identifier les arbres en hiver quand les feuilles sont tombées.","exemple":"Les bourgeons du marronnier sont gros et collants.","schema":"SVG_schema_bourgeon","simple":"Le bouton d'où naîtront les feuilles ou les fleurs au printemps.","tip":"💡 En hiver, regarde les bourgeons : le frêne a des bourgeons noirs, le hêtre de longs bourgeons marron pointus, le marronnier de gros bourgeons collants.","exemples":[{"nom":"Hêtre","svg":"bord_lisse","txt":"Bourgeons longs et pointus"},{"nom":"Frêne commun","svg":"feuille_composee","txt":"Bourgeons noirs caractéristiques"}]},
+  "persistante": {"titre":"Persistante","simple":"La feuille reste toute l'année sur l'arbre.","definition":"Un arbre persistant (ou sempervirent) garde ses feuilles en hiver. Ses feuilles sont souvent plus épaisses, coriaces et brillantes pour résister au froid et à la sécheresse. Les résineux (pin, épicéa) et certains feuillus (lierre, houx) sont persistants.","tip":"💡 En hiver, si l'arbre a encore ses feuilles, elles sont persistantes !","exemples":[{"nom":"Pin sylvestre","svg":"aig_longue","txt":"Persistant — aiguilles toute l'année"},{"nom":"Épicéa","svg":"aig_isolee","txt":"Persistant — aiguilles toute l'année"}],"svg":"<svg viewBox=\"0 0 220 120\" xmlns=\"http://www.w3.org/2000/svg\">\n      <line x1=\"110\" y1=\"110\" x2=\"110\" y2=\"20\" stroke=\"#3e4a27\" stroke-width=\"2.5\"/>\n      <ellipse cx=\"96\" cy=\"35\" rx=\"14\" ry=\"5\" fill=\"#5c6b3a\" stroke=\"#3e4a27\" stroke-width=\".8\" transform=\"rotate(-25 96 35)\"/>\n      <ellipse cx=\"124\" cy=\"35\" rx=\"14\" ry=\"5\" fill=\"#5c6b3a\" stroke=\"#3e4a27\" stroke-width=\".8\" transform=\"rotate(25 124 35)\"/>\n      <ellipse cx=\"92\" cy=\"55\" rx=\"14\" ry=\"5\" fill=\"#5c6b3a\" stroke=\"#3e4a27\" stroke-width=\".8\" transform=\"rotate(-25 92 55)\"/>\n      <ellipse cx=\"128\" cy=\"55\" rx=\"14\" ry=\"5\" fill=\"#5c6b3a\" stroke=\"#3e4a27\" stroke-width=\".8\" transform=\"rotate(25 128 55)\"/>\n      <ellipse cx=\"94\" cy=\"75\" rx=\"14\" ry=\"5\" fill=\"#5c6b3a\" stroke=\"#3e4a27\" stroke-width=\".8\" transform=\"rotate(-25 94 75)\"/>\n      <ellipse cx=\"126\" cy=\"75\" rx=\"14\" ry=\"5\" fill=\"#5c6b3a\" stroke=\"#3e4a27\" stroke-width=\".8\" transform=\"rotate(25 126 75)\"/>\n      <text x=\"72\" y=\"112\" font-family=\"Old Standard TT,serif\" font-style=\"italic\" font-size=\"12\" fill=\"#5c6b3a\">Hiver — toujours vert</text>\n    </svg>"},
+  "entier": {"titre":"Entier","simple":"Le bord de la feuille est lisse, sans dents ni vagues.","definition":"Une feuille à bord entier a un contour lisse et régulier. Ni dents, ni lobes, ni épines. C'est le cas du hêtre (légèrement ondulé mais presque lisse) ou du troène.","tip":"💡 Passe le doigt sur le bord — si c'est complètement lisse, le bord est entier.","exemples":[{"nom":"Hêtre","svg":"bord_lisse","txt":"Bord entier, légèrement ondulé"}],"svg":"<svg viewBox=\"0 0 220 120\" xmlns=\"http://www.w3.org/2000/svg\">\n      <path d=\"M110 8 C76 18,62 52,110 108 C158 52,144 18,110 8Z\" fill=\"#e8dfc8\" stroke=\"#3e4a27\" stroke-width=\"1.5\"/>\n      <line x1=\"110\" y1=\"8\" x2=\"110\" y2=\"108\" stroke=\"#5c6b3a\" stroke-width=\".9\"/>\n      <text x=\"148\" y=\"55\" font-family=\"Old Standard TT,serif\" font-style=\"italic\" font-size=\"12\" fill=\"#5c6b3a\">← lisse</text>\n    </svg>"},
+  "foliole": {"titre":"Foliole","simple":"Une des petites feuilles d'une feuille composée.","definition":"Dans une feuille composée, chaque 'petite feuille' s'appelle une foliole. Toutes les folioles sont attachées sur le même pétiole. Attention : on peut confondre une foliole avec une feuille simple — le truc : la feuille a un bourgeon à sa base, la foliole n'en a pas.","tip":"💡 Cherche le bourgeon : si tu en vois un au point d'attache, c'est une feuille. Pas de bourgeon = foliole.","exemples":[{"nom":"Frêne commun","svg":"feuille_composee","txt":"7–13 folioles opposées"},{"nom":"Marronnier","svg":"feuille_composee","txt":"5–7 folioles palmées"}],"svg":"<svg viewBox=\"0 0 220 120\" xmlns=\"http://www.w3.org/2000/svg\">\n      <line x1=\"110\" y1=\"110\" x2=\"110\" y2=\"18\" stroke=\"#8b6b3d\" stroke-width=\"1.5\"/>\n      <ellipse cx=\"86\" cy=\"35\" rx=\"20\" ry=\"9\" fill=\"#e8dfc8\" stroke=\"#3e4a27\" stroke-width=\"1\" transform=\"rotate(-28 86 35)\"/>\n      <ellipse cx=\"134\" cy=\"35\" rx=\"20\" ry=\"9\" fill=\"#e8dfc8\" stroke=\"#3e4a27\" stroke-width=\"1\" transform=\"rotate(28 134 35)\"/>\n      <ellipse cx=\"82\" cy=\"58\" rx=\"20\" ry=\"9\" fill=\"#e8dfc8\" stroke=\"#3e4a27\" stroke-width=\"1\" transform=\"rotate(-28 82 58)\"/>\n      <ellipse cx=\"138\" cy=\"58\" rx=\"20\" ry=\"9\" fill=\"#e8dfc8\" stroke=\"#3e4a27\" stroke-width=\"1\" transform=\"rotate(28 138 58)\"/>\n      <ellipse cx=\"110\" cy=\"18\" rx=\"14\" ry=\"9\" fill=\"#e8dfc8\" stroke=\"#3e4a27\" stroke-width=\"1\"/>\n      <text x=\"62\" y=\"92\" font-family=\"Old Standard TT,serif\" font-style=\"italic\" font-size=\"12\" fill=\"#a0522d\">folioles</text>\n      <line x1=\"80\" y1=\"89\" x2=\"86\" y2=\"70\" stroke=\"#a0522d\" stroke-width=\".8\"/>\n      <line x1=\"140\" y1=\"89\" x2=\"134\" y2=\"70\" stroke=\"#a0522d\" stroke-width=\".8\"/>\n    </svg>"},
+  "velu": {"titre":"Velu","simple":"Couvert de poils longs et doux.","definition":"Une feuille velue a des poils longs et visibles sur sa surface. C'est plus prononcé que pubescent (poils fins et courts). On touche le dessous d'une feuille velue et on sent clairement les poils.","tip":"💡 Retourne la feuille et touche le dessous — si tu sens des poils doux et longs, c'est velu.","exemples":[{"nom":"Cornouiller","svg":"velu","txt":"Feuilles velues en dessous"},{"nom":"Néflier","svg":"velu","txt":"Velue sur les deux faces"}],"svg":"<svg viewBox=\"0 0 220 120\" xmlns=\"http://www.w3.org/2000/svg\">\n      <path d=\"M110 10 C80 20,68 50,110 100 C152 50,140 20,110 10Z\" fill=\"#e8dfc8\" stroke=\"#3e4a27\" stroke-width=\"1.2\"/>\n      <line x1=\"110\" y1=\"10\" x2=\"110\" y2=\"100\" stroke=\"#5c6b3a\" stroke-width=\".9\"/>\n      <line x1=\"72\" y1=\"42\" x2=\"68\" y2=\"32\" stroke=\"#8b6b3d\" stroke-width=\"1.2\"/>\n      <line x1=\"78\" y1=\"50\" x2=\"74\" y2=\"40\" stroke=\"#8b6b3d\" stroke-width=\"1.2\"/>\n      <line x1=\"86\" y1=\"58\" x2=\"82\" y2=\"48\" stroke=\"#8b6b3d\" stroke-width=\"1.2\"/>\n      <line x1=\"148\" y1=\"42\" x2=\"152\" y2=\"32\" stroke=\"#8b6b3d\" stroke-width=\"1.2\"/>\n      <line x1=\"142\" y1=\"50\" x2=\"146\" y2=\"40\" stroke=\"#8b6b3d\" stroke-width=\"1.2\"/>\n      <line x1=\"134\" y1=\"58\" x2=\"138\" y2=\"48\" stroke=\"#8b6b3d\" stroke-width=\"1.2\"/>\n      <line x1=\"92\" y1=\"70\" x2=\"88\" y2=\"60\" stroke=\"#8b6b3d\" stroke-width=\"1.2\"/>\n      <line x1=\"128\" y1=\"70\" x2=\"132\" y2=\"60\" stroke=\"#8b6b3d\" stroke-width=\"1.2\"/>\n      <text x=\"62\" y=\"114\" font-family=\"Old Standard TT,serif\" font-style=\"italic\" font-size=\"12\" fill=\"#8b6b3d\">poils longs visibles</text>\n    </svg>"},
+  "glabre": {"titre":"Glabre","simple":"Sans poils — lisse au toucher.","definition":"Glabre signifie simplement 'sans poils'. En botanique, on distingue glabre (lisse), velu (poils longs), pubescent (poils fins et courts) et cilié (poils sur le bord). Le dessous d'une feuille glabre est lisse quand on le touche.","tip":"💡 Retourne la feuille et passe le doigt sur le dessous — glabre = doux et lisse, velu = poils que tu sens.","exemples":[{"nom":"Hêtre","svg":"glabre","txt":"Feuille glabre à maturité"}],"svg":"<svg viewBox=\"0 0 220 120\" xmlns=\"http://www.w3.org/2000/svg\">\n      <path d=\"M110 10 C80 20,68 50,110 100 C152 50,140 20,110 10Z\" fill=\"#e8dfc8\" stroke=\"#3e4a27\" stroke-width=\"1.2\"/>\n      <line x1=\"110\" y1=\"10\" x2=\"110\" y2=\"100\" stroke=\"#5c6b3a\" stroke-width=\".9\"/>\n      <text x=\"148\" y=\"58\" font-family=\"Old Standard TT,serif\" font-style=\"italic\" font-size=\"13\" fill=\"#5c6b3a\">lisse</text>\n    </svg>"},
+  "corde": {"titre":"Cordé","simple":"La base de la feuille est en forme de cœur.","definition":"Une base cordée ressemble à un cœur inversé : deux lobes arrondis de chaque côté du pétiole. C'est le cas du tilleul et du lierre.","tip":"💡 Regarde tout en bas de la feuille, là où la queue commence — si tu vois deux petites oreilles rondes, c'est cordé.","exemples":[{"nom":"Tilleul","svg":"base_ronde","txt":"Base cordée typique"}],"svg":"<svg viewBox=\"0 0 220 120\" xmlns=\"http://www.w3.org/2000/svg\">\n      <path d=\"M110 20 C80 28,64 55,110 105 C156 55,140 28,110 20Z\" fill=\"#e8dfc8\" stroke=\"#3e4a27\" stroke-width=\"1.2\"/>\n      <line x1=\"110\" y1=\"20\" x2=\"110\" y2=\"105\" stroke=\"#5c6b3a\" stroke-width=\".9\"/>\n      <path d=\"M110 105 C96 105,86 108,82 112 C80 115,84 118,88 116 C96 112,104 110,110 110 C116 110,124 112,132 116 C136 118,140 115,138 112 C134 108,124 105,110 105Z\" fill=\"#e8dfc8\" stroke=\"#3e4a27\" stroke-width=\"1.2\"/>\n      <text x=\"56\" y=\"116\" font-family=\"Old Standard TT,serif\" font-style=\"italic\" font-size=\"12\" fill=\"#a0522d\">base en cœur</text>\n    </svg>"},
+  "elliptique": {"titre":"Elliptique","simple":"La feuille a la forme d'une ellipse — ovale et symétrique.","definition":"Une feuille elliptique est plus longue que large, avec les deux extrémités arrondies et symétriques. C'est une des formes les plus courantes. On distingue elliptique (rapport longueur/largeur ≈ 2) et lancéolé (plus allongé).","tip":"💡 Si la feuille ressemble à un œuf coupé en deux dans la longueur, elle est elliptique.","exemples":[{"nom":"Hêtre","svg":"bord_lisse","txt":"Feuille elliptique à ovale"}],"svg":"<svg viewBox=\"0 0 220 120\" xmlns=\"http://www.w3.org/2000/svg\">\n      <ellipse cx=\"110\" cy=\"60\" rx=\"40\" ry=\"55\" fill=\"#e8dfc8\" stroke=\"#3e4a27\" stroke-width=\"1.2\"/>\n      <line x1=\"110\" y1=\"5\" x2=\"110\" y2=\"115\" stroke=\"#5c6b3a\" stroke-width=\".9\"/>\n      <line x1=\"70\" y1=\"60\" x2=\"150\" y2=\"60\" stroke=\"#a0522d\" stroke-width=\".8\" stroke-dasharray=\"3,2\"/>\n      <text x=\"125\" y=\"58\" font-family=\"Old Standard TT,serif\" font-style=\"italic\" font-size=\"11\" fill=\"#a0522d\">largeur</text>\n    </svg>"},
+  "lanceole": {"titre":"Lancéolé","simple":"La feuille est longue et fine, comme une lance.","definition":"Une feuille lancéolée est bien plus longue que large (rapport ≥ 3), avec les deux extrémités en pointe. Elle ressemble à la lame d'une lance ou d'un couteau. C'est typique des saules et du châtaignier.","tip":"💡 Si la feuille est très allongée et effilée aux deux bouts, elle est lancéolée.","exemples":[{"nom":"Châtaignier","svg":"forme_longue","txt":"Feuilles lancéolées"}],"svg":"<svg viewBox=\"0 0 220 120\" xmlns=\"http://www.w3.org/2000/svg\">\n      <path d=\"M110 8 C96 20,84 45,88 60 C84 75,96 100,110 112 C124 100,136 75,132 60 C136 45,124 20,110 8Z\" fill=\"#e8dfc8\" stroke=\"#3e4a27\" stroke-width=\"1.2\"/>\n      <line x1=\"110\" y1=\"8\" x2=\"110\" y2=\"112\" stroke=\"#5c6b3a\" stroke-width=\".9\"/>\n      <text x=\"138\" y=\"62\" font-family=\"Old Standard TT,serif\" font-style=\"italic\" font-size=\"12\" fill=\"#8b6b3d\">← étroite</text>\n    </svg>"},
+  "samare": {"titre":"Samare","simple":"Un fruit sec avec une aile qui lui permet de voler.","definition":"La samare est un fruit sec qui ne s'ouvre pas, muni d'une ou deux ailes membraneuses. Ces ailes font tournoyer le fruit comme un hélicoptère quand il tombe, ce qui lui permet de se disperser loin de l'arbre. Les érables ont des samares doubles, le frêne des samares simples.","tip":"💡 En automne, ramasse des 'hélicoptères' sous un érable — ce sont des samares doubles !","exemples":[{"nom":"Érable sycomore","svg":"nerv_palmee","txt":"Samares doubles en hélice"},{"nom":"Frêne commun","svg":"feuille_composee","txt":"Samares simples en grappes"}],"svg":"<svg viewBox=\"0 0 220 120\" xmlns=\"http://www.w3.org/2000/svg\">\n      <ellipse cx=\"88\" cy=\"85\" rx=\"10\" ry=\"8\" fill=\"#8b6b3d\" stroke=\"#3e4a27\" stroke-width=\"1\"/>\n      <path d=\"M88 85 C75 75,55 45,70 18 C85 30,95 60,88 85Z\" fill=\"#e8dfc8\" stroke=\"#3e4a27\" stroke-width=\"1.2\"/>\n      <ellipse cx=\"132\" cy=\"85\" rx=\"10\" ry=\"8\" fill=\"#8b6b3d\" stroke=\"#3e4a27\" stroke-width=\"1\"/>\n      <path d=\"M132 85 C145 75,165 45,150 18 C135 30,125 60,132 85Z\" fill=\"#e8dfc8\" stroke=\"#3e4a27\" stroke-width=\"1.2\"/>\n      <text x=\"72\" y=\"112\" font-family=\"Old Standard TT,serif\" font-style=\"italic\" font-size=\"13\" fill=\"#a0522d\">double samare</text>\n    </svg>"},
+  "chaton": {"titre":"Chaton","simple":"Une longue grappe de petites fleurs sans pétales, qui pend comme une queue de chat.","definition":"Le chaton est une inflorescence (groupe de fleurs) allongée et souple, faite de nombreuses petites fleurs très simples sans pétales. Il ressemble à une chenille ou à une queue de chat. Les chatons sont très visibles au printemps avant les feuilles chez le bouleau, le noisetier et le charme.","tip":"💡 Au printemps, les longs chatons jaunes du bouleau et du noisetier libèrent beaucoup de pollen — si tu éternues, c'est peut-être à cause d'eux !","exemples":[{"nom":"Bouleau verruqueux","svg":"bord_dente","txt":"Chatons pendants au printemps"},{"nom":"Charme","svg":"bord_dd","txt":"Chatons verts en épi"}],"svg":"<svg viewBox=\"0 0 220 120\" xmlns=\"http://www.w3.org/2000/svg\">\n      <line x1=\"50\" y1=\"25\" x2=\"170\" y2=\"95\" stroke=\"#8b6b3d\" stroke-width=\"2\"/>\n      <ellipse cx=\"62\" cy=\"32\" rx=\"7\" ry=\"4\" fill=\"#c8922a\" stroke=\"#8b6b3d\" stroke-width=\".8\" transform=\"rotate(35 62 32)\"/>\n      <ellipse cx=\"78\" cy=\"42\" rx=\"7\" ry=\"4\" fill=\"#c8922a\" stroke=\"#8b6b3d\" stroke-width=\".8\" transform=\"rotate(35 78 42)\"/>\n      <ellipse cx=\"94\" cy=\"52\" rx=\"7\" ry=\"4\" fill=\"#c8922a\" stroke=\"#8b6b3d\" stroke-width=\".8\" transform=\"rotate(35 94 52)\"/>\n      <ellipse cx=\"110\" cy=\"62\" rx=\"7\" ry=\"4\" fill=\"#c8922a\" stroke=\"#8b6b3d\" stroke-width=\".8\" transform=\"rotate(35 110 62)\"/>\n      <ellipse cx=\"126\" cy=\"72\" rx=\"7\" ry=\"4\" fill=\"#c8922a\" stroke=\"#8b6b3d\" stroke-width=\".8\" transform=\"rotate(35 126 72)\"/>\n      <ellipse cx=\"142\" cy=\"82\" rx=\"7\" ry=\"4\" fill=\"#c8922a\" stroke=\"#8b6b3d\" stroke-width=\".8\" transform=\"rotate(35 142 82)\"/>\n      <text x=\"50\" y=\"112\" font-family=\"Old Standard TT,serif\" font-style=\"italic\" font-size=\"13\" fill=\"#c8922a\">chaton pendant</text>\n    </svg>"},
+  "cupule": {"titre":"Cupule","simple":"La petite coupe qui tient le gland ou la faîne.","definition":"La cupule est une enveloppe écailleuse ou hérissée qui entoure partiellement le fruit. Chez le chêne, elle forme une petite coupe sous le gland. Chez le hêtre, elle est hérissée et contient 2-3 faînes. Chez le châtaignier, elle est très épineuse (bogue) et contient 1-3 châtaignes.","tip":"💡 Ramasse un gland : la petite coupe en dessous, c'est la cupule !","exemples":[{"nom":"Chêne pédonculé","svg":"bord_lobe","txt":"Cupule écailleuse sous le gland"},{"nom":"Hêtre","svg":"bord_lisse","txt":"Cupule hérissée contenant les faînes"}],"svg":"<svg viewBox=\"0 0 220 120\" xmlns=\"http://www.w3.org/2000/svg\">\n      <ellipse cx=\"110\" cy=\"55\" rx=\"18\" ry=\"28\" fill=\"#c8922a\" stroke=\"#8b6b3d\" stroke-width=\"1.5\"/>\n      <path d=\"M88 68 C88 80,96 88,110 90 C124 88,132 80,132 68Z\" fill=\"#8b6b3d\" stroke=\"#5a4a36\" stroke-width=\"1.2\"/>\n      <path d=\"M90 70 C92 72,88 74,90 76\" stroke=\"#3e4a27\" stroke-width=\".8\" fill=\"none\"/>\n      <path d=\"M96 71 C98 73,94 75,96 77\" stroke=\"#3e4a27\" stroke-width=\".8\" fill=\"none\"/>\n      <path d=\"M102 72 C104 74,100 76,102 78\" stroke=\"#3e4a27\" stroke-width=\".8\" fill=\"none\"/>\n      <path d=\"M108 72 C110 74,106 76,108 78\" stroke=\"#3e4a27\" stroke-width=\".8\" fill=\"none\"/>\n      <path d=\"M114 72 C116 74,112 76,114 78\" stroke=\"#3e4a27\" stroke-width=\".8\" fill=\"none\"/>\n      <path d=\"M120 71 C122 73,118 75,120 77\" stroke=\"#3e4a27\" stroke-width=\".8\" fill=\"none\"/>\n      <path d=\"M126 70 C128 72,124 74,126 76\" stroke=\"#3e4a27\" stroke-width=\".8\" fill=\"none\"/>\n      <text x=\"62\" y=\"112\" font-family=\"Old Standard TT,serif\" font-style=\"italic\" font-size=\"13\" fill=\"#8b6b3d\">gland dans sa cupule</text>\n    </svg>"},
+  "pubescent": {"titre":"Pubescent","simple":"Couvert de petits poils fins et doux, comme du duvet.","definition":"Pubescent signifie 'couvert de poils fins et courts'. C'est différent de velu (poils longs) ou de glabre (sans poils). Une surface pubescente a une texture légèrement veloutée au toucher. Le bouleau pubescent tire son nom de ses jeunes rameaux couverts de ce duvet.","tip":"💡 Frotte doucement le dessous de la feuille — si c'est vaguement doux comme du velours, c'est pubescent.","exemples":[{"nom":"Bouleau verruqueux","svg":"velu","txt":"Rameaux pubescents chez le bouleau pubescent"}],"svg":"<svg viewBox=\"0 0 220 120\" xmlns=\"http://www.w3.org/2000/svg\">\n      <path d=\"M110 10 C80 20,68 50,110 100 C152 50,140 20,110 10Z\" fill=\"#e8dfc8\" stroke=\"#3e4a27\" stroke-width=\"1.2\"/>\n      <line x1=\"110\" y1=\"10\" x2=\"110\" y2=\"100\" stroke=\"#5c6b3a\" stroke-width=\".9\"/>\n      <line x1=\"72\" y1=\"45\" x2=\"70\" y2=\"38\" stroke=\"#8b6b3d\" stroke-width=\".8\"/>\n      <line x1=\"78\" y1=\"52\" x2=\"75\" y2=\"45\" stroke=\"#8b6b3d\" stroke-width=\".8\"/>\n      <line x1=\"85\" y1=\"58\" x2=\"82\" y2=\"51\" stroke=\"#8b6b3d\" stroke-width=\".8\"/>\n      <line x1=\"148\" y1=\"45\" x2=\"150\" y2=\"38\" stroke=\"#8b6b3d\" stroke-width=\".8\"/>\n      <line x1=\"142\" y1=\"52\" x2=\"145\" y2=\"45\" stroke=\"#8b6b3d\" stroke-width=\".8\"/>\n      <line x1=\"135\" y1=\"58\" x2=\"138\" y2=\"51\" stroke=\"#8b6b3d\" stroke-width=\".8\"/>\n      <line x1=\"92\" y1=\"70\" x2=\"89\" y2=\"63\" stroke=\"#8b6b3d\" stroke-width=\".8\"/>\n      <line x1=\"128\" y1=\"70\" x2=\"131\" y2=\"63\" stroke=\"#8b6b3d\" stroke-width=\".8\"/>\n      <text x=\"66\" y=\"114\" font-family=\"Old Standard TT,serif\" font-style=\"italic\" font-size=\"13\" fill=\"#8b6b3d\">petits poils fins</text>\n    </svg>"},
+  "stipule": {"titre":"Stipule","simple":"Deux petites pièces à la base de la queue de la feuille.","definition":"Les stipules sont deux petits appendices (écailles, feuilles réduites ou épines) situés à la base du pétiole, de chaque côté. Elles sont parfois grandes et persistantes (saule, rosier), parfois minuscules et tombent vite. Leur présence ou absence est un critère d'identification.","tip":"💡 Regarde à la base du pétiole : si tu vois deux petites oreilles ou écailles symétriques, ce sont des stipules.","exemples":[{"nom":"Charme","svg":"bord_dd","txt":"Stipules présentes mais caduques"}],"svg":"<svg viewBox=\"0 0 220 120\" xmlns=\"http://www.w3.org/2000/svg\">\n      <line x1=\"110\" y1=\"105\" x2=\"110\" y2=\"30\" stroke=\"#8b6b3d\" stroke-width=\"1.5\"/>\n      <path d=\"M110 30 C85 38,74 62,110 95 C146 62,135 38,110 30Z\" fill=\"#e8dfc8\" stroke=\"#3e4a27\" stroke-width=\"1.2\"/>\n      <path d=\"M110 105 C100 95,90 95,86 100 C84 103,88 107,94 106 C102 104,108 102,110 100Z\" fill=\"#5c6b3a\" stroke=\"#3e4a27\" stroke-width=\"1\" opacity=\".8\"/>\n      <path d=\"M110 105 C120 95,130 95,134 100 C136 103,132 107,126 106 C118 104,112 102,110 100Z\" fill=\"#5c6b3a\" stroke=\"#3e4a27\" stroke-width=\"1\" opacity=\".8\"/>\n      <text x=\"62\" y=\"118\" font-family=\"Old Standard TT,serif\" font-style=\"italic\" font-size=\"12\" fill=\"#5c6b3a\">stipules (en vert)</text>\n    </svg>"},
+  "rameau": {"titre":"Rameau","simple":"Une jeune et petite branche de l'année.","definition":"Le rameau est une petite branche de l'année courante ou de l'année précédente. Sa surface, sa couleur, ses poils ou verrues, son odeur et sa moelle sont des caractères très utiles pour identifier les arbres. On parle de 'jeunes rameaux' pour ceux de l'année.","tip":"💡 Pour identifier un arbre en hiver, casse un bout de jeune rameau et observe : sa couleur, s'il est creux, son odeur, ses verrues.","exemples":[{"nom":"Bouleau verruqueux","svg":"ram_verruq","txt":"Rameaux verruqueux"},{"nom":"Frêne commun","svg":"odeur_n","txt":"Rameaux inodores"}],"svg":"<svg viewBox=\"0 0 220 120\" xmlns=\"http://www.w3.org/2000/svg\">\n      <line x1=\"30\" y1=\"95\" x2=\"190\" y2=\"30\" stroke=\"#8b6b3d\" stroke-width=\"3\" stroke-linecap=\"round\"/>\n      <line x1=\"80\" y1=\"78\" x2=\"60\" y2=\"55\" stroke=\"#8b6b3d\" stroke-width=\"1.8\" stroke-linecap=\"round\"/>\n      <line x1=\"120\" y1=\"64\" x2=\"140\" y2=\"40\" stroke=\"#8b6b3d\" stroke-width=\"1.8\" stroke-linecap=\"round\"/>\n      <circle cx=\"80\" cy=\"78\" r=\"3.5\" fill=\"#5c6b3a\"/>\n      <circle cx=\"120\" cy=\"64\" r=\"3.5\" fill=\"#5c6b3a\"/>\n      <text x=\"32\" y=\"112\" font-family=\"Old Standard TT,serif\" font-style=\"italic\" font-size=\"12\" fill=\"#8b6b3d\">rameaux et bourgeons</text>\n    </svg>"},
+  "composee_pennee": {"titre":"Composée pennée","simple":"Plusieurs petites feuilles (folioles) alignées de chaque côté d'une tige centrale.","definition":"Une feuille composée pennée ressemble à une plume : des folioles sont alignées de part et d'autre d'un axe central (rachis). Le frêne et le sureau ont des feuilles composées pennées. Attention à ne pas confondre chaque foliole avec une feuille simple.","tip":"💡 Cherche le bourgeon : il est à la base du pétiole principal, pas à la base des folioles.","exemples":[{"nom":"Frêne commun","svg":"feuille_composee","txt":"7–13 folioles opposées"}],"svg":"<svg viewBox=\"0 0 220 120\" xmlns=\"http://www.w3.org/2000/svg\">\n      <line x1=\"30\" y1=\"110\" x2=\"190\" y2=\"28\" stroke=\"#8b6b3d\" stroke-width=\"1.8\"/>\n      <ellipse cx=\"72\" cy=\"88\" rx=\"18\" ry=\"7\" fill=\"#e8dfc8\" stroke=\"#3e4a27\" stroke-width=\"1\" transform=\"rotate(-28 72 88)\"/>\n      <ellipse cx=\"96\" cy=\"76\" rx=\"18\" ry=\"7\" fill=\"#e8dfc8\" stroke=\"#3e4a27\" stroke-width=\"1\" transform=\"rotate(28 96 76)\"/>\n      <ellipse cx=\"118\" cy=\"62\" rx=\"18\" ry=\"7\" fill=\"#e8dfc8\" stroke=\"#3e4a27\" stroke-width=\"1\" transform=\"rotate(-28 118 62)\"/>\n      <ellipse cx=\"142\" cy=\"50\" rx=\"18\" ry=\"7\" fill=\"#e8dfc8\" stroke=\"#3e4a27\" stroke-width=\"1\" transform=\"rotate(28 142 50)\"/>\n      <ellipse cx=\"164\" cy=\"36\" rx=\"18\" ry=\"7\" fill=\"#e8dfc8\" stroke=\"#3e4a27\" stroke-width=\"1\" transform=\"rotate(-28 164 36)\"/>\n      <text x=\"30\" y=\"118\" font-family=\"Old Standard TT,serif\" font-style=\"italic\" font-size=\"12\" fill=\"#8b6b3d\">folioles de part et d'autre</text>\n    </svg>"},
+  "composee_palmee": {"titre":"Composée palmée","simple":"Plusieurs petites feuilles (folioles) attachées au même point, comme les doigts d'une main.","definition":"Une feuille composée palmée a toutes ses folioles qui partent du même point, comme les doigts d'une main. Le marronnier d'Inde en est l'exemple parfait avec ses 5 à 7 grandes folioles.","tip":"💡 Compte les 'doigts' du marronnier au printemps — 5 à 7 grandes folioles qui s'ouvrent ensemble.","exemples":[{"nom":"Marronnier","svg":"feuille_composee","txt":"5–7 folioles palmées"}],"svg":"<svg viewBox=\"0 0 220 120\" xmlns=\"http://www.w3.org/2000/svg\">\n      <circle cx=\"110\" cy=\"88\" r=\"5\" fill=\"#8b6b3d\"/>\n      <path d=\"M110 88 L68 28\" stroke=\"#8b6b3d\" stroke-width=\"1.5\"/>\n      <path d=\"M110 88 L88 20\" stroke=\"#8b6b3d\" stroke-width=\"1.5\"/>\n      <path d=\"M110 88 L110 16\" stroke=\"#8b6b3d\" stroke-width=\"1.5\"/>\n      <path d=\"M110 88 L132 20\" stroke=\"#8b6b3d\" stroke-width=\"1.5\"/>\n      <path d=\"M110 88 L152 28\" stroke=\"#8b6b3d\" stroke-width=\"1.5\"/>\n      <ellipse cx=\"68\" cy=\"26\" rx=\"16\" ry=\"6\" fill=\"#e8dfc8\" stroke=\"#3e4a27\" stroke-width=\"1\" transform=\"rotate(-50 68 26)\"/>\n      <ellipse cx=\"88\" cy=\"19\" rx=\"16\" ry=\"6\" fill=\"#e8dfc8\" stroke=\"#3e4a27\" stroke-width=\"1\" transform=\"rotate(-20 88 19)\"/>\n      <ellipse cx=\"110\" cy=\"14\" rx=\"16\" ry=\"6\" fill=\"#e8dfc8\" stroke=\"#3e4a27\" stroke-width=\"1\"/>\n      <ellipse cx=\"132\" cy=\"19\" rx=\"16\" ry=\"6\" fill=\"#e8dfc8\" stroke=\"#3e4a27\" stroke-width=\"1\" transform=\"rotate(20 132 19)\"/>\n      <ellipse cx=\"152\" cy=\"26\" rx=\"16\" ry=\"6\" fill=\"#e8dfc8\" stroke=\"#3e4a27\" stroke-width=\"1\" transform=\"rotate(50 152 26)\"/>\n      <text x=\"66\" y=\"112\" font-family=\"Old Standard TT,serif\" font-style=\"italic\" font-size=\"12\" fill=\"#8b6b3d\">comme une main</text>\n    </svg>"},
+  "arrondi": {"titre":"Arrondi","simple":"En forme de cercle ou de demi-cercle.","definition":"En botanique, 'arrondi' décrit la forme d'un sommet ou d'une base de feuille en arc de cercle. Un sommet arrondi est doux et sans pointe. Une base arrondie forme un U régulier.","tip":"💡 Si le bout de la feuille ressemble à un demi-cercle, il est arrondi.","exemples":[{"nom":"Hêtre","svg":"bord_lisse","txt":"Sommet arrondi ou légèrement pointu"}],"svg":"<svg viewBox=\"0 0 220 120\" xmlns=\"http://www.w3.org/2000/svg\">\n      <path d=\"M110 10 C80 18,68 50,110 108 C152 50,140 18,110 10Z\" fill=\"#e8dfc8\" stroke=\"#3e4a27\" stroke-width=\"1.2\"/>\n      <line x1=\"110\" y1=\"10\" x2=\"110\" y2=\"108\" stroke=\"#5c6b3a\" stroke-width=\".9\"/>\n      <path d=\"M90 12 A25 25 0 0 1 130 12\" stroke=\"#a0522d\" stroke-width=\"1.5\" fill=\"none\"/>\n      <text x=\"64\" y=\"8\" font-family=\"Old Standard TT,serif\" font-style=\"italic\" font-size=\"12\" fill=\"#a0522d\">sommet arrondi</text>\n    </svg>"},
+  "sessile": {"titre":"Sessile","simple":"Sans queue — directement attaché à la branche.","definition":"Sessile vient du latin 'sessilis' (assis). Une feuille sessile n'a pas de pétiole : elle est directement attachée à la branche. Le chêne sessile tire son nom de ses glands sans pédoncule.","tip":"💡 Cherche la queue de la feuille : pas de queue = sessile.","exemples":[{"nom":"Chêne sessile","svg":"feuille_simple","txt":"Gland sessile (sans pédoncule)"}],"svg":"<svg viewBox=\"0 0 220 120\" xmlns=\"http://www.w3.org/2000/svg\">\n      <line x1=\"50\" y1=\"60\" x2=\"130\" y2=\"60\" stroke=\"#8b6b3d\" stroke-width=\"2.5\"/>\n      <path d=\"M130 60 C140 50,160 45,170 50 C175 55,172 65,165 68 C158 72,140 70,130 60Z\" fill=\"#e8dfc8\" stroke=\"#3e4a27\" stroke-width=\"1.2\"/>\n      <text x=\"58\" y=\"80\" font-family=\"Old Standard TT,serif\" font-style=\"italic\" font-size=\"13\" fill=\"#a0522d\">← pas de pétiole</text>\n    </svg>"}
 };
+/* Anciennes clés accentuées des fiches d'arbres (term('lobé') …) → clés du glossaire unique */
+const GLOSSAIRE_ALIAS = {"lobé":"lobe","pennée":"pennee","palmée":"palmee","caduque":"caduc","alternes":"alterne","opposées":"opposee","denté":"dente","pétiole":"petiole","bourgeon":"bourgeon","nervure":"nervure","composée pennée":"composee_pennee","composée palmée":"composee_palmee","persistante":"persistante","entier":"entier","foliole":"foliole","velu":"velu","glabre":"glabre","cordé":"corde","elliptique":"elliptique","lancéolé":"lanceole","samare":"samare","chaton":"chaton","cupule":"cupule","pubescent":"pubescent","stipule":"stipule","rameau":"rameau","arrondi":"arrondi","sessile":"sessile"};
 
 /* ────── SCHÉMAS SVG du GLOSSAIRE ────── */
 function SVG_schema_alterne(){
@@ -3393,7 +3250,7 @@ function glossaireIllus(termeKey){
     brut='<img src="assets/criteres/'+pic+'.webp" alt="" decoding="async">';
   } else {
     var fn=GLOSSAIRE_SVG[termeKey];
-    brut=fn?fn():'';
+    brut=fn?fn():((GLOSSAIRE_TERMES[termeKey]||{}).svg||'');
   }
   if(!brut) return '';
   var t=GLOSSAIRE_TERMES[termeKey];
@@ -3404,38 +3261,40 @@ function glossaireIllus(termeKey){
 function openGlossaireModal(termeKey){
   var t = GLOSSAIRE_TERMES[termeKey];
   if(!t){ console.warn('Terme inconnu :', termeKey); return; }
-
-  // Créer overlay
-  var overlay = document.getElementById('gloss-overlay');
-  if(overlay) overlay.remove();
-  overlay = document.createElement('div');
+  var prev = document.getElementById('gloss-overlay');
+  if(prev) prev.remove();
+  var overlay = document.createElement('div');
   overlay.id = 'gloss-overlay';
-  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(62,47,31,.55);z-index:10000;display:flex;align-items:center;justify-content:center;padding:18px;animation:toastSlideUp 0.25s ease-out;';
-
-  var svgHtml = glossaireIllus(termeKey);
-
-  overlay.innerHTML = '<div style="background:var(--cream);border:2px solid var(--moss);border-radius:12px;max-width:480px;width:100%;max-height:90vh;overflow-y:auto;padding:20px;box-shadow:0 12px 40px rgba(62,47,31,.4);">'
-    +'<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;gap:12px;">'
-    +'<div>'
-    +'<div class="eyebrow" style="margin-bottom:4px;">— Glossaire naturaliste —</div>'
-    +'<div style="font-family:var(--font-title);font-size:1.5em;font-style:italic;color:var(--moss-dark);line-height:1.2;">'+t.titre+'</div>'
-    +'</div>'
-    +'<button id="gloss-close" style="background:none;border:1px solid var(--sepia);color:var(--sepia);border-radius:50%;width:32px;height:32px;cursor:pointer;font-size:1em;line-height:1;flex-shrink:0;">\u2715</button>'
-    +'</div>'
-    +(svgHtml?'<div style="background:rgba(245,239,224,.6);border:1px solid var(--sepia-light);border-radius:8px;padding:12px;margin:14px 0;display:flex;justify-content:center;">'+svgHtml+'</div>':'')
-    +'<div style="font-size:0.95em;line-height:1.6;color:var(--ink);margin-bottom:12px;">'+t.definition+'</div>'
-    +'<div style="background:rgba(200,146,42,.10);border-left:3px solid var(--gold);padding:10px 12px;border-radius:6px;font-size:0.88em;line-height:1.5;color:var(--ink-soft);font-style:italic;">'
-    +'<strong style="font-family:var(--font-title);color:var(--moss-dark);font-style:italic;">Exemple :</strong> '+t.exemple
-    +'</div>'
-    +'</div>';
-
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(62,47,31,.55);z-index:10000;display:flex;align-items:flex-end;justify-content:center;padding:0;animation:glossFade .2s ease-out;';
+  var sub = 'font-size:0.74em;letter-spacing:.12em;text-transform:uppercase;color:var(--sepia);font-style:italic;margin-bottom:4px;';
+  var illus = glossaireIllus(termeKey);
+  var exHtml = '';
+  if(t.exemples && t.exemples.length){
+    exHtml = '<div class="eyebrow" style="text-align:left;margin:16px 0 8px;">\u2014 Exemples dans tes arbres \u2014</div>'
+      + t.exemples.map(function(x){
+        return '<div style="display:flex;align-items:center;gap:11px;margin-bottom:8px;background:rgba(245,239,224,.55);border-radius:8px;padding:8px 11px;">'
+          + '<span style="width:50px;height:42px;flex-shrink:0;display:flex;align-items:center;justify-content:center;">'+(SVG[x.svg]?critereVignette(SVG[x.svg]):'')+'</span>'
+          + '<span style="font-size:0.9em;line-height:1.4;"><strong style="color:var(--moss-dark);font-family:var(--font-title);font-style:italic;">'+x.nom+'</strong> \u2014 '+x.txt+'</span></div>';
+      }).join('');
+  }
+  overlay.innerHTML = '<div style="background:var(--cream);border:2px solid var(--moss);border-bottom:none;border-radius:16px 16px 0 0;max-width:480px;width:100%;max-height:88vh;overflow-y:auto;padding:14px 20px 26px;box-shadow:0 -8px 40px rgba(62,47,31,.4);animation:glossUp .28s cubic-bezier(.2,.8,.2,1);">'
+    + '<div style="width:38px;height:4px;background:rgba(139,107,61,.3);border-radius:2px;margin:0 auto 14px;"></div>'
+    + '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;gap:12px;">'
+    + '<div><div class="eyebrow" style="margin-bottom:4px;">\u2014 Glossaire naturaliste \u2014</div>'
+    + '<div style="font-family:var(--font-title);font-size:1.5em;font-style:italic;color:var(--moss-dark);line-height:1.2;">'+t.titre+'</div></div>'
+    + '<button id="gloss-close" aria-label="Fermer" style="background:none;border:1px solid var(--sepia);color:var(--sepia);border-radius:50%;width:32px;height:32px;cursor:pointer;font-size:1em;line-height:1;flex-shrink:0;">\u2715</button>'
+    + '</div>'
+    + (illus?'<div style="background:rgba(245,239,224,.6);border:1px solid rgba(139,107,61,.25);border-radius:8px;padding:10px;margin:0 0 14px;display:flex;justify-content:center;">'+illus+'</div>':'')
+    + (t.simple?'<div style="'+sub+'">En deux mots</div><div style="font-size:1.05em;line-height:1.5;color:var(--ink);margin-bottom:14px;font-family:var(--font-title);font-style:italic;">'+t.simple+'</div>':'')
+    + '<div style="'+sub+'">Explication</div>'
+    + '<div style="font-size:0.93em;line-height:1.55;color:var(--ink);">'+t.definition+'</div>'
+    + (t.tip?'<div style="background:rgba(200,146,42,.10);border-left:3px solid var(--gold);padding:10px 12px;border-radius:6px;margin-top:14px;font-size:0.9em;line-height:1.5;color:var(--ink-soft);">'+t.tip+'</div>':'')
+    + (t.exemple?'<div style="background:rgba(200,146,42,.10);border-left:3px solid var(--gold);padding:10px 12px;border-radius:6px;margin-top:14px;font-size:0.88em;line-height:1.5;color:var(--ink-soft);font-style:italic;"><strong style="font-family:var(--font-title);color:var(--moss-dark);font-style:italic;">Exemple :</strong> '+t.exemple+'</div>':'')
+    + exHtml
+    + '</div>';
   document.body.appendChild(overlay);
-
-  // Fermer au clic sur le bouton OU sur l'overlay
   document.getElementById('gloss-close').addEventListener('click', function(){ overlay.remove(); });
-  overlay.addEventListener('click', function(e){
-    if(e.target === overlay) overlay.remove();
-  });
+  overlay.addEventListener('click', function(e){ if(e.target === overlay) overlay.remove(); });
 }
 
 // Helper pour créer un span surligné cliquable autour d'un mot
@@ -3955,548 +3814,8 @@ function esc(s){ return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;'
 /* ────────────────────────────────
    GLOSSAIRE BOTANIQUE
 ──────────────────────────────── */
-const GLOSSAIRE = {
-  "lobé": {
-    titre: "Lobé",
-    simple: "Le bord de la feuille forme de grandes vagues arrondies ou pointues.",
-    detail: "Une feuille lobée est découpée en 'lobes', comme les doigts d'une main. Les lobes peuvent être arrondis (chêne) ou pointus (érable sycomore, chêne rouge). Ce n'est pas une coupure totale — les lobes restent reliés entre eux.",
-    tip: "💡 Passe le doigt sur le bord : tu sentiras les grandes vagues successives.",
-    svg: `<svg viewBox="0 0 220 120" xmlns="http://www.w3.org/2000/svg">
-      <path d="M80 10 C68 14,60 22,58 28 C48 26,38 30,34 38 C40 44,44 46,52 46 C44 50,38 56,38 62 C46 64,52 62,58 58 C52 64,48 70,48 76 C56 78,62 76,66 72 C62 78,62 85,66 90 L74 95 82 90 C86 85,86 78,82 72 C86 76,92 78,100 76 C100 70,96 64,90 58 C96 62,102 64,110 62 C110 56,104 50,96 46 C104 46,108 44,114 38 C110 30,100 26,90 28 C88 22,80 14,80 10Z" fill="#e8dfc8" stroke="#3e4a27" stroke-width="1.2"/>
-      <path d="M80 10L80 95" stroke="#5c6b3a" stroke-width=".9" fill="none"/>
-      <text x="125" y="40" font-family="Old Standard TT,serif" font-style="italic" font-size="13" fill="#8b6b3d">← lobes</text>
-      <text x="125" y="58" font-family="Old Standard TT,serif" font-style="italic" font-size="13" fill="#8b6b3d">arrondis</text>
-    </svg>`,
-    exemples: [
-      {nom:"Chêne pédonculé", svg:"bord_lobe", txt:"Lobes arrondis, profonds"},
-      {nom:"Érable sycomore", svg:"nerv_palmee", txt:"5 lobes palmés, dentés"},
-    ]
-  },
-  "pennée": {
-    titre: "Pennée (nervation)",
-    simple: "Une nervure centrale avec des nervures secondaires de chaque côté — comme une plume.",
-    detail: "Dans une feuille à nervation pennée, toutes les nervures secondaires partent d'une seule grande nervure centrale (le 'rachis'). C'est comme les barbes d'une plume d'oiseau. La plupart des feuillus ont une nervation pennée.",
-    tip: "💡 Tiens la feuille à contre-jour : tu verras la nervure centrale et ses 'bras' de chaque côté.",
-    svg: `<svg viewBox="0 0 220 120" xmlns="http://www.w3.org/2000/svg">
-      <path d="M110 8 C80 18,68 48,110 108 C152 48,140 18,110 8Z" fill="#e8dfc8" stroke="#3e4a27" stroke-width="1.2"/>
-      <line x1="110" y1="8" x2="110" y2="108" stroke="#3e4a27" stroke-width="1.5"/>
-      <line x1="110" y1="28" x2="84" y2="40" stroke="#5c6b3a" stroke-width="1"/>
-      <line x1="110" y1="28" x2="136" y2="40" stroke="#5c6b3a" stroke-width="1"/>
-      <line x1="110" y1="50" x2="76" y2="62" stroke="#5c6b3a" stroke-width="1"/>
-      <line x1="110" y1="50" x2="144" y2="62" stroke="#5c6b3a" stroke-width="1"/>
-      <line x1="110" y1="72" x2="84" y2="82" stroke="#5c6b3a" stroke-width="1"/>
-      <line x1="110" y1="72" x2="136" y2="82" stroke="#5c6b3a" stroke-width="1"/>
-      <text x="10" y="55" font-family="Old Standard TT,serif" font-style="italic" font-size="12" fill="#8b6b3d">nervures</text>
-      <text x="10" y="70" font-family="Old Standard TT,serif" font-style="italic" font-size="12" fill="#8b6b3d">secondaires →</text>
-    </svg>`,
-    exemples: [
-      {nom:"Hêtre", svg:"nerv_pennee", txt:"Nervation pennée classique"},
-      {nom:"Châtaignier", svg:"nerv_pennee", txt:"Nervures très marquées"},
-    ]
-  },
-  "palmée": {
-    titre: "Palmée (nervation ou feuille)",
-    simple: "Plusieurs nervures principales partent toutes du même point — comme les doigts d'une main.",
-    detail: "Une nervation palmée ressemble à une main ouverte : plusieurs grandes nervures rayonnent depuis le point d'attache du pétiole. Les feuilles d'érable, de platane et de marronnier sont palmées. Une feuille composée palmée a ses folioles disposées comme les doigts d'une main.",
-    tip: "💡 Trouve le point où la queue (pétiole) rejoint la feuille : si plusieurs nervures partent de là, c'est palmé.",
-    svg: `<svg viewBox="0 0 220 120" xmlns="http://www.w3.org/2000/svg">
-      <path d="M110 20 C74 28,64 62,76 90 L110 100 144 90 C156 62,146 28,110 20Z" fill="#e8dfc8" stroke="#3e4a27" stroke-width="1.2"/>
-      <line x1="110" y1="22" x2="82" y2="58" stroke="#3e4a27" stroke-width="1.3"/>
-      <line x1="110" y1="22" x2="110" y2="96" stroke="#3e4a27" stroke-width="1.3"/>
-      <line x1="110" y1="22" x2="138" y2="58" stroke="#3e4a27" stroke-width="1.3"/>
-      <line x1="110" y1="22" x2="70" y2="76" stroke="#3e4a27" stroke-width="1.3"/>
-      <line x1="110" y1="22" x2="150" y2="76" stroke="#3e4a27" stroke-width="1.3"/>
-      <circle cx="110" cy="22" r="4" fill="#a0522d"/>
-      <text x="116" y="18" font-family="Old Standard TT,serif" font-style="italic" font-size="11" fill="#a0522d">point de départ</text>
-    </svg>`,
-    exemples: [
-      {nom:"Érable sycomore", svg:"nerv_palmee", txt:"5 nervures palmées"},
-      {nom:"Marronnier", svg:"feuille_composee", txt:"Feuille composée palmée"},
-    ]
-  },
-  "caduque": {
-    titre: "Caduque",
-    simple: "La feuille tombe à l'automne.",
-    detail: "Un arbre caduque perd toutes ses feuilles à l'automne. En hiver, il se retrouve nu. C'est une adaptation au froid et à la sécheresse hivernale. La plupart de nos arbres indigènes sont caducs : chêne, hêtre, charme, bouleau...",
-    tip: "💡 En automne, les feuilles caduques changent de couleur (jaune, orange, rouge) avant de tomber — c'est un spectacle !",
-    svg: `<svg viewBox="0 0 220 120" xmlns="http://www.w3.org/2000/svg">
-      <line x1="50" y1="110" x2="50" y2="30" stroke="#8b6b3d" stroke-width="2.5"/>
-      <path d="M50 50 C30 40,18 30,24 22" stroke="#5c6b3a" stroke-width="1.2" fill="none"/>
-      <path d="M50 50 C70 40,82 30,76 22" stroke="#5c6b3a" stroke-width="1.2" fill="none"/>
-      <path d="M50 70 C28 58,16 46,20 38" stroke="#5c6b3a" stroke-width="1.2" fill="none"/>
-      <path d="M50 70 C72 58,84 46,80 38" stroke="#5c6b3a" stroke-width="1.2" fill="none"/>
-      <text x="20" y="118" font-family="Old Standard TT,serif" font-style="italic" font-size="12" fill="#5c6b3a">Été</text>
-      <line x1="140" y1="110" x2="140" y2="30" stroke="#8b6b3d" stroke-width="2.5"/>
-      <ellipse cx="125" cy="75" rx="10" ry="6" fill="#a0522d" opacity=".7" transform="rotate(-30 125 75)"/>
-      <ellipse cx="155" cy="85" rx="9" ry="5" fill="#a0522d" opacity=".5" transform="rotate(20 155 85)"/>
-      <ellipse cx="148" cy="100" rx="8" ry="5" fill="#8b6b3d" opacity=".6" transform="rotate(-10 148 100)"/>
-      <ellipse cx="128" cy="95" rx="9" ry="5" fill="#a0522d" opacity=".6" transform="rotate(15 128 95)"/>
-      <text x="118" y="118" font-family="Old Standard TT,serif" font-style="italic" font-size="12" fill="#a0522d">Automne</text>
-    </svg>`,
-    exemples: [
-      {nom:"Hêtre", svg:"caduc", txt:"Caduque, feuilles tombent en automne"},
-      {nom:"Chêne pédonculé", svg:"bord_lobe", txt:"Caduque — parfois semi-persistant"},
-    ]
-  },
-  "persistante": {
-    titre: "Persistante",
-    simple: "La feuille reste toute l'année sur l'arbre.",
-    detail: "Un arbre persistant (ou sempervirent) garde ses feuilles en hiver. Ses feuilles sont souvent plus épaisses, coriaces et brillantes pour résister au froid et à la sécheresse. Les résineux (pin, épicéa) et certains feuillus (lierre, houx) sont persistants.",
-    tip: "💡 En hiver, si l'arbre a encore ses feuilles, elles sont persistantes !",
-    svg: `<svg viewBox="0 0 220 120" xmlns="http://www.w3.org/2000/svg">
-      <line x1="110" y1="110" x2="110" y2="20" stroke="#3e4a27" stroke-width="2.5"/>
-      <ellipse cx="96" cy="35" rx="14" ry="5" fill="#5c6b3a" stroke="#3e4a27" stroke-width=".8" transform="rotate(-25 96 35)"/>
-      <ellipse cx="124" cy="35" rx="14" ry="5" fill="#5c6b3a" stroke="#3e4a27" stroke-width=".8" transform="rotate(25 124 35)"/>
-      <ellipse cx="92" cy="55" rx="14" ry="5" fill="#5c6b3a" stroke="#3e4a27" stroke-width=".8" transform="rotate(-25 92 55)"/>
-      <ellipse cx="128" cy="55" rx="14" ry="5" fill="#5c6b3a" stroke="#3e4a27" stroke-width=".8" transform="rotate(25 128 55)"/>
-      <ellipse cx="94" cy="75" rx="14" ry="5" fill="#5c6b3a" stroke="#3e4a27" stroke-width=".8" transform="rotate(-25 94 75)"/>
-      <ellipse cx="126" cy="75" rx="14" ry="5" fill="#5c6b3a" stroke="#3e4a27" stroke-width=".8" transform="rotate(25 126 75)"/>
-      <text x="72" y="112" font-family="Old Standard TT,serif" font-style="italic" font-size="12" fill="#5c6b3a">Hiver — toujours vert</text>
-    </svg>`,
-    exemples: [
-      {nom:"Pin sylvestre", svg:"aig_longue", txt:"Persistant — aiguilles toute l'année"},
-      {nom:"Épicéa", svg:"aig_isolee", txt:"Persistant — aiguilles toute l'année"},
-    ]
-  },
-  "alternes": {
-    titre: "Alternes",
-    simple: "Les feuilles sont placées une après l'autre en zigzag sur la branche.",
-    detail: "Les feuilles alternes ne sont jamais face à face. Elles sont décalées — une à gauche, une à droite, une à gauche... C'est la disposition la plus courante chez les arbres.",
-    tip: "💡 Regarde une branche du bas vers le haut : si les feuilles alternent de côté, elles sont alternes.",
-    svg: `<svg viewBox="0 0 220 120" xmlns="http://www.w3.org/2000/svg">
-      <path d="M30 110 Q110 60 190 20" stroke="#8b6b3d" stroke-width="2" fill="none"/>
-      <ellipse cx="65" cy="86" rx="22" ry="8" fill="#e8dfc8" stroke="#3e4a27" stroke-width="1.2" transform="rotate(-32 65 86)"/>
-      <ellipse cx="110" cy="60" rx="22" ry="8" fill="#e8dfc8" stroke="#3e4a27" stroke-width="1.2" transform="rotate(40 110 60)"/>
-      <ellipse cx="155" cy="36" rx="22" ry="8" fill="#e8dfc8" stroke="#3e4a27" stroke-width="1.2" transform="rotate(-32 155 36)"/>
-      <text x="8" y="115" font-family="Old Standard TT,serif" font-style="italic" font-size="12" fill="#8b6b3d">gauche → droite → gauche</text>
-    </svg>`,
-    exemples: [
-      {nom:"Hêtre", svg:"disp_alt", txt:"Feuilles alternes"},
-      {nom:"Châtaignier", svg:"disp_alt", txt:"Feuilles alternes"},
-    ]
-  },
-  "opposées": {
-    titre: "Opposées",
-    simple: "Les feuilles sont placées par paires, face à face.",
-    detail: "Les feuilles opposées poussent deux par deux, directement en face l'une de l'autre sur la branche. C'est moins courant que les feuilles alternes. Le frêne, l'érable et le marronnier ont des feuilles opposées.",
-    tip: "💡 Si tu vois deux feuilles exactement face à face au même niveau, elles sont opposées.",
-    svg: `<svg viewBox="0 0 220 120" xmlns="http://www.w3.org/2000/svg">
-      <path d="M30 110 Q110 60 190 20" stroke="#8b6b3d" stroke-width="2" fill="none"/>
-      <ellipse cx="76" cy="80" rx="22" ry="8" fill="#e8dfc8" stroke="#3e4a27" stroke-width="1.2" transform="rotate(-32 76 80)"/>
-      <ellipse cx="88" cy="72" rx="22" ry="8" fill="#e8dfc8" stroke="#3e4a27" stroke-width="1.2" transform="rotate(40 88 72)"/>
-      <ellipse cx="130" cy="52" rx="22" ry="8" fill="#e8dfc8" stroke="#3e4a27" stroke-width="1.2" transform="rotate(-32 130 52)"/>
-      <ellipse cx="142" cy="44" rx="22" ry="8" fill="#e8dfc8" stroke="#3e4a27" stroke-width="1.2" transform="rotate(40 142 44)"/>
-      <text x="18" y="115" font-family="Old Standard TT,serif" font-style="italic" font-size="12" fill="#8b6b3d">toujours par paires</text>
-    </svg>`,
-    exemples: [
-      {nom:"Frêne commun", svg:"disp_opp", txt:"Folioles opposées"},
-      {nom:"Érable sycomore", svg:"disp_opp", txt:"Feuilles opposées"},
-    ]
-  },
-  "denté": {
-    titre: "Denté",
-    simple: "Le bord de la feuille a de petites dents régulières, comme une scie.",
-    detail: "Un bord denté ressemble à la lame d'une scie : des petites pointes régulières tout autour. Certaines feuilles sont 'simplement dentées' (dents simples) ou 'doublement dentées' (chaque dent a elle-même de petites dents).",
-    tip: "💡 Passe doucement ton doigt sur le bord — tu sentiras les petites dents une à une.",
-    svg: `<svg viewBox="0 0 220 120" xmlns="http://www.w3.org/2000/svg">
-      <path d="M110 10 C90 18,76 25,68 32 L62 34 64 40 56 42 59 48 52 52 56 58 52 64 58 68 56 74 64 78 62 84 72 88 74 94 85 98 110 102 135 98 146 94 148 88 156 84 154 78 160 74 156 68 160 64 156 58 160 52 153 48 156 42 148 40 150 34 144 32 C136 25,122 18,110 10Z" fill="#e8dfc8" stroke="#3e4a27" stroke-width="1.2" stroke-linejoin="round"/>
-      <line x1="110" y1="10" x2="110" y2="102" stroke="#5c6b3a" stroke-width=".9"/>
-      <line x1="80" y1="26" x2="62" y2="36" stroke="#8b6b3d" stroke-width="1" stroke-dasharray="3,2"/>
-      <text x="8" y="40" font-family="Old Standard TT,serif" font-style="italic" font-size="12" fill="#a0522d">← dents</text>
-    </svg>`,
-    exemples: [
-      {nom:"Bouleau verruqueux", svg:"bord_dente", txt:"Doublement denté"},
-      {nom:"Charme", svg:"bord_dd", txt:"Doublement denté, nervures saillantes"},
-    ]
-  },
-  "entier": {
-    titre: "Entier",
-    simple: "Le bord de la feuille est lisse, sans dents ni vagues.",
-    detail: "Une feuille à bord entier a un contour lisse et régulier. Ni dents, ni lobes, ni épines. C'est le cas du hêtre (légèrement ondulé mais presque lisse) ou du troène.",
-    tip: "💡 Passe le doigt sur le bord — si c'est complètement lisse, le bord est entier.",
-    svg: `<svg viewBox="0 0 220 120" xmlns="http://www.w3.org/2000/svg">
-      <path d="M110 8 C76 18,62 52,110 108 C158 52,144 18,110 8Z" fill="#e8dfc8" stroke="#3e4a27" stroke-width="1.5"/>
-      <line x1="110" y1="8" x2="110" y2="108" stroke="#5c6b3a" stroke-width=".9"/>
-      <text x="148" y="55" font-family="Old Standard TT,serif" font-style="italic" font-size="12" fill="#5c6b3a">← lisse</text>
-    </svg>`,
-    exemples: [
-      {nom:"Hêtre", svg:"bord_lisse", txt:"Bord entier, légèrement ondulé"},
-    ]
-  },
-  "pétiole": {
-    titre: "Pétiole",
-    simple: "La 'queue' qui relie la feuille à la branche.",
-    detail: "Le pétiole est la tige mince entre la branche et le limbe (la partie plate de la feuille). Il peut être long ou court, velu ou glabre, rond ou aplati. Certaines feuilles n'en ont pas (feuilles sessiles).",
-    tip: "💡 Le pétiole du chêne pédonculé est très court, celui du peuplier est aplati — c'est pour ça que ses feuilles tremblent dans le vent !",
-    svg: `<svg viewBox="0 0 220 120" xmlns="http://www.w3.org/2000/svg">
-      <path d="M110 15 C80 25,68 55,110 95 C152 55,140 25,110 15Z" fill="#e8dfc8" stroke="#3e4a27" stroke-width="1.2"/>
-      <line x1="110" y1="15" x2="110" y2="95" stroke="#5c6b3a" stroke-width=".9"/>
-      <line x1="110" y1="95" x2="110" y2="118" stroke="#8b6b3d" stroke-width="2.5"/>
-      <line x1="96" y1="95" x2="124" y2="95" stroke="rgba(139,107,61,.3)" stroke-width=".8" stroke-dasharray="3,2"/>
-      <text x="120" y="112" font-family="Old Standard TT,serif" font-style="italic" font-size="13" fill="#a0522d">pétiole</text>
-    </svg>`,
-    exemples: [
-      {nom:"Chêne pédonculé", svg:"pet_court", txt:"Pétiole très court"},
-      {nom:"Hêtre", svg:"pet_long", txt:"Pétiole moyen"},
-    ]
-  },
-  "foliole": {
-    titre: "Foliole",
-    simple: "Une des petites feuilles d'une feuille composée.",
-    detail: "Dans une feuille composée, chaque 'petite feuille' s'appelle une foliole. Toutes les folioles sont attachées sur le même pétiole. Attention : on peut confondre une foliole avec une feuille simple — le truc : la feuille a un bourgeon à sa base, la foliole n'en a pas.",
-    tip: "💡 Cherche le bourgeon : si tu en vois un au point d'attache, c'est une feuille. Pas de bourgeon = foliole.",
-    svg: `<svg viewBox="0 0 220 120" xmlns="http://www.w3.org/2000/svg">
-      <line x1="110" y1="110" x2="110" y2="18" stroke="#8b6b3d" stroke-width="1.5"/>
-      <ellipse cx="86" cy="35" rx="20" ry="9" fill="#e8dfc8" stroke="#3e4a27" stroke-width="1" transform="rotate(-28 86 35)"/>
-      <ellipse cx="134" cy="35" rx="20" ry="9" fill="#e8dfc8" stroke="#3e4a27" stroke-width="1" transform="rotate(28 134 35)"/>
-      <ellipse cx="82" cy="58" rx="20" ry="9" fill="#e8dfc8" stroke="#3e4a27" stroke-width="1" transform="rotate(-28 82 58)"/>
-      <ellipse cx="138" cy="58" rx="20" ry="9" fill="#e8dfc8" stroke="#3e4a27" stroke-width="1" transform="rotate(28 138 58)"/>
-      <ellipse cx="110" cy="18" rx="14" ry="9" fill="#e8dfc8" stroke="#3e4a27" stroke-width="1"/>
-      <text x="62" y="92" font-family="Old Standard TT,serif" font-style="italic" font-size="12" fill="#a0522d">folioles</text>
-      <line x1="80" y1="89" x2="86" y2="70" stroke="#a0522d" stroke-width=".8"/>
-      <line x1="140" y1="89" x2="134" y2="70" stroke="#a0522d" stroke-width=".8"/>
-    </svg>`,
-    exemples: [
-      {nom:"Frêne commun", svg:"feuille_composee", txt:"7–13 folioles opposées"},
-      {nom:"Marronnier", svg:"feuille_composee", txt:"5–7 folioles palmées"},
-    ]
-  },
-  "velu": {
-    titre: "Velu",
-    simple: "Couvert de poils longs et doux.",
-    detail: "Une feuille velue a des poils longs et visibles sur sa surface. C'est plus prononcé que pubescent (poils fins et courts). On touche le dessous d'une feuille velue et on sent clairement les poils.",
-    tip: "💡 Retourne la feuille et touche le dessous — si tu sens des poils doux et longs, c'est velu.",
-    svg: `<svg viewBox="0 0 220 120" xmlns="http://www.w3.org/2000/svg">
-      <path d="M110 10 C80 20,68 50,110 100 C152 50,140 20,110 10Z" fill="#e8dfc8" stroke="#3e4a27" stroke-width="1.2"/>
-      <line x1="110" y1="10" x2="110" y2="100" stroke="#5c6b3a" stroke-width=".9"/>
-      <line x1="72" y1="42" x2="68" y2="32" stroke="#8b6b3d" stroke-width="1.2"/>
-      <line x1="78" y1="50" x2="74" y2="40" stroke="#8b6b3d" stroke-width="1.2"/>
-      <line x1="86" y1="58" x2="82" y2="48" stroke="#8b6b3d" stroke-width="1.2"/>
-      <line x1="148" y1="42" x2="152" y2="32" stroke="#8b6b3d" stroke-width="1.2"/>
-      <line x1="142" y1="50" x2="146" y2="40" stroke="#8b6b3d" stroke-width="1.2"/>
-      <line x1="134" y1="58" x2="138" y2="48" stroke="#8b6b3d" stroke-width="1.2"/>
-      <line x1="92" y1="70" x2="88" y2="60" stroke="#8b6b3d" stroke-width="1.2"/>
-      <line x1="128" y1="70" x2="132" y2="60" stroke="#8b6b3d" stroke-width="1.2"/>
-      <text x="62" y="114" font-family="Old Standard TT,serif" font-style="italic" font-size="12" fill="#8b6b3d">poils longs visibles</text>
-    </svg>`,
-    exemples: [
-      {nom:"Cornouiller", svg:"velu", txt:"Feuilles velues en dessous"},
-      {nom:"Néflier", svg:"velu", txt:"Velue sur les deux faces"},
-    ]
-  },
-  "glabre": {
-    titre: "Glabre",
-    simple: "Sans poils — lisse au toucher.",
-    detail: "Glabre signifie simplement 'sans poils'. En botanique, on distingue glabre (lisse), velu (poils longs), pubescent (poils fins et courts) et cilié (poils sur le bord). Le dessous d'une feuille glabre est lisse quand on le touche.",
-    tip: "💡 Retourne la feuille et passe le doigt sur le dessous — glabre = doux et lisse, velu = poils que tu sens.",
-    svg: `<svg viewBox="0 0 220 120" xmlns="http://www.w3.org/2000/svg">
-      <path d="M110 10 C80 20,68 50,110 100 C152 50,140 20,110 10Z" fill="#e8dfc8" stroke="#3e4a27" stroke-width="1.2"/>
-      <line x1="110" y1="10" x2="110" y2="100" stroke="#5c6b3a" stroke-width=".9"/>
-      <text x="148" y="58" font-family="Old Standard TT,serif" font-style="italic" font-size="13" fill="#5c6b3a">lisse</text>
-    </svg>`,
-    exemples: [
-      {nom:"Hêtre", svg:"glabre", txt:"Feuille glabre à maturité"},
-    ]
-  },
-  "cordé": {
-    titre: "Cordé",
-    simple: "La base de la feuille est en forme de cœur.",
-    detail: "Une base cordée ressemble à un cœur inversé : deux lobes arrondis de chaque côté du pétiole. C'est le cas du tilleul et du lierre.",
-    tip: "💡 Regarde tout en bas de la feuille, là où la queue commence — si tu vois deux petites oreilles rondes, c'est cordé.",
-    svg: `<svg viewBox="0 0 220 120" xmlns="http://www.w3.org/2000/svg">
-      <path d="M110 20 C80 28,64 55,110 105 C156 55,140 28,110 20Z" fill="#e8dfc8" stroke="#3e4a27" stroke-width="1.2"/>
-      <line x1="110" y1="20" x2="110" y2="105" stroke="#5c6b3a" stroke-width=".9"/>
-      <path d="M110 105 C96 105,86 108,82 112 C80 115,84 118,88 116 C96 112,104 110,110 110 C116 110,124 112,132 116 C136 118,140 115,138 112 C134 108,124 105,110 105Z" fill="#e8dfc8" stroke="#3e4a27" stroke-width="1.2"/>
-      <text x="56" y="116" font-family="Old Standard TT,serif" font-style="italic" font-size="12" fill="#a0522d">base en cœur</text>
-    </svg>`,
-    exemples: [{nom:"Tilleul", svg:"base_ronde", txt:"Base cordée typique"}]
-  },
-  "elliptique": {
-    titre: "Elliptique",
-    simple: "La feuille a la forme d'une ellipse — ovale et symétrique.",
-    detail: "Une feuille elliptique est plus longue que large, avec les deux extrémités arrondies et symétriques. C'est une des formes les plus courantes. On distingue elliptique (rapport longueur/largeur ≈ 2) et lancéolé (plus allongé).",
-    tip: "💡 Si la feuille ressemble à un œuf coupé en deux dans la longueur, elle est elliptique.",
-    svg: `<svg viewBox="0 0 220 120" xmlns="http://www.w3.org/2000/svg">
-      <ellipse cx="110" cy="60" rx="40" ry="55" fill="#e8dfc8" stroke="#3e4a27" stroke-width="1.2"/>
-      <line x1="110" y1="5" x2="110" y2="115" stroke="#5c6b3a" stroke-width=".9"/>
-      <line x1="70" y1="60" x2="150" y2="60" stroke="#a0522d" stroke-width=".8" stroke-dasharray="3,2"/>
-      <text x="125" y="58" font-family="Old Standard TT,serif" font-style="italic" font-size="11" fill="#a0522d">largeur</text>
-    </svg>`,
-    exemples: [{nom:"Hêtre", svg:"bord_lisse", txt:"Feuille elliptique à ovale"}]
-  },
-  "lancéolé": {
-    titre: "Lancéolé",
-    simple: "La feuille est longue et fine, comme une lance.",
-    detail: "Une feuille lancéolée est bien plus longue que large (rapport ≥ 3), avec les deux extrémités en pointe. Elle ressemble à la lame d'une lance ou d'un couteau. C'est typique des saules et du châtaignier.",
-    tip: "💡 Si la feuille est très allongée et effilée aux deux bouts, elle est lancéolée.",
-    svg: `<svg viewBox="0 0 220 120" xmlns="http://www.w3.org/2000/svg">
-      <path d="M110 8 C96 20,84 45,88 60 C84 75,96 100,110 112 C124 100,136 75,132 60 C136 45,124 20,110 8Z" fill="#e8dfc8" stroke="#3e4a27" stroke-width="1.2"/>
-      <line x1="110" y1="8" x2="110" y2="112" stroke="#5c6b3a" stroke-width=".9"/>
-      <text x="138" y="62" font-family="Old Standard TT,serif" font-style="italic" font-size="12" fill="#8b6b3d">← étroite</text>
-    </svg>`,
-    exemples: [{nom:"Châtaignier", svg:"forme_longue", txt:"Feuilles lancéolées"}]
-  },
-  "samare": {
-    titre: "Samare",
-    simple: "Un fruit sec avec une aile qui lui permet de voler.",
-    detail: "La samare est un fruit sec qui ne s'ouvre pas, muni d'une ou deux ailes membraneuses. Ces ailes font tournoyer le fruit comme un hélicoptère quand il tombe, ce qui lui permet de se disperser loin de l'arbre. Les érables ont des samares doubles, le frêne des samares simples.",
-    tip: "💡 En automne, ramasse des 'hélicoptères' sous un érable — ce sont des samares doubles !",
-    svg: `<svg viewBox="0 0 220 120" xmlns="http://www.w3.org/2000/svg">
-      <ellipse cx="88" cy="85" rx="10" ry="8" fill="#8b6b3d" stroke="#3e4a27" stroke-width="1"/>
-      <path d="M88 85 C75 75,55 45,70 18 C85 30,95 60,88 85Z" fill="#e8dfc8" stroke="#3e4a27" stroke-width="1.2"/>
-      <ellipse cx="132" cy="85" rx="10" ry="8" fill="#8b6b3d" stroke="#3e4a27" stroke-width="1"/>
-      <path d="M132 85 C145 75,165 45,150 18 C135 30,125 60,132 85Z" fill="#e8dfc8" stroke="#3e4a27" stroke-width="1.2"/>
-      <text x="72" y="112" font-family="Old Standard TT,serif" font-style="italic" font-size="13" fill="#a0522d">double samare</text>
-    </svg>`,
-    exemples: [
-      {nom:"Érable sycomore", svg:"nerv_palmee", txt:"Samares doubles en hélice"},
-      {nom:"Frêne commun", svg:"feuille_composee", txt:"Samares simples en grappes"},
-    ]
-  },
-  "bourgeon": {
-    titre: "Bourgeon",
-    simple: "Le bouton d'où naîtront les feuilles ou les fleurs au printemps.",
-    detail: "Le bourgeon est une structure compacte protégée par des écailles. Il contient les futures feuilles ou fleurs en miniature. La forme, la couleur et la disposition des bourgeons sont des critères très utiles pour identifier les arbres en hiver quand les feuilles sont tombées.",
-    tip: "💡 En hiver, regarde les bourgeons : le frêne a des bourgeons noirs, le hêtre de longs bourgeons marron pointus, le marronnier de gros bourgeons collants.",
-    svg: `<svg viewBox="0 0 220 120" xmlns="http://www.w3.org/2000/svg">
-      <line x1="60" y1="110" x2="160" y2="110" stroke="#8b6b3d" stroke-width="2"/>
-      <path d="M90 110 C88 95,84 80,90 65 C96 52,104 52,110 65 C116 80,112 95,110 110Z" fill="#5c6b3a" stroke="#3e4a27" stroke-width="1.2"/>
-      <path d="M90 110 C92 90,96 72,100 62" stroke="#3e4a27" stroke-width=".7" fill="none"/>
-      <path d="M110 110 C108 90,104 72,100 62" stroke="#3e4a27" stroke-width=".7" fill="none"/>
-      <text x="78" y="30" font-family="Old Standard TT,serif" font-style="italic" font-size="13" fill="#5c6b3a">bourgeon</text>
-      <line x1="100" y1="33" x2="100" y2="60" stroke="#a0522d" stroke-width=".8"/>
-    </svg>`,
-    exemples: [
-      {nom:"Hêtre", svg:"bord_lisse", txt:"Bourgeons longs et pointus"},
-      {nom:"Frêne commun", svg:"feuille_composee", txt:"Bourgeons noirs caractéristiques"},
-    ]
-  },
-  "chaton": {
-    titre: "Chaton",
-    simple: "Une longue grappe de petites fleurs sans pétales, qui pend comme une queue de chat.",
-    detail: "Le chaton est une inflorescence (groupe de fleurs) allongée et souple, faite de nombreuses petites fleurs très simples sans pétales. Il ressemble à une chenille ou à une queue de chat. Les chatons sont très visibles au printemps avant les feuilles chez le bouleau, le noisetier et le charme.",
-    tip: "💡 Au printemps, les longs chatons jaunes du bouleau et du noisetier libèrent beaucoup de pollen — si tu éternues, c'est peut-être à cause d'eux !",
-    svg: `<svg viewBox="0 0 220 120" xmlns="http://www.w3.org/2000/svg">
-      <line x1="50" y1="25" x2="170" y2="95" stroke="#8b6b3d" stroke-width="2"/>
-      <ellipse cx="62" cy="32" rx="7" ry="4" fill="#c8922a" stroke="#8b6b3d" stroke-width=".8" transform="rotate(35 62 32)"/>
-      <ellipse cx="78" cy="42" rx="7" ry="4" fill="#c8922a" stroke="#8b6b3d" stroke-width=".8" transform="rotate(35 78 42)"/>
-      <ellipse cx="94" cy="52" rx="7" ry="4" fill="#c8922a" stroke="#8b6b3d" stroke-width=".8" transform="rotate(35 94 52)"/>
-      <ellipse cx="110" cy="62" rx="7" ry="4" fill="#c8922a" stroke="#8b6b3d" stroke-width=".8" transform="rotate(35 110 62)"/>
-      <ellipse cx="126" cy="72" rx="7" ry="4" fill="#c8922a" stroke="#8b6b3d" stroke-width=".8" transform="rotate(35 126 72)"/>
-      <ellipse cx="142" cy="82" rx="7" ry="4" fill="#c8922a" stroke="#8b6b3d" stroke-width=".8" transform="rotate(35 142 82)"/>
-      <text x="50" y="112" font-family="Old Standard TT,serif" font-style="italic" font-size="13" fill="#c8922a">chaton pendant</text>
-    </svg>`,
-    exemples: [
-      {nom:"Bouleau verruqueux", svg:"bord_dente", txt:"Chatons pendants au printemps"},
-      {nom:"Charme", svg:"bord_dd", txt:"Chatons verts en épi"},
-    ]
-  },
-  "cupule": {
-    titre: "Cupule",
-    simple: "La petite coupe qui tient le gland ou la faîne.",
-    detail: "La cupule est une enveloppe écailleuse ou hérissée qui entoure partiellement le fruit. Chez le chêne, elle forme une petite coupe sous le gland. Chez le hêtre, elle est hérissée et contient 2-3 faînes. Chez le châtaignier, elle est très épineuse (bogue) et contient 1-3 châtaignes.",
-    tip: "💡 Ramasse un gland : la petite coupe en dessous, c'est la cupule !",
-    svg: `<svg viewBox="0 0 220 120" xmlns="http://www.w3.org/2000/svg">
-      <ellipse cx="110" cy="55" rx="18" ry="28" fill="#c8922a" stroke="#8b6b3d" stroke-width="1.5"/>
-      <path d="M88 68 C88 80,96 88,110 90 C124 88,132 80,132 68Z" fill="#8b6b3d" stroke="#5a4a36" stroke-width="1.2"/>
-      <path d="M90 70 C92 72,88 74,90 76" stroke="#3e4a27" stroke-width=".8" fill="none"/>
-      <path d="M96 71 C98 73,94 75,96 77" stroke="#3e4a27" stroke-width=".8" fill="none"/>
-      <path d="M102 72 C104 74,100 76,102 78" stroke="#3e4a27" stroke-width=".8" fill="none"/>
-      <path d="M108 72 C110 74,106 76,108 78" stroke="#3e4a27" stroke-width=".8" fill="none"/>
-      <path d="M114 72 C116 74,112 76,114 78" stroke="#3e4a27" stroke-width=".8" fill="none"/>
-      <path d="M120 71 C122 73,118 75,120 77" stroke="#3e4a27" stroke-width=".8" fill="none"/>
-      <path d="M126 70 C128 72,124 74,126 76" stroke="#3e4a27" stroke-width=".8" fill="none"/>
-      <text x="62" y="112" font-family="Old Standard TT,serif" font-style="italic" font-size="13" fill="#8b6b3d">gland dans sa cupule</text>
-    </svg>`,
-    exemples: [
-      {nom:"Chêne pédonculé", svg:"bord_lobe", txt:"Cupule écailleuse sous le gland"},
-      {nom:"Hêtre", svg:"bord_lisse", txt:"Cupule hérissée contenant les faînes"},
-    ]
-  },
-  "pubescent": {
-    titre: "Pubescent",
-    simple: "Couvert de petits poils fins et doux, comme du duvet.",
-    detail: "Pubescent signifie 'couvert de poils fins et courts'. C'est différent de velu (poils longs) ou de glabre (sans poils). Une surface pubescente a une texture légèrement veloutée au toucher. Le bouleau pubescent tire son nom de ses jeunes rameaux couverts de ce duvet.",
-    tip: "💡 Frotte doucement le dessous de la feuille — si c'est vaguement doux comme du velours, c'est pubescent.",
-    svg: `<svg viewBox="0 0 220 120" xmlns="http://www.w3.org/2000/svg">
-      <path d="M110 10 C80 20,68 50,110 100 C152 50,140 20,110 10Z" fill="#e8dfc8" stroke="#3e4a27" stroke-width="1.2"/>
-      <line x1="110" y1="10" x2="110" y2="100" stroke="#5c6b3a" stroke-width=".9"/>
-      <line x1="72" y1="45" x2="70" y2="38" stroke="#8b6b3d" stroke-width=".8"/>
-      <line x1="78" y1="52" x2="75" y2="45" stroke="#8b6b3d" stroke-width=".8"/>
-      <line x1="85" y1="58" x2="82" y2="51" stroke="#8b6b3d" stroke-width=".8"/>
-      <line x1="148" y1="45" x2="150" y2="38" stroke="#8b6b3d" stroke-width=".8"/>
-      <line x1="142" y1="52" x2="145" y2="45" stroke="#8b6b3d" stroke-width=".8"/>
-      <line x1="135" y1="58" x2="138" y2="51" stroke="#8b6b3d" stroke-width=".8"/>
-      <line x1="92" y1="70" x2="89" y2="63" stroke="#8b6b3d" stroke-width=".8"/>
-      <line x1="128" y1="70" x2="131" y2="63" stroke="#8b6b3d" stroke-width=".8"/>
-      <text x="66" y="114" font-family="Old Standard TT,serif" font-style="italic" font-size="13" fill="#8b6b3d">petits poils fins</text>
-    </svg>`,
-    exemples: [{nom:"Bouleau verruqueux", svg:"velu", txt:"Rameaux pubescents chez le bouleau pubescent"}]
-  },
-  "stipule": {
-    titre: "Stipule",
-    simple: "Deux petites pièces à la base de la queue de la feuille.",
-    detail: "Les stipules sont deux petits appendices (écailles, feuilles réduites ou épines) situés à la base du pétiole, de chaque côté. Elles sont parfois grandes et persistantes (saule, rosier), parfois minuscules et tombent vite. Leur présence ou absence est un critère d'identification.",
-    tip: "💡 Regarde à la base du pétiole : si tu vois deux petites oreilles ou écailles symétriques, ce sont des stipules.",
-    svg: `<svg viewBox="0 0 220 120" xmlns="http://www.w3.org/2000/svg">
-      <line x1="110" y1="105" x2="110" y2="30" stroke="#8b6b3d" stroke-width="1.5"/>
-      <path d="M110 30 C85 38,74 62,110 95 C146 62,135 38,110 30Z" fill="#e8dfc8" stroke="#3e4a27" stroke-width="1.2"/>
-      <path d="M110 105 C100 95,90 95,86 100 C84 103,88 107,94 106 C102 104,108 102,110 100Z" fill="#5c6b3a" stroke="#3e4a27" stroke-width="1" opacity=".8"/>
-      <path d="M110 105 C120 95,130 95,134 100 C136 103,132 107,126 106 C118 104,112 102,110 100Z" fill="#5c6b3a" stroke="#3e4a27" stroke-width="1" opacity=".8"/>
-      <text x="62" y="118" font-family="Old Standard TT,serif" font-style="italic" font-size="12" fill="#5c6b3a">stipules (en vert)</text>
-    </svg>`,
-    exemples: [{nom:"Charme", svg:"bord_dd", txt:"Stipules présentes mais caduques"}]
-  },
-  "rameau": {
-    titre: "Rameau",
-    simple: "Une jeune et petite branche de l'année.",
-    detail: "Le rameau est une petite branche de l'année courante ou de l'année précédente. Sa surface, sa couleur, ses poils ou verrues, son odeur et sa moelle sont des caractères très utiles pour identifier les arbres. On parle de 'jeunes rameaux' pour ceux de l'année.",
-    tip: "💡 Pour identifier un arbre en hiver, casse un bout de jeune rameau et observe : sa couleur, s'il est creux, son odeur, ses verrues.",
-    svg: `<svg viewBox="0 0 220 120" xmlns="http://www.w3.org/2000/svg">
-      <line x1="30" y1="95" x2="190" y2="30" stroke="#8b6b3d" stroke-width="3" stroke-linecap="round"/>
-      <line x1="80" y1="78" x2="60" y2="55" stroke="#8b6b3d" stroke-width="1.8" stroke-linecap="round"/>
-      <line x1="120" y1="64" x2="140" y2="40" stroke="#8b6b3d" stroke-width="1.8" stroke-linecap="round"/>
-      <circle cx="80" cy="78" r="3.5" fill="#5c6b3a"/>
-      <circle cx="120" cy="64" r="3.5" fill="#5c6b3a"/>
-      <text x="32" y="112" font-family="Old Standard TT,serif" font-style="italic" font-size="12" fill="#8b6b3d">rameaux et bourgeons</text>
-    </svg>`,
-    exemples: [
-      {nom:"Bouleau verruqueux", svg:"ram_verruq", txt:"Rameaux verruqueux"},
-      {nom:"Frêne commun", svg:"odeur_n", txt:"Rameaux inodores"},
-    ]
-  },
-  "composée pennée": {
-    titre: "Composée pennée",
-    simple: "Plusieurs petites feuilles (folioles) alignées de chaque côté d'une tige centrale.",
-    detail: "Une feuille composée pennée ressemble à une plume : des folioles sont alignées de part et d'autre d'un axe central (rachis). Le frêne et le sureau ont des feuilles composées pennées. Attention à ne pas confondre chaque foliole avec une feuille simple.",
-    tip: "💡 Cherche le bourgeon : il est à la base du pétiole principal, pas à la base des folioles.",
-    svg: `<svg viewBox="0 0 220 120" xmlns="http://www.w3.org/2000/svg">
-      <line x1="30" y1="110" x2="190" y2="28" stroke="#8b6b3d" stroke-width="1.8"/>
-      <ellipse cx="72" cy="88" rx="18" ry="7" fill="#e8dfc8" stroke="#3e4a27" stroke-width="1" transform="rotate(-28 72 88)"/>
-      <ellipse cx="96" cy="76" rx="18" ry="7" fill="#e8dfc8" stroke="#3e4a27" stroke-width="1" transform="rotate(28 96 76)"/>
-      <ellipse cx="118" cy="62" rx="18" ry="7" fill="#e8dfc8" stroke="#3e4a27" stroke-width="1" transform="rotate(-28 118 62)"/>
-      <ellipse cx="142" cy="50" rx="18" ry="7" fill="#e8dfc8" stroke="#3e4a27" stroke-width="1" transform="rotate(28 142 50)"/>
-      <ellipse cx="164" cy="36" rx="18" ry="7" fill="#e8dfc8" stroke="#3e4a27" stroke-width="1" transform="rotate(-28 164 36)"/>
-      <text x="30" y="118" font-family="Old Standard TT,serif" font-style="italic" font-size="12" fill="#8b6b3d">folioles de part et d'autre</text>
-    </svg>`,
-    exemples: [
-      {nom:"Frêne commun", svg:"feuille_composee", txt:"7–13 folioles opposées"},
-    ]
-  },
-  "composée palmée": {
-    titre: "Composée palmée",
-    simple: "Plusieurs petites feuilles (folioles) attachées au même point, comme les doigts d'une main.",
-    detail: "Une feuille composée palmée a toutes ses folioles qui partent du même point, comme les doigts d'une main. Le marronnier d'Inde en est l'exemple parfait avec ses 5 à 7 grandes folioles.",
-    tip: "💡 Compte les 'doigts' du marronnier au printemps — 5 à 7 grandes folioles qui s'ouvrent ensemble.",
-    svg: `<svg viewBox="0 0 220 120" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="110" cy="88" r="5" fill="#8b6b3d"/>
-      <path d="M110 88 L68 28" stroke="#8b6b3d" stroke-width="1.5"/>
-      <path d="M110 88 L88 20" stroke="#8b6b3d" stroke-width="1.5"/>
-      <path d="M110 88 L110 16" stroke="#8b6b3d" stroke-width="1.5"/>
-      <path d="M110 88 L132 20" stroke="#8b6b3d" stroke-width="1.5"/>
-      <path d="M110 88 L152 28" stroke="#8b6b3d" stroke-width="1.5"/>
-      <ellipse cx="68" cy="26" rx="16" ry="6" fill="#e8dfc8" stroke="#3e4a27" stroke-width="1" transform="rotate(-50 68 26)"/>
-      <ellipse cx="88" cy="19" rx="16" ry="6" fill="#e8dfc8" stroke="#3e4a27" stroke-width="1" transform="rotate(-20 88 19)"/>
-      <ellipse cx="110" cy="14" rx="16" ry="6" fill="#e8dfc8" stroke="#3e4a27" stroke-width="1"/>
-      <ellipse cx="132" cy="19" rx="16" ry="6" fill="#e8dfc8" stroke="#3e4a27" stroke-width="1" transform="rotate(20 132 19)"/>
-      <ellipse cx="152" cy="26" rx="16" ry="6" fill="#e8dfc8" stroke="#3e4a27" stroke-width="1" transform="rotate(50 152 26)"/>
-      <text x="66" y="112" font-family="Old Standard TT,serif" font-style="italic" font-size="12" fill="#8b6b3d">comme une main</text>
-    </svg>`,
-    exemples: [{nom:"Marronnier", svg:"feuille_composee", txt:"5–7 folioles palmées"}]
-  },
-  "nervure": {
-    titre: "Nervure",
-    simple: "Les 'veines' visibles sur une feuille.",
-    detail: "Les nervures sont les canaux qui transportent l'eau et les nutriments dans la feuille. Elles forment un réseau visible. La nervure principale (midrib) va de la base au sommet. Les nervures secondaires partent de la principale. Leur disposition — pennée ou palmée — est un critère clé d'identification.",
-    tip: "💡 Tiens ta feuille à contre-jour devant le soleil : tu verras tout le réseau de nervures en transparence.",
-    svg: `<svg viewBox="0 0 220 120" xmlns="http://www.w3.org/2000/svg">
-      <path d="M110 8 C80 18,68 50,110 108 C152 50,140 18,110 8Z" fill="#e8dfc8" stroke="#3e4a27" stroke-width="1.2"/>
-      <line x1="110" y1="8" x2="110" y2="108" stroke="#3e4a27" stroke-width="1.5"/>
-      <line x1="110" y1="28" x2="88" y2="38" stroke="#5c6b3a" stroke-width=".9"/>
-      <line x1="110" y1="28" x2="132" y2="38" stroke="#5c6b3a" stroke-width=".9"/>
-      <line x1="110" y1="48" x2="80" y2="60" stroke="#5c6b3a" stroke-width=".9"/>
-      <line x1="110" y1="48" x2="140" y2="60" stroke="#5c6b3a" stroke-width=".9"/>
-      <line x1="110" y1="68" x2="84" y2="78" stroke="#5c6b3a" stroke-width=".9"/>
-      <line x1="110" y1="68" x2="136" y2="78" stroke="#5c6b3a" stroke-width=".9"/>
-      <line x1="88" y1="38" x2="80" y2="44" stroke="#8b6b3d" stroke-width=".6"/>
-      <line x1="132" y1="38" x2="140" y2="44" stroke="#8b6b3d" stroke-width=".6"/>
-      <text x="30" y="115" font-family="Old Standard TT,serif" font-style="italic" font-size="12" fill="#3e4a27">nervure principale</text>
-    </svg>`,
-    exemples: [
-      {nom:"Hêtre", svg:"nerv_pennee", txt:"Nervation pennée très régulière"},
-      {nom:"Érable sycomore", svg:"nerv_palmee", txt:"Nervation palmée à 5 branches"},
-    ]
-  },
-  "arrondi": {
-    titre: "Arrondi",
-    simple: "En forme de cercle ou de demi-cercle.",
-    detail: "En botanique, 'arrondi' décrit la forme d'un sommet ou d'une base de feuille en arc de cercle. Un sommet arrondi est doux et sans pointe. Une base arrondie forme un U régulier.",
-    tip: "💡 Si le bout de la feuille ressemble à un demi-cercle, il est arrondi.",
-    svg: `<svg viewBox="0 0 220 120" xmlns="http://www.w3.org/2000/svg">
-      <path d="M110 10 C80 18,68 50,110 108 C152 50,140 18,110 10Z" fill="#e8dfc8" stroke="#3e4a27" stroke-width="1.2"/>
-      <line x1="110" y1="10" x2="110" y2="108" stroke="#5c6b3a" stroke-width=".9"/>
-      <path d="M90 12 A25 25 0 0 1 130 12" stroke="#a0522d" stroke-width="1.5" fill="none"/>
-      <text x="64" y="8" font-family="Old Standard TT,serif" font-style="italic" font-size="12" fill="#a0522d">sommet arrondi</text>
-    </svg>`,
-    exemples: [{nom:"Hêtre", svg:"bord_lisse", txt:"Sommet arrondi ou légèrement pointu"}]
-  },
-  "sessile": {
-    titre: "Sessile",
-    simple: "Sans queue — directement attaché à la branche.",
-    detail: "Sessile vient du latin 'sessilis' (assis). Une feuille sessile n'a pas de pétiole : elle est directement attachée à la branche. Le chêne sessile tire son nom de ses glands sans pédoncule.",
-    tip: "💡 Cherche la queue de la feuille : pas de queue = sessile.",
-    svg: `<svg viewBox="0 0 220 120" xmlns="http://www.w3.org/2000/svg">
-      <line x1="50" y1="60" x2="130" y2="60" stroke="#8b6b3d" stroke-width="2.5"/>
-      <path d="M130 60 C140 50,160 45,170 50 C175 55,172 65,165 68 C158 72,140 70,130 60Z" fill="#e8dfc8" stroke="#3e4a27" stroke-width="1.2"/>
-      <text x="58" y="80" font-family="Old Standard TT,serif" font-style="italic" font-size="13" fill="#a0522d">← pas de pétiole</text>
-    </svg>`,
-    exemples: [
-      {nom:"Chêne sessile", svg:"feuille_simple", txt:"Gland sessile (sans pédoncule)"},
-    ]
-  },
-};
 
-function openExplScreen(key){
-  const entry = GLOSSAIRE[key];
-  if(!entry) return;
-  var prev = document.getElementById('gloss-overlay');
-  if(prev) prev.remove();
-  var overlay = document.createElement('div');
-  overlay.id = 'gloss-overlay';
-  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(62,47,31,.55);z-index:10000;display:flex;align-items:flex-end;justify-content:center;padding:0;animation:glossFade .2s ease-out;';
-  var exHtml = '';
-  if(entry.exemples && entry.exemples.length){
-    exHtml = '<div class="eyebrow" style="text-align:left;margin:16px 0 8px;">\u2014 Exemples dans tes arbres \u2014</div>'
-      + entry.exemples.map(function(x){
-        return '<div style="display:flex;align-items:center;gap:11px;margin-bottom:8px;background:rgba(245,239,224,.55);border-radius:8px;padding:8px 11px;">'
-          + '<svg viewBox="0 0 120 100" style="width:50px;height:42px;flex-shrink:0;">'+(SVG[x.svg]||'')+'</svg>'
-          + '<span style="font-size:0.9em;line-height:1.4;"><strong style="color:var(--moss-dark);font-family:var(--font-title);font-style:italic;">'+x.nom+'</strong> \u2014 '+x.txt+'</span></div>';
-      }).join('');
-  }
-  var sub = 'font-size:0.74em;letter-spacing:.12em;text-transform:uppercase;color:var(--sepia);font-style:italic;margin-bottom:4px;';
-  overlay.innerHTML = '<div style="background:var(--cream);border:2px solid var(--moss);border-bottom:none;border-radius:16px 16px 0 0;max-width:480px;width:100%;max-height:88vh;overflow-y:auto;padding:14px 20px 26px;box-shadow:0 -8px 40px rgba(62,47,31,.4);animation:glossUp .28s cubic-bezier(.2,.8,.2,1);">'
-    + '<div style="width:38px;height:4px;background:rgba(139,107,61,.3);border-radius:2px;margin:0 auto 14px;"></div>'
-    + '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;gap:12px;">'
-    + '<div><div class="eyebrow" style="margin-bottom:4px;">\u2014 Glossaire naturaliste \u2014</div>'
-    + '<div style="font-family:var(--font-title);font-size:1.5em;font-style:italic;color:var(--moss-dark);line-height:1.2;">'+entry.titre+'</div></div>'
-    + '<button id="gloss-close" style="background:none;border:1px solid var(--sepia);color:var(--sepia);border-radius:50%;width:32px;height:32px;cursor:pointer;font-size:1em;line-height:1;flex-shrink:0;">\u2715</button>'
-    + '</div>'
-    + (entry.svg?'<div style="background:rgba(245,239,224,.6);border:1px solid rgba(139,107,61,.25);border-radius:8px;padding:10px;margin:0 0 14px;display:flex;justify-content:center;">'+entry.svg+'</div>':'')
-    + '<div style="'+sub+'">En deux mots</div>'
-    + '<div style="font-size:1.05em;line-height:1.5;color:var(--ink);margin-bottom:14px;font-family:var(--font-title);font-style:italic;">'+entry.simple+'</div>'
-    + '<div style="'+sub+'">Explication</div>'
-    + '<div style="font-size:0.93em;line-height:1.55;color:var(--ink);">'+entry.detail+'</div>'
-    + (entry.tip?'<div style="background:rgba(200,146,42,.10);border-left:3px solid var(--gold);padding:10px 12px;border-radius:6px;font-size:0.85em;line-height:1.5;color:var(--ink-soft);font-style:italic;margin-top:14px;">'+entry.tip+'</div>':'')
-    + exHtml
-    + '</div>';
-  document.body.appendChild(overlay);
-  document.getElementById('gloss-close').addEventListener('click', function(){ overlay.remove(); });
-  overlay.addEventListener('click', function(ev){ if(ev.target===overlay) overlay.remove(); });
-}
-
-function closeExplScreen(){
-  document.getElementById('expl-screen').classList.remove('open');
-}
+function openExplScreen(key){ openGlossaireModal(GLOSSAIRE_ALIAS[key]||key); }
 
 // Fonction pour wrapper un terme avec un lien d'explication
 function term(key, label){
@@ -16097,7 +15416,7 @@ function renderGlossaireHub(){
 
   // Regrouper par catégorie
   var categories = {
-    'Feuilles & arbres': ['simple','composee','alterne','opposee','pennee','palmee','limbe','petiole','nervure','lobe','dente','ecorce','bourgeon','caduc'],
+    'Feuilles & arbres': ['simple','composee','composee_pennee','composee_palmee','foliole','alterne','opposee','pennee','palmee','limbe','petiole','sessile','nervure','lobe','dente','entier','arrondi','corde','elliptique','lanceole','velu','glabre','pubescent','stipule','rameau','ecorce','bourgeon','chaton','cupule','samare','caduc','persistante'],
     'Insectes': ['elytre','antenne','rostre','metamorphose'],
     'Champignons': ['mycelium','volve','spore'],
     'Animaux & comportements': ['mue','hibernation','aposematique','predateur','herbivore','mimetisme'],
