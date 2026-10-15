@@ -229,6 +229,7 @@ body{font-family:'Cormorant Garamond',serif;background:var(--cream);color:var(--
 .home-header2{display:flex;align-items:center;gap:12px;padding:16px 0 18px}
 .home-logo2{width:52px;height:52px;flex:0 0 auto;border:1px solid rgba(139,107,61,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,252,240,.6)}
 .home-logo2 svg{width:38px;height:38px}
+.home-logo2 img{width:46px;height:46px;border-radius:50%;object-fit:cover}
 .home-h1b{font-family:var(--font-title);font-weight:500;font-style:italic;font-size:30px;line-height:1;color:var(--ink)}
 .home-subb{font-family:var(--font-body);font-style:italic;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--sepia);margin-top:3px}
 .eyebrow2{font-family:var(--font-body);font-style:italic;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--sepia);text-align:center;margin:4px 0 14px}
@@ -372,14 +373,6 @@ body{font-family:'Cormorant Garamond',serif;background:var(--cream);color:var(--
 .term:active{background:rgba(139,107,61,.25)}
 
 /* ── ÉCRAN EXPLICATION ── */
-.expl-screen{
-  position:fixed;inset:0;background:var(--cream);
-  z-index:100;overflow-y:auto;padding:24px 20px 40px;
-  transform:translateX(100%);transition:transform .25s ease;
-  max-width:430px;left:50%;margin-left:-215px;
-}
-@media(max-width:430px){.expl-screen{left:0;margin-left:0}}
-.expl-screen.open{transform:translateX(0)}
 .expl-topbar{display:flex;align-items:center;gap:14px;margin-bottom:24px;padding-bottom:14px;border-bottom:1px solid rgba(139,107,61,.25)}
 .expl-back{width:38px;height:38px;border:1px solid var(--sepia);border-radius:50%;background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0}
 .expl-back svg{stroke:var(--ink)}
@@ -516,7 +509,7 @@ body{font-family:'Cormorant Garamond',serif;background:var(--cream);color:var(--
   <!-- ── ACCUEIL ── -->
   <div id="screen-home" class="screen active">
     <div class="home-header2">
-      <div class="home-logo2"><svg viewBox="0 0 66 66" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M33 5 C20 12,14 28,14 38 C14 48,20 56,33 62 C46 56,52 48,52 38 C52 28,46 12,33 5Z" fill="#e8dfc8" stroke="#3e4a27" stroke-width="1.2"/><path d="M33 5 L33 62" stroke="#5c6b3a" stroke-width=".9"/><path d="M33 18 Q22 25 16 32" stroke="#5c6b3a" stroke-width=".6" fill="none"/><path d="M33 18 Q44 25 50 32" stroke="#5c6b3a" stroke-width=".6" fill="none"/><path d="M33 36 Q20 43 14 50" stroke="#5c6b3a" stroke-width=".6" fill="none"/><path d="M33 36 Q46 43 52 50" stroke="#5c6b3a" stroke-width=".6" fill="none"/></svg></div>
+      <div class="home-logo2"><img src="icon-192.png" alt="Piko le naturaliste" decoding="async"></div>
       <div><h1 class="home-h1b">Les Carnets</h1><div class="home-subb">— du naturaliste —</div></div>
     </div>
 
@@ -757,7 +750,7 @@ const KEY_TREE = {
                     "Il y a 3 aiguilles par touffe.": {
                       "character": "Il y a 3 aiguilles par touffe.",
                       "children": {},
-                      "species": "Genevrier commun."
+                      "species": "Genévrier commun."
                     },
                     "Il y a plus de 3 aiguilles par touffes": {
                       "character": "Il y a plus de 3 aiguilles par touffes",
@@ -765,7 +758,7 @@ const KEY_TREE = {
                         "Les aiguilles sont souples et vertes": {
                           "character": "Les aiguilles sont souples et vertes",
                           "children": {},
-                          "species": "Melèze d'Europe."
+                          "species": "Mélèze d'Europe."
                         },
                         "Les aiguilles sont rigides et bleutées": {
                           "character": "Les aiguilles sont rigides et bleutées",
@@ -813,7 +806,7 @@ const KEY_TREE = {
                             "Aiguilles sans pétiole et insérées sur une protubérance nettement saillante.": {
                               "character": "Aiguilles sans pétiole et insérées sur une protubérance nettement saillante.",
                               "children": {},
-                              "species": "Epicéa commun."
+                              "species": "Épicéa commun."
                             }
                           }
                         }
@@ -1502,9 +1495,9 @@ const KEY_TREE = {
                           "character": "Pétiole dépourvu de glandes.",
                           "children": {},
                           "species": [
-                            "Erable champêtre",
-                            "Erable plane",
-                            "Erable sycomore"
+                            "Érable champêtre",
+                            "Érable plane",
+                            "Érable sycomore"
                           ]
                         }
                       }
@@ -2255,11 +2248,11 @@ const SPECIES_DB = {
     fun:"Le frêne était appelé 'l'arbre du monde' dans la mythologie nordique. Son bois très flexible est utilisé pour les manches d'outils.",
     clues:{}
   },
-  "Erable sycomore":{
+  "Érable sycomore":{
     latin:"Acer pseudoplatanus",famille:"Sapindacées",
     desc:`Grandes feuilles ${term('palmée','palmées')} à 5 lobes ${term('denté','dentés')}, ${term('opposées')}. Fruits : 2 samares en hélice. Feuilles ${term('caduque','caduques')}.`,
     fun:"Les graines de l'érable tombent en tournoyant comme des hélicoptères — c'est une adaptation pour se disperser loin de l'arbre parent.",
-    clues:{"Erable champêtre":["Érable sycomore : feuilles grandes, lobes dentés, sinus peu profonds","Érable champêtre : feuilles petites, lobes arrondis peu dentés"]}
+    clues:{"Érable champêtre":["Érable sycomore : feuilles grandes, lobes dentés, sinus peu profonds","Érable champêtre : feuilles petites, lobes arrondis peu dentés"]}
   },
   "Châtaignier":{
     latin:"Castanea sativa",famille:"Fagacées",
@@ -2273,7 +2266,7 @@ const SPECIES_DB = {
     fun:"Le pin sylvestre est l'arbre le plus répandu au monde. Son bois est le plus commercialisé en Europe.",
     clues:{"Pin Noir":["Pin sylvestre : tronc roux vers le haut, aiguilles 3-7 cm","Pin noir : écorce gris foncé sur toute la hauteur, aiguilles 6-16 cm"]}
   },
-  "Epicéa commun":{
+  "Épicéa commun":{
     latin:"Picea abies",famille:"Pinacées",
     desc:`Aiguilles isolées, courtes, ${term('sessile','attachées sur une protubérance')} saillante. Feuilles ${term('persistante','persistantes')}. Grands cônes pendants (10–15 cm).`,
     fun:"L'épicéa est l'arbre de Noël classique. Son bois résonnant est utilisé pour fabriquer des violons et guitares.",
@@ -2327,11 +2320,11 @@ const SPECIES_DB = {
     fun:"La graphiose a décimé presque tous les ormes d'Europe depuis les années 1970. Un grand orme adulte est aujourd'hui très rare.",
     clues:{}
   },
-  "Erable champêtre":{
+  "Érable champêtre":{
     latin:"Acer campestre",famille:"Sapindacées",
     desc:`Feuilles ${term('palmée','palmées')} à 5 lobes arrondis peu dentés, ${term('opposées')}, ${term('caduque','caduques')}. Plus petites que l'érable sycomore (5–10 cm). Pétiole à latex blanc.`,
     fun:"En automne, les feuilles de l'érable champêtre deviennent d'un jaune doré magnifique.",
-    clues:{"Erable sycomore":["Erable champêtre : petites feuilles, lobes arrondis, pétiole à latex blanc","Érable sycomore : grandes feuilles, lobes dentés, pas de latex"]}
+    clues:{"Érable sycomore":["Érable champêtre : petites feuilles, lobes arrondis, pétiole à latex blanc","Érable sycomore : grandes feuilles, lobes dentés, pas de latex"]}
   },
   "Sureau noir":{
     latin:"Sambucus nigra",famille:"Adoxacées",
@@ -2355,13 +2348,13 @@ const SPECIES_DB = {
     latin:"Abies alba",famille:"Pinacées",
     desc:`Aiguilles plates, directement attachées sur le ${term('rameau')} lisse (sans bosse). Feuilles ${term('persistante','persistantes')}. Cônes dressés (se défont sur l'arbre). Écorce gris argenté.`,
     fun:"Le sapin blanc est le vrai sapin de Noël d'origine, mais il a été largement remplacé par l'épicéa. Ses cônes ne tombent jamais entiers : ils se désagrègent sur l'arbre.",
-    clues:{"Epicéa commun":["Sapin : aiguilles sur rameau lisse, cônes dressés qui se défont","Épicéa : aiguilles sur bosse saillante, longs cônes pendants entiers"]}
+    clues:{"Épicéa commun":["Sapin : aiguilles sur rameau lisse, cônes dressés qui se défont","Épicéa : aiguilles sur bosse saillante, longs cônes pendants entiers"]}
   },
   "Douglas":{
     latin:"Pseudotsuga menziesii",famille:"Pinacées",
     desc:`Aiguilles avec un court ${term('pétiole')}, très odorantes (parfum de pamplemousse) au froissement. Feuilles ${term('persistante','persistantes')}. Cônes pendants avec bractées à 3 pointes caractéristiques.`,
     fun:"Le douglas vient d'Amérique du Nord. C'est l'un des arbres les plus grands du monde — en Amérique, certains dépassent 100 mètres.",
-    clues:{"Epicéa commun":["Douglas : aiguilles odorantes au froissement (pamplemousse), bractées en trident","Épicéa : aiguilles peu odorantes, pas de bractées visibles"]}
+    clues:{"Épicéa commun":["Douglas : aiguilles odorantes au froissement (pamplemousse), bractées en trident","Épicéa : aiguilles peu odorantes, pas de bractées visibles"]}
   },
   "Pin Noir":{
     latin:"Pinus nigra",famille:"Pinacées",
@@ -2369,7 +2362,7 @@ const SPECIES_DB = {
     fun:"Le pin noir d'Autriche est très utilisé pour reboiser les terrains calcaires et les zones dégradées. Il supporte la pollution mieux que d'autres conifères.",
     clues:{"Pin sylvestre":["Pin noir : aiguilles 6-16 cm, écorce gris foncé sur toute la hauteur","Pin sylvestre : aiguilles 3-7 cm, tronc roux-orangé dans la partie haute"]}
   },
-  "Melèze d'Europe":{
+  "Mélèze d'Europe":{
     latin:"Larix decidua",famille:"Pinacées",
     desc:`Aiguilles courtes en touffes de 20–40, ${term('caduque','caduques')} (tombent en automne — rare chez les conifères !). Douces au toucher. Cônes dressés, petits (2–4 cm), persistant plusieurs années.`,
     fun:"Le mélèze est le seul conifère d'Europe à perdre ses aiguilles en hiver. En automne, ses aiguilles deviennent dorées avant de tomber — un spectacle magnifique.",
@@ -2379,9 +2372,9 @@ const SPECIES_DB = {
     latin:"Cedrus atlantica",famille:"Pinacées",
     desc:`Aiguilles courtes en touffes, rigides et bleutées. Feuilles ${term('persistante','persistantes')}. Grands cônes dressés, baril-forme. Port majestueux avec branches horizontales étagées.`,
     fun:"Le cèdre est l'arbre national du Liban. Son bois très aromatique était utilisé dans l'Antiquité pour construire des temples.",
-    clues:{"Melèze d'Europe":["Cèdre : aiguilles rigides bleutées, persistantes","Mélèze : aiguilles souples vertes, caduques"]}
+    clues:{"Mélèze d'Europe":["Cèdre : aiguilles rigides bleutées, persistantes","Mélèze : aiguilles souples vertes, caduques"]}
   },
-  "Genevrier commun":{
+  "Genévrier commun":{
     latin:"Juniperus communis",famille:"Cupressacées",
     desc:`Aiguilles par 3, très piquantes, courtes. Feuilles ${term('persistante','persistantes')}. Fruits : baies bleues-noires (les 'baies de genièvre' utilisées en cuisine). Petit arbre ou arbuste.`,
     fun:"Les baies de genévrier donnent leur goût caractéristique au gin. Le genévrier est l'un des rares conifères à produire des 'baies' (en réalité des cônes charnus).",
@@ -2447,11 +2440,11 @@ const SPECIES_DB = {
     fun:"La groseille rouge est l'une des baies les plus courantes des jardins. Elle est très riche en vitamine C et en pectine — idéale pour les gelées.",
     clues:{"Groseillier noir, cassis":["Groseillier rouge : pas d'odeur, baies rouges","Cassis : odeur caractéristique, baies noires"]}
   },
-  "Erable plane":{
+  "Érable plane":{
     latin:"Acer platanoides",famille:"Sapindacées",
     desc:`Feuilles ${term('palmée','palmées')} à 5 lobes pointus, ${term('opposées')}, ${term('caduque','caduques')}. Pétiole sans glandes (contrairement à la viorne). Fleurs jaune-vert avant les feuilles.`,
     fun:"L'érable plane ressemble à l'érable sycomore mais s'en distingue par ses lobes plus pointus et ses fleurs qui apparaissent avant les feuilles au printemps.",
-    clues:{"Erable sycomore":["Érable plane : lobes pointus, fleurs avant les feuilles","Érable sycomore : lobes dentés arrondis, fleurs avec les feuilles"]}
+    clues:{"Érable sycomore":["Érable plane : lobes pointus, fleurs avant les feuilles","Érable sycomore : lobes dentés arrondis, fleurs avec les feuilles"]}
   },
   "Bouleau pubescent":{
     latin:"Betula pubescens",famille:"Bétulacées",
@@ -2616,11 +2609,11 @@ const SPECIES_DB = {
     fun:"Le chèvrefeuille grimpe si fort qu'il peut déformer les troncs des jeunes arbres sur lesquels il s'enroule — on voit parfois des troncs en spirale dans les forêts.",
     clues:{}
   },
-  "Erable de Montpellier":{
+  "Érable de Montpellier":{
     latin:"Acer monspessulanum",famille:"Sapindacées",
     desc:`Petites feuilles ${term('palmée','palmées')} à 3 lobes arrondis, ${term('entier','entières')}, coriaces, ${term('opposées')}, ${term('caduque','caduques')}. ${term('pétiole','Pétiole')} long et rouge. Pousse surtout dans le sud.`,
     fun:"L'érable de Montpellier est l'érable le plus méditerranéen d'Europe. Il supporte très bien la chaleur et la sécheresse.",
-    clues:{"Erable champêtre":["Érable de Montpellier : 3 lobes entiers, coriaces","Erable champêtre : 5 lobes, légèrement dentés"]}
+    clues:{"Érable champêtre":["Érable de Montpellier : 3 lobes entiers, coriaces","Érable champêtre : 5 lobes, légèrement dentés"]}
   },
   "Sorbier torminal":{
     latin:"Sorbus torminalis",famille:"Rosacées",
@@ -2657,8 +2650,10 @@ const SPECIES_DB = {
 /* ────────────────────────────────
    COLLECTION (localStorage)
 ──────────────────────────────── */
+var COLL_MIGRATION={'erable':'érable','epicéa':'épicéa','melèze':'mélèze','genevrier':'genévrier'};
+function migrerNomColl(x){ return typeof x==='string' ? x.replace(/^(erable|epicéa|melèze|genevrier)\b/,function(m){ return COLL_MIGRATION[m]; }) : x; }
 function loadCollection(){
-  try{ return JSON.parse(localStorage.getItem('naturalia_coll')||'[]'); }
+  try{ return JSON.parse(localStorage.getItem('naturalia_coll')||'[]').map(migrerNomColl); }
   catch(e){ return []; }
 }
 function saveCollection(arr){
@@ -9870,15 +9865,15 @@ const SPECIES_ORDER=[
   'Hêtre','Châtaignier',
   'Charme','Bouleau verruqueux','Bouleau pubescent','Aulne glutineux','Aulne blanc','Noisetier',
   'Peuplier','Peuplier noir','Saule','Osier',
-  'Frêne commun','Erable sycomore','Erable champêtre','Erable plane','Erable de Montpellier',
+  'Frêne commun','Érable sycomore','Érable champêtre','Érable plane','Érable de Montpellier',
   'Tilleul','Platane','Orme','Noyer royal','Marronnier',
   'Aubépine','Aubépine monogyne','Sorbier des oiseleurs','Sorbier torminal',
   'Pommier','Poirier','Merisier','Cerisier de Sainte-Lucie','Prunier sauvage',
   'Prunellier','Pêcher','Néflier','Rosier sauvage','Ronce',
   'Robinier faux-acacia','Cytise faux-ébénier',
   'Sureau noir','Sureau à grappe',
-  'Pin sylvestre','Pin Noir','Epicéa commun','Sapin','Douglas',
-  'If',"Melèze d'Europe","Cèdre de l'Atlas",'Genevrier commun',
+  'Pin sylvestre','Pin Noir','Épicéa commun','Sapin','Douglas',
+  'If',"Mélèze d'Europe","Cèdre de l'Atlas",'Genévrier commun',
   'Lierre','Houx','Buis','Laurier-cerise',
   'Cornouiller','Fusain','Bourdaine','Nerprun purgatif','Argousier',
   'Troène commun','Lilas','Symphorine','Viorne obier',
@@ -11569,7 +11564,7 @@ const DEFIS = [
     id: 'a3', saison:'automne', titre:'Couleurs flamboyantes', emoji:'\uD83C\uDF42',
     description:'Les arbres se parent de couleurs avant l\u2019hiver. Identifie ces feuillus.',
     cibles:[
-      {type:'arbre', cle:'Erable sycomore'},
+      {type:'arbre', cle:'Érable sycomore'},
       {type:'arbre', cle:'Charme'},
       {type:'arbre', cle:'Tilleul'},
       {type:'arbre', cle:'Sorbier des oiseleurs'}
@@ -12777,7 +12772,7 @@ function dRestart(){
 
 /* Noms traites en correspondance EXACTE, avant la chaine de includes() ci-dessous.
    Sans cela : 'sapin' et 'aubepine' contiennent 'pin' et recevaient les aiguilles
-   longues de pin (la regle 'pin' passe avant les leurs) ; 'Epicéa commun' et 'If'
+   longues de pin (la regle 'pin' passe avant les leurs) ; 'Épicéa commun' et 'If'
    ne correspondaient a aucune regle -- la premiere teste 'épicéa' et 'epicea' mais
    jamais 'epicéa', la seconde teste 'if ' avec une espace que normName() a retiree --
    et retombaient sur la feuille plate par defaut. */
@@ -12906,15 +12901,15 @@ const ARBRES_ILLUS={
   'cornouiller': ['arbre','planche','vignette'],   /* Cornouiller */
   'cytise-faux-ebenier': ['arbre','planche','vignette'],   /* Cytise faux-ébénier */
   'douglas': ['arbre','planche','vignette'],   /* Douglas */
-  'epicea-commun': ['arbre','planche','vignette'],   /* Epicéa commun */
-  'erable-champetre': ['arbre','planche','vignette'],   /* Erable champêtre */
-  'erable-de-montpellier': ['arbre','planche','vignette'],   /* Erable de Montpellier */
-  'erable-plane': ['arbre','planche','vignette'],   /* Erable plane */
-  'erable-sycomore': ['arbre','planche','vignette'],   /* Erable sycomore */
+  'epicea-commun': ['arbre','planche','vignette'],   /* Épicéa commun */
+  'erable-champetre': ['arbre','planche','vignette'],   /* Érable champêtre */
+  'erable-de-montpellier': ['arbre','planche','vignette'],   /* Érable de Montpellier */
+  'erable-plane': ['arbre','planche','vignette'],   /* Érable plane */
+  'erable-sycomore': ['arbre','planche','vignette'],   /* Érable sycomore */
   'forsythie': ['arbre','planche','vignette'],   /* Forsythie */
   'frene-commun': ['arbre','planche','vignette'],   /* Frêne commun */
   'fusain': ['arbre','planche','vignette'],   /* Fusain */
-  'genevrier-commun': ['arbre','planche','vignette'],   /* Genevrier commun */
+  'genevrier-commun': ['arbre','planche','vignette'],   /* Genévrier commun */
   'groseillier-noir-cassis': ['arbre','planche','vignette'],   /* Groseillier noir, cassis */
   'groseillier-rouge': ['arbre','planche','vignette'],   /* Groseillier rouge */
   'hetre': ['arbre','planche','vignette'],   /* Hêtre */
@@ -12925,7 +12920,7 @@ const ARBRES_ILLUS={
   'lierre': ['arbre','planche','vignette'],   /* Lierre */
   'lilas': ['arbre','planche','vignette'],   /* Lilas */
   'marronnier': ['arbre','planche','vignette'],   /* Marronnier */
-  'meleze-d-europe': ['arbre','planche','vignette'],   /* Melèze d'Europe */
+  'meleze-d-europe': ['arbre','planche','vignette'],   /* Mélèze d'Europe */
   'merisier': ['arbre','planche','vignette'],   /* Merisier */
   'neflier': ['arbre','planche','vignette'],   /* Néflier */
   'nerprun-purgatif': ['arbre','planche','vignette'],   /* Nerprun purgatif */
@@ -17287,7 +17282,7 @@ function renderLearnList(){
     {v:'collectes',l:'Collect\u00e9es'}
   ];
   const speciesOrder=SPECIES_ORDER;
-  const resineuxSet=new Set(['Pin sylvestre','Epicéa commun']);
+  const resineuxSet=new Set(['Pin sylvestre','Épicéa commun']);
 
   const visible=speciesOrder.filter(name=>{
     if(learnFilter==='feuillu') return !resineuxSet.has(name);
@@ -18160,7 +18155,6 @@ if ('serviceWorker' in navigator) {
 
     navigator.serviceWorker.register('sw.js')
       .then(function(reg){
-        console.log('[Naturalia] Service Worker enregistré', reg.scope);
 
         /* Une PWA reste ouverte des jours : sans ces verifications, elle ne
            voyait jamais qu'une version plus recente existait. */
@@ -18179,7 +18173,6 @@ if ('serviceWorker' in navigator) {
               /* Le nouveau SW appelle skipWaiting() : il va prendre le
                  controle tout seul, et controllerchange rechargera la page.
                  Rien a demander a l'utilisateur. */
-              console.log('[Naturalia] nouvelle version install\u00e9e, activation en cours');
             }
           });
         });
@@ -18241,7 +18234,6 @@ function showInstallBanner(){
 
 // Détecter installation réussie
 window.addEventListener('appinstalled', function(){
-  console.log('[Naturalia] App install\u00e9e !');
   deferredInstallPrompt = null;
   var b = document.getElementById('install-banner');
   if(b) b.remove();
@@ -18288,7 +18280,6 @@ applyDarkMode();
 // Détecter si l'app est lancée en mode standalone (installée)
 if(window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true){
   document.documentElement.classList.add('pwa-installed');
-  console.log('[Naturalia] Lancement en mode app install\u00e9e');
   var _ib=document.getElementById('home-install-wrap'); if(_ib) _ib.style.display='none';
 }
 </script>
