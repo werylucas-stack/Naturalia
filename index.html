@@ -645,7 +645,7 @@ const AQUA_BASE='assets/aqua/';
 const AQUA={
   'animaux_illus':{'blaireau':1,'canard':1,'chat':1,'chevreuil':1,'chien':1,'ecureuil':1,'heron':1,'lievre':1,'renard':1,'sanglier':1},
   'arbres_illus':{'argousier':1,'aubepine':1,'aubepine_monogyne':1,'aulne_blanc':1,'aulne_glutineux':1,'bouleau_pubescent':1,'bouleau_verruqueux':1,'bourdaine':1,'buis':1,'cedre_de_l_atlas':1,'cerisier_de_sainte_lucie':1,'charme':1,'chataignier':1,'chene_pedoncule':1,'chene_rouge_d_amerique':1,'chene_sessile_rouvre':1,'chevrefeuille':1,'clematite_des_haies':1,'cornouiller':1,'cytise_faux_ebenier':1,'douglas':1,'epicea_commun':1,'erable_champetre':1,'erable_de_montpellier':1,'erable_plane':1,'erable_sycomore':1,'forsythie':1,'frene_commun':1,'fusain':1,'genevrier_commun':1,'groseillier_noir_cassis':1,'groseillier_rouge':1,'hetre':1,'houx':1,'if':1,'laurier_cerise':1,'liane_chevrefeuille':1,'lierre':1,'lilas':1,'marronnier':1,'meleze_d_europe':1,'merisier':1,'neflier':1,'nerprun_purgatif':1,'noisetier':1,'noyer_royal':1,'orme':1,'osier':1,'pecher':1,'peuplier':1,'peuplier_noir':1,'piment_royal':1,'pin_noir':1,'pin_sylvestre':1,'platane':1,'poirier':1,'pommier':1,'prunellier':1,'prunier_sauvage':1,'robinier_faux_acacia':1,'ronce':1,'rosier_sauvage':1,'sapin':1,'saule':1,'sorbier_des_oiseleurs':1,'sorbier_torminal':1,'sureau_a_grappe':1,'sureau_noir':1,'symphorine':1,'tilleul':1,'troene_commun':1,'viorne_obier':1},
-  'cat_icons':{'animal':1,'arbre':1,'champignon':1,'champs':1,'ciel':1,'herpeto':1,'insecte':1,'mare':1,'mousse':1,'oiseau':1,'plante':1,'potager':1,'roches':1,'traces':1},
+  'cat_icons':{'animal':1,'arachnologie':1,'arbre':1,'botanique':1,'carcinologie':1,'champignon':1,'champs':1,'ciel':1,'ecologie_sols':1,'herpeto':1,'ichtyologie':1,'insecte':1,'limnologie':1,'malacologie':1,'mammalogie':1,'mare':1,'mousse':1,'oiseau':1,'plante':1,'potager':1,'roches':1,'traces':1},
   'champignons_illus':{'agaric_champetre':1,'amanite_phalloide':1,'amanite_tue_mouches':1,'bolet_satan':1,'cepe':1,'girolle':1,'lepiote_elevee':1,'morille':1,'pleurote_huitre':1,'russule_charbonniere':1,'trompette_de_la_mort':1,'vesse_de_loup':1},
   'champs_illus':{'avoine':1,'betterave':1,'bleuet':1,'chicoree':1,'chrysantheme_moissons':1,'colza':1,'coquelicot':1,'epeautre':1,'feverole':1,'froment':1,'lin':1,'luzerne':1,'mais':1,'matricaire':1,'moutarde':1,'orge':1,'pomme_de_terre':1,'seigle':1,'trefle_violet':1},
   'ciel_illus':{'cassiopee':1,'cygne':1,'etoile_filante':1,'grande_ourse':1,'iss':1,'jupiter':1,'lune':1,'mars':1,'orion':1,'petite_ourse':1,'phases_lune':1,'pleiades':1,'satellites':1,'saturne':1,'venus':1,'voie_lactee':1},
@@ -655,18 +655,25 @@ const AQUA={
   'mamm_illus':{'belette':1,'blaireau':1,'castor':1,'cerf':1,'chat_forestier':1,'chauve_souris':1,'chevreuil':1,'daim':1,'ecureuil':1,'fouine':1,'herisson':1,'lapin':1,'lievre':1,'loir':1,'loup':1,'loutre':1,'martre':1,'mulot':1,'musaraigne':1,'muscardin':1,'rat_musque':1,'renard':1,'sanglier':1,'taupe':1},
   'mare_illus':{'dytique':1,'elodee':1,'epinoche':1,'gammare':1,'gerris':1,'grenouille_verte':1,'iris_marais':1,'larve_libellule':1,'lentille':1,'limnee':1,'massette':1,'myriophylle':1,'nenuphar':1,'notonecte':1,'phrygane':1,'renoncule_eau':1,'roseau':1,'tetard':1,'triton':1},
   'mousses_illus':{'cladonie':1,'evernia':1,'fontinale':1,'graphis':1,'hypne':1,'mnium':1,'parmelie':1,'polytric':1,'sphaigne':1,'tortula':1,'usnee':1,'xanthorie':1},
-  'obs_animal_illus':{'blaireau':1,'canard':1,'chevreuil':1,'ecureuil':1,'heron':1,'lievre':1,'renard':1,'sanglier':1},
+  'obs_animal_illus':{'blaireau':1,'canard':1,'chat':1,'chevreuil':1,'chien':1,'ecureuil':1,'heron':1,'lievre':1,'renard':1,'sanglier':1},
   'ois_illus':{'buse':1,'chouette_hulotte':1,'corneille':1,'hirondelle':1,'merle':1,'mesange_bleue':1,'moineau':1,'mouette':1,'pic_epeiche':1,'pie':1,'pinson':1,'rouge_gorge':1},
   'plantes_illus':{'achillee':1,'bardane':1,'bourrache':1,'bouton_or':1,'coquelicot':1,'lierre_terrestre':1,'marguerite':1,'ortie':1,'paquerette':1,'pissenlit':1,'plantain_lanceole':1,'trefle_blanc':1},
   'potager_illus':{'ail':1,'aubergine':1,'basilic':1,'betterave_rouge':1,'blette':1,'bourrache':1,'brocoli':1,'capucine':1,'carotte':1,'celeri':1,'chou':1,'chou_fleur':1,'ciboulette':1,'concombre':1,'cosmos':1,'courge':1,'courgette':1,'echalote':1,'epinard':1,'feve':1,'fraise':1,'haricot':1,'laitue':1,'lavande':1,'mache':1,'mais_doux':1,'melon':1,'navet':1,'oeillet_inde':1,'oignon':1,'panais':1,'persil':1,'petit_pois':1,'phacelie':1,'poireau':1,'poivron':1,'potiron':1,'radis':1,'roquette':1,'souci':1,'tomate':1,'tournesol':1},
   'roches_illus':{'amethyste':1,'ardoise':1,'calcaire':1,'craie':1,'galene':1,'granite':1,'gres':1,'marbre':1,'pyrite':1,'quartz':1,'schiste':1,'silex':1},
-  'story_illus':{'abeille':1,'boletus':1,'bouleau':1,'brock':1,'brutus':1,'chauvesouris':1,'chene_monde':1,'chenille':1,'chouette':1,'coccinelle':1,'coquelicot':1,'elise':1,'escargot':1,'etoile_filante':1,'fougere':1,'fourmi':1,'galet':1,'geai':1,'gland':1,'grenouille':1,'hetre':1,'hirondelle':1,'lichen':1,'lierre':1,'loup':1,'lucane':1,'lune':1,'ortie':1,'pic':1,'piko':1,'pioupiou':1,'pissenlit':1,'renard':1,'ronce':1,'roussette':1,'saga_automne':1,'saga_ete':1,'saga_hiver':1,'saga_printemps':1,'saule':1,'sphaigne':1,'tetard':1,'verdeterre':1},
+  'story_illus':{'abeille':1,'boletus':1,'botanique':1,'bouleau':1,'brock':1,'brutus':1,'chauvesouris':1,'chene_monde':1,'chenille':1,'chouette':1,'coccinelle':1,'coquelicot':1,'elise':1,'escargot':1,'etoile_filante':1,'fougere':1,'fourmi':1,'galet':1,'geai':1,'gland':1,'grenouille':1,'hetre':1,'hirondelle':1,'lichen':1,'lierre':1,'loup':1,'lucane':1,'lune':1,'ortie':1,'pic':1,'piko':1,'pioupiou':1,'pissenlit':1,'renard':1,'ronce':1,'roussette':1,'saga_automne':1,'saga_ete':1,'saga_hiver':1,'saga_printemps':1,'saule':1,'sphaigne':1,'tetard':1,'verdeterre':1},
   'traces_illus':{'blaireau':1,'canard':1,'chat':1,'chevreuil':1,'chien':1,'ecureuil':1,'heron':1,'lievre':1,'renard':1,'sanglier':1},
   'arachno_illus':{'argiope_frelon':1,'dolomede_des_marais':1,'epeire_diademe':1,'lycose':1,'opilion':1,'pholque_phalangide':1,'pisaure_admirable':1,'pseudoscorpion':1,'saltique':1,'tegenaire_domestique':1,'thomise':1,'tique_du_mouton':1},
   'carcino_illus':{'aselle':1,'cloporte_boule':1,'cloporte_commun':1,'cloporte_rugueux':1,'crabe_chinois':1,'daphnie':1,'ecrevisse_americaine':1,'ecrevisse_louisiane':1,'ecrevisse_pattes_rouges':1,'gammare':1},
   'ichtyo_illus':{'ablette':1,'anguille':1,'brochet':1,'carpe_commune':1,'chabot':1,'epinoche':1,'gardon':1,'perche':1,'rotengle':1,'tanche':1,'truite_fario':1,'vairon':1},
   'malaco_illus':{'anodonte':1,'clausilie':1,'escargot_de_bourgogne':1,'escargot_des_haies':1,'escargot_des_jardins':1,'grande_loche_rouge':1,'limace_grise_des_jardins':1,'limace_leopard':1,'limnee_des_etangs':1,'moule_zebree':1,'petit_gris':1,'planorbe':1},
-  'sols_illus':{'collembole':1,'enchytree':1,'hanneton_larve':1,'humus':1,'iule':1,'lithobie':1,'mycelium':1,'nematode':1,'oribate':1,'taupe':1,'ver_compost':1,'ver_de_terre':1}
+  'sols_illus':{'collembole':1,'enchytree':1,'hanneton_larve':1,'humus':1,'iule':1,'lithobie':1,'mycelium':1,'nematode':1,'oribate':1,'taupe':1,'ver_compost':1,'ver_de_terre':1},
+  'defis_illus':{'a1':1,'a2':1,'a3':1,'e1':1,'e2':1,'e3':1,'h1':1,'h2':1,'h3':1,'h4':1,'p1':1,'p2':1,'p3':1,'p4':1},
+  'famchampi_illus':{'amanitacees':1,'boletacees':1,'cantharellacees':1},
+  'familles_illus':{'apiacees':1,'asteracees':1,'boraginacees':1,'brassicacees':1,'caryophyllacees':1,'fabacees':1,'lamiacees':1,'papaveracees':1,'plantaginacees':1,'renonculacees':1,'rosacees':1,'urticacees':1},
+  'indices_illus':{'crotte_chevreuil':1,'crotte_lapin':1,'crotte_renard':1,'pelote_chouette':1,'pic_arbre':1,'plumes':1,'pomme_pin_rongee':1,'taupiniere':1,'terrier_lapin':1,'terrier_renard':1},
+  'ordres_illus':{'coleopteres':1,'dipteres':1,'hemipteres':1,'hymenopteres':1,'lepidopteres':1,'mantopteres':1,'odonates':1,'orthopteres':1},
+  'ui_illus':{'ampoule':1,'apprendre':1,'arbre':1,'bienvenue':1,'cadenas':1,'calendrier':1,'carnet':1,'cerveau':1,'champignon':1,'cible':1,'cle':1,'coche':1,'coeur':1,'corbeille':1,'diplome':1,'diplome_or':1,'etoile':1,'explorer':1,'feuille':1,'fleur':1,'fusee':1,'galaxie':1,'goutte':1,'grenouille':1,'identifier':1,'insecte':1,'lettre':1,'lezard':1,'lieu':1,'livre':1,'loupe':1,'lune':1,'mousse':1,'observations':1,'oeil':1,'oiseau':1,'palette':1,'partage':1,'patte':1,'plume':1,'question':1,'roche':1,'sablier':1,'sauvegarde':1,'serpent':1,'sons':1,'stats':1,'trophee':1},
+  'decor_illus':{'abeille':1,'amanite':1,'boussole':1,'cepe':1,'cerf':1,'chataigne':1,'chene':1,'chenille':1,'ecureuil':1,'empreintes':1,'epicea':1,'feuille_vent':1,'feuilles_mortes':1,'fleur_cerisier':1,'flocon':1,'goutte_rosee':1,'graines_lumineuses':1,'lune_branches':1,'lune_noire':1,'menthe':1,'mesange':1,'oeuf_oiseau':1,'pousse':1,'sablier':1,'soleil':1,'sommet_neige':1,'vent':1}
 };
 function aquaDispo(dossier,cle){ var m=AQUA[dossier]; return !!(m && m[cle]); }
 function aquaSrc(dossier,cle){ return AQUA_BASE+dossier+'__'+cle+'.webp'; }
@@ -13438,7 +13445,7 @@ function renderLearnHub(){
     }
 
     return '<div class="home-card" onclick="'+action+'" style="cursor:pointer;display:block;text-align:center;padding:20px 10px;opacity:'+op+';">'
-      +'<div style="font-size:2em;margin-bottom:6px;">'+m.emoji+'</div>'
+      +'<div style="font-size:2em;margin-bottom:6px;">'+aquaModuleIcone(m)+'</div>'
       +'<div style="font-family:var(--font-title);font-size:1em;color:var(--moss)">'+m.titre+'</div>'
       +'<div style="font-size:0.68em;color:var(--sepia);margin-top:3px;font-style:italic;">'+m.sub+'</div>'
       +(m.dispo && progressInfo ? progressInfo : '<div style="font-size:0.62em;color:var(--sepia);margin-top:2px;">'+m.info+'</div>')
@@ -13450,7 +13457,7 @@ function renderLearnHub(){
     var action = dispo ? "renderGalerieRegne('"+r+"','learn')" : "renderLearnComingSoon(this.getAttribute('data-cle'))";
     var info = dispo ? regneProg(r).length+' / '+FICHES[r].ordre.length : 'Bient\u00f4t';
     return '<div class="home-card" data-cle="'+m.cle+'" onclick="'+action+'" style="cursor:pointer;display:block;text-align:center;padding:16px 8px;opacity:'+(dispo?'1':'0.5')+';">'
-      +'<div style="font-size:1.6em;margin-bottom:4px;">'+m.emoji+'</div>'
+      +'<div style="font-size:1.6em;margin-bottom:4px;">'+aquaModuleIcone(m)+'</div>'
       +'<div style="font-family:var(--font-title);font-size:0.9em;color:var(--moss)">'+m.titre+'</div>'
       +'<div style="font-size:0.62em;color:var(--sepia);margin-top:2px;font-style:italic;">'+m.sub+'</div>'
       +'<div style="font-size:0.6em;color:var(--sepia);margin-top:2px;">'+info+'</div>'
@@ -15839,6 +15846,56 @@ function aquaPoserStory(){
   }
 })();
 /* fin AQUA (poseurs) */
+/* AQUA-V35-DEBUT (brancher_aqua.js) */
+/* Icônes des modules Apprendre : les quatorze du menu Déterminer (cat_icons) + huit dessinées en v35. */
+var AQUA_MODULE_CAT={arbres:'arbre',oiseaux:'oiseau',herpetologie:'herpeto',entomologie:'insecte',botanique:'botanique',plantes:'plante',mycologie:'champignon',traces:'traces',bryologie:'mousse',potager:'potager',champs:'champs',roches:'roches',mammiferes:'animal',mare:'mare',ciel:'ciel',arachnologie:'arachnologie',malacologie:'malacologie',carcinologie:'carcinologie',ichtyologie:'ichtyologie',mammalogie:'mammalogie',limnologie:'limnologie',ecologie_sols:'ecologie_sols'};
+function aquaModuleIcone(m){ var c=AQUA_MODULE_CAT[m.cle]; return (c&&aquaDispo('cat_icons',c))?aquaImg('cat_icons',c,'width:1.4em;height:1.4em;object-fit:contain;display:inline-block;vertical-align:middle'):m.emoji; }
+/* Décors d'étapes d'histoires : un emoji par étape → une vignette (decor_illus). */
+var AQUA_DECOR={"🌱":"pousse","🍂":"feuilles_mortes","❄️":"flocon","🌳":"chene","🌿":"menthe","🐿️":"ecureuil","✨":"graines_lumineuses","🐾":"empreintes","🍄":"cepe","🥚":"oeuf_oiseau","☀️":"soleil","🐦":"mesange","⚠️":"amanite","💧":"goutte_rosee","🌰":"chataigne","🌑":"lune_noire","🌸":"fleur_cerisier","🐛":"chenille","🌙":"lune_branches","🌲":"epicea","🍃":"feuille_vent","🦌":"cerf","🏔️":"sommet_neige","🧭":"boussole","🐝":"abeille","⏳":"sablier","🌬️":"vent","🌧️":"pluie","🌼":"marguerite","🌊":"vague","🐗":"sanglier","🌾":"epi_ble","🕳️":"terrier","👃":"truffe","🦋":"paon_du_jour","♻️":"cycle_feuille","🪨":"rocher","🐟":"truite","🐸":"grenouille","🏛️":"colonne_lierre","🌍":"globe","🛡️":"herisson","🟡":"ambre","💞":"cygnes","🧠":"noix_cerveau","🐕":"chien","🍓":"fraise_bois","🏜️":"dune","🌞":"souci","🦡":"blaireau","🗾":"ilot","⚡":"foudre","💕":"mesanges_couple","🐷":"cochon","🌅":"aube","🗣️":"geai","🧗":"lierre_grimpant","🦇":"chauve_souris","🐇":"lapin","🍲":"marmite","🧵":"fil_lin","🔃":"crosse_fougere","🫐":"myrtilles","🎻":"violon","🔍":"loupe","🦕":"ammonite","🌫️":"brouillard","🪹":"nid_vide","🤸":"agneau_bondissant","🌻":"tournesol","🛠️":"outils_jardin","🍯":"miel","💃":"coquelicot","🍎":"pomme","🪷":"nenuphar","🗝️":"cle_ancienne","🪵":"buche","🐜":"fourmi","⚪":"galet_blanc","🐞":"coccinelle","🌆":"clocher","🔊":"merle","🦟":"moustique","🍼":"lait","🐣":"poussin_eclosion","🐁":"souris","🏡":"chaumiere","🥬":"chou","🐚":"escargot","👑":"couronne_chene","🎒":"besace","📢":"cor_de_chasse","🌤️":"eclaircie","🕸️":"toile","🔬":"microscope","🛖":"cabane","⚔️":"lucane","🌒":"lune_croissante","🌕":"pleine_lune","👀":"yeux_hibou","🏠":"maison_briques","💥":"capsule_eclatee","🥁":"pic","👅":"couleuvre","🐤":"poussin","⚓":"ancre","🧺":"panier","💊":"sureau","☁️":"nuage","👁️":"sphinx_ocelle","⛏️":"pioche","🐺":"loup","🗺️":"carte_ancienne","🦗":"grillon","☄️":"comete","🌠":"etoile_filante","🌌":"ciel_etoile","⛰️":"roche_ardennes","🚜":"tracteur","🌺":"rose_tremiere"};
+var AQUA_STYLE_DECOR='width:2.2em;height:2.2em;object-fit:contain;display:inline-block;vertical-align:middle';
+function aquaSlugFamille(n){ return String(n||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'_'); }
+(function(){
+  function poser(objs,coll,cleFn,champ,style){
+    if(!objs) return; var liste=Array.isArray(objs)?objs:Object.keys(objs).map(function(k){ return objs[k]; });
+    for(var i=0;i<liste.length;i++){ var o=liste[i]; if(!o) continue; var c=cleFn(o,i); if(c&&aquaDispo(coll,c)&&String(o[champ]||'').indexOf('<img')<0) o[champ]=aquaImg(coll,c,style||AQUA_STYLE_EM); }
+  }
+  try{
+    if(typeof STORIES!=='undefined'){ for(var id in STORIES){ var et=STORIES[id].etapes||[]; for(var j=0;j<et.length;j++){ var d=et[j].decor; var c=AQUA_DECOR[d]; if(c&&aquaDispo('decor_illus',c)) et[j].decor=aquaImg('decor_illus',c,AQUA_STYLE_DECOR); } } }
+    if(typeof DEFIS!=='undefined') poser(DEFIS,'defis_illus',function(o){ return o.id; },'emoji');
+    if(typeof ONBOARDING_STEPS!=='undefined'){ var ob=['bienvenue','identifier','apprendre','observations','explorer']; poser(ONBOARDING_STEPS,'ui_illus',function(o,i){ return ob[i]; },'emoji','width:1.5em;height:1.5em;object-fit:contain;display:inline-block'); }
+    if(typeof BOTANIQUE_FAMILLES!=='undefined') poser(BOTANIQUE_FAMILLES,'familles_illus',function(o){ return o.cle; },'emoji');
+    if(typeof FAMILLES_INFOS!=='undefined') poser(FAMILLES_INFOS,'familles_illus',function(o,i){ return aquaSlugFamille(Object.keys(FAMILLES_INFOS)[i]); },'emoji');
+    if(typeof FAMILLES_CHAMPIGNONS!=='undefined') poser(FAMILLES_CHAMPIGNONS,'famchampi_illus',function(o){ return o.cle; },'emoji');
+    if(typeof ORDRES_INSECTES!=='undefined') poser(ORDRES_INSECTES,'ordres_illus',function(o){ return o.cle; },'emoji');
+    if(typeof TRACES_INDICES!=='undefined') poser(TRACES_INDICES,'indices_illus',function(o){ return o.cle; },'svg',AQUA_STYLE_FIT);
+  }catch(e){}
+})();
+/* Pictos génériques : un emoji en tête d'un titre d'écran, d'un sous-titre ou seul dans un grand bloc
+   est remplacé par son aquarelle (ui_illus) après chaque rendu. */
+var AQUA_UI_EMOJI={'\uD83D\uDD11':'cle','\uD83C\uDFC6':'trophee','\uD83D\uDD0D':'loupe','\uD83D\uDD0E':'loupe','\uD83D\uDCD3':'carnet','\uD83C\uDFAF':'cible','\uD83D\uDCD6':'livre','\uD83D\uDCDA':'livre','\uD83C\uDF19':'lune','\uD83D\uDCCA':'stats','\uD83E\uDEB6':'plume','\uD83C\uDFA8':'palette','\uD83D\uDCA1':'ampoule','\uD83D\uDC40':'oeil','\uD83D\uDCC5':'calendrier','\uD83D\uDCCD':'lieu','\uD83D\uDC8C':'lettre','\uD83D\uDCBE':'sauvegarde','\uD83D\uDCE4':'partage','\uD83D\uDDD1':'corbeille','\u2726':'etoile','\u2B50':'etoile','\uD83C\uDF93':'diplome','\uD83D\uDD12':'cadenas','\u2754':'question','\u2753':'question','\uD83D\uDC0D':'serpent','\uD83D\uDC38':'grenouille','\uD83C\uDF44':'champignon','\uD83C\uDF3F':'feuille','\uD83C\uDF43':'mousse','\uD83D\uDC3E':'patte','\uD83D\uDC1B':'insecte','\uD83D\uDC26':'oiseau','\uD83C\uDF33':'arbre','\uD83C\uDF38':'fleur','\uD83C\uDF3C':'fleur','\uD83E\uDD8E':'lezard','\uD83E\uDEA8':'roche','\uD83D\uDCA7':'goutte','\uD83C\uDF0C':'galaxie','\u23F3':'sablier','\uD83D\uDD0A':'sons','\uD83D\uDC9E':'coeur','\u2764\uFE0F':'coeur','\uD83D\uDE80':'fusee','\uD83E\uDDE0':'cerveau','\uD83E\uDD47':'diplome_or','\uD83D\uDCDD':'carnet'};
+var AQUA_UI_RE=/^(\u2726|\u2B50|\u2754|\u2753|\u23F3|\u2764\uFE0F|[\uD83C-\uD83E][\uDC00-\uDFFF])\uFE0F?\s*/;
+function aquaPoserUI(racine){
+  if(!racine||!racine.querySelectorAll) return;
+  var els=racine.querySelectorAll('.topbar-title,h1,h2,h3,h4,div[style*="font-size:3em"],div[style*="font-size:2.5em"],div[style*="font-size:4em"],div[style*="font-size:5em"],div[style*="font-size:3.5em"]');
+  for(var i=0;i<els.length;i++){
+    var el=els[i]; if(el.querySelector('img')) continue;
+    var t=el.firstChild; if(!t||t.nodeType!==3) continue;
+    var m=t.nodeValue.match(AQUA_UI_RE); if(!m) continue;
+    var cle=AQUA_UI_EMOJI[m[1]]; if(!cle||!aquaDispo('ui_illus',cle)) continue;
+    var seul=t.nodeValue.trim()===m[0].trim()&&el.children.length===0;
+    var img=document.createElement('span'); img.innerHTML=aquaImg('ui_illus',cle,seul?'width:1em;height:1em;object-fit:contain;display:inline-block':'width:1.15em;height:1.15em;object-fit:contain;display:inline-block;vertical-align:-0.2em;margin-right:0.25em');
+    t.nodeValue=t.nodeValue.slice(m[0].length);
+    el.insertBefore(img.firstChild,t);
+  }
+}
+if(typeof MutationObserver!=='undefined'){
+  try{
+    var aquaObs=new MutationObserver(function(muts){ for(var i=0;i<muts.length;i++){ var a=muts[i].addedNodes; for(var j=0;j<a.length;j++){ if(a[j].nodeType===1) aquaPoserUI(a[j]); } } });
+    aquaObs.observe(document.body,{childList:true,subtree:true});
+    aquaPoserUI(document.body);
+  }catch(e){}
+}
+/* AQUA-V35-FIN */
 
 updateHomeCollection();
 updateSaisonSuggestions();
