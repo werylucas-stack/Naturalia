@@ -10,7 +10,7 @@
 ║  FICHIER     : index.html + sw.js + manifest.webmanifest        ║
 ║  TAILLE      : ~1,5 Mo (index.html) + 645 aquarelles WebP       ║
 ╠══════════════════════════════════════════════════════════════════╣
-║  DERNIÈRE VERSION : v35.0 — 2026-10-15                          ║
+║  DERNIÈRE VERSION : v35.1 — 2026-10-20                          ║
 ║  DÉPLOIEMENT : toujours incrémenter CACHE_NAME dans sw.js ET    ║
 ║  pousser sw.js — c'est le seul signal de mise à jour du         ║
 ║  navigateur. Ne jamais réécrire index.html avec PowerShell 5.1  ║
@@ -109,6 +109,8 @@
 ║          12 arbres + 12 histoires + 5 modules nouveaux, toutes les     ║
 ║          images en aquarelle sépia (décors, défis, pictos, familles),  ║
 ║          glossaire 53 schémas, 84 arbres gravés, mode sombre images    ║
+║  v35.1 — Sécurité : Content-Security-Policy (meta) + referrer      ║
+║          no-referrer ; aucune ressource externe autorisée             ║
 ╠══════════════════════════════════════════════════════════════════╣
 ║  PROCHAINES ÉTAPES SUGGÉRÉES                                     ║
 ║  • Badges encore en emoji (~40)                                 ║
@@ -120,6 +122,8 @@
 
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; media-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>Les Carnets du Naturaliste — Apprends la nature</title>
 <meta name="description" content="Application naturaliste pour identifier les espèces (arbres, plantes, insectes, animaux, oiseaux, champignons). Pour enfants 7-14 ans.">
@@ -11104,8 +11108,8 @@ function renderParametresScreen(){
     +'<div class="fiche-section">'
     +'<h4>\u2139\uFE0F Version</h4>'
     +'<div style="background:var(--cream-dark);border-radius:8px;padding:14px;font-size:0.88em;line-height:1.7;font-family:monospace;">'
-    +'<strong>Les Carnets du Naturaliste v35.0</strong><br>'
-    +'Build : 2026-08-22<br>'
+    +'<strong>Les Carnets du Naturaliste v35.1</strong><br>'
+    +'Build : 2026-10-20<br>'
     /* Compte reellement les regnes et les especes plutot que d'annoncer des
        chiffres ecrits en dur, qui dataient de la v28 et n'ont jamais suivi. */
     +statsApp()
