@@ -110,7 +110,7 @@
 ║          images en aquarelle sépia (décors, défis, pictos, familles),  ║
 ║          glossaire 53 schémas, 84 arbres gravés, mode sombre images    ║
 ║  v35.1 — Sécurité : Content-Security-Policy (meta) + referrer      ║
-║          no-referrer ; aucune ressource externe autorisée             ║
+║          no-referrer ; restauration d'une sauvegarde .json           ║
 ╠══════════════════════════════════════════════════════════════════╣
 ║  PROCHAINES ÉTAPES SUGGÉRÉES                                     ║
 ║  • Badges encore en emoji (~40)                                 ║
@@ -11101,6 +11101,8 @@ function renderParametresScreen(){
     +'Aucune information n\u2019est envoy\u00e9e \u00e0 un serveur.'
     +'</div>'
     +'<button onclick="exportAllData()" class="btn" style="width:100%;margin-bottom:8px;">\uD83D\uDCE4 Exporter toutes mes donn\u00e9es (.json)</button>'
+    +'<button onclick="importAllData()" class="btn" style="width:100%;margin-bottom:8px;">\uD83D\uDCE5 Restaurer une sauvegarde (.json)</button>'
+    +'<input type="file" id="import-data-file" accept=".json,application/json" style="display:none" onchange="importAllDataFichier(this)">'
     +'<button onclick="confirmResetData()" class="btn" style="width:100%;color:var(--rust);border-color:var(--rust);">\uD83D\uDDD1\uFE0F Effacer toutes mes donn\u00e9es</button>'
     +'</div>'
 
@@ -11126,7 +11128,7 @@ function renderParametresScreen(){
 
 function exportAllData(){
   var data={
-    version: 'v22.0',
+    version: 'v35.1',
     exportDate: new Date().toISOString(),
     arbres: loadCollection(),
     animaux: loadAnimauxCollection(),
@@ -11145,6 +11147,14 @@ function exportAllData(){
   for(var key in localStorage){
     if(key.indexOf('naturalia_story_')===0 || key==='naturalia_bot_story' || key==='naturalia_plantes_story' || key==='naturalia_insectes_story'){
       try{ data.stories[key]=JSON.parse(localStorage.getItem(key)); }catch(e){}
+    }
+  }
+  // Depuis la v35.1 : copie brute de toutes les clés naturalia_* (c'est elle que
+  // lit la restauration ; les champs ci-dessus restent pour les anciens outils).
+  data.stockage={};
+  for(var ks in localStorage){
+    if(ks.indexOf('naturalia_')===0 && ks!=='naturalia_install_dismissed' && ks!=='naturalia_maj_faite'){
+      try{ data.stockage[ks]=localStorage.getItem(ks); }catch(e){}
     }
   }
   var txt=JSON.stringify(data, null, 2);
@@ -11166,6 +11176,72 @@ function exportAllData(){
       });
     }
   }
+}
+
+/* ---- Restauration d'une sauvegarde (v35.1) ----------------------------
+   Lit un fichier .json produit par exportAllData (format « stockage » v35.1,
+   ou ancien format v22 à champs nommés). Seules des clés naturalia_* portant
+   un texte JSON valide sont acceptées ; tout le reste est ignoré. */
+function importAllData(){
+  var inp=document.getElementById('import-data-file');
+  if(inp){ inp.value=''; inp.click(); }
+}
+function importAllDataFichier(inp){
+  var f=inp && inp.files && inp.files[0];
+  if(!f) return;
+  if(f.size>5*1024*1024){ showToast('⚠ Fichier trop gros pour une sauvegarde'); return; }
+  var rd=new FileReader();
+  rd.onload=function(){
+    var data;
+    try{ data=JSON.parse(String(rd.result)); }catch(e){ showToast('⚠ Ce fichier n’est pas une sauvegarde valide'); return; }
+    var paires=lireSauvegarde(data);
+    if(!paires){ showToast('⚠ Ce fichier n’est pas une sauvegarde des Carnets'); return; }
+    var quand=(typeof data.exportDate==='string' && /^\d{4}-\d{2}-\d{2}/.test(data.exportDate))?' du '+formatDateFR(data.exportDate.slice(0,10)):'';
+    if(!confirm('Restaurer la sauvegarde'+quand+' ? Tes données actuelles (collection, journal, défis, histoires) seront remplacées.')) return;
+    try{
+      var anciennes=[];
+      for(var k in localStorage){ if(k.indexOf('naturalia_')===0) anciennes.push(k); }
+      anciennes.forEach(function(k){ localStorage.removeItem(k); });
+      for(var c in paires) localStorage.setItem(c, paires[c]);
+      localStorage.setItem('naturalia_onboarding_done','1');
+    }catch(e){ showToast('⚠ Impossible d’écrire la sauvegarde'); return; }
+    showToast('✓ Sauvegarde restaurée');
+    setTimeout(function(){ location.reload(); }, 900);
+  };
+  rd.onerror=function(){ showToast('⚠ Lecture du fichier impossible'); };
+  rd.readAsText(f);
+}
+function lireSauvegarde(data){
+  if(!data || typeof data!=='object' || Array.isArray(data)) return null;
+  var RE=/^naturalia_[A-Za-z0-9_\-]{1,80}$/;
+  var out={}, ok=false;
+  function poser(k,v){
+    if(typeof k!=='string' || !RE.test(k)) return;
+    var txt=(typeof v==='string')?v:JSON.stringify(v);
+    if(typeof txt!=='string' || txt.length>1000000) return;
+    try{ JSON.parse(txt); }catch(e){ return; }
+    out[k]=txt; ok=true;
+  }
+  if(data.stockage && typeof data.stockage==='object' && !Array.isArray(data.stockage)){
+    for(var k in data.stockage) poser(k, data.stockage[k]);
+    return ok?out:null;
+  }
+  // Ancien format (exports v22 à v35.0)
+  if(Array.isArray(data.arbres)) poser('naturalia_coll', data.arbres);
+  if(Array.isArray(data.animaux)) poser('naturalia_animaux', data.animaux);
+  if(Array.isArray(data.journal)) poser('naturalia_journal', data.journal);
+  if(Array.isArray(data.defis)) poser('naturalia_defis', data.defis);
+  if(data.botanique && Array.isArray(data.botanique.progress)) poser('naturalia_bot', data.botanique.progress);
+  if(Array.isArray(data.traces_indices)) poser('naturalia_traces_indices', data.traces_indices);
+  var regnes=['plantes','insectes','oiseaux','champignons','herpeto'];
+  for(var i=0;i<regnes.length;i++){
+    var r=regnes[i];
+    if(Array.isArray(data[r]) && typeof FICHES!=='undefined' && FICHES[r] && FICHES[r].stockage) poser(FICHES[r].stockage, data[r]);
+  }
+  if(data.stories && typeof data.stories==='object' && !Array.isArray(data.stories)){
+    for(var sk in data.stories) poser(sk, data.stories[sk]);
+  }
+  return ok?out:null;
 }
 
 function confirmResetData(){
